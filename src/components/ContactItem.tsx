@@ -10,7 +10,7 @@ export function ContactItem({ icon, text }: ContactItemProps) {
         loading="lazy"
         src={icon}
         alt=""
-        className="object-contain shrink-0 self-stretch my-auto aspect-square w-[11px]"
+        className="object-contain shrink-0 self-stretch my-auto aspect-square w-[13px]"
       />
       <div className="self-stretch my-auto">{text}</div>
     </div>

@@ -15,68 +15,82 @@ export interface HeaderProps {
 }
 
 export function Header({ name, title, profileImage, contacts }: HeaderProps) {
+  const formatUrl = (url: string) => {
+    return url.indexOf("://") === -1 ? `http://${url}` : url;
+  };
+
   return (
     <div className="flex flex-wrap gap-2 w-full text-black min-h-[128px] max-md:max-w-full items-center">
       <img
         loading="lazy"
         src={profileImage}
-        className="object-contain shrink-0 self-start w-32 aspect-square"
+        className="object-contain shrink-0 self-start w-40 aspect-square"
         alt={`${name} profile`}
       />
       <div className="flex flex-col flex-1 shrink justify-between basis-0 min-w-[240px]">
-        <div className="flex gap-2.5 items-center self-start h-[37px]">
-          <div className="self-stretch my-auto text-5xl font-clash font-bold -mt-1">
+        <div className="flex gap-2.5 items-center self-start">
+          <div className="self-stretch my-auto text-6xl font-clash font-bold">
             {name}
           </div>
-          <div className="my-auto text-xl font-clash font-semibold leading-5 w-[101px]">
+          <div className="my-auto text-2xl font-clash font-semibold leading-6 w-[120px]">
             {title}
           </div>
         </div>
         <div className="flex gap-10 justify-between items-start pl-1.5 mt-2.5 w-full text-xs">
-          <div className="flex flex-col w-[134px]">
+          <div className="flex flex-col w-[134px] gap-0.5">
             <div className="flex gap-1 items-center self-start">
               <img
                 loading="lazy"
                 src="/icons/id.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.fullName}</div>
             </div>
-            <div className="flex gap-1 items-center w-full whitespace-nowrap">
+            <a
+              href={`mailto:${contacts.email}`}
+              className="flex gap-1 items-center w-full whitespace-nowrap underline"
+            >
               <img
                 loading="lazy"
                 src="/icons/email.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.email}</div>
-            </div>
-            <div className="flex gap-1 items-center w-full whitespace-nowrap">
+            </a>
+            <a
+              href={formatUrl(contacts.github)}
+              target="_blank"
+              className="flex gap-1 items-center w-full whitespace-nowrap underline"
+            >
               <img
                 loading="lazy"
                 src="/icons/github.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.github}</div>
-            </div>
-            <div className="flex gap-1 items-center self-start">
+            </a>
+            <a
+              href={`tel:${contacts.phone.replace(" ", "")}`}
+              className="flex gap-1 items-center self-start underline"
+            >
               <img
                 loading="lazy"
                 src="/icons/phone.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.phone}</div>
-            </div>
+            </a>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start gap-0.5">
             <div className="flex gap-1 items-end self-stretch">
               <img
                 loading="lazy"
                 src="/icons/degree.svg"
-                className="object-contain shrink-0 aspect-square w-[11px]"
+                className="object-contain shrink-0 aspect-square w-[12px]"
                 alt=""
               />
               <div>{contacts.education}</div>
@@ -85,7 +99,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               <img
                 loading="lazy"
                 src="/icons/language.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-[1.1] w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-[1.1] w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.languages}</div>
@@ -94,20 +108,24 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               <img
                 loading="lazy"
                 src="/icons/location.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-[0.79] w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-[0.79] w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.location}</div>
             </div>
-            <div className="flex gap-1.5 items-center whitespace-nowrap">
+            <a
+              href={formatUrl(contacts.linkedin)}
+              target="_blank"
+              className="flex gap-1.5 items-center whitespace-nowrap underline"
+            >
               <img
                 loading="lazy"
                 src="/icons/linkedin.svg"
-                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[11px]"
+                className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.linkedin}</div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

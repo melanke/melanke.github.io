@@ -17,7 +17,7 @@ export const SkillBars = ({ level }: SkillBarsProps) => {
       {[...Array(5)].map((_, index) => (
         <div
           key={index}
-          className={`w-[6px] h-full transform -skew-x-[18deg] ${
+          className={`w-[7px] h-full transform -skew-x-[18deg] ${
             index < levelToBarCount[level] ? "bg-black" : "bg-gray-300"
           }`}
         />

@@ -4,11 +4,12 @@ import { SkillSection } from "./components/SkillSection";
 import { Timeline } from "./components/Timeline";
 import { LeadershipSection } from "./components/LeadershipSection";
 import { OtherSection } from "./components/OtherSection";
+import { PageHeader } from "./components/PageHeader";
 
 export function Resume() {
   return (
-    <div className="flex overflow-hidden flex-col bg-white max-w-[740px]">
-      <div className="flex flex-col py-6 pr-8 pl-5 w-full max-md:pr-5 max-md:max-w-full">
+    <div className="flex overflow-hidden flex-col bg-white max-w-[740px] mx-auto">
+      <div className="flex flex-col py-6 pr-8 pl-5 print:p-0 w-full max-md:pr-5 max-md:max-w-full">
         <Header
           name="Gil"
           title="Senior Developer"
@@ -28,7 +29,7 @@ export function Resume() {
         <div className="flex flex-col flex-1 pl-2.5 mt-5 w-full max-md:max-w-full">
           <Bio text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader. Now, I am returning to my core passion for hands-on software development." />
 
-          <div className="flex flex-wrap gap-5 items-start mt-5 w-full text-black max-md:max-w-full">
+          <div className="flex flex-wrap gap-x-5 gap-y-10 items-start mt-10 w-full text-black max-md:max-w-full">
             <SkillSection
               title="Web Frontend"
               icon="/icons/web.svg"
@@ -128,14 +129,14 @@ export function Resume() {
               ]}
             />
           </div>
-          <div className="break-after-page" />
+          <PageHeader />
 
           <LeadershipSection />
           <OtherSection />
 
           <Timeline />
 
-          <div className="h-64 bg-transparent mt-5" />
+          <div className="h-8 bg-transparent mt-[120px] hidden print:block" />
         </div>
       </div>
     </div>

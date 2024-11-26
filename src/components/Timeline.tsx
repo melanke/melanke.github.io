@@ -1,19 +1,28 @@
+import { PageHeader } from "./PageHeader";
 import { TimelineItem } from "./TimelineItem";
+
+function TimelineHeader({ className }: { className?: string }) {
+  return (
+    <div
+      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none ${className}`}
+    >
+      <img
+        loading="lazy"
+        src="/icons/timeline.svg"
+        className="object-contain shrink-0 self-stretch my-auto aspect-[1.2] w-[18px]"
+        alt=""
+      />
+      <div className="self-stretch my-auto font-clash font-semibold">
+        Projects Timeline
+      </div>
+    </div>
+  );
+}
 
 export function Timeline() {
   return (
     <div className="flex flex-col mt-10 w-full text-black max-md:max-w-full">
-      <div className="flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none">
-        <img
-          loading="lazy"
-          src="/icons/timeline.svg"
-          className="object-contain shrink-0 self-stretch my-auto aspect-[1.2] w-[18px]"
-          alt=""
-        />
-        <div className="self-stretch my-auto font-clash font-semibold">
-          Projects Timeline
-        </div>
-      </div>
+      <TimelineHeader />
       <div className="flex-1 shrink gap-2.5 self-stretch pt-1.5 pb-4 w-full text-base leading-5 text-black max-md:max-w-full">
         Throughout my career, I have contributed to over{" "}
         <span className="font-bold">50 projects</span>, encompassing diverse
@@ -42,6 +51,8 @@ export function Timeline() {
         role="Product Owner / TechLead"
         description="This platform allows dApp administrators to upload their application icons to a decentralized File System and save the URL into a SmartContract, which organizes and makes these icons available to other applications. I was responsible for architecting the dApp to operate in a fully decentralized manner."
       />
+      <PageHeader />
+      <TimelineHeader className="hidden print:flex mb-8" />
       <TimelineItem
         dateRange="Aug 2023 - Jul 2024"
         technologies={["TS", "Blockchain"]}
@@ -98,6 +109,8 @@ export function Timeline() {
         role="Developer / Tech Consultant"
         description="Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data due to significant performance issues with the old dashboard. Initially, my responsibility was focused solely on the frontend. However, I quickly realized that structural changes were necessary. I provided several recommendations to Jamef's team on improving the data structure and delivery for better performance. Ultimately, I delivered a complex dashboard featuring various customized graphs and contributed to enhancing the overall structure of the central system."
       />
+      <PageHeader />
+      <TimelineHeader className="hidden print:flex mb-8" />
       <TimelineItem
         dateRange="Jan 2018 - May 2019"
         technologies={["Vue2", "Kotlin / R"]}

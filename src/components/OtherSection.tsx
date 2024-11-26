@@ -2,7 +2,7 @@ import { SkillItem } from "./SkillItem";
 
 export function OtherSection() {
   return (
-    <div className="flex flex-col w-full text-black max-md:max-w-full">
+    <div className="flex flex-col w-full mt-10 text-black max-md:max-w-full">
       <div className="flex flex-wrap gap-1.5 items-center w-full text-xl font-semibold leading-none whitespace-nowrap max-md:max-w-full">
         <img
           loading="lazy"

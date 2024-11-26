@@ -2,7 +2,7 @@ import { SkillItem } from "./SkillItem";
 
 export function LeadershipSection() {
   return (
-    <div className="flex flex-col mt-5 w-full text-black max-md:max-w-full">
+    <div className="flex flex-col mt-10 w-full text-black max-md:max-w-full">
       <div className="flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none">
         <img
           loading="lazy"
@@ -34,7 +34,7 @@ export function LeadershipSection() {
             />
           </div>
         </div>
-        <div className="text-xs leading-4 min-w-[240px] w-[258px]">
+        <div className="flex-1 shrink basis-0 text-xs leading-4 min-w-[240px] w-[258px]">
           From college onward, my advanced experience set me apart from my
           peers, fostering a natural leadership spirit and a drive to guide
           others toward achieving the best results. Leading teams has taught me

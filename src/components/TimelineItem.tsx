@@ -16,22 +16,21 @@ export function TimelineItem({
   description,
 }: TimelineItemProps) {
   return (
-    <div className="flex mt-2.5 w-full max-md:max-w-full break-inside-avoid">
-      <div className="flex flex-wrap gap-1.5 h-full min-w-[240px]">
-        <div className="flex flex-col items-center text-xs leading-4 w-[60px]">
+    <div className="flex mt-3.5 w-full max-md:max-w-full break-inside-avoid">
+      <div className="flex flex-wrap gap-2 h-full min-w-[288px]">
+        <div className="flex flex-col text-[0.82rem] leading-4 w-[72px]">
           <div className="text-black">
             {dateRange.split(" - ").join(" -\n")}
           </div>
           <div className="text-black text-opacity-60">
-            {technologies.map((tech, index) => (
-              <React.Fragment key={index}>
-                {tech}
-                <br />
-              </React.Fragment>
-            ))}
+            <ul className="list-disc list-outside ml-4">
+              {technologies.map((tech, index) => (
+                <li key={index}>{tech}</li>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="flex flex-col flex-1 shrink self-start text-xs basis-0 min-w-[240px] max-md:max-w-full">
+        <div className="flex flex-col flex-1 shrink self-start text-[0.89rem] basis-0 min-w-[240px] max-md:max-w-full">
           <div className="flex items-start w-full leading-snug min-h-[14px] max-md:max-w-full">
             <div className="font-bold text-black">{title}</div>
             <span className="mx-2 text-black text-opacity-60">•</span>
