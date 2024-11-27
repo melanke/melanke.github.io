@@ -13,7 +13,7 @@ export function SkillItem({ name, since, level, yearRange }: SkillItemProps) {
       <div className="flex-1 shrink self-stretch my-auto text-sm font-clash font-medium leading-none basis-0">
         {name}
       </div>
-      <div className="self-stretch my-auto text-sm font-light leading-snug">
+      <div className="self-stretch my-auto text-sm font-clash font-light leading-snug">
         {yearRange ?? (since ? `Since ${since}` : "")}
       </div>
       <SkillBars level={level} />

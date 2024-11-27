@@ -4,9 +4,15 @@ export interface SkillSectionProps {
   title: string;
   icon: string;
   skills: SkillItemProps[];
+  otherSkills?: string[];
 }
 
-export function SkillSection({ title, icon, skills }: SkillSectionProps) {
+export function SkillSection({
+  title,
+  icon,
+  skills,
+  otherSkills,
+}: SkillSectionProps) {
   return (
     <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
       <div className="flex gap-2 items-center w-full text-2xl font-semibold leading-none">
@@ -26,6 +32,18 @@ export function SkillSection({ title, icon, skills }: SkillSectionProps) {
             <SkillItem {...skill} />
           </div>
         ))}
+        {otherSkills && (
+          <div className="mt-1.5 flex flex-wrap gap-1 font-clash text-xs">
+            {otherSkills.map((skill, index) => (
+              <span
+                key={index}
+                className="px-3 py-[0.19rem] bg-stone-100 rounded-full"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

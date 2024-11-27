@@ -38,19 +38,24 @@ export function Resume() {
                 { name: "Typescript", since: "2018", level: "expert" },
                 { name: "HTML / CSS / SCSS", since: "2007", level: "expert" },
                 { name: "Tailwind", since: "2020", level: "expert" },
-                { name: "Chakra UI", since: "2021", level: "expert" },
                 { name: "ReactJS / NextJS", since: "2020", level: "expert" },
-                {
-                  name: "Svelte / SvelteKit",
-                  since: "2022",
-                  level: "advanced",
-                },
-                {
-                  name: "Vue 2",
-                  since: "2016",
-                  yearRange: "2016 - 2021",
-                  level: "expert",
-                },
+              ]}
+              otherSkills={[
+                "Vue 2",
+                "SvelteKit",
+                "Chakra UI",
+                "ReactQuery",
+                "ReduxToolkit",
+                "Echarts",
+                "Valtio",
+                "Vite",
+                "Jest",
+                "Playwright",
+                "Storybook",
+                "URQL",
+                "ReactHookForm",
+                "Lighthouse",
+                "and more...",
               ]}
             />
 
@@ -58,16 +63,30 @@ export function Resume() {
               title="Blockchain"
               icon="/icons/blockchain.svg"
               skills={[
-                { name: "EVM dApp Dev.", since: "2023", level: "expert" },
+                { name: "Ethereum / Solidity", since: "2023", level: "expert" },
                 {
-                  name: "Solana dApp Dev.",
+                  name: "Solana / Anchor / Rust",
                   since: "2023",
                   level: "expert",
                 },
-                { name: "Flow dApp Dev.", since: "2022", level: "expert" },
-                { name: "Neo N3 dApp Dev.", since: "2018", level: "expert" },
-                { name: "Wallet Dev.", since: "2020", level: "expert" },
-                { name: "Tooling Dev.", since: "2020", level: "expert" },
+                { name: "Flow / Cadence", since: "2022", level: "expert" },
+                {
+                  name: "Neo N3 / Python / Go",
+                  since: "2018",
+                  level: "expert",
+                },
+              ]}
+              otherSkills={[
+                "Smart Contract",
+                "VM Compiler Development",
+                "Wallet Development",
+                "TS SDK development",
+                "Wagmi",
+                "Viem",
+                "Ethers",
+                "Hardhat",
+                "ScaffoldEth-2",
+                "and more...",
               ]}
             />
 
@@ -76,12 +95,12 @@ export function Resume() {
               icon="/icons/backend.svg"
               skills={[
                 {
-                  name: "Node.JS / Express",
+                  name: "Node.JS",
                   since: "2012",
                   level: "expert",
                 },
                 {
-                  name: "Java / Kotlin / Jersey / JDBC",
+                  name: "Java / Kotlin",
                   yearRange: "2008 - 2022",
                   level: "expert",
                 },
@@ -91,15 +110,24 @@ export function Resume() {
                   level: "expert",
                 },
                 {
-                  name: "Apollo / TypeGraphQL",
-                  since: "2022",
-                  level: "advanced",
-                },
-                {
                   name: "Prisma",
                   since: "2022",
                   level: "advanced",
                 },
+              ]}
+              otherSkills={[
+                "C#",
+                "Python",
+                "Express",
+                "TypeGraphQL",
+                "Apollo",
+                "Jersey",
+                "JDBC",
+                "Docker",
+                "AWS",
+                "PayPal",
+                "ElasticSearch",
+                "and more...",
               ]}
             />
 
@@ -126,6 +154,17 @@ export function Resume() {
                   since: "2023",
                   level: "advanced",
                 },
+              ]}
+              otherSkills={[
+                "Dailies",
+                "Kanban",
+                "Time tracking",
+                "Effort Estimation",
+                "Code Review",
+                "Git Hooks",
+                "Github Actions",
+                "Test Environment",
+                "and more...",
               ]}
             />
           </div>
