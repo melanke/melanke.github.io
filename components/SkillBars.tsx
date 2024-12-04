@@ -1,3 +1,5 @@
+"use client";
+
 export type SkillLevel = "expert" | "advanced" | "intermediate" | "beginner";
 
 interface SkillBarsProps {

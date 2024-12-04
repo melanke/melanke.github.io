@@ -1,12 +1,14 @@
 import { SkillItem } from "./SkillItem";
+import Image from "next/image";
 
 export function OtherSection() {
   return (
     <div className="flex flex-col w-full mt-10 text-black max-md:max-w-full">
       <div className="flex flex-wrap gap-1.5 items-center w-full text-xl font-semibold leading-none whitespace-nowrap max-md:max-w-full">
-        <img
-          loading="lazy"
+        <Image
           src="/icons/other.svg"
+          width={16}
+          height={16}
           className="object-contain shrink-0 self-stretch my-auto w-4 aspect-[1.07]"
           alt=""
         />

@@ -1,14 +1,18 @@
+"use client";
+
 import { PageHeader } from "./PageHeader";
 import { TimelineItem } from "./TimelineItem";
+import Image from "next/image";
 
 function TimelineHeader({ className }: { className?: string }) {
   return (
     <div
       className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none ${className}`}
     >
-      <img
-        loading="lazy"
+      <Image
         src="/icons/timeline.svg"
+        width={18}
+        height={18}
         className="object-contain shrink-0 self-stretch my-auto aspect-[1.2] w-[18px]"
         alt=""
       />

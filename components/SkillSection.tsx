@@ -1,4 +1,5 @@
 import { SkillItem, SkillItemProps } from "./SkillItem";
+import Image from "next/image";
 
 export interface SkillSectionProps {
   title: string;
@@ -16,9 +17,10 @@ export function SkillSection({
   return (
     <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
       <div className="flex gap-2 items-center w-full text-2xl font-semibold leading-none">
-        <img
-          loading="lazy"
+        <Image
           src={icon}
+          width={20}
+          height={20}
           className="object-contain shrink-0 self-stretch my-auto w-5 aspect-[1.07]"
           alt=""
         />

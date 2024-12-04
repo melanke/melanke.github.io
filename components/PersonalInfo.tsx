@@ -1,4 +1,5 @@
 import { ContactItem, ContactItemProps } from "./ContactItem";
+import Image from "next/image";
 
 export interface PersonalInfoProps {
   name: string;
@@ -15,9 +16,10 @@ export function PersonalInfo({
 }: PersonalInfoProps) {
   return (
     <header className="flex flex-wrap gap-2 w-full min-h-[128px] max-md:max-w-full">
-      <img
-        loading="lazy"
+      <Image
         src="/icons/id.svg"
+        width={128}
+        height={128}
         alt="Profile"
         className="object-contain shrink-0 self-start w-32 aspect-square"
       />

@@ -1,12 +1,14 @@
 import { SkillItem } from "./SkillItem";
+import Image from "next/image";
 
 export function LeadershipSection() {
   return (
     <div className="flex flex-col mt-10 w-full text-black max-md:max-w-full">
       <div className="flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none">
-        <img
-          loading="lazy"
+        <Image
           src="/icons/leadership.svg"
+          width={16}
+          height={16}
           className="object-contain shrink-0 self-stretch my-auto w-4 aspect-[1.07]"
           alt=""
         />

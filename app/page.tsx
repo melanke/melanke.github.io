@@ -1,12 +1,12 @@
-import { Header } from "./components/Header";
-import { Bio } from "./components/Bio";
-import { SkillSection } from "./components/SkillSection";
-import { Timeline } from "./components/Timeline";
-import { LeadershipSection } from "./components/LeadershipSection";
-import { OtherSection } from "./components/OtherSection";
-import { PageHeader } from "./components/PageHeader";
+import { Header } from "@/components/Header";
+import { Bio } from "@/components/Bio";
+import { SkillSection } from "@/components/SkillSection";
+import { Timeline } from "@/components/Timeline";
+import { LeadershipSection } from "@/components/LeadershipSection";
+import { OtherSection } from "@/components/OtherSection";
+import { PageHeader } from "@/components/PageHeader";
 
-export function Resume() {
+export default function Home() {
   return (
     <div className="flex overflow-hidden flex-col bg-white max-w-[740px] mx-auto">
       <div className="flex flex-col py-6 pr-8 pl-5 print:p-0 w-full max-md:pr-5 max-md:max-w-full">

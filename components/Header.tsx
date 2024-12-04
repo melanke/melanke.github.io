@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+
 export interface HeaderProps {
   name: string;
   title: string;
@@ -21,9 +25,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
 
   return (
     <div className="flex flex-wrap gap-2 w-full text-black min-h-[128px] max-md:max-w-full items-center">
-      <img
-        loading="lazy"
+      <Image
         src={profileImage}
+        width={160}
+        height={160}
         className="object-contain shrink-0 self-start w-40 aspect-square"
         alt={`${name} profile`}
       />
@@ -39,9 +44,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
         <div className="flex gap-10 justify-between items-start pl-1.5 mt-2.5 w-full text-xs">
           <div className="flex flex-col w-[134px] gap-0.5">
             <div className="flex gap-1 items-center self-start">
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/id.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px]"
                 alt=""
               />
@@ -51,9 +57,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               href={`mailto:${contacts.email}`}
               className="flex gap-1 items-center w-full whitespace-nowrap underline"
             >
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/email.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px]"
                 alt=""
               />
@@ -64,9 +71,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               target="_blank"
               className="flex gap-1 items-center w-full whitespace-nowrap underline"
             >
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/github.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
@@ -76,9 +84,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               href={`tel:${contacts.phone.replace(" ", "")}`}
               className="flex gap-1 items-center self-start underline"
             >
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/phone.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
@@ -87,27 +96,30 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
           </div>
           <div className="flex flex-col items-start gap-0.5">
             <div className="flex gap-1 items-end self-stretch">
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/degree.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 aspect-square w-[12px]"
                 alt=""
               />
               <div>{contacts.education}</div>
             </div>
             <div className="flex gap-1.5 items-center">
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/language.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-[1.1] w-[12px]"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.languages}</div>
             </div>
             <div className="flex gap-1.5 items-center">
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/location.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-[0.79] w-[12px]"
                 alt=""
               />
@@ -118,9 +130,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               target="_blank"
               className="flex gap-1.5 items-center whitespace-nowrap underline"
             >
-              <img
-                loading="lazy"
+              <Image
                 src="/icons/linkedin.svg"
+                width={12}
+                height={12}
                 className="object-contain shrink-0 self-stretch my-auto aspect-square w-[12px]"
                 alt=""
               />
