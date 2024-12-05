@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/PageHeader";
 
 export default function Home() {
   return (
-    <div className="flex overflow-hidden flex-col bg-white max-w-[740px] mx-auto">
+    <div className="flex overflow-hidden flex-col max-w-[740px] mx-auto">
       <div className="flex flex-col py-6 pr-8 pl-5 print:p-0 w-full max-md:pr-5 max-md:max-w-full">
         <Header
           name="Gil"

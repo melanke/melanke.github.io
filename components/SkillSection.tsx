@@ -16,12 +16,12 @@ export function SkillSection({
 }: SkillSectionProps) {
   return (
     <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
-      <div className="flex gap-2 items-center w-full text-2xl font-semibold leading-none">
+      <div className="flex gap-2 items-center w-full text-2xl font-semibold leading-none text-black dark:text-white">
         <Image
           src={icon}
           width={20}
           height={20}
-          className="object-contain shrink-0 self-stretch my-auto w-5 aspect-[1.07]"
+          className="object-contain shrink-0 self-stretch my-auto w-5 aspect-[1.07] dark:invert"
           alt=""
         />
         <div className="self-stretch my-auto font-clash font-semibold">
@@ -39,7 +39,7 @@ export function SkillSection({
             {otherSkills.map((skill, index) => (
               <span
                 key={index}
-                className="px-3 py-[0.19rem] bg-stone-100 rounded-full"
+                className="px-3 py-[0.19rem] bg-neutral-100 dark:bg-neutral-800 rounded-full text-black dark:text-white"
               >
                 {skill}
               </span>

@@ -3,13 +3,13 @@ import Image from "next/image";
 
 export function LeadershipSection() {
   return (
-    <div className="flex flex-col mt-10 w-full text-black max-md:max-w-full">
+    <div className="flex flex-col mt-10 w-full text-black dark:text-white max-md:max-w-full">
       <div className="flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none">
         <Image
           src="/icons/leadership.svg"
           width={16}
           height={16}
-          className="object-contain shrink-0 self-stretch my-auto w-4 aspect-[1.07]"
+          className="object-contain shrink-0 self-stretch my-auto w-4 aspect-[1.07] dark:invert"
           alt=""
         />
         <div className="self-stretch my-auto font-clash font-semibold">
@@ -36,7 +36,7 @@ export function LeadershipSection() {
             />
           </div>
         </div>
-        <div className="flex-1 shrink basis-0 text-xs leading-4 min-w-[240px] w-[258px]">
+        <div className="flex-1 shrink basis-0 text-xs leading-4 min-w-[240px] w-[258px] text-black dark:text-white">
           From college onward, my advanced experience set me apart from my
           peers, fostering a natural leadership spirit and a drive to guide
           others toward achieving the best results. Leading teams has taught me

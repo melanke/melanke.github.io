@@ -1,5 +1,3 @@
-"use client";
-
 import { PageHeader } from "./PageHeader";
 import { TimelineItem } from "./TimelineItem";
 import Image from "next/image";
@@ -13,7 +11,7 @@ function TimelineHeader({ className }: { className?: string }) {
         src="/icons/timeline.svg"
         width={18}
         height={18}
-        className="object-contain shrink-0 self-stretch my-auto aspect-[1.2] w-[18px]"
+        className="object-contain shrink-0 self-stretch my-auto aspect-[1.2] w-[18px] dark:invert"
         alt=""
       />
       <div className="self-stretch my-auto font-clash font-semibold">
@@ -25,9 +23,9 @@ function TimelineHeader({ className }: { className?: string }) {
 
 export function Timeline() {
   return (
-    <div className="flex flex-col mt-10 w-full text-black max-md:max-w-full">
+    <div className="flex flex-col mt-10 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
-      <div className="flex-1 shrink gap-2.5 self-stretch pt-1.5 pb-4 w-full text-base leading-5 text-black max-md:max-w-full">
+      <div className="flex-1 shrink gap-2.5 self-stretch pt-1.5 pb-4 w-full text-base leading-5 text-black dark:text-white max-md:max-w-full">
         Throughout my career, I have contributed to over{" "}
         <span className="font-bold">50 projects</span>, encompassing diverse
         industries and innovative technologies. This selection highlights those

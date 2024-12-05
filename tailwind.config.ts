@@ -6,10 +6,14 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'media',
   theme: {
     extend: {
       fontFamily: {
         clash: ["ClashDisplay", "sans-serif"],
+      },
+      screens: {
+        'xs': '375px',
       },
     },
   },

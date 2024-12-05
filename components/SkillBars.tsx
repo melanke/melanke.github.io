@@ -1,5 +1,3 @@
-"use client";
-
 export type SkillLevel = "expert" | "advanced" | "intermediate" | "beginner";
 
 interface SkillBarsProps {
@@ -20,7 +18,7 @@ export const SkillBars = ({ level }: SkillBarsProps) => {
         <div
           key={index}
           className={`w-[7px] h-full transform -skew-x-[18deg] ${
-            index < levelToBarCount[level] ? "bg-black" : "bg-gray-300"
+            index < levelToBarCount[level] ? "bg-black dark:bg-white" : "bg-neutral-300 dark:bg-neutral-600"
           }`}
         />
       ))}
