@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex flex-col py-6 pr-8 pl-5 print:p-0 w-full max-md:pr-5 max-md:max-w-full">
         <Header
           name="Gil"
-          title="Senior Developer"
+          title="Software Engineer"
           profileImage="/profile.webp"
           contacts={{
             fullName: "Gil Lopes Bueno",
@@ -135,6 +135,11 @@ export default function Home() {
               title="Processes and Tools"
               icon="/icons/processes.svg"
               skills={[
+                {
+                  name: "AI / Vibe Coding / Prompt Engineering",
+                  since: "2023",
+                  level: "advanced",
+                },
                 {
                   name: "Scrum / Agile",
                   since: "2013",

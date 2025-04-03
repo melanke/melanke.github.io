@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gil.solutions'),
+  metadataBase: new URL("https://gil.solutions"),
   title: "Gil Lopes Bueno - Senior Software Engineer",
   description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
   keywords: [
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Computer Science",
     "Ethereum",
-    "Solana"
+    "Solana",
   ],
   authors: [{ name: "Gil Lopes Bueno" }],
   creator: "Gil Lopes Bueno",
@@ -47,15 +47,18 @@ export const metadata: Metadata = {
     telephone: false,
   },
   // verification: {
-    // google: "your-google-site-verification", // Opcional: se você tiver verificação do Google Search Console
+  // google: "your-google-site-verification", // Opcional: se você tiver verificação do Google Search Console
   // },
   alternates: {
     canonical: "https://linkedin.com/in/gilbueno",
   },
   other: {
-    "education": "Computer Science, Bachelor's Degree PUC-SP",
-    "languages": "English and Portuguese",
-    "location": "Sao Paulo, Brazil",
+    education: "Computer Science, Bachelor's Degree PUC-SP",
+    languages: "English and Portuguese",
+    location: "Sao Paulo, Brazil",
+  },
+  appleWebApp: {
+    title: "Gil LB",
   },
 };
 

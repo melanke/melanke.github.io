@@ -36,8 +36,8 @@ export function Timeline() {
         dateRange="Since Jun 2024"
         technologies={["TS", "React", "Contract"]}
         title="Enclave Wallet - Simpli"
-        role="Developer / Researcher"
-        description="In it's Alpha version, Enclave is a Wallet built to embrace non-blockchain users. Using Abstract Accounts, WebAuthn and Gasless transactions, it makes the onboarding smooth as traditional web applications. I am one of the developers pioneering these emerging technologies."
+        role="Developer / Product Owner / UI/UX Designer"
+        description="Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, and development of the wallet frontend."
       />
       <TimelineItem
         dateRange="Jan 2024 - Aug 2024"
@@ -145,14 +145,14 @@ export function Timeline() {
         dateRange="Sep 2015 - July 2017"
         technologies={["Android", "Java"]}
         title="Apptite - Simpli"
-        role="Business Analyst / TechLead / Developer / UX/UI Designer"
+        role="Business Analyst / TechLead / Developer / UI/UX Designer"
         description="Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups'. With media coverage, it established itself as an important platform in the artisanal food market. I was the main responsible for the initial planning, structuring and development of the platform."
       />
       <TimelineItem
         dateRange="Aug 2015 - July 2017"
         technologies={["Android", "Java"]}
         title="Desabafa - Simpli"
-        role="Business Analyst / TechLead / Developer / UX/UI Designer"
+        role="Business Analyst / TechLead / Developer / UI/UX Designer"
         description="Desabafa was an anonymous social network designed for emotional support and mutual understanding, featuring a robust security and monitoring system to ensure a healthy user experience. The platform received media recognition in the mental health sector and facilitated over 1 million interactions. I contributed to the planning, structuring, and development of the platform."
       />
       <TimelineItem
@@ -173,7 +173,7 @@ export function Timeline() {
         dateRange="2010 - 2013"
         technologies={["JQuery", "Backbone", "Java", "Android"]}
         title="SIMET - NIC.br"
-        role="Developer / UX/UI Designer"
+        role="Developer / UI/UX Designer"
         description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
       />
     </div>
