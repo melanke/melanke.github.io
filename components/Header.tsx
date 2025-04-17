@@ -50,7 +50,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.fullName}</div>
-            </div>            
+            </div>
             <div className="flex gap-1 items-end self-stretch">
               <Image
                 src="/icons/degree.svg"
@@ -82,7 +82,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               <div className="self-stretch my-auto">{contacts.location}</div>
             </div>
           </div>
-          <div className="flex sm:flex-col gap-y-2 gap-x-6 sm:gap-0.5 w-full sm:w-[134px] items-center justify-center sm:items-start">
+          <div className="flex sm:flex-col gap-y-2 gap-x-6 sm:gap-0.5 w-full sm:w-auto items-center justify-center sm:items-start">
             <a
               href={`mailto:${contacts.email}`}
               className="flex gap-1 items-center sm:w-full whitespace-nowrap sm:underline"
@@ -95,7 +95,9 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px] dark:invert"
                 alt="Email"
               />
-              <div className="self-stretch my-auto hidden sm:block">{contacts.email}</div>
+              <div className="self-stretch my-auto hidden sm:block">
+                {contacts.email}
+              </div>
             </a>
             <a
               href={`tel:${contacts.phone.replace(" ", "")}`}
@@ -109,7 +111,9 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
                 alt="Phone"
               />
-              <div className="self-stretch my-auto hidden sm:block">{contacts.phone}</div>
+              <div className="self-stretch my-auto hidden sm:block">
+                {contacts.phone}
+              </div>
             </a>
             <a
               href={formatUrl(contacts.github)}
@@ -124,7 +128,9 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
                 alt="GitHub"
               />
-              <div className="self-stretch my-auto hidden sm:block">{contacts.github}</div>
+              <div className="self-stretch my-auto hidden sm:block">
+                {contacts.github}
+              </div>
             </a>
             <a
               href={formatUrl(contacts.linkedin)}
@@ -139,7 +145,9 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
                 alt="LinkedIn"
               />
-              <div className="self-stretch my-auto hidden sm:block">{contacts.linkedin}</div>
+              <div className="self-stretch my-auto hidden sm:block">
+                {contacts.linkedin}
+              </div>
             </a>
           </div>
         </div>
