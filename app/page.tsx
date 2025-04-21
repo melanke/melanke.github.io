@@ -63,10 +63,10 @@ export default function Home() {
               title="Blockchain"
               icon="/icons/blockchain.svg"
               skills={[
-                { name: "Ethereum / Solidity", since: "2023", level: "expert" },
+                { name: "Ethereum / Solidity", since: "2020", level: "expert" },
                 {
                   name: "Solana / Anchor / Rust",
-                  since: "2023",
+                  since: "2020",
                   level: "expert",
                 },
                 { name: "Flow / Cadence", since: "2022", level: "expert" },
@@ -80,7 +80,10 @@ export default function Home() {
                 "Smart Contract",
                 "VM Compiler Development",
                 "Wallet Development",
-                "TS SDK development",
+                "NFT",
+                "Crypto Currency",
+                "DEX",
+                "AMM",
                 "Wagmi",
                 "Viem",
                 "Ethers",
