@@ -1,4 +1,3 @@
-import { PageHeader } from "./PageHeader";
 import { TimelineItem } from "./TimelineItem";
 import Image from "next/image";
 
