@@ -46,7 +46,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/id.svg"
                 width={12}
                 height={12}
-                className="object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px] dark:invert"
+                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[1.22] dark:invert"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.fullName}</div>
@@ -56,7 +56,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/degree.svg"
                 width={12}
                 height={12}
-                className="object-contain shrink-0 aspect-square w-[12px] dark:invert"
+                className="w-auto h-auto object-contain shrink-0 aspect-square dark:invert"
                 alt=""
               />
               <div>{contacts.education}</div>
@@ -66,7 +66,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/language.svg"
                 width={12}
                 height={12}
-                className="object-contain shrink-0 self-stretch my-auto aspect-[1.1] w-[12px] dark:invert"
+                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[1.1] dark:invert"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.languages}</div>
@@ -76,7 +76,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/location.svg"
                 width={12}
                 height={12}
-                className="object-contain shrink-0 self-stretch my-auto aspect-[0.79] w-[12px] dark:invert"
+                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[0.79] dark:invert"
                 alt=""
               />
               <div className="self-stretch my-auto">{contacts.location}</div>
@@ -92,7 +92,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/email.svg"
                 width={36}
                 height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-[1.22] w-[12px] dark:invert"
+                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-[1.22] dark:invert"
                 alt="Email"
               />
               <div className="self-stretch my-auto hidden sm:block">
@@ -108,7 +108,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/phone.svg"
                 width={36}
                 height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
+                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
                 alt="Phone"
               />
               <div className="self-stretch my-auto hidden sm:block">
@@ -125,7 +125,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/github.svg"
                 width={36}
                 height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
+                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
                 alt="GitHub"
               />
               <div className="self-stretch my-auto hidden sm:block">
@@ -142,7 +142,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
                 src="/icons/linkedin.svg"
                 width={36}
                 height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square w-[12px] dark:invert"
+                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
                 alt="LinkedIn"
               />
               <div className="self-stretch my-auto hidden sm:block">

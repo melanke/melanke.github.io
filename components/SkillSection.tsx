@@ -21,7 +21,7 @@ export function SkillSection({
           src={icon}
           width={20}
           height={20}
-          className="object-contain shrink-0 self-stretch my-auto w-5 aspect-[1.07] dark:invert"
+          className="w-auto h-auto object-contain shrink-0 self-stretch my-auto dark:invert"
           alt=""
         />
         <div className="self-stretch my-auto font-clash font-semibold">

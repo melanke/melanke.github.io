@@ -69,7 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="transition-colors">
-      <body className="bg-white dark:bg-neutral-900 transition-colors">
+      <body className="bg-white dark:bg-neutral-900 transition-colors vsc-initialized">
         {children}
       </body>
     </html>

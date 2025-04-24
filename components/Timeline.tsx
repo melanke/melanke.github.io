@@ -33,11 +33,12 @@ export function Timeline() {
         achieved.
       </div>
       <TimelineItem
-        dateRange="Since Jun 2024"
+        dateRange="Jun 2024 - Mar 2025"
         technologies={["TS", "React", "Contract"]}
         title="Enclave Wallet - Simpli"
         role="Developer / Product Owner / UI/UX Designer"
         description="Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, and development of the wallet frontend."
+        image="/projects/enclave.webp"
       />
       <TimelineItem
         dateRange="Jan 2024 - Aug 2024"
@@ -45,6 +46,7 @@ export function Timeline() {
         title="Linkd Academy - Simpli"
         role="Tech Consultant"
         description="Linkd is the largest educational platform on the Neo network. This project features a website with extensive materials teaching users how to develop dApps on the network, along with a VSCode extension to streamline installation and integration with the platform's development environment and a Token. I was responsible for reviewing the platform's content, providing technical leadership on specific aspects of the project, and developing the dApp related to the Token."
+        image="/projects/linkd.webp"
       />
       <TimelineItem
         dateRange="Oct 2023 - Jun 2024"
@@ -53,8 +55,6 @@ export function Timeline() {
         role="Product Owner / TechLead"
         description="This platform allows dApp administrators to upload their application icons to a decentralized File System and save the URL into a SmartContract, which organizes and makes these icons available to other applications. I was responsible for architecting the dApp to operate in a fully decentralized manner."
       />
-      <PageHeader />
-      <TimelineHeader className="hidden print:flex mb-8" />
       <TimelineItem
         dateRange="Aug 2023 - Jul 2024"
         technologies={["TS", "Blockchain"]}
@@ -75,6 +75,7 @@ export function Timeline() {
         title="Neon Wallet - Simpli"
         role="TechLead"
         description="Neon is the largest wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for structuring its mobile version and later contributed to the development of the desktop version. Key challenges of this wallet included supporting multiple blockchain networks and managing multiple accounts simultaneously. Through this wallet, we introduced Wallet Connect integration to the network, implemented atomic swaps, and executed various other integrations."
+        image="/projects/neon.webp"
       />
       <TimelineItem
         dateRange="Mar 2021 - Mar 2022"
@@ -82,6 +83,7 @@ export function Timeline() {
         title="Sharity - Simpli"
         role="TechLead / Main Developer"
         description="A crowdfunding for charitable causes with more than 100 thousand users. I played a key role at the outset of the project, where I designed the database architecture, structured the project, and developed the most critical components of the application."
+        image="/projects/sharity.webp"
       />
       <TimelineItem
         dateRange="Feb 2021 - Set 2024"
@@ -111,8 +113,6 @@ export function Timeline() {
         role="Developer / Tech Consultant"
         description="Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data due to significant performance issues with the old dashboard. Initially, my responsibility was focused solely on the frontend. However, I quickly realized that structural changes were necessary. I provided several recommendations to Jamef's team on improving the data structure and delivery for better performance. Ultimately, I delivered a complex dashboard featuring various customized graphs and contributed to enhancing the overall structure of the central system."
       />
-      <PageHeader />
-      <TimelineHeader className="hidden print:flex mb-8" />
       <TimelineItem
         dateRange="Jan 2018 - May 2019"
         technologies={["Vue2", "Kotlin / R"]}
@@ -133,6 +133,7 @@ export function Timeline() {
         title="iTrack - Simpli"
         role="Business Analyst / TechLead / Developer"
         description="iTrack Brasil is a B2B delivery services platform, integrating multiple systems, with nearly 60,000 couriers. Key challenges included various integrations and optimizing large data volumes. With over 50 million invoices and 2,000 companies registered, the platform's growth was further boosted by its acquisition by MadeiraMadeira in 2021."
+        image="/projects/itrack.webp"
       />
       <TimelineItem
         dateRange="Mar 2016 - Jan 2018"
@@ -147,6 +148,7 @@ export function Timeline() {
         title="Apptite - Simpli"
         role="Business Analyst / TechLead / Developer / UI/UX Designer"
         description="Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups'. With media coverage, it established itself as an important platform in the artisanal food market. I was the main responsible for the initial planning, structuring and development of the platform."
+        image="/projects/apptite.webp"
       />
       <TimelineItem
         dateRange="Aug 2015 - July 2017"
@@ -154,6 +156,7 @@ export function Timeline() {
         title="Desabafa - Simpli"
         role="Business Analyst / TechLead / Developer / UI/UX Designer"
         description="Desabafa was an anonymous social network designed for emotional support and mutual understanding, featuring a robust security and monitoring system to ensure a healthy user experience. The platform received media recognition in the mental health sector and facilitated over 1 million interactions. I contributed to the planning, structuring, and development of the platform."
+        image="/projects/desabafa.webp"
       />
       <TimelineItem
         dateRange="Out 2014 - Nov 2015"
@@ -168,6 +171,7 @@ export function Timeline() {
         title="Multilaser Runin - Simpli"
         role="Developer"
         description="Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control tests, which were previously done manually. I helped develop an Android application to automate these tests, covering CPU, RAM, GPS, screen brightness, and touch functionality. This automation significantly improved productivity in tablet production, and the app has since tested over 20 million devices."
+        image="/projects/runin.webp"
       />
       <TimelineItem
         dateRange="2010 - 2013"
