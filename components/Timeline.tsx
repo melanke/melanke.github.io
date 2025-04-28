@@ -32,6 +32,13 @@ export function Timeline() {
         achieved.
       </div>
       <TimelineItem
+        dateRange="Apr 2025 - Present"
+        technologies={["Solidity", "Optimism", "TS", "React", "NextJS"]}
+        title="Jodobix"
+        role="Solo Developer"
+        description="Jodobix is a decentralized betting game designed to be fully fair and autonomous. It uses blockchain technology to eliminate intermediaries and ensures that all betting value is distributed among players and contributors. Creating this project entirely by myself, I could ellaborate random number generation strategies that are safe and don't rely on trusted parties."
+      />
+      <TimelineItem
         dateRange="Jun 2024 - Mar 2025"
         technologies={["TS", "React", "Contract"]}
         title="Enclave Wallet - Simpli"
@@ -179,6 +186,7 @@ export function Timeline() {
         role="Developer / UI/UX Designer"
         description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
       />
+      <div className="h-48"></div>
     </div>
   );
 }
