@@ -15,7 +15,7 @@ export function SkillSection({
   otherSkills,
 }: SkillSectionProps) {
   return (
-    <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
+    <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px] animate-fade-up opacity-0">
       <div className="flex gap-2 items-center w-full text-2xl font-semibold leading-none text-black dark:text-white">
         <Image
           src={icon}
@@ -30,12 +30,23 @@ export function SkillSection({
       </div>
       <div className="flex flex-col mt-2.5 w-full">
         {skills.map((skill, index) => (
-          <div key={index} className={index > 0 ? "mt-1.5" : ""}>
+          <div
+            key={index}
+            className={`${
+              index > 0 ? "mt-1.5" : ""
+            } animate-fade-up [animation-delay:${
+              (index + 1) * 200
+            }ms] opacity-0`}
+          >
             <SkillItem {...skill} />
           </div>
         ))}
         {otherSkills && (
-          <div className="mt-1.5 flex flex-wrap gap-1 font-clash text-xs">
+          <div
+            className={`mt-1.5 flex flex-wrap gap-1 font-clash text-xs animate-fade-up [animation-delay:${
+              (skills.length + 1) * 200
+            }ms] opacity-0`}
+          >
             {otherSkills.map((skill, index) => (
               <span
                 key={index}
