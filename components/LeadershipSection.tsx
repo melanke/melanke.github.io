@@ -23,7 +23,7 @@ export function LeadershipSection() {
             <SkillItem name="Techlead" since="2013" level="expert" />
           </div>
           <div className="mt-1.5">
-            <SkillItem name="Business Analyst" since="2013" level="expert" />
+            <SkillItem name="Business Analyst" since="2010" level="expert" />
           </div>
           <div className="mt-1.5">
             <SkillItem name="Product Owner" since="2022" level="intermediate" />

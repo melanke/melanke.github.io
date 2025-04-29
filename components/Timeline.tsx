@@ -32,14 +32,29 @@ export function Timeline() {
         achieved.
       </div>
       <TimelineItem
-        dateRange="Apr 2025 - Present"
-        technologies={["Solidity", "Optimism", "TS", "React", "NextJS"]}
+        dateRange="Mar 2025 - Present"
+        technologies={[
+          "Solidity",
+          "Hardhat",
+          "Optimism",
+          "TS",
+          "React",
+          "NextJS",
+        ]}
         title="Jodobix"
         role="Solo Developer"
-        description="Jodobix is a decentralized betting game designed to be fully fair and autonomous. It uses blockchain technology to eliminate intermediaries and ensures that all betting value is distributed among players and contributors. Creating this project entirely by myself, I could ellaborate random number generation strategies that are safe and don't rely on trusted parties."
+        description="Jodobix is a decentralized betting game designed to be fully fair and autonomous. It leverages blockchain technology to eliminate intermediaries and guarantees that all betting value is distributed among players and contributors. I developed the entire project on my own, including the design of secure random number generation strategies that do not rely on trusted third parties."
       />
       <TimelineItem
-        dateRange="Jun 2024 - Mar 2025"
+        dateRange="Feb 2025 - Present"
+        technologies={["Solidity", "Hardhat", "TS", "React", "NextJS"]}
+        title="BuidlGuidl Batch Program"
+        role="Mentor / BG member"
+        description="BuidlGuidl is one of the most impactful builder communities in the Ethereum ecosystem. One of its core initiatives is the Batch Program, which helps onboard new developers into the Ethereum space. As a mentor in the program, I guide participants through their first steps contributing to open source using Solidity, Hardhat, ScaffoldEth 2, and Next.js."
+        image="/projects/buidlguidl.webp"
+      />
+      <TimelineItem
+        dateRange="Jun 2024 - Present"
         technologies={["TS", "React", "Contract"]}
         title="Enclave Wallet - Simpli"
         role="Developer / Product Owner / UI/UX Designer"
@@ -53,13 +68,6 @@ export function Timeline() {
         role="Tech Consultant"
         description="Linkd is the largest educational platform on the Neo network. This project features a website with extensive materials teaching users how to develop dApps on the network, along with a VSCode extension to streamline installation and integration with the platform's development environment and a Token. I was responsible for reviewing the platform's content, providing technical leadership on specific aspects of the project, and developing the dApp related to the Token."
         image="/projects/linkd.webp"
-      />
-      <TimelineItem
-        dateRange="Oct 2023 - Jun 2024"
-        technologies={["SvelteKit", "Contract"]}
-        title="Icon Dapp - Simpli"
-        role="Product Owner / TechLead"
-        description="This platform allows dApp administrators to upload their application icons to a decentralized File System and save the URL into a SmartContract, which organizes and makes these icons available to other applications. I was responsible for architecting the dApp to operate in a fully decentralized manner."
       />
       <TimelineItem
         dateRange="Aug 2023 - Jul 2024"
@@ -80,7 +88,7 @@ export function Timeline() {
         technologies={["TS", "React", "R. Native", "Blockchain"]}
         title="Neon Wallet - Simpli"
         role="TechLead"
-        description="Neon is the largest wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for structuring its mobile version and later contributed to the development of the desktop version. Key challenges of this wallet included supporting multiple blockchain networks and managing multiple accounts simultaneously. Through this wallet, we introduced Wallet Connect integration to the network, implemented atomic swaps, and executed various other integrations."
+        description="Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations."
         image="/projects/neon.webp"
       />
       <TimelineItem
