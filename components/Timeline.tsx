@@ -44,6 +44,7 @@ export function Timeline() {
         title="Jodobix"
         role="Solo Developer"
         description="Jodobix is a decentralized betting game designed to be fully fair and autonomous. It leverages blockchain technology to eliminate intermediaries and guarantees that all betting value is distributed among players and contributors. I developed the entire project on my own, including the design of secure random number generation strategies that do not rely on trusted third parties."
+        image="/projects/jodobix.png"
       />
       <TimelineItem
         dateRange="Feb 2025 - Present"
@@ -75,6 +76,7 @@ export function Timeline() {
         title="Blockchain Services Library - Simpli"
         role="Techlead"
         description="BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team."
+        image="/projects/github.png"
       />
       <TimelineItem
         dateRange="Fev 2022 - Apr 2023"
@@ -82,6 +84,7 @@ export function Timeline() {
         title="Letter - Simpli"
         role="TechLead / Main Developer"
         description="In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations."
+        image="/projects/letter.png"
       />
       <TimelineItem
         dateRange="July 2021 - July 2024"
