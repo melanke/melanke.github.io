@@ -26,7 +26,7 @@ export default function Home() {
           }}
         />
 
-        <div className="flex flex-col flex-1 pl-2.5 mt-5 w-full max-md:max-w-full">
+        <div className="flex flex-col flex-1 mt-5 w-full max-md:max-w-full">
           <Bio text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />
 
           <div className="flex flex-wrap gap-x-5 gap-y-10 items-start mt-10 w-full text-black max-md:max-w-full">
