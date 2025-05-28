@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaGithub, FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaLocationDot } from "react-icons/fa6";
 import { LuLanguages } from "react-icons/lu";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { RiGraduationCapFill, RiIdCardFill } from "react-icons/ri";
