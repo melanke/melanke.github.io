@@ -11,6 +11,7 @@ export interface TimelineItemProps {
   image?: string;
   link?: string;
   nested?: boolean;
+  lastNested?: boolean;
   groupCircleForPrint?: boolean;
 }
 
@@ -23,6 +24,7 @@ export function TimelineItem({
   image,
   link,
   nested = false,
+  lastNested = false,
   groupCircleForPrint = false,
 }: TimelineItemProps) {
   return (
@@ -31,16 +33,30 @@ export function TimelineItem({
         <div className="hidden print:flex flex-col">
           <div className="flex-grow"></div>
           <div className="w-5 h-5 flex-shrink-0 mr-3 rounded-full border-2 border-neutral-200 dark:border-neutral-800"></div>
-          <div className="flex-grow md:ml-2 pl-2 md:pl-4 border-l-2 border-neutral-200 dark:border-neutral-800"></div>
+          <div className="flex-grow md:ml-2 border-l-2 border-neutral-200 dark:border-neutral-800"></div>
         </div>
       )}
-      <div
-        className={`flex flex-col pt-5 ${
-          nested
-            ? "md:ml-2 pl-2 md:pl-4 border-l-2 border-neutral-200 dark:border-neutral-800"
-            : ""
-        }`}
-      >
+      {nested && (
+        <div className="flex flex-col items-start relative">
+          <div
+            className="
+              w-3.5
+              h-20
+              ml-1
+              md:ml-2 
+              border-b-2
+              border-l-2
+              border-neutral-200
+              dark:border-neutral-800
+              rounded-bl-xl
+            "
+          ></div>
+          {!lastNested && (
+            <div className="absolute top-0 w-3.5 h-full ml-1 md:ml-2 border-l-2 border-neutral-200 dark:border-neutral-800"></div>
+          )}
+        </div>
+      )}
+      <div className="flex flex-col pt-5">
         <div className="flex items-start w-full leading-snug min-h-[14px] max-md:max-w-full">
           <div className="font-bold text-black dark:text-white">{title}</div>
           <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">

@@ -214,6 +214,7 @@ export function Timeline() {
       />
       <TimelineItem
         nested
+        lastNested
         dateRange="Aug 2014 - Out 2014"
         technologies={["Android", "Java"]}
         title="Multilaser Runin - Simpli"
