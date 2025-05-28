@@ -1,17 +1,11 @@
 import { SkillItem } from "./SkillItem";
-import Image from "next/image";
+import { HiOutlineUserGroup } from "react-icons/hi2";
 
 export function LeadershipSection() {
   return (
     <div className="flex flex-col mt-10 w-full text-black dark:text-white max-md:max-w-full">
       <div className="flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none animate-fade-up opacity-0">
-        <Image
-          src="/icons/leadership.svg"
-          width={16}
-          height={16}
-          className="object-contain shrink-0 self-stretch my-auto w-4 aspect-[1.07] dark:invert"
-          alt=""
-        />
+        <HiOutlineUserGroup size={20} />
         <div className="self-stretch my-auto font-clash font-semibold">
           Leadership Experience
         </div>

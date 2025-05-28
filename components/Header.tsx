@@ -1,4 +1,8 @@
 import Image from "next/image";
+import { FaGithub, FaLinkedin, FaLocationDot, FaPhone } from "react-icons/fa6";
+import { LuLanguages } from "react-icons/lu";
+import { MdEmail, MdPhone } from "react-icons/md";
+import { RiGraduationCapFill, RiIdCardFill } from "react-icons/ri";
 
 export interface HeaderProps {
   name: string;
@@ -25,6 +29,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
     <div className="flex flex-col sm:flex-row gap-2 w-full text-black dark:text-white min-h-[128px] max-sm:max-w-full items-center justify-center sm:justify-start">
       <Image
         src={profileImage}
+        priority
         width={160}
         height={160}
         className="object-contain shrink-0 self-center sm:self-start w-40 aspect-square"
@@ -40,77 +45,41 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-10 justify-between items-start pl-1.5 mt-2.5 w-full text-xs">
-          <div className="flex flex-col gap-0.5">
-            <div className="flex gap-1 items-center self-start">
-              <Image
-                src="/icons/id.svg"
-                width={12}
-                height={12}
-                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[1.22] dark:invert"
-                alt=""
-              />
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-1.5 items-center self-start">
+              <RiIdCardFill className="w-4 h-4" />
               <div className="self-stretch my-auto">{contacts.fullName}</div>
             </div>
-            <div className="flex gap-1 items-end self-stretch">
-              <Image
-                src="/icons/degree.svg"
-                width={12}
-                height={12}
-                className="w-auto h-auto object-contain shrink-0 aspect-square dark:invert"
-                alt=""
-              />
+            <div className="flex gap-1.5 items-end self-stretch">
+              <RiGraduationCapFill className="w-4 h-4" />
               <div>{contacts.education}</div>
             </div>
             <div className="flex gap-1.5 items-center">
-              <Image
-                src="/icons/language.svg"
-                width={12}
-                height={12}
-                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[1.1] dark:invert"
-                alt=""
-              />
+              <LuLanguages className="w-4 h-4" />
               <div className="self-stretch my-auto">{contacts.languages}</div>
             </div>
             <div className="flex gap-1.5 items-center">
-              <Image
-                src="/icons/location.svg"
-                width={12}
-                height={12}
-                className="w-auto h-auto object-contain shrink-0 self-stretch my-auto aspect-[0.79] dark:invert"
-                alt=""
-              />
+              <FaLocationDot className="w-4 h-4" />
               <div className="self-stretch my-auto">{contacts.location}</div>
             </div>
           </div>
-          <div className="flex sm:flex-col gap-y-2 gap-x-6 sm:gap-0.5 w-full sm:w-auto items-center justify-center sm:items-start">
+          <div className="flex sm:flex-col gap-y-1 gap-x-6 w-full sm:w-auto items-center justify-center sm:items-start">
             <a
               href={`mailto:${contacts.email}`}
-              className="flex gap-1 items-center sm:w-full whitespace-nowrap sm:underline"
+              className="flex gap-1.5 items-center whitespace-nowrap sm:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.email}
             >
-              <Image
-                src="/icons/email.svg"
-                width={36}
-                height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-[1.22] dark:invert"
-                alt="Email"
-              />
+              <MdEmail className="w-10 sm:w-4 h-10 sm:h-4" />
               <div className="self-stretch my-auto hidden sm:block">
                 {contacts.email}
               </div>
             </a>
             <a
               href={`tel:${contacts.phone.replace(" ", "")}`}
-              className="flex gap-1 items-center sm:self-start sm:underline"
+              className="flex gap-1.5 items-center sm:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.phone}
             >
-              <Image
-                src="/icons/phone.svg"
-                width={36}
-                height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
-                alt="Phone"
-              />
+              <MdPhone className="w-10 sm:w-4 h-10 sm:h-4" />
               <div className="self-stretch my-auto hidden sm:block">
                 {contacts.phone}
               </div>
@@ -118,16 +87,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
             <a
               href={formatUrl(contacts.github)}
               target="_blank"
-              className="flex gap-1 items-center sm:w-full whitespace-nowrap sm:underline"
+              className="flex gap-1.5 items-center whitespace-nowrap sm:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.github}
             >
-              <Image
-                src="/icons/github.svg"
-                width={36}
-                height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
-                alt="GitHub"
-              />
+              <FaGithub className="w-10 sm:w-4 h-10 sm:h-4" />
               <div className="self-stretch my-auto hidden sm:block">
                 {contacts.github}
               </div>
@@ -135,16 +98,10 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
             <a
               href={formatUrl(contacts.linkedin)}
               target="_blank"
-              className="flex gap-1.5 items-center whitespace-nowrap sm:underline"
+              className="flex gap-1.5 items-center whitespace-nowrap sm:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.linkedin}
             >
-              <Image
-                src="/icons/linkedin.svg"
-                width={36}
-                height={36}
-                className="w-[36px] h-[36px] sm:w-[12px] sm:h-[12px] object-contain shrink-0 self-stretch my-auto aspect-square dark:invert"
-                alt="LinkedIn"
-              />
+              <FaLinkedin className="w-10 sm:w-4 h-10 sm:h-4" />
               <div className="self-stretch my-auto hidden sm:block">
                 {contacts.linkedin}
               </div>

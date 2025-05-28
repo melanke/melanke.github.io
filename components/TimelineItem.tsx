@@ -58,8 +58,8 @@ export function TimelineItem({
               src={image}
               alt={title}
               width={128}
-              height={72}
-              className="float-left mr-3 rounded-lg border border-neutral-200 dark:border-neutral-800 print:hidden"
+              height={0}
+              className="w-32 h-auto float-left mr-3 rounded-lg border border-neutral-200 dark:border-neutral-800 print:hidden"
             />
           )}
           {description}

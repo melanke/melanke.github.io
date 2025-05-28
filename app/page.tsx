@@ -5,6 +5,10 @@ import { Timeline } from "@/components/Timeline";
 import { LeadershipSection } from "@/components/LeadershipSection";
 import { OtherSection } from "@/components/OtherSection";
 import { PageHeader } from "@/components/PageHeader";
+import { PiGlobe } from "react-icons/pi";
+import { BlockchainIcon } from "@/components/BlockchainIcon";
+import { BiServer } from "react-icons/bi";
+import { LiaToolsSolid } from "react-icons/lia";
 
 export default function Home() {
   return (
@@ -32,7 +36,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-x-5 gap-y-10 items-start mt-10 w-full text-black max-md:max-w-full">
             <SkillSection
               title="Web Frontend"
-              icon="/icons/web.svg"
+              icon={PiGlobe}
               skills={[
                 { name: "Javascript", since: "2008", level: "expert" },
                 { name: "Typescript", since: "2018", level: "expert" },
@@ -61,7 +65,7 @@ export default function Home() {
 
             <SkillSection
               title="Blockchain"
-              icon="/icons/blockchain.svg"
+              icon={BlockchainIcon}
               skills={[
                 { name: "Ethereum / Solidity", since: "2020", level: "expert" },
                 {
@@ -95,7 +99,7 @@ export default function Home() {
 
             <SkillSection
               title="Backend"
-              icon="/icons/backend.svg"
+              icon={BiServer}
               skills={[
                 {
                   name: "Node.JS",
@@ -136,7 +140,7 @@ export default function Home() {
 
             <SkillSection
               title="Processes and Tools"
-              icon="/icons/processes.svg"
+              icon={LiaToolsSolid}
               skills={[
                 {
                   name: "AI / Vibe Coding / Prompt Engineering",
