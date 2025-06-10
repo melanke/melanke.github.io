@@ -4,7 +4,7 @@ import { TimelineIcon } from "./TimelineIcon";
 function TimelineHeader({ className }: { className?: string }) {
   return (
     <div
-      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none ${className}`}
+      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none mt-10 ${className}`}
     >
       <TimelineIcon size={17} />
       <div className="self-stretch my-auto font-clash font-semibold">
