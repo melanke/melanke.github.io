@@ -7,7 +7,7 @@ export interface TimelineItemProps {
   technologies: string[];
   title: string;
   role: string;
-  description: string;
+  description: string | React.ReactNode;
   image?: string;
   link?: string;
   nested?: boolean;

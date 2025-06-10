@@ -55,7 +55,33 @@ export function Timeline() {
         technologies={[]}
         title="Simpli"
         role="CTO and Co-Founder"
-        description="Head of Technology, responsible for the implementation of technologies and development processes. Specialist on Blockchain. Requirements Analyst, Software Architect and Senior Developer. "
+        description={
+          <div className="space-y-2">
+            <p>
+              Hands-on Head of Technology, responsible for defining and
+              implementing technology stacks, development processes, and product
+              architecture. Blockchain specialist with a strong background as a
+              Requirements Analyst, Software Architect, and Senior Developer.
+              Over the past 11 years, I have successfully delivered more than 50
+              projects to clients and stakeholders. Some notable results
+              include:
+            </p>
+            <ul className="list-disc list-inside">
+              <li>Neon Wallet – Over US$1 Billion in traded volume</li>
+              <li>
+                iTrack – 50 Million invoices registered; 60k delivery mans; 2k
+                companies
+              </li>
+              <li>Runin Multilaser – Embedded in over 20 Million devices</li>
+              <li>
+                Apptite – US$1.6 Million in GMV; 100k deliveries; 50k users
+              </li>
+              <li>Sharity – R$ 2 Million in donations; 100k users</li>
+              <li>Desabafa - 700k posts</li>
+            </ul>
+            <p>Below are more details about each of these projects:</p>
+          </div>
+        }
         image="/projects/simpli.webp"
         groupCircleForPrint
       />
@@ -65,7 +91,7 @@ export function Timeline() {
         technologies={["TS", "React", "Contract"]}
         title="Enclave Wallet - Simpli"
         role="Developer / Product Owner / UI/UX Designer"
-        description="Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, and development of the wallet frontend."
+        description="Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, development of the whole wallet frontend and contributing to the Smart Contracts."
         image="/projects/enclave.webp"
         link="https://enclavewallet.com"
       />

@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Bio } from "@/components/Bio";
+import { History } from "@/components/History";
 import { SkillSection } from "@/components/SkillSection";
 import { Timeline } from "@/components/Timeline";
 import { LeadershipSection } from "@/components/LeadershipSection";
@@ -29,7 +30,7 @@ export default function Home() {
           }}
         />
 
-        <Bio text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />
+        <Bio text="I am a Senior Software Engineer with 15+ years of experience and over 50 successfully delivered projects. I’ve worked extensively with Fullstack Web Development and have been deeply involved with Web3 technologies for the past 7 years. For 12 of those years, I’ve also acted as a Tech Lead, gaining a strong understanding of digital product development." />
 
         <div className="flex flex-wrap gap-x-5 gap-y-10 items-start mt-10 w-full text-black max-md:max-w-full">
           <SkillSection
@@ -181,6 +182,8 @@ export default function Home() {
 
         <LeadershipSection />
         <OtherSection />
+
+        <History text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />
       </div>
       <div className="flex flex-col">
         <Timeline />
