@@ -41,7 +41,7 @@ export default function Home() {
               { name: "Typescript", since: "2018", level: "expert" },
               { name: "HTML / CSS / SCSS", since: "2007", level: "expert" },
               { name: "Tailwind", since: "2020", level: "expert" },
-              { name: "ReactJS / NextJS", since: "2020", level: "expert" },
+              { name: "ReactJS / NextJS", since: "2017", level: "expert" },
             ]}
             otherSkills={[
               "Vue 2",
@@ -107,7 +107,7 @@ export default function Home() {
               },
               {
                 name: "Java / Kotlin",
-                yearRange: "2008 - 2022",
+                since: "2008",
                 level: "expert",
               },
               {

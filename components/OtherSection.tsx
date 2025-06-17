@@ -14,7 +14,7 @@ export function OtherSection() {
         <div className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
           <SkillItem
             name="Mobile Developer - Native Android, React Native"
-            yearRange="2011 - 2022"
+            since="2011"
             level="intermediate"
           />
           <div className="mt-1.5">
