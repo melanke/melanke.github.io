@@ -79,7 +79,6 @@ export function Timeline() {
           </div>
         }
         image="/projects/simpli.webp"
-        groupCircleForPrint
       />
       <TimelineItem
         nested
