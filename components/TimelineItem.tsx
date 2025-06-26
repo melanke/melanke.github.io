@@ -89,29 +89,18 @@ export function TimelineItem({
                   {tech}
                 </span>
               ))}
-              {allLinks.map((link) =>
-                typeof link === "string" ? (
-                  <a
-                    href={link}
-                    target="_blank"
-                    className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
-                    rel="noopener noreferrer"
-                  >
-                    <FaLink className="print:hidden" />
-                    {link}
-                  </a>
-                ) : (
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
-                    rel="noopener noreferrer"
-                  >
-                    <FaLink className="print:hidden" />
-                    {link.label}
-                  </a>
-                )
-              )}
+              {allLinks.map((link, index) => (
+                <a
+                  href={typeof link === "string" ? link : link.url}
+                  target="_blank"
+                  key={index}
+                  className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
+                  rel="noopener noreferrer"
+                >
+                  <FaLink className="print:hidden" />
+                  {typeof link === "string" ? link : link.label}
+                </a>
+              ))}
             </div>
           )}
         </div>

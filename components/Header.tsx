@@ -6,7 +6,7 @@ import {
   FaTelegram,
 } from "react-icons/fa6";
 import { LuLanguages } from "react-icons/lu";
-import { MdEmail, MdPhone } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 import { RiGraduationCapFill, RiIdCardFill } from "react-icons/ri";
 
 export interface HeaderProps {
