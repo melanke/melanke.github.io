@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Bio } from "@/components/Bio";
+import { Achievements } from "@/components/Achievements";
 import { History } from "@/components/History";
 import { SkillSection } from "@/components/SkillSection";
 import { Timeline } from "@/components/Timeline";
@@ -12,7 +13,7 @@ import { LiaToolsSolid } from "react-icons/lia";
 
 export default function Home() {
   return (
-    <div className="flex overflow-hidden max-xl:flex-col max-xl:max-w-[740px] max-xl:mx-auto py-6 pr-8 pl-5 print:p-0 max-md:pr-5 gap-x-32">
+    <div className="flex overflow-hidden max-xl:flex-col max-xl:max-w-[740px] max-xl:mx-auto print:mx-0 py-6 pr-8 pl-5 max-md:pr-5 print:p-0 gap-x-32">
       <div className="flex flex-col max-w-[740px]">
         <Header
           name="Gil"
@@ -22,17 +23,18 @@ export default function Home() {
             fullName: "Gil Lopes Bueno",
             email: "gilbueno.mail@gmail.com",
             github: "github.com/melanke",
-            phone: "+55 11970629099",
+            telegram: "melankeee",
             education: "Computer Science, Bachelor's Degree PUC-SP",
             languages: "English and Portuguese",
-            location: "Sao Paulo, Brazil",
+            location: "Sao Paulo, Brazil (UTC-3)",
             linkedin: "linkedin.com/in/gilbueno",
           }}
         />
 
-        <Bio text="I am a Senior Software Engineer with 15+ years of experience and over 50 successfully delivered projects. I’ve worked extensively with Fullstack Web Development and have been deeply involved with Web3 technologies for the past 7 years. For 12 of those years, I’ve also acted as a Tech Lead, gaining a strong understanding of digital product development." />
+        <Bio />
+        <Achievements />
 
-        <div className="flex flex-wrap gap-x-5 gap-y-10 items-start mt-10 w-full text-black max-md:max-w-full">
+        <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-10 print:gap-y-3 items-start mt-10 print:mt-5 w-full text-black max-md:max-w-full">
           <SkillSection
             title="Web Frontend"
             icon={PiGlobe}
@@ -69,8 +71,8 @@ export default function Home() {
               { name: "Ethereum / Solidity", since: "2020", level: "expert" },
               {
                 name: "Solana / Anchor / Rust",
-                since: "2020",
-                level: "expert",
+                since: "2022",
+                level: "advanced",
               },
               { name: "Flow / Cadence", since: "2022", level: "expert" },
               {
@@ -140,6 +142,7 @@ export default function Home() {
           <SkillSection
             title="Processes and Tools"
             icon={LiaToolsSolid}
+            className="print:hidden"
             skills={[
               {
                 name: "AI / Vibe Coding / Prompt Engineering",

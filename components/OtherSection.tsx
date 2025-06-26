@@ -3,7 +3,7 @@ import { SkillItem } from "./SkillItem";
 
 export function OtherSection() {
   return (
-    <div className="flex flex-col w-full mt-10 text-black dark:text-white max-md:max-w-full">
+    <div className="flex flex-col w-full mt-10 text-black dark:text-white max-md:max-w-full print:hidden">
       <div className="flex flex-wrap gap-1.5 items-center w-full text-2xl font-semibold leading-none whitespace-nowrap max-md:max-w-full">
         <TbCards size={20} />
         <div className="self-stretch my-auto font-clash font-semibold">

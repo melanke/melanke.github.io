@@ -10,9 +10,10 @@ export interface TimelineItemProps {
   description: string | React.ReactNode;
   image?: string;
   link?: string;
+  links?: (string | { label: string; url: string })[];
   nested?: boolean;
   lastNested?: boolean;
-  groupCircleForPrint?: boolean;
+  print?: boolean;
 }
 
 export function TimelineItem({
@@ -23,19 +24,18 @@ export function TimelineItem({
   description,
   image,
   link,
+  links = [],
   nested = false,
   lastNested = false,
-  groupCircleForPrint = false,
+  print = true,
 }: TimelineItemProps) {
+  const allLinks = [...(link ? [link] : []), ...(links || [])];
   return (
-    <div className="flex w-full max-md:max-w-full break-inside-avoid text-[0.89rem] min-w-[288px] max-md:max-w-full">
-      {groupCircleForPrint && (
-        <div className="hidden print:flex flex-col">
-          <div className="flex-grow"></div>
-          <div className="w-5 h-5 flex-shrink-0 mr-3 rounded-full border-2 border-neutral-200 dark:border-neutral-800"></div>
-          <div className="flex-grow md:ml-2 border-l-2 border-neutral-200 dark:border-neutral-800"></div>
-        </div>
-      )}
+    <div
+      className={`flex w-full max-md:max-w-full break-inside-avoid text-[0.89rem] min-w-[288px] max-md:max-w-full ${
+        !print ? "print:hidden" : ""
+      }`}
+    >
       {nested && (
         <div className="flex flex-col items-start relative">
           <div
@@ -83,22 +83,34 @@ export function TimelineItem({
             <div className="mt-2.5 flex flex-wrap gap-1 text-xs">
               {technologies.map((tech, index) => (
                 <span
-                  className="px-3 py-[0.19rem] bg-neutral-100 font-clash dark:bg-neutral-800 rounded-full text-black dark:text-white"
+                  className="px-3 py-[0.19rem] bg-neutral-100 font-clash print:font-sans dark:bg-neutral-800 rounded-full text-black dark:text-white"
                   key={index}
                 >
                   {tech}
                 </span>
               ))}
-              {link && (
-                <a
-                  href={link}
-                  target="_blank"
-                  className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
-                  rel="noopener noreferrer"
-                >
-                  <FaLink />
-                  {link}
-                </a>
+              {allLinks.map((link) =>
+                typeof link === "string" ? (
+                  <a
+                    href={link}
+                    target="_blank"
+                    className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLink className="print:hidden" />
+                    {link}
+                  </a>
+                ) : (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    className="flex items-center gap-1 pl-2 pr-3 py-[0.19rem] border border-neutral-100 dark:border-neutral-800 rounded-full text-black dark:text-white hover:bg-neutral-800 dark:hover:bg-neutral-100 hover:text-white dark:hover:text-black transition-colors duration-200"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLink className="print:hidden" />
+                    {link.label}
+                  </a>
+                )
               )}
             </div>
           )}
