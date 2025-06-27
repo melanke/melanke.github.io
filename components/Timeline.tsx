@@ -83,7 +83,7 @@ export function Timeline() {
       <TimelineItem
         nested
         title="Enclave Wallet"
-        dateRange="Jun 2024 - Present"
+        dateRange="Jun 2024 - Feb 2025"
         technologies={[
           "TypeScript",
           "React.js",
