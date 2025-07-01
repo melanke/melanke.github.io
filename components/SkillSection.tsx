@@ -21,7 +21,7 @@ export function SkillSection({
     <div
       className={`flex flex-col flex-1 shrink basis-0 min-w-[240px] animate-fade-up opacity-0 ${className}`}
     >
-      <div className="flex gap-2 items-center w-full text-2xl print:text-xl font-semibold leading-none text-black dark:text-white">
+      <div className="flex gap-2 items-center w-full text-2xl print:text-base font-semibold leading-none text-black dark:text-white">
         {typeof icon === "string" ? (
           <Image
             src={icon}
@@ -33,11 +33,12 @@ export function SkillSection({
         ) : (
           icon({ size: 20, className: "print:hidden" })
         )}
+        <div className="hidden print:block w-1.5 h-1.5 bg-black dark:bg-white rounded-full shrink-0 self-stretch my-auto"></div>
         <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
           {title}
         </div>
       </div>
-      <div className="flex flex-col print:flex-row print:flex-wrap mt-2.5 print:mt-1 w-full">
+      <div className="flex flex-col print:flex-row print:flex-wrap mt-2.5 print:mt-1 print:ml-4 w-full">
         {skills.map((skill, index) => (
           <>
             <div

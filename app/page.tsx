@@ -10,6 +10,7 @@ import { PiGlobe } from "react-icons/pi";
 import { BlockchainIcon } from "@/components/BlockchainIcon";
 import { BiServer } from "react-icons/bi";
 import { LiaToolsSolid } from "react-icons/lia";
+import { contentVersion } from "./contentVersion";
 
 export default function Home() {
   return (
@@ -17,10 +18,14 @@ export default function Home() {
       <div className="flex flex-col max-w-[740px]">
         <Header
           name="Gil"
-          title="Software Engineer"
+          title={
+            contentVersion === "web3"
+              ? "Senior Blockchain Engineer"
+              : "Senior Software Engineer"
+          }
           profileImage="/profile.webp"
           contacts={{
-            fullName: "Gil Lopes Bueno",
+            fullName: "Gil L Bueno",
             email: "gilbueno.mail@gmail.com",
             github: "github.com/melanke",
             telegram: "melankeee",
@@ -33,37 +38,11 @@ export default function Home() {
 
         <Bio />
         <Achievements />
+        <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-5 text-xl">
+          Technical Skills
+        </div>
 
-        <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-10 print:gap-y-3 items-start mt-10 print:mt-5 w-full text-black max-md:max-w-full">
-          <SkillSection
-            title="Web Frontend"
-            icon={PiGlobe}
-            skills={[
-              { name: "Javascript", since: "2008", level: "expert" },
-              { name: "Typescript", since: "2018", level: "expert" },
-              { name: "HTML / CSS / SCSS", since: "2007", level: "expert" },
-              { name: "Tailwind", since: "2020", level: "expert" },
-              { name: "ReactJS / NextJS", since: "2017", level: "expert" },
-            ]}
-            otherSkills={[
-              "Vue 2",
-              "SvelteKit",
-              "Chakra UI",
-              "ReactQuery",
-              "ReduxToolkit",
-              "Echarts",
-              "Valtio",
-              "Vite",
-              "Jest",
-              "Playwright",
-              "Storybook",
-              "URQL",
-              "ReactHookForm",
-              "Lighthouse",
-              "and more...",
-            ]}
-          />
-
+        <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-10 print:gap-y-3 items-start mt-10 print:mt-2 w-full text-black max-md:max-w-full">
           <SkillSection
             title="Blockchain"
             icon={BlockchainIcon}
@@ -94,6 +73,34 @@ export default function Home() {
               "Ethers",
               "Hardhat",
               "ScaffoldEth-2",
+              "and more...",
+            ]}
+          />
+
+          <SkillSection
+            title="Web Frontend"
+            icon={PiGlobe}
+            skills={[
+              { name: "Javascript", since: "2008", level: "expert" },
+              { name: "Typescript", since: "2018", level: "expert" },
+              { name: "Tailwind", since: "2020", level: "expert" },
+              { name: "ReactJS / NextJS", since: "2017", level: "expert" },
+            ]}
+            otherSkills={[
+              "Vue 2",
+              "SvelteKit",
+              "Chakra UI",
+              "ReactQuery",
+              "ReduxToolkit",
+              "Echarts",
+              "Valtio",
+              "Vite",
+              "Jest",
+              "Playwright",
+              "Storybook",
+              "URQL",
+              "ReactHookForm",
+              "Lighthouse",
               "and more...",
             ]}
           />

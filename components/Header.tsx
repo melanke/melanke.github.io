@@ -48,7 +48,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
           <div className="self-stretch my-auto text-6xl font-sans hidden print:block font-bold">
             {contacts.fullName}
           </div>
-          <div className="my-auto text-2xl font-clash print:font-sans font-semibold leading-6 w-[120px]">
+          <div className="my-auto text-2xl font-clash print:font-sans font-semibold leading-6">
             {title}
           </div>
         </div>
@@ -89,7 +89,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
             >
               <FaTelegram className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:block">
-                t.me/{contacts.telegram}
+                Telegram
               </div>
             </a>
             <a
@@ -99,9 +99,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
               title={contacts.github}
             >
               <FaGithub className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
-              <div className="self-stretch my-auto hidden sm:block">
-                {contacts.github}
-              </div>
+              <div className="self-stretch my-auto hidden sm:block">Github</div>
             </a>
             <a
               href={formatUrl(contacts.linkedin)}
@@ -111,7 +109,7 @@ export function Header({ name, title, profileImage, contacts }: HeaderProps) {
             >
               <FaLinkedin className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:block">
-                {contacts.linkedin}
+                LinkedIn
               </div>
             </a>
             <div className="self-stretch my-auto hidden print:block">

@@ -31,7 +31,7 @@ export function Timeline() {
           "Ethereum",
           "EVM",
         ]}
-        role="Software Engineer | Mentor"
+        role="Mentor"
         description="BuidlGuidl is one of the most impactful builder communities in the Ethereum ecosystem. One of its core initiatives is the Batch Program, which helps onboard new developers into the Ethereum space. As a mentor in the program, I guide participants through their first steps contributing to open source using Solidity, Hardhat, ScaffoldEth 2, and Next.js."
         image="/projects/buidlguidl.webp"
         link="https://buidlguidl.com/batches"
@@ -68,14 +68,27 @@ export function Timeline() {
         description={
           <div className="space-y-2">
             <p>
-              Hands-on Head of Technology, responsible for defining and
-              implementing technology stacks, development processes, and product
-              architecture. Blockchain specialist with a strong background as a
-              Requirements Analyst, Software Architect, and Senior Developer.
-              Over the past 11 years, I have successfully delivered more than 50
-              projects to clients and stakeholders.
+              Simpli started as a startup focused on building a B2C mobile
+              product, but quickly evolved into a fast-growing software house
+              serving a wide range of clients. In its first year, the company
+              pivoted to delivering custom distributed applications, and scaled
+              organically to a 30-person team through consistent delivery and
+              client satisfaction. Over 11 years, we delivered 50+ successful
+              digital products for both startups and enterprise clients, while
+              also launching and maintaining our own proprietary platforms.
             </p>
-            <p>Below are more details about some of these projects:</p>
+            <p>
+              From the beginning, Simpli was an early adopter of emerging
+              technologies like mobile development and blockchain. I played a
+              key role in shaping both the technical direction and business
+              strategy of the company. My work ranged from hands-on technical
+              leadership to driving innovation through research, process design,
+              and technology adoption. I led system architecture, created
+              technical roadmaps and documentation, and helped turn product
+              ideas into real businesses by aligning technical execution with
+              market opportunities.
+            </p>
+            <p>Below are more details about some key projects:</p>
           </div>
         }
         image="/projects/simpli.webp"
@@ -110,7 +123,7 @@ export function Timeline() {
       <TimelineItem
         title="Letter"
         nested
-        dateRange="Fev 2022 - Apr 2023"
+        dateRange="Feb 2022 - Apr 2023"
         technologies={[
           "TypeScript",
           "React.js",
@@ -273,6 +286,9 @@ export function Timeline() {
         description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
         link="https://simet.nic.br"
       />
+      <div className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-xl">
+        Academic Qualifications
+      </div>
       <TimelineItem
         dateRange="2008 - 2011"
         technologies={[]}

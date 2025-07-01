@@ -57,18 +57,21 @@ export function TimelineItem({
         </div>
       )}
       <div className="flex flex-col pt-5">
-        <div className="flex items-start w-full leading-snug min-h-[14px] max-md:max-w-full">
+        <div className="flex items-center w-full leading-snug min-h-[14px] max-md:max-w-full">
           <div className="font-bold text-black dark:text-white">{title}</div>
           <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">
             •
           </span>
           <div className="text-black/60 dark:text-white/60">{role}</div>
-        </div>
-        <div className="text-black/60 dark:text-white/60 text-xs">
-          {dateRange}
+          <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">
+            •
+          </span>
+          <div className="text-black/60 dark:text-white/60 text-xs">
+            {dateRange}
+          </div>
         </div>
 
-        <div className="leading-4 text-black dark:text-white max-md:max-w-full">
+        <div className="leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
           {image && (
             <Image
               src={image}
@@ -79,11 +82,11 @@ export function TimelineItem({
             />
           )}
           {description}
-          {technologies.length > 0 && (
+          {(technologies.length > 0 || allLinks.length > 0) && (
             <div className="mt-2.5 flex flex-wrap gap-1 text-xs">
               {technologies.map((tech, index) => (
                 <span
-                  className="px-3 py-[0.19rem] bg-neutral-100 font-clash print:font-sans dark:bg-neutral-800 rounded-full text-black dark:text-white"
+                  className="print:hidden px-3 py-[0.19rem] bg-neutral-100 font-clash print:font-sans dark:bg-neutral-800 rounded-full text-black dark:text-white"
                   key={index}
                 >
                   {tech}
