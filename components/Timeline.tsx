@@ -20,8 +20,23 @@ export function Timeline() {
       <TimelineHeader />
 
       <TimelineItem
+        title="Mosaic at 33Audits"
+        dateRange="Sep 2025 - Present"
+        technologies={[
+          "Solidity",
+          "Foundry",
+          "Uniswap V3",
+          "Uniswap V4",
+          "Ethereum",
+          "EVM",
+        ]}
+        role="Software Engineer | Main Smart Contract Developer"
+        description="Mosaic is a protocol designed to make smart contract development easier, cheaper, and more secure through flexible, pre-audited and composable contracts. It enables complex DeFi workflows and integrates AI tools that generate contract compositions from natural language descriptions. I've contributed to the core architecture and developed multiple reusable protocol modules."
+      />
+
+      <TimelineItem
         title="BuidlGuidl Batch Program"
-        dateRange="Feb 2025 - Present"
+        dateRange="Feb 2025 - Jan 2026"
         technologies={[
           "Solidity",
           "Hardhat",
