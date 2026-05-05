@@ -56,7 +56,7 @@ export function TimelineItem({
           )}
         </div>
       )}
-      <div className="flex flex-col pt-5">
+      <div className="flex flex-col pt-10 print:pt-5">
         <div className="flex items-center w-full leading-snug min-h-[14px] max-md:max-w-full">
           <div className="font-bold text-black dark:text-white">{title}</div>
           <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">
@@ -71,7 +71,7 @@ export function TimelineItem({
           </div>
         </div>
 
-        <div className="leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
+        <div className="mt-1 print:mt-0 leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
           {image && (
             <Image
               src={image}

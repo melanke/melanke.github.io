@@ -1,5 +1,8 @@
+ "use client";
+
 import { TimelineItem } from "./TimelineItem";
 import { TimelineIcon } from "./TimelineIcon";
+import { useState } from "react";
 
 function TimelineHeader({ className }: { className?: string }) {
   return (
@@ -15,6 +18,8 @@ function TimelineHeader({ className }: { className?: string }) {
 }
 
 export function Timeline() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="flex flex-col mt-10 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
@@ -249,152 +254,172 @@ export function Timeline() {
         image="/projects/neon.webp"
         link="https://coz.io/neon-wallet/"
       />
-      <TimelineItem
-        title="Sharity"
-        print={false}
-        nested
-        dateRange="Mar 2021 - Mar 2022"
-        technologies={[
-          "TypeScript",
-          "React.js",
-          "Kotlin",
-          "Java",
-          "Node.js",
-          "Next.js",
-          "GraphQL",
-        ]}
-        role="Software Engineer | TechLead"
-        description="A crowdfunding for charitable causes with more than 100 thousand users. I played a key role at the outset of the project, where I designed the database architecture, structured the project, and developed the most critical components of the application."
-        image="/projects/sharity.webp"
-        link="https://sharity.com.br"
-      />
-      <TimelineItem
-        title="NDapp"
-        print={false}
-        nested
-        dateRange="Feb 2021 - Set 2024"
-        technologies={["TypeScript", "React.js", "Kotlin", "Java"]}
-        role="Software Engineer | TechLead"
-        description="NDapp became the official dApps galery of Neo network. Provides detailed information and automatic updates about each dApp, with data pulled directly from the NeoLegacy, Neo N3 and Neo X blockchains. I worked defining the initial structure of the project and developing the first functionalities."
-        link="https://ndapp.org"
-      />
-      <TimelineItem
-        title="Wow Talents"
-        print={false}
-        nested
-        dateRange="Mar 2020 - Aug 2023"
-        technologies={[
-          "TypeScript",
-          "React.js",
-          "Kotlin",
-          "Java",
-          "Jersey",
-          "MySQL",
-        ]}
-        role="Software Engineer | TechLead"
-        description="Wow Talents was a comprehensive agency platform for child models. Its primary features included model registration, job listing, and match-making between models and opportunities. The system also supported various functionalities, such as subscription payments and five different user types. Organizing all the demands into functional requirements, developing wireframes, managing the project roadmap, designing the database architecture, structuring the project, creating the permissions system and delegating tasks were significant challenges. This project was a tremendous learning experience."
-      />
-      <TimelineItem
-        nested
-        dateRange="Oct 2019 - Nov 2020"
-        technologies={["TypeScript", "React.js", "Kotlin", "Java", "MySQL"]}
-        title="LDC's She Digital"
-        role="Software Engineer | TechLead"
-        description="Louis Dreyfus Company, one of the largest commodity traders in the world, commissioned the development of a 'Safety, Health, and Environment' management platform for use across all its global units. I architected and developed this project entirely. The platform included integrations with Azure Active Directory for authentication and user management. The most significant challenge was translating all the company's needs into a flexible application that could scale without requiring code modifications."
-      />
-      <TimelineItem
-        title="Jamef Customers Dashboard"
-        print={false}
-        nested
-        dateRange="Jun 2019 - May 2022"
-        technologies={["TypeScript", "React.js"]}
-        role="Software Engineer"
-        description="Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data due to significant performance issues with the old dashboard. Initially, my responsibility was focused solely on the frontend. However, I quickly realized that structural changes were necessary. I provided several recommendations to Jamef's team on improving the data structure and delivery for better performance. Ultimately, I delivered a complex dashboard featuring various customized graphs and contributed to enhancing the overall structure of the central system."
-      />
-      <TimelineItem
-        title="SimpliData"
-        nested
-        print={false}
-        dateRange="Jan 2018 - May 2019"
-        technologies={["TypeScript", "React.js", "Kotlin", "R"]}
-        role="Software Engineer | TechLead"
-        description="In partnership with the macroeconomics firm Parallaxis, my team and I developed SimpliData, a Data Science application akin to the Bloomberg dashboard. Our goal was to combine various market tools and techniques into a platform that was significantly more practical and user-friendly."
-      />
-      <TimelineItem
-        title="iTrack"
-        nested
-        dateRange="Nov 2016 - Jun 2018"
-        technologies={["TypeScript", "React.js", "Kotlin", "Java"]}
-        role="Software Engineer | TechLead"
-        description="iTrack Brasil is a B2B delivery services platform, integrating multiple systems, with nearly 60,000 couriers. Key challenges included various integrations and optimizing large data volumes. With over 50 million invoices and 2,000 companies registered, the platform's growth was further boosted by its acquisition by MadeiraMadeira in 2021."
-        image="/projects/itrack.webp"
-        link="https://itrackbrasil.com.br"
-      />
-      <TimelineItem
-        title="Mapix"
-        nested
-        print={false}
-        dateRange="Mar 2016 - Jan 2018"
-        technologies={["Android", "Java"]}
-        role="Software Engineer | TechLead"
-        description="Mapix is a platform that connects students with their drivers, enhancing predictability and safety for children and parents while simplifying route planning and communication for drivers. I handled all the planning and structuring of the solution, and developed critical components of the application, including the route-building system, chat, and GPS mode."
-        link="https://mapixapp.com/"
-      />
-      <TimelineItem
-        title="Apptite"
-        nested
-        dateRange="Sep 2015 - July 2017"
-        technologies={["Android", "Java"]}
-        role="Software Engineer | TechLead"
-        description="Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups'. With media coverage, it established itself as an important platform in the artisanal food market. I was the main responsible for the initial planning, structuring and development of the platform."
-        image="/projects/apptite.webp"
-      />
-      <TimelineItem
-        title="Desabafa"
-        nested
-        dateRange="Aug 2015 - July 2017"
-        technologies={["Android", "Java"]}
-        role="Software Engineer | TechLead"
-        description="Desabafa was an anonymous social network designed for emotional support and mutual understanding, featuring a robust security and monitoring system to ensure a healthy user experience. The platform received media recognition in the mental health sector and facilitated over 1 million interactions. I contributed to the planning, structuring, and development of the platform."
-        image="/projects/desabafa.webp"
-      />
-      <TimelineItem
-        title="Band Radios App"
-        print={false}
-        nested
-        dateRange="Out 2014 - Nov 2015"
-        technologies={["Xamarin"]}
-        role="Software Engineer"
-        description="Bandeirantes, a major Brazilian media conglomerate, established Band Radios in 1937 and selected my team in 2014 to modernize their mobile app. The project presented several challenges, including the requirement to establish a UDP connection before the user selected a radio station. I served as the lead developer for the Android and iOS apps."
-      />
-      <TimelineItem
-        title="Multilaser Runin"
-        nested
-        lastNested
-        dateRange="Aug 2014 - Out 2014"
-        technologies={["Android", "Java"]}
-        role="Software Engineer"
-        description="Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control tests, which were previously done manually. I helped develop an Android application to automate these tests, covering CPU, RAM, GPS, screen brightness, and touch functionality. This automation significantly improved productivity in tablet production, and the app has since tested over 20 million devices."
-        image="/projects/runin.webp"
-      />
-      <TimelineItem
-        dateRange="2010 - 2013"
-        technologies={["JQuery", "Backbone", "Java", "Android"]}
-        title="SIMET - NIC.br"
-        role="Software Engineer"
-        description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
-        link="https://simet.nic.br"
-      />
+      {!isExpanded && (
+        <button
+          type="button"
+          onClick={() => setIsExpanded(true)}
+          aria-expanded={false}
+          className="print:hidden self-start mt-4 px-4 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        >
+          Show more
+        </button>
+      )}
+      <div
+        className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out print:overflow-visible ${
+          isExpanded
+            ? "max-h-[5000px] opacity-100"
+            : "max-h-0 opacity-0 print:max-h-[5000px] print:opacity-100"
+        }`}
+      >
+        <TimelineItem
+          title="Sharity"
+          print={false}
+          nested
+          dateRange="Mar 2021 - Mar 2022"
+          technologies={[
+            "TypeScript",
+            "React.js",
+            "Kotlin",
+            "Java",
+            "Node.js",
+            "Next.js",
+            "GraphQL",
+          ]}
+          role="Software Engineer | TechLead"
+          description="A crowdfunding for charitable causes with more than 100 thousand users. I played a key role at the outset of the project, where I designed the database architecture, structured the project, and developed the most critical components of the application."
+          image="/projects/sharity.webp"
+          link="https://sharity.com.br"
+        />
+        <TimelineItem
+          title="NDapp"
+          print={false}
+          nested
+          dateRange="Feb 2021 - Set 2024"
+          technologies={["TypeScript", "React.js", "Kotlin", "Java"]}
+          role="Software Engineer | TechLead"
+          description="NDapp became the official dApps galery of Neo network. Provides detailed information and automatic updates about each dApp, with data pulled directly from the NeoLegacy, Neo N3 and Neo X blockchains. I worked defining the initial structure of the project and developing the first functionalities."
+          link="https://ndapp.org"
+        />
+        <TimelineItem
+          title="Wow Talents"
+          print={false}
+          nested
+          dateRange="Mar 2020 - Aug 2023"
+          technologies={[
+            "TypeScript",
+            "React.js",
+            "Kotlin",
+            "Java",
+            "Jersey",
+            "MySQL",
+          ]}
+          role="Software Engineer | TechLead"
+          description="Wow Talents was a comprehensive agency platform for child models. Its primary features included model registration, job listing, and match-making between models and opportunities. The system also supported various functionalities, such as subscription payments and five different user types. Organizing all the demands into functional requirements, developing wireframes, managing the project roadmap, designing the database architecture, structuring the project, creating the permissions system and delegating tasks were significant challenges. This project was a tremendous learning experience."
+        />
+        <TimelineItem
+          nested
+          dateRange="Oct 2019 - Nov 2020"
+          technologies={["TypeScript", "React.js", "Kotlin", "Java", "MySQL"]}
+          title="LDC's She Digital"
+          role="Software Engineer | TechLead"
+          description="Louis Dreyfus Company, one of the largest commodity traders in the world, commissioned the development of a 'Safety, Health, and Environment' management platform for use across all its global units. I architected and developed this project entirely. The platform included integrations with Azure Active Directory for authentication and user management. The most significant challenge was translating all the company's needs into a flexible application that could scale without requiring code modifications."
+        />
+        <TimelineItem
+          title="Jamef Customers Dashboard"
+          print={false}
+          nested
+          dateRange="Jun 2019 - May 2022"
+          technologies={["TypeScript", "React.js"]}
+          role="Software Engineer"
+          description="Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data due to significant performance issues with the old dashboard. Initially, my responsibility was focused solely on the frontend. However, I quickly realized that structural changes were necessary. I provided several recommendations to Jamef's team on improving the data structure and delivery for better performance. Ultimately, I delivered a complex dashboard featuring various customized graphs and contributed to enhancing the overall structure of the central system."
+        />
+        <TimelineItem
+          title="SimpliData"
+          nested
+          print={false}
+          dateRange="Jan 2018 - May 2019"
+          technologies={["TypeScript", "React.js", "Kotlin", "R"]}
+          role="Software Engineer | TechLead"
+          description="In partnership with the macroeconomics firm Parallaxis, my team and I developed SimpliData, a Data Science application akin to the Bloomberg dashboard. Our goal was to combine various market tools and techniques into a platform that was significantly more practical and user-friendly."
+        />
+        <TimelineItem
+          title="iTrack"
+          nested
+          dateRange="Nov 2016 - Jun 2018"
+          technologies={["TypeScript", "React.js", "Kotlin", "Java"]}
+          role="Software Engineer | TechLead"
+          description="iTrack Brasil is a B2B delivery services platform, integrating multiple systems, with nearly 60,000 couriers. Key challenges included various integrations and optimizing large data volumes. With over 50 million invoices and 2,000 companies registered, the platform's growth was further boosted by its acquisition by MadeiraMadeira in 2021."
+          image="/projects/itrack.webp"
+          link="https://itrackbrasil.com.br"
+        />
+        <TimelineItem
+          title="Mapix"
+          nested
+          print={false}
+          dateRange="Mar 2016 - Jan 2018"
+          technologies={["Android", "Java"]}
+          role="Software Engineer | TechLead"
+          description="Mapix is a platform that connects students with their drivers, enhancing predictability and safety for children and parents while simplifying route planning and communication for drivers. I handled all the planning and structuring of the solution, and developed critical components of the application, including the route-building system, chat, and GPS mode."
+          link="https://mapixapp.com/"
+        />
+        <TimelineItem
+          title="Apptite"
+          nested
+          dateRange="Sep 2015 - July 2017"
+          technologies={["Android", "Java"]}
+          role="Software Engineer | TechLead"
+          description="Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups'. With media coverage, it established itself as an important platform in the artisanal food market. I was the main responsible for the initial planning, structuring and development of the platform."
+          image="/projects/apptite.webp"
+        />
+        <TimelineItem
+          title="Desabafa"
+          nested
+          dateRange="Aug 2015 - July 2017"
+          technologies={["Android", "Java"]}
+          role="Software Engineer | TechLead"
+          description="Desabafa was an anonymous social network designed for emotional support and mutual understanding, featuring a robust security and monitoring system to ensure a healthy user experience. The platform received media recognition in the mental health sector and facilitated over 1 million interactions. I contributed to the planning, structuring, and development of the platform."
+          image="/projects/desabafa.webp"
+        />
+        <TimelineItem
+          title="Band Radios App"
+          print={false}
+          nested
+          dateRange="Out 2014 - Nov 2015"
+          technologies={["Xamarin"]}
+          role="Software Engineer"
+          description="Bandeirantes, a major Brazilian media conglomerate, established Band Radios in 1937 and selected my team in 2014 to modernize their mobile app. The project presented several challenges, including the requirement to establish a UDP connection before the user selected a radio station. I served as the lead developer for the Android and iOS apps."
+        />
+        <TimelineItem
+          title="Multilaser Runin"
+          nested
+          lastNested
+          dateRange="Aug 2014 - Out 2014"
+          technologies={["Android", "Java"]}
+          role="Software Engineer"
+          description="Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control tests, which were previously done manually. I helped develop an Android application to automate these tests, covering CPU, RAM, GPS, screen brightness, and touch functionality. This automation significantly improved productivity in tablet production, and the app has since tested over 20 million devices."
+          image="/projects/runin.webp"
+        />
+        <TimelineItem
+          dateRange="2010 - 2013"
+          technologies={["JQuery", "Backbone", "Java", "Android"]}
+          title="SIMET - NIC.br"
+          role="Software Engineer"
+          description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
+          link="https://simet.nic.br"
+        />
+      </div>
       <div className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-xl">
         Academic Qualifications
       </div>
-      <TimelineItem
-        dateRange="2008 - 2011"
-        technologies={[]}
-        title="Pontifícia Universidade Católica de São Paulo (PUC-SP)"
-        role="Bachelor, Computer Science"
-        description="Bachelor's degree in Computer Science from Pontifícia Universidade Católica de São Paulo, one of Brazil's leading higher education institutions."
-      />
+      <div className="-mt-7 print:-mt-3">
+        <TimelineItem
+          dateRange="2008 - 2011"
+          technologies={[]}
+          title="Pontifícia Universidade Católica de São Paulo (PUC-SP)"
+          role="Bachelor, Computer Science"
+          description="Bachelor's degree in Computer Science from Pontifícia Universidade Católica de São Paulo, one of Brazil's leading higher education institutions."
+        />
+      </div>
       <div className="h-48"></div>
     </div>
   );

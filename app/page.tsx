@@ -42,7 +42,7 @@ export default function Home() {
           Technical Skills
         </div>
 
-        <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-10 print:gap-y-3 items-start mt-10 print:mt-2 w-full text-black max-md:max-w-full">
+        <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-14 print:gap-y-3 items-start mt-14 print:mt-2 w-full text-black max-md:max-w-full">
           <SkillSection
             title="Blockchain"
             icon={BlockchainIcon}
