@@ -58,9 +58,14 @@ export function Timeline() {
               idle capital during market activity.
             </p>
             <p>
-              Contributed to the smart contract architecture ensuring seamless
-              transitions between market phases without disrupting user
-              positions.
+              Led the end-to-end design and implementation of the smart contract
+              architecture, ensuring seamless transitions between market phases
+              without disrupting user positions or incentives.
+            </p>
+            <p>
+              Drove close collaboration with auditors throughout development,
+              incorporating feedback early to strengthen security and reduce
+              iteration cycles.
             </p>
           </div>
         }
@@ -246,6 +251,7 @@ export function Timeline() {
       />
       <TimelineItem
         title="Sharity"
+        print={false}
         nested
         dateRange="Mar 2021 - Mar 2022"
         technologies={[

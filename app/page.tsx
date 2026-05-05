@@ -83,8 +83,8 @@ export default function Home() {
             skills={[
               { name: "Javascript", since: "2008", level: "expert" },
               { name: "Typescript", since: "2018", level: "expert" },
-              { name: "Tailwind", since: "2020", level: "expert" },
               { name: "ReactJS / NextJS", since: "2017", level: "expert" },
+              { name: "Tailwind", since: "2020", level: "expert" },
             ]}
             otherSkills={[
               "Vue 2",
