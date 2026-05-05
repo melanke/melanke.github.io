@@ -20,8 +20,58 @@ export function Timeline() {
       <TimelineHeader />
 
       <TimelineItem
-        title="Mosaic at 33Audits"
+        title="33Labs"
         dateRange="Sep 2025 - Present"
+        technologies={[]}
+        role="Software Engineer | Main Smart Contract Developer"
+        description="Worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience."
+        image="/projects/33labs.webp"
+        link="https://www.33labs.ai/"
+      />
+      <TimelineItem
+        nested
+        title="American Spend"
+        dateRange="Mar 2026 - Present"
+        technologies={[
+          "Solidity",
+          "Foundry",
+          "Prediction Market",
+          "Vault",
+          "CLOB",
+          "Ethereum",
+          "EVM",
+        ]}
+        role="Software Engineer | Main Smart Contract Developer"
+        description={
+          <div className="space-y-2">
+            <p>
+              American Spend is a prediction market protocol combining yield
+              generation with market-based price discovery through a hybrid
+              market structure.
+            </p>
+            <p>
+              Designed a hybrid market model starting with a parimutuel phase
+              and transitioning into a Central Limit Order Book (CLOB).
+            </p>
+            <p>
+              Integrated vault-based yield strategies to generate returns on
+              idle capital during market activity.
+            </p>
+            <p>
+              Contributed to the smart contract architecture ensuring seamless
+              transitions between market phases without disrupting user
+              positions.
+            </p>
+          </div>
+        }
+        image="/projects/american-spend.webp"
+        link="https://spend.market/"
+      />
+      <TimelineItem
+        nested
+        lastNested
+        title="Mosaic"
+        dateRange="Sep 2025 - Feb 2026"
         technologies={[
           "Solidity",
           "Foundry",
@@ -31,7 +81,35 @@ export function Timeline() {
           "EVM",
         ]}
         role="Software Engineer | Main Smart Contract Developer"
-        description="Mosaic is a protocol designed to make smart contract development easier, cheaper, and more secure through flexible, pre-audited and composable contracts. It enables complex DeFi workflows and integrates AI tools that generate contract compositions from natural language descriptions. I've contributed to the core architecture and developed multiple reusable protocol modules."
+        description={
+          <div className="space-y-2">
+            <p>
+              Mosaic is a protocol designed to make smart contract development
+              more accessible, cost-efficient, and secure through flexible,
+              pre-audited, and composable contracts, with AI-assisted tooling
+              for generating contract compositions from natural language.
+            </p>
+            <p>
+              Contributed to the core architecture and designed reusable
+              protocol modules with a strong focus on composability.
+            </p>
+            <p>
+              Designed and implemented a Launchpad workflow powered by a
+              bonding curve, graduating into a Uniswap v3 liquidity pool for
+              smooth price discovery and liquidity transition.
+            </p>
+            <p>
+              Built a Uniswap v4 hook combining CLMM behavior with a bonding
+              curve model, later transitioning into a standard AMM.
+            </p>
+            <p>
+              Developed abstractions to support modular and extensible DeFi
+              primitives.
+            </p>
+          </div>
+        }
+        image="/projects/mosaic.webp"
+        link="https://mosaic.build/"
       />
 
       <TimelineItem
