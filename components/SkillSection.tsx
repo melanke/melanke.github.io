@@ -1,5 +1,6 @@
 import { SkillItem, SkillItemProps } from "./SkillItem";
 import Image from "next/image";
+import { Fragment } from "react";
 import { IconType } from "react-icons";
 
 export interface SkillSectionProps {
@@ -40,9 +41,8 @@ export function SkillSection({
       </div>
       <div className="flex flex-col print:flex-row print:flex-wrap mt-2.5 print:mt-1 print:ml-4 w-full">
         {skills.map((skill, index) => (
-          <>
+          <Fragment key={index}>
             <div
-              key={index}
               className={`${
                 index > 0 ? "mt-1.5 print:mt-0" : ""
               } animate-fade-up [animation-delay:${
@@ -57,7 +57,7 @@ export function SkillSection({
                 ,
               </div>
             )}
-          </>
+          </Fragment>
         ))}
         {otherSkills && (
           <div
