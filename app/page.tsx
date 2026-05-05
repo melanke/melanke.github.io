@@ -51,13 +51,13 @@ export default function Home() {
               {
                 name: "Solana / Anchor / Rust",
                 since: "2022",
-                level: "advanced",
+                level: "beginner",
               },
-              { name: "Flow / Cadence", since: "2022", level: "expert" },
+              { name: "Flow / Cadence", since: "2022", level: "advanced" },
               {
                 name: "Neo N3 / Python / Go",
                 since: "2018",
-                level: "expert",
+                level: "advanced",
               },
             ]}
             otherSkills={[
