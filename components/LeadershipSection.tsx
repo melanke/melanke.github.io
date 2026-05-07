@@ -5,7 +5,7 @@ export function LeadershipSection() {
   return (
     <div className="flex flex-col mt-10 w-full text-black break-inside-avoid dark:text-white max-md:max-w-full print:hidden">
       <div className="flex gap-1.5 justify-center items-center self-start text-2xl font-semibold leading-none animate-fade-up opacity-0">
-        <HiOutlineUserGroup size={20} />
+        <HiOutlineUserGroup size={20} className="text-[#4F28FF]" />
         <div className="self-stretch my-auto font-clash font-semibold">
           Leadership Experience
         </div>

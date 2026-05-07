@@ -32,7 +32,7 @@ export function SkillSection({
             alt=""
           />
         ) : (
-          icon({ size: 20, className: "print:hidden" })
+          icon({ size: 20, className: "print:hidden text-[#4F28FF]" })
         )}
         <div className="hidden print:block w-1.5 h-1.5 bg-black dark:bg-white rounded-full shrink-0 self-stretch my-auto"></div>
         <div className="self-stretch my-auto font-clash print:font-sans font-semibold">

@@ -7,9 +7,9 @@ import { useState } from "react";
 function TimelineHeader({ className }: { className?: string }) {
   return (
     <div
-      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none mt-10 print:mt-8 ${className}`}
+      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none print:mt-8 ${className}`}
     >
-      <TimelineIcon size={17} className="print:hidden" />
+      <TimelineIcon size={17} className="print:hidden text-[#4F28FF]" />
       <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
         Work Experience
       </div>
@@ -21,7 +21,7 @@ export function Timeline() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="flex flex-col mt-10 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
+    <div className="flex flex-col max-xl:mt-14 xl:mt-8 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
 
       <TimelineItem
