@@ -420,7 +420,7 @@ export function Timeline() {
           description="Bachelor's degree in Computer Science from Pontifícia Universidade Católica de São Paulo, one of Brazil's leading higher education institutions."
         />
       </div>
-      <div className="h-48"></div>
+      <div className="xl:h-48"></div>
     </div>
   );
 }

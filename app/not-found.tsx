@@ -14,7 +14,7 @@ const headerProps = {
     education: "Computer Science, Bachelor's Degree PUC-SP",
     languages: 'English and Portuguese',
     location: 'Sao Paulo, Brazil (UTC-3)',
-    linkedin: 'linkedin.com/in/gilbueno',
+    linkedin: 'linkedin.com/in/gilsolutions',
   },
 }
 

@@ -27,7 +27,7 @@ export function Footer() {
             <span className="text-sm">Telegram</span>
           </a>
           <a
-            href="https://linkedin.com/in/gilbueno"
+            href="https://www.linkedin.com/in/gilsolutions/"
             target="_blank"
             title="LinkedIn"
             className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
