@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gil.solutions"),
@@ -69,8 +70,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="transition-colors">
+      <head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="6232833a-5ec5-4e89-b8f8-9cbdb7ce1dae" />
+      </head>
       <body className="bg-white dark:bg-neutral-900 transition-colors vsc-initialized">
         {children}
+        <Footer />
       </body>
     </html>
   );

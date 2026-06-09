@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
+  FaBlog,
   FaGithub,
   FaLinkedin,
   FaLocationDot,
@@ -63,23 +65,25 @@ export function Header({
       <div className="flex flex-col flex-1 shrink justify-between basis-0 min-w-[240px] items-center sm:items-start">
         <div className="flex w-full items-center justify-between gap-6">
           <div className="flex gap-2.5 items-center self-center sm:self-start">
-            <div
-              className={`self-stretch my-auto font-clash print:hidden font-bold transition-all duration-300 ease-out print:text-6xl ${
-                compact ? "text-2xl leading-none" : "text-6xl"
-              }`}
-            >
-              {name}
-            </div>
-            <div className="self-stretch my-auto text-6xl font-sans hidden print:block font-bold">
-              {contacts.fullName}
-            </div>
-            <div
-              className={`my-auto font-clash print:font-sans font-semibold transition-all duration-300 ease-out print:text-2xl print:leading-6 ${
-                compact ? "text-sm leading-4" : "text-2xl leading-6"
-              }`}
-            >
-              {title}
-            </div>
+            <Link href="/" className="contents">
+              <div
+                className={`self-stretch my-auto font-clash print:hidden font-bold transition-all duration-300 ease-out print:text-6xl ${
+                  compact ? "text-2xl leading-none" : "text-6xl"
+                }`}
+              >
+                {name}
+              </div>
+              <div className="self-stretch my-auto text-6xl font-sans hidden print:block font-bold">
+                {contacts.fullName}
+              </div>
+              <div
+                className={`my-auto font-clash print:font-sans font-semibold transition-all duration-300 ease-out print:text-2xl print:leading-6 ${
+                  compact ? "text-sm leading-4" : "text-2xl leading-6"
+                }`}
+              >
+                {title}
+              </div>
+            </Link>
           </div>
           <div
             className={`print:hidden gap-6 items-center pr-2 shrink-0 ${
@@ -124,6 +128,13 @@ export function Header({
             >
               <FaXTwitter className={bigIconClass} />
             </a>
+            <Link
+              href="/blog"
+              className={bigLinkClass}
+              title="Blog"
+            >
+              <FaBlog className={bigIconClass} />
+            </Link>
           </div>
         </div>
         <div
@@ -203,6 +214,16 @@ export function Header({
                 {`x.com/${contacts.x}`}
               </div>
             </a>
+            <Link
+              href="/blog"
+              className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
+              title="Blog"
+            >
+              <FaBlog className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <div className="self-stretch my-auto hidden sm:max-lg:block print:hidden">
+                Blog
+              </div>
+            </Link>
             <div className="self-stretch my-auto hidden print:block">
               {contacts.location}
             </div>

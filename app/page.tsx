@@ -6,13 +6,17 @@ import { SkillSection } from "@/components/SkillSection";
 import { Timeline } from "@/components/Timeline";
 import { LeadershipSection } from "@/components/LeadershipSection";
 import { OtherSection } from "@/components/OtherSection";
+import { LatestPosts } from "@/components/LatestPosts";
 import { PiGlobe } from "react-icons/pi";
 import { BlockchainIcon } from "@/components/BlockchainIcon";
 import { BiServer } from "react-icons/bi";
 import { LiaToolsSolid } from "react-icons/lia";
 import { contentVersion } from "./contentVersion";
+import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
+  const latestPosts = getAllPosts().slice(0, 3);
+
   return (
     <div className="print:p-0 print:max-w-[740px]">
       <StickyHeader
@@ -203,6 +207,9 @@ export default function Home() {
             <OtherSection />
 
             <History text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />
+
+            {/* Latest Posts — xl+ only (left column) */}
+            <LatestPosts posts={latestPosts} className="hidden xl:block print:hidden" />
           </div>
           <div className="flex flex-col">
             <Timeline />
@@ -210,6 +217,12 @@ export default function Home() {
             <div className="h-8 bg-transparent mt-[120px] hidden print:block" />
           </div>
         </div>
+
+        {/* Latest Posts — below xl (below two-column layout) */}
+        <LatestPosts
+          posts={latestPosts}
+          className="xl:hidden print:hidden max-xl:max-w-[740px] max-xl:mx-auto"
+        />
       </div>
     </div>
   );

@@ -1,0 +1,28 @@
+---
+social-post: "\U0001F680 Web3 won’t truly take off until onboarding is simple for everyone.\nI just published an article diving into the main challenges of user onboarding—and how solutions like Abstract Wallets, sponsored transactions, and seamless fiat on-ramps can make a real difference. I also share my personal experience building Enclave Wallet to tackle these issues.\nIf you’re a dapp developer or passionate about blockchain adoption, this is worth a read! \U0001F447"
+linkedin-url: >-
+  https://www.linkedin.com/pulse/we-cant-scale-web3-until-nail-onboarding-gil-lopes-bueno-9yzyf
+summary: >-
+  Private keys and gas tokens are still the wall keeping mainstream users out of
+  Web3. How abstract wallets, sponsored transactions, and embedded fiat on-ramps
+  fix it — with lessons from building Enclave Wallet.
+og-image: /blog-images/we-can-t-scale-web3-until-we-nail-onboarding.png
+published-at: '2025-06-06T13:48:08.000+00:00'
+---
+The future is decentralized. It’s a future where users regain control, intermediaries fade into the background, and trust is built into the system’s fabric. But while the vision is inspiring, the path is far from simple. For most people, using dapps is still confusing, unfamiliar, and often frustrating. Concepts like wallets, gas fees, and private keys can turn even the most curious users away. If we want to reach real adoption, we need to rethink how people begin their journey into Web3—starting with onboarding.
+
+For mainstream users, even getting started with a dapp can be overwhelming. The requirement to manage cryptographic private keys creates friction from the very first step. Most people aren’t comfortable storing or safeguarding keys, and any mistake could mean irreversible loss. On top of that, new users are often expected to already hold network tokens just to begin interacting—turning exploration into a technical and financial challenge before they’ve had a chance to try anything.
+
+Abstract wallets are emerging as a promising solution, offering users the ability to interact with dapps without managing private keys directly. I built [Enclave Wallet](https://enclavewallet.com/) to tackle this challenge head-on—allowing users to authenticate with passkeys or biometrics, while securely storing their public key on-chain for transaction verification. It worked surprisingly well. The catch? It was built on Neo—a network that, despite technical potential, has struggled to grow due to limited ecosystem activity and inconsistent leadership. Solving onboarding is critical, but it also needs to happen on chains where real users are active—primarily in the EVM ecosystem, where a variety of wallets have made significant progress.
+
+Wallets have evolved significantly in addressing onboarding challenges. In the EVM ecosystem, solutions like [**Privy**](https://www.privy.io/), [**Web3Auth**](https://web3auth.io/), and [**Alchemy's Account Kit**](https://www.alchemy.com/docs/wallets) offer abstracted key management along with smooth login via social accounts or passkeys. These tools make it much easier for dapps to onboard users without forcing them to understand wallet complexities. But for this to happen, **it’s up to us—dapp developers—to integrate these tools directly into our apps**. Onboarding isn’t just a wallet problem; it’s something we need to own at the application level, making login and account creation seamless and accessible from the very first interaction.
+
+One persistent challenge remains: users must hold tokens to pay transaction fees. This financial barrier often stops newcomers before they even begin exploring blockchain applications. To tackle this, the Enclave Wallet implemented its own decentralized sponsored transactions mechanism, enabling seamless interaction without requiring tokens upfront. Meanwhile, in the EVM ecosystem, solutions like the [**Gas Station Network**](https://opengsn.org/) **(GSN)** offer similar functionality, allowing dapps to cover transaction fees on behalf of users and further smooth the onboarding experience. This approach is especially valuable for applications that don’t revolve directly around money—such as social platforms or coordination tools—where ownership of tokens may not be necessary. For finance-focused apps, however, sponsored transactions tend to be less critical since holding tokens is usually a prerequisite to participate.
+
+But onboarding doesn’t stop there. To truly welcome mainstream users, dapps must also offer seamless fiat on-ramp options integrated right into the app. This lets users buy tokens or access blockchain services using familiar payment methods—like credit cards, Apple Pay, or bank transfers—without ever leaving the app. Tools like [Transak](https://transak.com/) make this possible by embedding fiat-to-crypto functionality directly into dapps, helping reduce friction at a critical stage. Removing this hurdle makes the whole process easier to understand and much smoother for new users. By enabling people to complete their goals in just a few simple steps, dapps improve retention and speed up mass adoption.
+
+After working hands-on to solve this in practice, I remain convinced that onboarding is the bottleneck we need to break for Web3 to truly take off. If you’re building a dapp and care about this challenge, let’s talk.
+
+---
+
+**_Written by Gil_**_, a fullstack developer with 15+ years of experience and a deep focus on blockchain technology. He is the creator of Enclave Wallet, a keyless, cost-free smart wallet designed to make decentralized applications accessible to everyone. Gil is passionate about building the infrastructure for a truly user-centric Web3._
