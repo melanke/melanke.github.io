@@ -21,7 +21,7 @@ export function Timeline() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="flex flex-col max-xl:mt-14 xl:mt-8 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
+    <div className="flex flex-col max-xl:mt-14 xl:mt-4 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
 
       <TimelineItem
@@ -29,7 +29,13 @@ export function Timeline() {
         dateRange="Sep 2025 - Present"
         technologies={[]}
         role="Software Engineer | Main Smart Contract Developer"
-        description="Worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience."
+        description={
+          <div className="space-y-2">
+            <p>At 33Labs (formerly 33Audits), I worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience.</p>
+ 
+            <p>The company began as a smart contract auditing firm, which gave me hands-on, daily experience identifying and preventing vulnerabilities. I developed protocols end to end — architecture, implementation, and testing — with security and gas optimization as constant priorities throughout. This led me to a key conviction: the auditing process should start at the architecture stage, before any code is written. To support this, I integrated specialized tooling and AI agents into our development and auditing workflow.</p>
+            </div>
+        }
         image="/projects/33labs.webp"
         link="https://www.33labs.ai/"
       />
@@ -141,6 +147,7 @@ export function Timeline() {
       />
       <TimelineItem
         title="Jodobix"
+        print={false}
         dateRange="Mar 2025 - Jun 2025"
         technologies={[
           "Solidity",
@@ -374,6 +381,7 @@ export function Timeline() {
         <TimelineItem
           title="Desabafa"
           nested
+          print={false}
           dateRange="Aug 2015 - July 2017"
           technologies={["Android", "Java"]}
           role="Software Engineer | TechLead"

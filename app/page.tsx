@@ -11,6 +11,7 @@ import { PiGlobe } from "react-icons/pi";
 import { BlockchainIcon } from "@/components/BlockchainIcon";
 import { BiServer } from "react-icons/bi";
 import { LiaToolsSolid } from "react-icons/lia";
+import { FaFileDownload } from "react-icons/fa";
 import { contentVersion } from "./contentVersion";
 import { getAllPosts } from "@/lib/posts";
 
@@ -41,6 +42,16 @@ export default function Home() {
       />
 
       <div className="pb-6 pl-5 pr-8 max-md:pr-5 print:p-0">
+        <div className="flex justify-end print:hidden mt-4">
+          <a
+            href="/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Software%20Engineer.pdf"
+            download
+            className="flex items-center gap-1.5 text-xs text-black dark:text-white opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <FaFileDownload className="w-3.5 h-3.5" />
+            Download CV
+          </a>
+        </div>
         <div className="flex overflow-hidden max-xl:flex-col max-xl:max-w-[740px] max-xl:mx-auto print:mx-0 gap-x-32">
           <div className="flex flex-col max-w-[740px]">
             <Bio />

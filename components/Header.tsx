@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FaBlog,
   FaGithub,
   FaLinkedin,
   FaLocationDot,
@@ -128,13 +127,6 @@ export function Header({
             >
               <FaXTwitter className={bigIconClass} />
             </a>
-            <Link
-              href="/blog"
-              className={bigLinkClass}
-              title="Blog"
-            >
-              <FaBlog className={bigIconClass} />
-            </Link>
           </div>
         </div>
         <div
@@ -166,7 +158,7 @@ export function Header({
               className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.email}
             >
-              <MdEmail className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <MdEmail className="w-7 sm:w-4 h-7 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:max-lg:block print:block">
                 {contacts.email}
               </div>
@@ -176,7 +168,7 @@ export function Header({
               className="flex gap-1.5 items-center sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.telegram}
             >
-              <FaTelegram className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <FaTelegram className="w-7 sm:w-4 h-7 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:max-lg:block print:block">
                 Telegram
               </div>
@@ -187,7 +179,7 @@ export function Header({
               className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.github}
             >
-              <FaGithub className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <FaGithub className="w-7 sm:w-4 h-7 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:max-lg:block print:block">
                 Github
               </div>
@@ -198,7 +190,7 @@ export function Header({
               className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={contacts.linkedin}
             >
-              <FaLinkedin className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <FaLinkedin className="w-7 sm:w-4 h-7 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:max-lg:block print:block">
                 LinkedIn
               </div>
@@ -209,21 +201,11 @@ export function Header({
               className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
               title={`x.com/${contacts.x}`}
             >
-              <FaXTwitter className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
+              <FaXTwitter className="w-7 sm:w-4 h-7 sm:h-4 print:hidden" />
               <div className="self-stretch my-auto hidden sm:max-lg:block print:block">
                 {`x.com/${contacts.x}`}
               </div>
             </a>
-            <Link
-              href="/blog"
-              className="flex gap-1.5 items-center whitespace-nowrap sm:max-lg:underline rounded-full hover:bg-black dark:hover:bg-white hover:p-1.5 hover:-m-1.5 hover:text-white dark:hover:text-black hover:z-10 hover:no-underline transition-all duration-200"
-              title="Blog"
-            >
-              <FaBlog className="w-10 sm:w-4 h-10 sm:h-4 print:hidden" />
-              <div className="self-stretch my-auto hidden sm:max-lg:block print:hidden">
-                Blog
-              </div>
-            </Link>
             <div className="self-stretch my-auto hidden print:block">
               {contacts.location}
             </div>
