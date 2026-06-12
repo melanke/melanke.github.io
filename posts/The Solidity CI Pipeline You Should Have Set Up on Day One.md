@@ -14,9 +14,9 @@ social-post: |-
   hashtag#Solidity hashtag#SmartContracts hashtag#Blockchain hashtag#Ethereum hashtag#DeFi hashtag#Foundry hashtag#CI_CD hashtag#Web3 hashtag#SoftwareEngineering hashtag#AuditPrep hashtag#FormalVerification
 linkedin-url:
 summary: >-
-  Ten CI gates built before writing the first contract on American Spend — from
-  formatter enforcement to Slither, Semgrep, and NatSpec checks. Which ones block
-  PRs, which ones run nightly, and what the pipeline looked like when the auditor
+  Ten CI gates built before writing the first contract — from formatter
+  enforcement to Slither, Semgrep, and NatSpec checks. Which ones block PRs,
+  which ones run nightly, and what the pipeline looked like when the auditor
   opened the repo.
 og-image: /blog-images/the-solidity-ci-pipeline-you-should-have-set-up-on-day-one.png
 published-at: '2026-06-12T12:00:00.000+00:00'
