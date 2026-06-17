@@ -1,5 +1,5 @@
 ---
-published-at: '2026-06-16T12:00:00.000+00:00'
+published-at: '2026-06-17T12:00:00.000+00:00'
 summary: >-
   Harness Engineering has two layers. The CI pipeline is one of them. This is the other — a structured discovery and spec workflow that constrains AI before it writes a single line of Solidity.
 og-image: /blog-images/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development.png
