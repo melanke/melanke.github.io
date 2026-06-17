@@ -14,7 +14,7 @@ social-post: |-
 
   Building DeFi protocols and mentoring builders at BuidlGuidl, I kept running into the same gap: teams would hand an AI agent a vague idea and get moving. Fast code, confident tests, clean pipeline — and an incentive model nobody had stress-tested, a bootstrapping assumption nobody had validated, a failure mode nobody had named. The kind of thing that shows up months after deploy when an arbitrageur finds the drain you left open.
 
-  The CI pipeline can't catch that. The harness that catches it is the one that runs before the AI opens the editor.
+  By the time a test suite or auditor surfaces a design flaw like that, the architecture is already built around it. What follows is rounds of refactoring and new audit cycles — a bill that can make the whole thing financially unviable. The harness that catches it early is the one that runs before the AI opens the editor.
 
   So I built defi-builder-skills — a marketplace of Claude Code skills that implements that upstream harness: structured protocol discovery (go/no-go before any code), followed by a full spec phase before any Solidity, then function-by-function implementation with audit passes built in.
 
@@ -51,9 +51,9 @@ But there's an upstream harness — and in AI-assisted DeFi development, it's mo
 
 ### The problem the pipeline can't solve
 
-A CI pipeline can catch a reentrancy bug. It can't catch an incentive structure that looked rational on a whiteboard but becomes a drain target the moment a rational actor looks at it sideways.
+A CI pipeline can catch a reentrancy bug. It can't easily catch an incentive structure that looked rational on a whiteboard but becomes a drain target the moment a rational actor looks at it sideways — and when it does, it's usually an auditor who finds it, not a linter.
 
-Most DeFi failures I've seen post-mortem don't trace back to bad code — they trace back to an assumption nobody challenged before the first commit. These aren't things a linter catches. They're things you have to reason through before the AI opens the editor.
+Most DeFi failures I've seen post-mortem don't trace back to bad code — they trace back to an assumption nobody challenged before the first commit. By the time a test suite or audit surfaces it, the architecture is already built around the flaw. What follows is rounds of refactoring, new audit cycles, and a bill that can make the whole thing financially unviable. These are things you have to reason through before the AI opens the editor.
 
 The upstream harness is the structured process that forces that reasoning — and gives the AI a well-defined context to code against once it's done.
 
