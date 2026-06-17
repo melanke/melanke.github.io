@@ -12,7 +12,7 @@ social-post: |-
 
   The upstream harness is what I've been less satisfied with. Especially in DeFi.
 
-  Building at 33Labs and American Spend, and mentoring builders at BuidlGuidl, I kept running into the same gap: teams would hand an AI agent a vague idea and get moving. Fast code, confident tests, clean pipeline — and an incentive model nobody had stress-tested, a bootstrapping assumption nobody had validated, a failure mode nobody had named. The kind of thing that shows up months after deploy when an arbitrageur finds the drain you left open.
+  Building DeFi protocols and mentoring builders at BuidlGuidl, I kept running into the same gap: teams would hand an AI agent a vague idea and get moving. Fast code, confident tests, clean pipeline — and an incentive model nobody had stress-tested, a bootstrapping assumption nobody had validated, a failure mode nobody had named. The kind of thing that shows up months after deploy when an arbitrageur finds the drain you left open.
 
   The CI pipeline can't catch that. The harness that catches it is the one that runs before the AI opens the editor.
 
