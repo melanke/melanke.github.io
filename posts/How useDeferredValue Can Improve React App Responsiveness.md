@@ -1,5 +1,5 @@
 ---
-social-post: "Curious about how to make your React apps feel faster without complex optimizations? \U0001F680\nCheck out my latest article on useDeferredValue — a simple React 18 hook that helps improve UI responsiveness by deferring non-urgent updates. Perfect for search inputs, large lists, and heavy renders!\nLet me know your experience with it or how you handle performance in React apps.\nhashtag#ReactJS hashtag#WebDevelopment hashtag#Frontend hashtag#React18 hashtag#JavaScript hashtag#Performance hashtag#CodingTips hashtag#SoftwareEngineering hashtag#DeveloperExperience hashtag#UX"
+linkedin-post: "Curious about how to make your React apps feel faster without complex optimizations? \U0001F680\nCheck out my latest article on useDeferredValue — a simple React 18 hook that helps improve UI responsiveness by deferring non-urgent updates. Perfect for search inputs, large lists, and heavy renders!\nLet me know your experience with it or how you handle performance in React apps.\nhashtag#ReactJS hashtag#WebDevelopment hashtag#Frontend hashtag#React18 hashtag#JavaScript hashtag#Performance hashtag#CodingTips hashtag#SoftwareEngineering hashtag#DeveloperExperience hashtag#UX"
 linkedin-url: >-
   https://www.linkedin.com/pulse/how-usedeferredvalue-can-improve-react-app-gil-lopes-bueno-xo2jf
 summary: >-

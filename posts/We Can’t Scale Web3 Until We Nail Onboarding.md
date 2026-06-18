@@ -1,5 +1,5 @@
 ---
-social-post: "\U0001F680 Web3 won’t truly take off until onboarding is simple for everyone.\nI just published an article diving into the main challenges of user onboarding—and how solutions like Abstract Wallets, sponsored transactions, and seamless fiat on-ramps can make a real difference. I also share my personal experience building Enclave Wallet to tackle these issues.\nIf you’re a dapp developer or passionate about blockchain adoption, this is worth a read! \U0001F447"
+linkedin-post: "\U0001F680 Web3 won’t truly take off until onboarding is simple for everyone.\nI just published an article diving into the main challenges of user onboarding—and how solutions like Abstract Wallets, sponsored transactions, and seamless fiat on-ramps can make a real difference. I also share my personal experience building Enclave Wallet to tackle these issues.\nIf you’re a dapp developer or passionate about blockchain adoption, this is worth a read! \U0001F447"
 linkedin-url: >-
   https://www.linkedin.com/pulse/we-cant-scale-web3-until-nail-onboarding-gil-lopes-bueno-9yzyf
 summary: >-

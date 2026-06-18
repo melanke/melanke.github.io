@@ -1,5 +1,5 @@
 ---
-social-post: >-
+linkedin-post: >-
   A clear and well-organized set of functional requirements is essential to
   build successful digital products. In my latest article, I share a practical
   method to write, structure, and maintain these requirements — helping teams

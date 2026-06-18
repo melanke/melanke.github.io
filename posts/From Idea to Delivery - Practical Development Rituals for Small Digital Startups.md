@@ -1,5 +1,5 @@
 ---
-social-post: "After helping launch several digital products from zero, I’ve learned that execution is where things usually break.\nIn this post, I share the core rituals that keep small teams aligned, productive, and shipping — without overcomplicating the process.\nHope it helps your team build with more clarity and confidence.\n\n\U0001F447 Read the article below\n\nhashtag#startups hashtag#productdevelopment hashtag#agile hashtag#softwareengineering hashtag#uxdesign hashtag#leanstartup hashtag#clickup hashtag#techtips"
+linkedin-post: "After helping launch several digital products from zero, I’ve learned that execution is where things usually break.\nIn this post, I share the core rituals that keep small teams aligned, productive, and shipping — without overcomplicating the process.\nHope it helps your team build with more clarity and confidence.\n\n\U0001F447 Read the article below\n\nhashtag#startups hashtag#productdevelopment hashtag#agile hashtag#softwareengineering hashtag#uxdesign hashtag#leanstartup hashtag#clickup hashtag#techtips"
 linkedin-url: >-
   https://www.linkedin.com/pulse/from-idea-delivery-practical-development-rituals-gil-lopes-bueno-xxvnf
 summary: >-

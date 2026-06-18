@@ -1,5 +1,5 @@
 ---
-social-post: |-
+linkedin-post: |-
   🔧 Most teams wire up CI after the first messy PR. That's too late.
 
   In my latest article, I walk through the full Solidity pipeline I set up before

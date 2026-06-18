@@ -1,5 +1,5 @@
 ---
-social-post: "Reentrancy isn’t just a thing of the past — it’s still one of the most dangerous bugs in smart contracts today.\nIn this article, I explain how it works, how to prevent it, and why design still matters.\n\U0001F447 If you write Solidity, this is for you:\nhashtag#Solidity hashtag#SmartContractSecurity hashtag#Ethereum hashtag#Web3Dev hashtag#Reentrancy hashtag#EVM hashtag#DeFi hashtag#BlockchainDevelopment"
+linkedin-post: "Reentrancy isn’t just a thing of the past — it’s still one of the most dangerous bugs in smart contracts today.\nIn this article, I explain how it works, how to prevent it, and why design still matters.\n\U0001F447 If you write Solidity, this is for you:\nhashtag#Solidity hashtag#SmartContractSecurity hashtag#Ethereum hashtag#Web3Dev hashtag#Reentrancy hashtag#EVM hashtag#DeFi hashtag#BlockchainDevelopment"
 linkedin-url: >-
   https://www.linkedin.com/pulse/reentrancy-art-defensive-programming-smart-contracts-gil-lopes-bueno-zlz7f
 summary: >-

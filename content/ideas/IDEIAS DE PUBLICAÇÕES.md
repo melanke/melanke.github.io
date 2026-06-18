@@ -1,0 +1,64 @@
+Hugo disse pra fazer posts técnicos
+
+- Web3:
+	- Are we still aiming for "non-stoppable apps"?
+	- Multichain
+	- 🔥 A importância de um DAO para o seu negócio decentralizado
+	- [[Estudar os Agora Subjects]]
+	- Web3 pra quem odeia MemeCoin e NFT de arte
+	- Pq EVM é o futuro (minha xp com Neo N3, Flow e Solana e citar que SUI e Cardano são bacanas; comparar com o motivo de React ser o futuro)
+	- Reentrancy attack, "Checks-Effects-Interactions" e ReentrancyGuard
+	- Diferentes tipos de Proxy patterns
+	- MEV
+	- 🔥 Standards: https://ethereum.org/en/developers/docs/smart-contracts/libraries/
+	- How to build a wallet
+		- To build a wallet you need these:
+		- A safe place to store users private information (private key, mnemonic, etc). This is different depending on the OS or platform.
+		- A service layer to communicate with the blockchain and handle wallet operations (I built this: https://github.com/CityOfZion/blockchain-services/blob/main/packages/bs-ethereum/src/BSEthereum.ts)
+		- WalletConnect / Wagmi integration
+		- A good UI/UX that simplify basic operations, abstract blockchain, but is flexible enough to give freedom to the user
+- Negócios/Liderança:	
+	- How to plan and execute effective **release strategies**
+	- What a good **QA process** looks like in small teams
+	- How to **track usage and collect feedback** to guide decisions
+	- How to evolve your product while managing **technical debt**
+	- How to **validate ideas through lean experiments**
+	- And how to improve **team communication and collaboration**
+	- Será que o meu projeto precisa de um app mobile?
+	- 🔥 Como organizar as prioridades do meu negócio com OGSM
+	- Como identificar um bom CTO para a sua Startup
+	- Como avaliar boas e más tecnologias
+	- Qual é o tamanho do rombo? Quanto custa desenvolver um software?
+	- Guia prático do Clickup
+	- Como organizar suas Tarefas alinhadas aos seus objetivos
+	- Ciclo de vida de uma tarefa
+	- Meios de pagamento
+	- SEO
+	- A busca pelo modelo de cobrança perfeito: Como cobrar pelo seu trabalho de desenvolvimento?
+- JS/TS/Web:
+	- software supply chain attacks
+		- [SES](https://www.npmjs.com/package/ses), LavaMoat, Endo, Socket.dev, Snyk, npm-audit, isolated-vm
+		- https://chatgpt.com/share/688b5f63-3f18-800b-b754-bdd23344c853
+	- Sentry
+	- oRPC
+	- DecimalsJS
+	- CSS functions: https://una.im/5-css-functions/
+- React:
+	- https://nuqs.47ng.com/ - The type-safe search params state manager for React
+	- Zustand
+	- [useSyncExternalStore](https://thisweekinreact.com/articles/useSyncExternalStore-the-underrated-react-api?ck_subscriber_id=3506462914&utm_source=convertkit&utm_medium=email&utm_campaign=%E2%9A%9B%EF%B8%8F%20This%20Week%20In%20React%20-%20Thank%20you%20for%20subscribing%20%F0%9F%A4%97%20-%205141581#link1)
+	- 🔥 useEffectEvent: https://react.dev/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks
+	- Lib de Efeitos visuais legais pra React: https://reactbits.dev/
+- IA: 
+	- 🔥 A importância de criarmos uma LLM local
+- Para programadores:
+	- Autoconhecimento: Estime e contabilize as suas horas
+	- CodeReview suficientemente bom
+	- Como lidar com exceptions e logs em Typescript para backend/cli/lib
+	- Código legado
+	- Desenvolvimento Enterprise
+	- 🔥 Medallion architecture for data lakes
+	- ACID
+	- Kafka
+- QA
+	- 🔥 Criar casos de teste hoje para poupar tempo amanhã
