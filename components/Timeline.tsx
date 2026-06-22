@@ -26,7 +26,7 @@ export function Timeline() {
 
       <TimelineItem
         title="33Labs"
-        dateRange="Sep 2025 - Present"
+        dateRange="Sep 2025 - May"
         technologies={[]}
         role="Software Engineer | Main Smart Contract Developer"
         description={
@@ -42,7 +42,7 @@ export function Timeline() {
       <TimelineItem
         nested
         title="American Spend"
-        dateRange="Mar 2026 - Present"
+        dateRange="Mar 2026 - May"
         technologies={[
           "Solidity",
           "Foundry",
@@ -141,7 +141,7 @@ export function Timeline() {
           "EVM",
         ]}
         role="Mentor"
-        description="BuidlGuidl is one of the most impactful builder communities in the Ethereum ecosystem. One of its core initiatives is the Batch Program, which helps onboard new developers into the Ethereum space. As a mentor in the program, I guide participants through their first steps contributing to open source using Solidity, Hardhat, ScaffoldEth 2, and Next.js."
+        description="BuidlGuidl is one of the most impactful builder communities in the Ethereum ecosystem. One of its core initiatives is the Batch Program, which helps onboard new developers into the Ethereum space. As a mentor in the program, I guide participants through their first steps contributing to open source using Solidity, Hardhat, Wagmi, and Next.js."
         image="/projects/buidlguidl.webp"
         link="https://buidlguidl.com/batches"
       />

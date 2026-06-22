@@ -17,10 +17,9 @@ Jump directly to **Phase Detection** below. Do not summarize this skill. Do not 
 
 Before anything else, read these files. They are the live source of truth — updated when the website is updated:
 
-1. `components/Timeline.tsx` — current employer, active projects, all past projects with their descriptions, dates, and technologies. This is the primary anchor source for every article.
-2. `components/Achievements.tsx` — scale numbers (Neon Wallet >$1B, iTrack 50M invoices, etc.)
-3. `app/page.tsx` — skills by category, contact info
-4. `content/INDEX.md` — index of topics and lessons
+1. `.claude/skills/_shared/professional-background.md` — the index of where Gil's experience lives. Follow it to the portfolio source files and read them: `components/Timeline.tsx` is the **primary anchor source for every article** (employer, active and past projects, dates, tech), plus `components/Achievements.tsx` for scale numbers and `app/page.tsx` for skills/contacts.
+2. `content/INDEX.md` — index of topics and lessons
+3. `.claude/skills/_shared/author-voice.md` — Gil's base writing voice & mannerisms (always active; the Author Voice & Style section below only adds blog-specific rules on top)
 
 For Phase 0 only: also compare `content/INDEX.md` against actual files in `content/topics/` and `content/lessons/`. If files are present on disk but absent from the index, read those files and add them to `content/INDEX.md` before proceeding.
 
@@ -279,18 +278,10 @@ og-image-prompt: "{from Phase 4}"
 
 ## Author Voice & Style
 
-> These rules are always active — apply throughout all phases.
-
-### Voice markers
-
-- **First person, practitioner.** "From my experience…", "In my work…", "In Jodobix, I needed to…", "On American Spend, we…"
-- **Confident but humble.** Share opinions plainly; admit limits and past mistakes.
-- **Concrete over abstract.** Every principle is anchored to a real project or decision from Timeline.tsx. Never invent project names, metrics, or quotes.
-- **Honest about trade-offs.** Recommendations always name a downside ("Key trade-off:", "But:", "The catch?").
-- **Generous, not preachy.** Closes warmly with an invitation, not a lecture.
-
-Recurring phrases (rhythm cues, not catchphrases — use sparingly):
-"From my experience…" / "In my work…" / "What I suggest instead…" / "Key trade-off:" / "Why? Because…"
+> **Base voice & mannerisms live in `.claude/skills/_shared/author-voice.md` — read that file first; it is always active.**
+> The sections below are the **blog-article-specific** additions on top of that shared base (opening patterns tied to article types, the mandatory closing stack with CTA + bio). When anything here conflicts with the shared base, these blog rules win for articles.
+>
+> In this skill, "anchored to a real project" means anchored to a project from `components/Timeline.tsx` specifically.
 
 ### Opening patterns — and when to use each
 
@@ -307,7 +298,7 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
 
 ### Closing pattern (mandatory stack, in order)
 
-1. Synthesis paragraph — restates core takeaway in fresh words, often with a metaphor
+1. Synthesis paragraph — restates the core takeaway in genuinely fresh words, ideally with a concrete metaphor. This is a deliberate close, not the mechanical "bow-tie recap" flagged in `.claude/skills/_shared/author-voice.md` — don't just list back what the article said.
 2. `---`
 3. CTA paragraph — one of:
    - "If you're building a product or just interested in improving your process, feel free to connect or message me. I'm always open to exchanging ideas and learning from other builders."
@@ -318,52 +309,17 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
    - General/process: `_Written by Gil, a fullstack developer with 15+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._`
    - Technical/blockchain: `_Written by Gil, a fullstack developer with over 15 years of experience and a strong focus on practical software architecture and blockchain technology._`
 
-### Formatting conventions
+### Blog-specific formatting & rules
 
-- **Em dashes** (—) for asides and emphasis. Never hyphens in place of dashes.
-- **Bold** for the key term being introduced — one bold per concept; never bold whole sentences.
-- *Italics* for definitions, asides, soft emphasis.
-- `inline code` for variable names, hooks, function names, file paths, CLI commands.
-- Code blocks: fenced, language tag optional; 5–20 lines max; always followed by a brief explanation.
-- Lists: bulleted for unordered, numbered for sequential steps.
-- Tables for side-by-side comparisons.
+These sit on top of the shared formatting conventions in `.claude/skills/_shared/author-voice.md`:
+
+- `---` horizontal rule between **every** major section.
 - `> 📝 _Note:_` style for side facts.
-- `---` horizontal rule between every major section.
-
-### Argumentation arc
-
-1. Name the problem in plain language (often by contrast)
-2. Define terms with crisp 1-sentence definitions
-3. Give a real example from Gil's projects (from Timeline.tsx)
-4. Spell out the trade-off explicitly
-5. Land on a pragmatic recommendation ("use X when…, avoid when…")
-6. Tie back to the reader's situation
-
-### Vocabulary bank
-
-Use 2–4 of these per article at moments that match Gil's natural rhythm — not as decoration:
-practical · pragmatic · real-world · hands-on · lived · iterative and incremental · trade-off · sweet spot · breathing room · minimum viable · lean · shipping · momentum · handoff · rhythm · cadence · friction · onboarding · mainstream · adoption · defensive programming · state integrity · seatbelt · "just enough process to stay focused" · "from the very first interaction" · "without forcing them to…"
-
-### Do / Don't
-
-**Do:**
-- Open with thesis, story, or contrast — never "in this article"
-- Anchor ≥1 section to a real project from Timeline.tsx
-- Name the trade-off explicitly
-- Use `---` between major sections
-- Keep paragraphs short (2–4 sentences)
-- Close with CTA + italic bio
-- Cross-link to published articles only where the reader genuinely benefits from following the link
-
-**Don't:**
-- Use marketing language ("game-changing", "revolutionary", "leverage synergies")
-- Write throat-clearing intros
-- Make claims without grounding in real experience
-- Bold whole sentences — bold the term, not the line
-- End with "I hope you enjoyed this article"
-- Invent project names, quotes, or biographical details not in Timeline.tsx
-- Over-emoji (series how-tos can use emoji section icons; opinion and technical pieces should not)
-- Force cross-links where they feel like promotion rather than navigation
+- **Anchor** every "real project" claim to a project from `components/Timeline.tsx` — never invent details not in it.
+- **Vocabulary bank:** use 2–4 of the shared vocabulary terms per article — at moments that match Gil's natural rhythm, not as decoration.
+- **Cross-links:** link to published articles only where the reader genuinely benefits from following the link. One forced link is worse than no link — never force a cross-link that feels like promotion rather than navigation.
+- **Emoji:** series how-tos (Type A) may use emoji section icons; opinion (C) and technical (B/D) pieces should not. Don't over-emoji.
+- **Close** every article with the mandatory closing stack above (synthesis → CTA → italic bio).
 
 ---
 

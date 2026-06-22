@@ -20,7 +20,6 @@ content/         # Content pipeline (not served)
   drafts/        # Work-in-progress articles
   ideas/         # Raw idea capture
   INDEX.md       # Cache of topics + lessons (auto-updated by skill)
-  author-profile.md  # Current author context (update manually as context changes)
 public/
   blog-images/   # OG images — one PNG per post, named {slug}.png
 ```
