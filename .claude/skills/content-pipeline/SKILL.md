@@ -1,8 +1,8 @@
 ---
 name: content-pipeline
 description: >
-  Full publishing pipeline for Gil's blog and social media presence. Handles the complete journey from idea to published post: ideation (content matrix), drafting, hook refinement, LinkedIn and Twitter social content, OG image prompt, pre-publish scoring, and blog publishing with correct frontmatter. Also handles cross-linking to existing published articles.
-  Trigger on: "escrever artigo", "novo post", "publicar", "draft", "hook", "social post", "twitter", "conteúdo", "content matrix", "pipeline", "write post", "new article", "publish", "ideias de conteúdo".
+  Full publishing pipeline for Gil's blog and social media presence. Handles the complete journey from idea to published post: ideation (content matrix), drafting, hook refinement, LinkedIn and Twitter social content, per-community Reddit posts (community-tailored flair/title/body), OG image prompt, pre-publish scoring, and blog publishing with correct frontmatter. Also handles cross-linking to existing published articles.
+  Trigger on: "escrever artigo", "novo post", "publicar", "draft", "hook", "social post", "twitter", "reddit", "conteúdo", "content matrix", "pipeline", "write post", "new article", "publish", "ideias de conteúdo".
 ---
 
 # Content Pipeline
@@ -35,9 +35,10 @@ Determine entry point from context:
 | Topic/headline provided but no draft file exists yet | Phase 1: Draft |
 | Draft file exists in `content/drafts/` AND body contains `[HOOK — refinar]` | Phase 2: Hook Refinement |
 | Draft body is complete (no `[HOOK — refinar]`), but no `linkedin-post` in frontmatter | Phase 3: Social Content |
-| Frontmatter has `linkedin-post` but no `og-image-prompt` | Phase 4: OG Image Prompt |
-| Frontmatter has `og-image-prompt` but no `status: ready` | Phase 5: Score |
-| Frontmatter has `status: ready` | Phase 6: Publish |
+| Frontmatter has `linkedin-post` but no `reddit-posts` | Phase 4: Reddit Communities |
+| Frontmatter has `reddit-posts` but no `og-image-prompt` | Phase 5: OG Image Prompt |
+| Frontmatter has `og-image-prompt` but no `status: ready` | Phase 6: Score |
+| Frontmatter has `status: ready` | Phase 7: Publish |
 | User explicitly names a phase | Jump to that phase |
 
 **Edge case:** Draft file exists in `content/drafts/` with no frontmatter AND no `[HOOK — refinar]` in the body → ask the user: "Is this draft still in progress (continue from where it left off) or should I treat it as body-complete and move to hooks?"
@@ -196,15 +197,80 @@ Generate both options, ask user to choose:
 **Option B — Thread (5–8 tweets):**
 - Tweet 1: 2-line hook (≤40 chars/line) + 🧵
 - Tweets 2–6: one concrete point per tweet, ≤280 characters each, brief example from real project
-- Final tweet: CTA + blog URL (https://melanke.github.io/blog/{slug})
+- Final tweet: CTA + blog URL (https://gil.solutions/blog/{slug} — the live domain; match the domain the article's own links already use)
 
 Save the user's choice in `twitter-post`. If the user picks Option B, save the full thread with tweets separated by `---`.
 
 ---
 
-## Phase 4 — OG Image Prompt
+## Phase 4 — Reddit Communities
 
-**Detected by:** has `linkedin-post`, no `og-image-prompt` in frontmatter
+**Detected by:** has `linkedin-post`, no `reddit-posts` in frontmatter
+
+**Goal:** For each Reddit community the article genuinely fits, produce a post shaped to *that* community's winning pattern — its own flair, title, and body. One size does **not** fit all subs; the whole point is to flex sub-to-sub.
+
+**Read first:** `.claude/skills/_shared/reddit-communities.md` — the living pattern reference (universal principles, the fit-gate, the research procedure, the pillar→subreddit map, and seeded per-community entries). Professional background is already loaded from Step 0.
+
+### Procedure
+
+1. **Identify the hero asset.** What is the article actually offering a dev audience? Usually one of: an OSS repo/tool Gil built, a reusable concept/pattern, a hands-on walkthrough, or an opinion/experience. The hero asset drives flair and title choice. The blog article is almost always a *secondary* "full breakdown" link, not the hero.
+
+2. **List candidate subreddits.** Map the article's content pillar(s) → candidate subs using the pillar map in the reference file, plus judgment about where this specific topic lives. Aim for 1–4 candidates, not a shotgun.
+
+3. **Get each candidate's pattern.**
+   - If the sub has a **fresh entry** (`Last reviewed` within ~6 months) in the reference file → use it.
+   - If **missing or stale** → research it live using the reference file's "How to research a community" procedure (WebFetch/WebSearch on the sub's top/hot posts), then **append/update its entry** in `reddit-communities.md` with today's date. This is how the reference grows.
+   - If a sub is missing/stale **and live research isn't available this run** (no web tools, or the user scoped the run to specific subs) → do **not** write a blind post for it. Fit-gate it on topic alone and mark it **`research deferred`** in your summary. Only ever write a post for a sub backed by a real entry.
+
+4. **Apply the fit-gate** (defined in the reference file) to each candidate. Drop any sub where the post would read as spam or require a dishonest flair. Record *why* a sub was dropped (or deferred) — dropping is a good outcome.
+
+5. **For each surviving sub, write a tailored post** following *that sub's* entry:
+   - **flair** — pick from the sub's actual flair list; one line of rationale.
+   - **title** — follow the sub's winning title archetype (e.g. r/ethdev = problem/curiosity first, project name never). One idea, single clause. Lead with the concrete gap *and* name plainly what the thing is. **Then count the characters before shipping (mirror the Phase 2 hook discipline): target ≤65, hard ceiling 70. If it's over the ceiling, cut words until it fits — do not ship a title over 70 chars.** Two more hard checks: (a) **no `+`, `&`, or "and" joining two features** to cram more in — that reads as a feature list, not a hook; pick the single sharpest angle. (b) **no second sentence and no mid-title period** — if you need one, the angle isn't sharp enough yet, tighten it. The top posts in these subs are uniformly tight titles (the r/ethdev examples are 46/63/64 chars); match that.
+   - **body** — follow the sub's winning body skeleton. Anchor every role/project/metric claim in Gil's real experience from `components/Timeline.tsx` specifically — never invent. Hero asset first, blog as a depth link (match the article's own URL domain), honest limitations, open question at the end. No marketing hashtags/emoji/hype.
+   - **notes** — operational reminders for Gil *about this surviving sub only* (best posting window, "reply to all comments in the first 2–3 hours", cross-post caveats). Reasons for dropped/deferred subs belong in the user-facing summary (step 7), not in any sub's `notes`.
+
+6. **If no sub passes the fit-gate:** write `reddit-posts: []` to the frontmatter with a YAML comment noting no strong fit and why, and tell the user. Don't force a bad post.
+
+### Write to frontmatter
+
+Add a `reddit-posts` YAML list to the draft, one entry per surviving sub:
+
+The block below shows the **shape and field order only** — every angle bracket is a slot
+you fill from *this* article and *this* sub's entry. Do **not** reuse any wording from it;
+it is intentionally contentless so it can't bias the post you write.
+
+```yaml
+reddit-posts:
+  - subreddit: <r/sub — only a sub backed by a real entry>
+    flair: <flair from that sub's actual flair list>
+    title: >-
+      <title built from the sub's winning archetype; lead with the gap, hook in first ~75 chars>
+    body: |-
+      <Personal context — a real role/project from Timeline.tsx, never invented>
+
+      <The concrete problem this audience actually feels>
+
+      <What was built — short bullets>
+      - <point>
+      - <point>
+
+      <Hero asset link first (repo), then blog as "full breakdown" — match the article's URL domain>
+
+      <Honest limitation — what's early/untested>
+
+      <Open question that invites this sub's expertise>
+    notes: >-
+      <operational reminders for THIS sub only: posting window, reply in first 2–3h, cross-post caveats>
+```
+
+7. **Summarize for the user:** which subs were chosen, which were dropped or `research deferred` (and why), and the flair/title for each chosen sub. Then offer Phase 5.
+
+---
+
+## Phase 5 — OG Image Prompt
+
+**Detected by:** has `reddit-posts`, no `og-image-prompt` in frontmatter
 
 Generate a prompt for DALL-E or Gemini. The prompt must:
 
@@ -219,7 +285,7 @@ Add as `og-image-prompt` to the draft's frontmatter.
 
 ---
 
-## Phase 5 — Score
+## Phase 6 — Score
 
 **Detected by:** has `og-image-prompt`, no `status: ready` in frontmatter
 
@@ -237,14 +303,14 @@ Evaluate the draft on 5 dimensions. Score each 1–10.
 | **Voice match** | Practitioner voice (not theorist)? Every claim grounded in something Gil actually built (projects from Timeline.tsx)? Score 5–6 if the article sounds like it could have been written by anyone. |
 | **Value density** | ≥1 concrete example from a real project? Trade-off explicitly named (not implied)? Does the reader leave with something actionable? Score 5–6 if there are no real examples or the trade-off is vague. |
 | **Structure** | Paragraphs 2–4 sentences? `---` between all major sections? Bold used only on key terms, not whole sentences? No padding/summary paragraphs? Score 5–6 if paragraphs are long walls or structure is missing. |
-| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
+| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
 
 For each dimension scored < 7: provide specific rewrite guidance and offer to apply it.
 When **all dimensions ≥ 7**: add `status: ready` to the draft's frontmatter. Confirm to user.
 
 ---
 
-## Phase 6 — Publish
+## Phase 7 — Publish
 
 **Detected by:** `status: ready` present in `content/drafts/`
 
@@ -261,7 +327,9 @@ linkedin-post: |-
   {from Phase 3}
 twitter-post: |-
   {from Phase 3}
-og-image-prompt: "{from Phase 4}"
+reddit-posts:
+  {from Phase 4 — the full YAML list; omit the key entirely only if it was empty with no fit}
+og-image-prompt: "{from Phase 5}"
 ---
 ```
 

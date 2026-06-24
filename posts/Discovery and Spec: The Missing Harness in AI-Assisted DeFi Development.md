@@ -39,6 +39,32 @@ twitter-post: |-
   https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development
 
   /plugin marketplace add melanke/defi-builder-skills
+reddit-posts:
+  - subreddit: r/ethdev
+    flair: My Project
+    title: >-
+      The DeFi harness that runs before AI writes any Solidity
+    body: |-
+      I build smart contracts at 33Labs (it started as an auditing firm, so security was always central to the company) and I mentor new devs in the BuidlGuidl Batch Program. Across both, the same gap kept showing up in AI-assisted builds.
+
+      A CI pipeline catches a reentrancy bug. It does nothing about an incentive model that looked fine on a whiteboard and turns into a drain target the moment someone reads it sideways. By the time an auditor finds that, the architecture is already built around the flaw, and the rework can make the whole thing financially unviable.
+
+      So I packaged the upstream process as two open-source Claude Code skills:
+
+      - `defi-protocol-discovery` — blank page to a go/no-go decision, with kill criteria defined before you synthesize the verdict
+      - `defi-spec-driven` — six spec phases (economic design, threat modeling, test spec) before a single line of Solidity, then it bootstraps a Foundry project and guides implementation function by function
+
+      Repo (CC-BY-4.0): https://github.com/melanke/defi-builder-skills
+      Full breakdown: https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development
+
+      It's early. The discovery and spec phases are deliberately slow at the front, and I've run them on my own protocol work more than I've watched other people use them, so the rough edges are mostly unmapped.
+
+      For those of you doing AI-assisted Solidity: how much do you constrain the model before it writes, versus catching problems downstream in tests and review?
+    notes: >-
+      Post midweek, US morning. Reply to every comment in the first 2-3 hours
+      while the thread is live. Lead with the gap, not the repo. If a
+      Solidity/security-narrow angle comes up, r/solidity could be a same-format
+      cross-post later, but research that sub first and never post both at once.
 ---
 
 A few weeks ago I wrote about [the CI pipeline I set up before writing the first contract on American Spend](https://gil.solutions/blog/the-solidity-ci-pipeline-you-should-have-set-up-on-day-one). Ten gates — formatter, static analysis, mutation testing, formal verification — all designed so that when an AI agent writes code, quality doesn't depend on the agent's judgment. The pipeline enforces it.

@@ -38,6 +38,15 @@ linkedin-post: |-                                # LinkedIn teaser (70-150 words
   hashtag#Topic1 hashtag#Topic2
 twitter-post: |-                                 # Twitter/X content
   Single tweet or thread text
+reddit-posts:                                     # per-community Reddit posts (list; one entry per fitting sub)
+  - subreddit: r/ethdev
+    flair: My Project
+    title: >-
+      Problem-first title shaped to the sub
+    body: |-
+      Self-post body following the sub's winning structure
+    notes: >-                                      # operational reminders (timing, first-hours engagement)
+      Reply to comments in the first 2-3h.
 og-image-prompt: "DALL-E prompt used to generate the OG image"
 ---
 ```
@@ -58,9 +67,10 @@ Phase is inferred from file state — no explicit field except `status: ready`:
 |-------|-------|
 | No frontmatter, body has `[HOOK — refinar]` | Phase 1-2: drafting/hook |
 | No `linkedin-post` in frontmatter | Phase 3: needs social content |
-| Has `linkedin-post`, no `og-image-prompt` | Phase 4: needs OG prompt |
-| Has `og-image-prompt`, no `status: ready` | Phase 5: needs scoring |
-| Has `status: ready` | Phase 6: ready to publish |
+| Has `linkedin-post`, no `reddit-posts` | Phase 4: needs Reddit communities |
+| Has `reddit-posts`, no `og-image-prompt` | Phase 5: needs OG prompt |
+| Has `og-image-prompt`, no `status: ready` | Phase 6: needs scoring |
+| Has `status: ready` | Phase 7: ready to publish |
 
 ## Skills
 
