@@ -187,19 +187,40 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 
 ### Twitter/X (`twitter-post`)
 
-Generate both options, ask user to choose:
+> **Design rationale (from a real underperforming post):** a link-only single tweet with the blog URL *and* the install command in the primary tweet, an abstract hook, and no question got ~17 views and zero engagement. X suppresses reach on posts that carry an outbound link in the opener, and stops distributing posts that get no early replies. The rules below target exactly those two failures.
 
-**Option A — Single tweet (≤280 characters total):**
-- Same hook angle as Phase 2 choice
-- No hashtags in the tweet
-- Implicit pull toward the article, not "click here"
+**Rules for both options:**
+- **No link (or command that reads like one) in the primary tweet.** Outbound links cut X distribution hard. The blog URL + `/plugin marketplace add …` go in a **reply** (Option A) or the **last tweet** (Option B) — never the opener.
+- **Hook = a tension the reader actually feels** in the first line — a relatable problem or a curiosity gap, not an abstract statement. Still tease (never reveal the article's conclusion), but make the reader feel the itch.
+- **End with a genuine, specific question** that invites replies, in Gil's voice — curious, peer-to-peer, naming the concrete dimensions it's really asking about (e.g. "how much do you constrain the model before line 1 — prompts, specs, kill criteria?") rather than a vague "what do you think?". Never hype ("test it and tell me 🚀"). Early replies are what keep the algorithm distributing.
+- **Prefer concrete numbers where they're real** — "six spec phases", "before line 1 of Solidity". They sharpen a technical claim and read as specific, not salesy.
+- **Every tweet — each `---` segment — must be ≤280 characters. Count each before saving; if one is over, split it.** The classic failure is cramming the honest limitation + the question + the link into one closing tweet (a 600-char "tweet"). One idea per segment.
+- **Generate a single-image prompt** for the thread and store it as `twitter-image-prompt` (see *Twitter image prompt* below). Text-only threads underperform on X. Keep it in its own frontmatter field — never paste the prompt into the `twitter-post` value.
+- **Hashtags: default none.** At most one genuinely relevant tag, only if it reads naturally. Do not spray hashtags — it looks like marketing and X de-prioritizes it.
 
-**Option B — Thread (5–8 tweets):**
-- Tweet 1: 2-line hook (≤40 chars/line) + 🧵
-- Tweets 2–6: one concrete point per tweet, ≤280 characters each, brief example from real project
-- Final tweet: CTA + blog URL (https://gil.solutions/blog/{slug} — the live domain; match the domain the article's own links already use)
+**Option A — Single tweet + link reply** (best for Type C/D shorter pieces):
+- Tweet 1 (≤280 chars): felt-tension hook + the core idea + the question. No link.
+- Reply: blog URL + install command.
 
-Save the user's choice in `twitter-post`. If the user picks Option B, save the full thread with tweets separated by `---`.
+**Option B — Thread** (default for Type A/B technical deep-dives — higher reach, fits dense content):
+- Tweet 1: felt-tension hook (≤40 chars/line if 2-line) + 🧵. No link.
+- Tweets 2–6: one concrete point per tweet, ≤280 chars each, a brief example from a real `Timeline.tsx` project. Optionally include one *why-now* beat — the scale/urgency of the problem (e.g. as agents ship code faster, the upstream gap bites harder) — kept matter-of-fact, not alarmist.
+- Closing content tweet: the genuine question (≤280 chars), **no link**.
+- Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command **only** — nothing else, so the link stays isolated and every segment stays ≤280.
+
+Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). Then surface the **operational reminder**: generate the image from `twitter-image-prompt` and attach it, and reply to / engage with others in the first 30–60 min after posting.
+
+### Twitter image prompt (`twitter-image-prompt`)
+
+After the thread, generate **one** image prompt — a single image, **not** a carousel — that the user pastes into an image model. Requirements:
+
+- **16:9 and fully self-contained** (pasteable with no extra context).
+- **Visualizes the thread's hook** — the specific contrast the opener sets up (what the reader's tooling *does* catch vs. what it *misses*), not a generic article illustration.
+- **Deliberately different from the OG image** (`og-image-prompt`), so the thread doesn't reuse the blog thumbnail in-feed.
+- **On-brand:** dark near-black / deep-navy background, electric-blue + purple + emerald accents, clean minimal vector, technical and precise — no stock-photo people, no cyberpunk/meme styling. A *short* bold text overlay of the core contrast (≤6 words) is allowed for feed-stopping power; keep it on-brand.
+- Specify palette, the central contrast visual, and composition.
+
+Store as `twitter-image-prompt` in frontmatter.
 
 ---
 
@@ -303,7 +324,7 @@ Evaluate the draft on 5 dimensions. Score each 1–10.
 | **Voice match** | Practitioner voice (not theorist)? Every claim grounded in something Gil actually built (projects from Timeline.tsx)? Score 5–6 if the article sounds like it could have been written by anyone. |
 | **Value density** | ≥1 concrete example from a real project? Trade-off explicitly named (not implied)? Does the reader leave with something actionable? Score 5–6 if there are no real examples or the trade-off is vague. |
 | **Structure** | Paragraphs 2–4 sentences? `---` between all major sections? Bold used only on key terms, not whole sentences? No padding/summary paragraphs? Score 5–6 if paragraphs are long walls or structure is missing. |
-| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
+| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `twitter-image-prompt` present? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
 
 For each dimension scored < 7: provide specific rewrite guidance and offer to apply it.
 When **all dimensions ≥ 7**: add `status: ready` to the draft's frontmatter. Confirm to user.
@@ -327,6 +348,7 @@ linkedin-post: |-
   {from Phase 3}
 twitter-post: |-
   {from Phase 3}
+twitter-image-prompt: "{from Phase 3 — single-image prompt for the thread, distinct from og-image-prompt}"
 reddit-posts:
   {from Phase 4 — the full YAML list; omit the key entirely only if it was empty with no fit}
 og-image-prompt: "{from Phase 5}"

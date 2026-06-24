@@ -38,6 +38,7 @@ linkedin-post: |-                                # LinkedIn teaser (70-150 words
   hashtag#Topic1 hashtag#Topic2
 twitter-post: |-                                 # Twitter/X content
   Single tweet or thread text
+twitter-image-prompt: "prompt for a single 16:9 image reinforcing the thread hook; distinct from og-image"
 reddit-posts:                                     # per-community Reddit posts (list; one entry per fitting sub)
   - subreddit: r/ethdev
     flair: My Project

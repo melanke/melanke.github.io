@@ -32,13 +32,48 @@ linkedin-post: |-
 
   hashtag#DeFi hashtag#Solidity hashtag#SmartContracts hashtag#Web3 hashtag#ClaudeCode hashtag#HarnessEngineering hashtag#Blockchain hashtag#OpenSource hashtag#ProtocolDesign hashtag#DeFiSecurity
 twitter-post: |-
-  The CI pipeline catches bad code. Discovery and Spec is the harness that runs before that — and it's what's missing from most AI-assisted DeFi builds.
+  Your CI pipeline catches a reentrancy bug.
 
-  I packaged it as open-source Claude Code skills.
+  It says nothing about an incentive model that turns into a drain target the moment someone reads it sideways. 🧵
 
-  https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development
+  ---
+
+  That gap kept showing up while I built protocols at 33Labs and mentored devs in the BuidlGuidl Batch Program.
+
+  Teams hand an AI agent a vague idea. Fast code, green tests, clean pipeline. And a design flaw nobody named.
+
+  ---
+
+  By the time an auditor finds it, the architecture is already built around the flaw.
+
+  Then it's rounds of refactoring and new audit cycles. A bill that can make the whole protocol financially unviable.
+
+  ---
+
+  The CI pipeline is the downstream harness. It checks code after it's written.
+
+  What was missing for me is the upstream one: the process that constrains the AI before it opens the editor.
+
+  ---
+
+  So I built it as two Claude Code skills.
+
+  One takes you from blank page to a go/no-go, with kill criteria defined before you write the verdict.
+
+  The other runs six spec phases before a single line of Solidity, then bootstraps a Foundry project.
+
+  ---
+
+  It's early. The front is deliberately slow, and I've run it on my own protocol work more than I've watched other people use it.
+
+  For those doing AI-assisted Solidity: how much do you constrain the model before line 1, versus catching it downstream in tests and review?
+
+  ---
+
+  Full breakdown: https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development
 
   /plugin marketplace add melanke/defi-builder-skills
+twitter-image-prompt: "A 16:9 horizontal illustration, dark near-black deep-navy background, clean minimal flat vector style, technical and precise, no people, no cyberpunk styling. Split the frame into two zones with a vertical seam. Left zone, brightly lit and dominant: an upstream stage shown as a glowing blueprint document with a branching go/no-go decision fork and a small lightbulb, representing protocol discovery and spec happening before any code. Right zone, dimmer and receding: a downstream CI pipeline drawn as connected pipe-nodes ending in a checkmark, with one node showing a caught bug icon. Between the two zones, near the left's blueprint, place a subtle warning marker on a flaw that the right-side pipeline never reaches, visually conveying that the upstream stage catches what the pipeline misses. Accent colors: electric blue and purple on the left, emerald green on the right, against the dark background, with soft glowing highlights and thin circuit-board line details. A short bold text overlay in the upper area reads 'BEFORE LINE 1' in clean sans-serif. Balanced composition emphasizing the left upstream zone."
 reddit-posts:
   - subreddit: r/ethdev
     flair: My Project
