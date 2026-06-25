@@ -2,8 +2,45 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+import { markedHighlight } from 'marked-highlight'
+import hljs from 'highlight.js'
+import hljsDefineSolidity from 'highlightjs-solidity'
 
 const postsDir = path.join(process.cwd(), 'posts')
+
+// Register Solidity/Yul grammars (not bundled with highlight.js core).
+hljsDefineSolidity(hljs)
+
+// Languages considered when a fenced block has no language tag. Restricting the
+// auto-detection set keeps results stable for this blog's tech stack.
+const AUTO_DETECT_LANGS = [
+  'typescript',
+  'javascript',
+  'json',
+  'yaml',
+  'bash',
+  'solidity',
+  'toml',
+  'sql',
+  'python',
+  'rust',
+]
+
+// Build-time syntax highlighting. Uses the declared language when valid,
+// otherwise auto-detects — so code blocks get highlighted without editing the
+// markdown source. Runs server-side only (no client JS cost).
+marked.use(
+  markedHighlight({
+    emptyLangClass: 'hljs',
+    langPrefix: 'hljs language-',
+    highlight(code, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        return hljs.highlight(code, { language: lang }).value
+      }
+      return hljs.highlightAuto(code, AUTO_DETECT_LANGS).value
+    },
+  })
+)
 
 export interface Post {
   slug: string

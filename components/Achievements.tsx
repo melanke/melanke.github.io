@@ -4,7 +4,7 @@ export function Achievements() {
   return (
     <div className="flex flex-col mt-10 print:mt-5 w-full text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:600ms] opacity-0">
       <div className="flex gap-1.5 justify-center items-center self-start text-2xl print:text-xl font-semibold leading-none">
-        <MdEmojiEvents size={20} className="print:hidden text-[#4F28FF]" />
+        <MdEmojiEvents size={20} className="print:hidden text-[#f9b800]" />
         <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
           Notable Achievements
         </div>

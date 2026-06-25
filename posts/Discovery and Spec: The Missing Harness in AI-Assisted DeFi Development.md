@@ -100,6 +100,27 @@ reddit-posts:
       while the thread is live. Lead with the gap, not the repo. If a
       Solidity/security-narrow angle comes up, r/solidity could be a same-format
       cross-post later, but research that sub first and never post both at once.
+twitter-engagement-queries:
+  - query: '"AI" ("solidity" OR "smart contract") (vibe OR generated OR wrote) min_faves:15 -filter:replies lang:en'
+    targets: Devs sharing that they let an AI agent write Solidity or a contract, often half-bragging, half-nervous.
+    why: Direct overlap with the article's thesis on constraining AI before it writes Solidity (discovery-and-spec-the-missing-harness).
+    angle: Ask how much they pin down before line 1 — economic invariants, threat model — vs catching it downstream; mention I packaged that upstream step as defi-protocol-discovery and defi-spec-driven.
+  - query: '("incentive design" OR "economic exploit" OR "design flaw") defi (audit OR auditor) min_faves:20 -filter:replies lang:en'
+    targets: Threads about a DeFi exploit or audit finding that traces to economics, not a code bug.
+    why: Connects to the article's core point that CI/audits surface design flaws too late (discovery-and-spec-the-missing-harness).
+    angle: Note that most post-mortems I read trace to an assumption nobody challenged pre-commit, and that kill-criteria-before-synthesis in the discovery skill exists to force that reasoning early.
+  - query: '"spec driven" OR "spec-driven" (AI OR agent OR claude) (code OR coding) min_faves:10 -filter:replies -filter:links lang:en'
+    targets: People debating whether writing a spec first actually makes AI coding better.
+    why: Overlaps the spec-phase argument in the article and the CI pipeline piece (the-solidity-ci-pipeline-you-should-have-set-up-on-day-one).
+    angle: Share that in DeFi I run six spec phases before any Solidity, then bootstrap Foundry from a security template — the spec is the harness the model codes against.
+  - query: '("claude code" OR "cursor") (solidity OR foundry OR "smart contract") min_faves:10 -filter:replies lang:en'
+    targets: Tweets about using Claude Code or Cursor on smart-contract work, asking for setup or workflow tips.
+    why: Overlaps the tooling/AI-assisted-build theme of the article and the Solana learning piece (how-ai-can-enhance-your-learning-in-new-technologies-my-experience-with-solana-development).
+    angle: Mention the open-source defi-builder-skills marketplace and the foundry-security-template it bootstraps from, framed as the harness around the agent rather than a prompt trick.
+  - query: '"harness engineering" OR "context engineering" (agent OR LLM OR AI) min_faves:10 -filter:replies lang:en'
+    targets: Discussion of Harness/context engineering as a discipline around AI agents.
+    why: The article frames its whole thesis as the upstream half of Harness Engineering.
+    angle: Add the DeFi-specific take — the upstream harness is structured discovery + spec before the editor opens, distinct from the downstream CI harness, with a concrete two-skill handoff.
 ---
 
 A few weeks ago I wrote about [the CI pipeline I set up before writing the first contract on American Spend](https://gil.solutions/blog/the-solidity-ci-pipeline-you-should-have-set-up-on-day-one). Ten gates — formatter, static analysis, mutation testing, formal verification — all designed so that when an AI agent writes code, quality doesn't depend on the agent's judgment. The pipeline enforces it.

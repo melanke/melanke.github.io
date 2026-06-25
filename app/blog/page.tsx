@@ -25,7 +25,6 @@ function formatDate(iso?: string): string {
 const headerProps = {
   name: 'Gil',
   title: 'Senior Software Engineer',
-  profileImage: '/profile.webp',
   contacts: {
     fullName: 'Gil L Bueno',
     email: 'gilbueno.mail@gmail.com',
@@ -48,7 +47,7 @@ export default function BlogPage() {
 
       <main className="max-w-4xl mx-auto px-5 pb-16">
         <div className="mt-10 mb-8">
-          <Link href="/" className="text-sm text-[#8063FF] dark:text-[#a78bff] hover:underline mb-4 inline-block">
+          <Link href="/" className="text-sm text-[#f9b800] dark:text-[#f9b800] hover:underline mb-4 inline-block">
             ← Back to home
           </Link>
           <h1 className="font-clash font-semibold text-2xl text-black dark:text-white mb-1">
@@ -75,7 +74,7 @@ export default function BlogPage() {
                   />
                 </div>
               ) : (
-                <div className="aspect-video bg-gradient-to-br from-[#8063FF] to-[#6721D5]" />
+                <div className="aspect-video bg-gradient-to-br from-[#f9b800] to-[#f9b800]" />
               )}
               <div className="p-5">
                 <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 mb-2">
@@ -83,7 +82,7 @@ export default function BlogPage() {
                   {post.publishedAt && <span>·</span>}
                   <span>{post.readingTime} min read</span>
                 </div>
-                <h2 className="font-clash font-semibold text-lg text-neutral-900 dark:text-white leading-snug group-hover:text-[#8063FF] dark:group-hover:text-[#a78bff] transition-colors">
+                <h2 className="font-clash font-semibold text-lg text-neutral-900 dark:text-white leading-snug group-hover:text-[#f9b800] dark:group-hover:text-[#f9b800] transition-colors">
                   {post.title}
                 </h2>
                 {post.summary && (

@@ -27,7 +27,6 @@ export default function Home() {
             ? "Senior Blockchain Engineer"
             : "Senior Software Engineer"
         }
-        profileImage="/profile.webp"
         contacts={{
           fullName: "Gil L Bueno",
           email: "gilbueno.mail@gmail.com",

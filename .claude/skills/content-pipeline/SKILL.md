@@ -37,8 +37,9 @@ Determine entry point from context:
 | Draft body is complete (no `[HOOK — refinar]`), but no `linkedin-post` in frontmatter | Phase 3: Social Content |
 | Frontmatter has `linkedin-post` but no `reddit-posts` | Phase 4: Reddit Communities |
 | Frontmatter has `reddit-posts` but no `og-image-prompt` | Phase 5: OG Image Prompt |
-| Frontmatter has `og-image-prompt` but no `status: ready` | Phase 6: Score |
-| Frontmatter has `status: ready` | Phase 7: Publish |
+| Frontmatter has `og-image-prompt` but no `twitter-engagement-queries` | Phase 6: X Engagement Targets |
+| Frontmatter has `twitter-engagement-queries` but no `status: ready` | Phase 7: Score |
+| Frontmatter has `status: ready` | Phase 8: Publish |
 | User explicitly names a phase | Jump to that phase |
 
 **Edge case:** Draft file exists in `content/drafts/` with no frontmatter AND no `[HOOK — refinar]` in the body → ask the user: "Is this draft still in progress (continue from where it left off) or should I treat it as body-complete and move to hooks?"
@@ -196,17 +197,17 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 - **Prefer concrete numbers where they're real** — "six spec phases", "before line 1 of Solidity". They sharpen a technical claim and read as specific, not salesy.
 - **Every tweet — each `---` segment — must be ≤280 characters. Count each before saving; if one is over, split it.** The classic failure is cramming the honest limitation + the question + the link into one closing tweet (a 600-char "tweet"). One idea per segment.
 - **Generate a single-image prompt** for the thread and store it as `twitter-image-prompt` (see *Twitter image prompt* below). Text-only threads underperform on X. Keep it in its own frontmatter field — never paste the prompt into the `twitter-post` value.
-- **Hashtags: default none.** At most one genuinely relevant tag, only if it reads naturally. Do not spray hashtags — it looks like marketing and X de-prioritizes it.
+- **Hashtags: the 3 most relevant, only at the very end of the last tweet** (the link tweet in a thread / the link reply in a single-tweet post) — never in the hook, never scattered through the body. Plain `#Word` format (not LinkedIn's `hashtag#`). Pick the 3 that genuinely match the article's topic; no filler tags.
 
 **Option A — Single tweet + link reply** (best for Type C/D shorter pieces):
 - Tweet 1 (≤280 chars): felt-tension hook + the core idea + the question. No link.
-- Reply: blog URL + install command.
+- Reply: blog URL + install command + the 3 hashtags.
 
 **Option B — Thread** (default for Type A/B technical deep-dives — higher reach, fits dense content):
 - Tweet 1: felt-tension hook (≤40 chars/line if 2-line) + 🧵. No link.
 - Tweets 2–6: one concrete point per tweet, ≤280 chars each, a brief example from a real `Timeline.tsx` project. Optionally include one *why-now* beat — the scale/urgency of the problem (e.g. as agents ship code faster, the upstream gap bites harder) — kept matter-of-fact, not alarmist.
 - Closing content tweet: the genuine question (≤280 chars), **no link**.
-- Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command **only** — nothing else, so the link stays isolated and every segment stays ≤280.
+- Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command + the 3 hashtags (the only place hashtags appear). Keep this segment ≤280 like the rest.
 
 Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). Then surface the **operational reminder**: generate the image from `twitter-image-prompt` and attach it, and reply to / engage with others in the first 30–60 min after posting.
 
@@ -306,9 +307,83 @@ Add as `og-image-prompt` to the draft's frontmatter.
 
 ---
 
-## Phase 6 — Score
+## Phase 6 — X Engagement Targets
 
-**Detected by:** has `og-image-prompt`, no `status: ready` in frontmatter
+**Detected by:** has `og-image-prompt`, no `twitter-engagement-queries` in frontmatter
+
+**Goal:** Produce a set of **X (Twitter) search queries** that surface *fresh, easy-to-comment* tweets thematically tied to this article — so Gil can drop a substantive reply (via `/comment-writer`) that pulls attention back toward the article's topic. This step **finds the hunting grounds**; it does not write comments — that's `/comment-writer`'s job.
+
+Semi-manual by design: the skill generates the queries; Gil runs them in X's own search (which stays fresh and unblocked); optionally pastes candidates back for ranking.
+
+### What makes a good query
+
+Each query targets a *kind* of tweet where a reply has a real shot at being seen and adds genuine value:
+
+- **Theme overlap with the article**, derived from the article's core concept and the Published Articles Cache row(s) it overlaps — not just one keyword.
+- **Recent** — rely on X's "Latest" tab or `since:` for freshness.
+- **Some traction, not viral** — enough engagement that replies get eyeballs, low enough that Gil isn't buried under hundreds of replies.
+- **Open-ended or question-shaped** tweets (people asking, complaining, debating) — easiest to add to honestly.
+- **English** (Gil's X audience), unless the article warrants pt-BR too.
+
+### X search operators to use
+
+**Default noise-filter stack — append these to every query unless there's a reason not to:**
+
+```
+-filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags
+```
+
+- `-filter:replies` — original tweets only (a reply buried in a thread is a dead end).
+- `-is:quote` — drop quote-tweets (they flood the results with reaction noise).
+- `-filter:links` — favor discussion tweets over pure link-drops.
+- `-filter:mentions` — drop tweets that `@`-tag someone. Tested trade-off: the junk-with-a-mention vastly outnumbers the good tweets lost, so the net is a cleaner feed.
+- `-min_replies:10` — exclude already-busy threads where Gil's reply gets buried (keeps tweets with < 10 replies).
+- `-has:cashtags` — drop `$TICKER` posts; they're almost always shill/promo.
+
+Then add per-query:
+
+- `min_faves:N` / `min_retweets:N` — traction floor (start ~10–30 faves; tune per topic).
+- `lang:en` (Gil's X audience).
+- `since:` / `until:` for a date window, or just use X's "Latest" tab.
+- Quote multi-word phrases; combine 2–3 concepts with `OR` sparingly.
+
+A complete query looks like:
+
+```
+"AI" ("solidity" OR "smart contract") (vibe OR generated OR wrote) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+```
+
+If a topic is so niche that the full stack returns almost nothing, loosen the optional filters (`-filter:links`, `-filter:mentions`) rather than the keywords.
+
+### Procedure
+
+1. Identify the article's 2–4 core themes and which Published-Articles-Cache rows it overlaps (these define the comment angle later).
+2. For each theme, write **2–3 query variants** (a tight phrase-match one, a broader `OR` one, a "people complaining/asking" one).
+3. For each query, note: what kind of tweet it targets, *why* it's a fit (the overlap), and the **comment angle** Gil would take — a one-line handoff for `/comment-writer`, grounded in a real project from `components/Timeline.tsx` or in a concrete detail from the overlapping article. Don't invent details, but the article itself is a valid source for specifics (named repos, tools, steps it describes).
+4. Add the `twitter-engagement-queries` list to frontmatter.
+
+### Write to frontmatter
+
+```yaml
+twitter-engagement-queries:
+  - query: <X search string with operators>
+    targets: <the kind of tweet this surfaces>
+    why: <theme overlap — name the article it connects to>
+    angle: <one-line comment angle to hand to /comment-writer; grounded in a real project or a concrete detail from the overlapping article>
+  - query: ...
+```
+
+Write **only** these four keys per entry (`query`, `targets`, `why`, `angle`) — no extra fields and no top-level note field. Operational reminders are not stored; the handoff to `/comment-writer` is implicit in each `angle`.
+
+If no theme has a credible engagement angle, write `twitter-engagement-queries: []` with a YAML comment saying why, and tell the user. Don't pad with weak queries.
+
+Then offer Phase 7 (Score).
+
+---
+
+## Phase 7 — Score
+
+**Detected by:** has `twitter-engagement-queries`, no `status: ready` in frontmatter
 
 Evaluate the draft on 5 dimensions. Score each 1–10.
 
@@ -324,14 +399,14 @@ Evaluate the draft on 5 dimensions. Score each 1–10.
 | **Voice match** | Practitioner voice (not theorist)? Every claim grounded in something Gil actually built (projects from Timeline.tsx)? Score 5–6 if the article sounds like it could have been written by anyone. |
 | **Value density** | ≥1 concrete example from a real project? Trade-off explicitly named (not implied)? Does the reader leave with something actionable? Score 5–6 if there are no real examples or the trade-off is vague. |
 | **Structure** | Paragraphs 2–4 sentences? `---` between all major sections? Bold used only on key terms, not whole sentences? No padding/summary paragraphs? Score 5–6 if paragraphs are long walls or structure is missing. |
-| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `twitter-image-prompt` present? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
+| **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `twitter-image-prompt` present? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? `twitter-engagement-queries` resolved (a list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
 
 For each dimension scored < 7: provide specific rewrite guidance and offer to apply it.
 When **all dimensions ≥ 7**: add `status: ready` to the draft's frontmatter. Confirm to user.
 
 ---
 
-## Phase 7 — Publish
+## Phase 8 — Publish
 
 **Detected by:** `status: ready` present in `content/drafts/`
 
@@ -349,6 +424,8 @@ linkedin-post: |-
 twitter-post: |-
   {from Phase 3}
 twitter-image-prompt: "{from Phase 3 — single-image prompt for the thread, distinct from og-image-prompt}"
+twitter-engagement-queries:
+  {from Phase 6 — the full YAML list; omit the key entirely only if it was empty with no fit}
 reddit-posts:
   {from Phase 4 — the full YAML list; omit the key entirely only if it was empty with no fit}
 og-image-prompt: "{from Phase 5}"

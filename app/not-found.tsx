@@ -4,7 +4,6 @@ import { CompactHeader } from '@/components/CompactHeader'
 const headerProps = {
   name: 'Gil',
   title: 'Senior Software Engineer',
-  profileImage: '/profile.webp',
   contacts: {
     fullName: 'Gil L Bueno',
     email: 'gilbueno.mail@gmail.com',
@@ -23,7 +22,7 @@ export default function NotFound() {
     <div className="min-h-screen flex flex-col bg-white dark:bg-neutral-900">
       <CompactHeader {...headerProps} />
       <main className="flex-1 flex flex-col items-center justify-center px-5 text-center gap-6">
-        <p className="font-clash font-bold text-8xl text-[#8063FF] dark:text-[#a78bff] leading-none">
+        <p className="font-clash font-bold text-8xl text-[#f9b800] dark:text-[#f9b800] leading-none">
           404
         </p>
         <div>
@@ -37,13 +36,13 @@ export default function NotFound() {
         <div className="flex gap-4">
           <Link
             href="/"
-            className="px-5 py-2 rounded-full bg-[#8063FF] text-white text-sm font-semibold hover:bg-[#6721D5] transition-colors"
+            className="px-5 py-2 rounded-full bg-[#f9b800] text-white text-sm font-semibold hover:bg-[#f9b800] transition-colors"
           >
             Go home
           </Link>
           <Link
             href="/blog"
-            className="px-5 py-2 rounded-full border border-neutral-200 dark:border-neutral-700 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:border-[#8063FF] dark:hover:border-[#a78bff] transition-colors"
+            className="px-5 py-2 rounded-full border border-neutral-200 dark:border-neutral-700 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:border-[#f9b800] dark:hover:border-[#f9b800] transition-colors"
           >
             Read the blog
           </Link>

@@ -6,34 +6,48 @@
   print-color-adjust: exact;
 }
 
-@font-face {
-  font-family: "ClashDisplay";
-  src: url("/fonts/ClashDisplay-Regular.woff2") format("woff2"),
-    url("/fonts/ClashDisplay-Regular.woff") format("woff");
+/* Syntax-highlighted code blocks. The highlight.js theme (github-dark) paints
+   the token colors and the block background on `code.hljs`; here we strip the
+   prose `pre` chrome so that background fills a clean rounded box, and keep
+   inline `code` styled by prose. */
+.prose pre {
+  background: transparent !important;
+  padding: 0 !important;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+.prose pre code.hljs {
+  display: block;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.6rem;
+  overflow-x: auto;
+  font-size: 0.85em;
+  line-height: 1.6;
   font-weight: 400;
-  font-style: normal;
+}
+.prose pre code::before,
+.prose pre code::after {
+  content: none !important;
 }
 
-@font-face {
-  font-family: "ClashDisplay";
-  src: url("/fonts/ClashDisplay-Medium.woff2") format("woff2"),
-    url("/fonts/ClashDisplay-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "ClashDisplay";
-  src: url("/fonts/ClashDisplay-Bold.woff2") format("woff2"),
-    url("/fonts/ClashDisplay-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "ClashDisplay";
-  src: url("/fonts/ClashDisplay-Semibold.woff2") format("woff2"),
-    url("/fonts/ClashDisplay-Semibold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
+/* Sticky/collapsing header: disable the fixed-overlay + spacer mechanics for
+   print so the CV renders the full expanded header in normal flow. !important
+   is required to override the component's inline (scroll-driven) styles. */
+@media print {
+  .sticky-bar {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+  .sticky-expanded {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .sticky-compact {
+    display: none !important;
+  }
+  .sticky-spacer {
+    display: none !important;
+  }
 }

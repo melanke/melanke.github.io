@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gil.solutions"),
@@ -69,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="transition-colors">
+    <html lang="en" className={`${display.variable} transition-colors`}>
       <head>
         <script defer src="https://cloud.umami.is/script.js" data-website-id="6232833a-5ec5-4e89-b8f8-9cbdb7ce1dae" />
       </head>

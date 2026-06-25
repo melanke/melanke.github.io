@@ -39,6 +39,11 @@ linkedin-post: |-                                # LinkedIn teaser (70-150 words
 twitter-post: |-                                 # Twitter/X content
   Single tweet or thread text
 twitter-image-prompt: "prompt for a single 16:9 image reinforcing the thread hook; distinct from og-image"
+twitter-engagement-queries:                       # X search queries to find fresh, easy-to-comment tweets that drive traffic back to the article
+  - query: ethereum onboarding gas min_faves:20 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+    targets: people venting about Web3 onboarding/gas friction
+    why: overlaps "We Can't Scale Web3 Until We Nail Onboarding"
+    angle: one-line comment angle to hand to /comment-writer
 reddit-posts:                                     # per-community Reddit posts (list; one entry per fitting sub)
   - subreddit: r/ethdev
     flair: My Project
@@ -70,8 +75,9 @@ Phase is inferred from file state — no explicit field except `status: ready`:
 | No `linkedin-post` in frontmatter | Phase 3: needs social content |
 | Has `linkedin-post`, no `reddit-posts` | Phase 4: needs Reddit communities |
 | Has `reddit-posts`, no `og-image-prompt` | Phase 5: needs OG prompt |
-| Has `og-image-prompt`, no `status: ready` | Phase 6: needs scoring |
-| Has `status: ready` | Phase 7: ready to publish |
+| Has `og-image-prompt`, no `twitter-engagement-queries` | Phase 6: needs X engagement targets |
+| Has `twitter-engagement-queries`, no `status: ready` | Phase 7: needs scoring |
+| Has `status: ready` | Phase 8: ready to publish |
 
 ## Skills
 

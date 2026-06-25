@@ -9,7 +9,7 @@ function TimelineHeader({ className }: { className?: string }) {
     <div
       className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none print:mt-8 ${className}`}
     >
-      <TimelineIcon size={17} className="print:hidden text-[#4F28FF]" />
+      <TimelineIcon size={17} className="print:hidden text-[#f9b800]" />
       <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
         Work Experience
       </div>

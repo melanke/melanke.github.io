@@ -3,6 +3,7 @@ import { getAllSlugs, getPost, getAdjacentPosts } from '@/lib/posts'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { CompactHeader } from '@/components/CompactHeader'
+import 'highlight.js/styles/github-dark.css'
 
 export function generateStaticParams() {
   return getAllSlugs().map(slug => ({ slug }))
@@ -47,7 +48,6 @@ function formatDate(iso?: string): string {
 const headerProps = {
   name: 'Gil',
   title: 'Senior Software Engineer',
-  profileImage: '/profile.webp',
   contacts: {
     fullName: 'Gil L Bueno',
     email: 'gilbueno.mail@gmail.com',
@@ -89,9 +89,9 @@ export default async function PostPage({
 
       <main className="max-w-3xl mx-auto px-5 py-10">
         <nav className="flex items-center gap-1.5 text-sm text-neutral-400 dark:text-neutral-500 mb-6">
-          <Link href="/" className="hover:text-[#8063FF] dark:hover:text-[#a78bff] transition-colors">Gil Lopes Bueno</Link>
+          <Link href="/" className="hover:text-[#f9b800] dark:hover:text-[#f9b800] transition-colors">Gil Lopes Bueno</Link>
           <span>/</span>
-          <Link href="/blog" className="hover:text-[#8063FF] dark:hover:text-[#a78bff] transition-colors">Blog</Link>
+          <Link href="/blog" className="hover:text-[#f9b800] dark:hover:text-[#f9b800] transition-colors">Blog</Link>
           <span>/</span>
           <span className="text-neutral-600 dark:text-neutral-300 truncate">{post.title}</span>
         </nav>
@@ -114,7 +114,7 @@ export default async function PostPage({
               {next && (
                 <Link href={`/blog/${next.slug}`} className="group flex flex-col gap-1">
                   <span className="text-xs text-neutral-400 dark:text-neutral-500">← Newer</span>
-                  <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-[#8063FF] dark:group-hover:text-[#a78bff] transition-colors line-clamp-2">
+                  <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-[#f9b800] dark:group-hover:text-[#f9b800] transition-colors line-clamp-2">
                     {next.title}
                   </span>
                 </Link>
@@ -124,7 +124,7 @@ export default async function PostPage({
               {prev && (
                 <Link href={`/blog/${prev.slug}`} className="group flex flex-col gap-1 items-end">
                   <span className="text-xs text-neutral-400 dark:text-neutral-500">Older →</span>
-                  <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-[#8063FF] dark:group-hover:text-[#a78bff] transition-colors line-clamp-2">
+                  <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-[#f9b800] dark:group-hover:text-[#f9b800] transition-colors line-clamp-2">
                     {prev.title}
                   </span>
                 </Link>

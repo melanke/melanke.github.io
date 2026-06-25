@@ -40,7 +40,7 @@ export function LatestPosts({ posts, className = "" }: LatestPostsProps) {
                 />
               </div>
             ) : (
-              <div className="w-24 shrink-0 bg-gradient-to-br from-[#8063FF] to-[#6721D5]" />
+              <div className="w-24 shrink-0 bg-gradient-to-br from-[#f9b800] to-[#f9b800]" />
             )}
             <div className="py-3 pr-4 flex flex-col justify-center">
               <div className="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 mb-1">
@@ -48,7 +48,7 @@ export function LatestPosts({ posts, className = "" }: LatestPostsProps) {
                 {post.publishedAt && <span>·</span>}
                 <span>{post.readingTime} min read</span>
               </div>
-              <h3 className="font-clash font-semibold text-sm text-neutral-900 dark:text-white leading-snug group-hover:text-[#8063FF] dark:group-hover:text-[#a78bff] transition-colors">
+              <h3 className="font-clash font-semibold text-sm text-neutral-900 dark:text-white leading-snug group-hover:text-[#f9b800] dark:group-hover:text-[#f9b800] transition-colors">
                 {post.title}
               </h3>
               {post.summary && (
@@ -63,7 +63,7 @@ export function LatestPosts({ posts, className = "" }: LatestPostsProps) {
       <div className="mt-4">
         <Link
           href="/blog"
-          className="text-sm text-[#8063FF] dark:text-[#a78bff] hover:underline font-semibold"
+          className="text-sm text-[#f9b800] dark:text-[#f9b800] hover:underline font-semibold"
         >
           View all posts →
         </Link>

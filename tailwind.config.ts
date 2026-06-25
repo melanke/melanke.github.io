@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        clash: ["ClashDisplay", "sans-serif"],
+        clash: ["var(--font-display)", "sans-serif"],
       },
       screens: {
         xs: "375px",
