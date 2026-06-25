@@ -330,9 +330,10 @@ Each query targets a *kind* of tweet where a reply has a real shot at being seen
 **Default noise-filter stack — append these to every query unless there's a reason not to:**
 
 ```
--filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags
+within_time:30d -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags
 ```
 
+- `within_time:30d` — **required freshness floor: only tweets from the last month.** Commenting on stale tweets is wasted effort — the conversation is dead and the reply won't be seen. Never drop this filter. (Equivalently, set `since:YYYY-MM-DD` to 30 days before today.)
 - `-filter:replies` — original tweets only (a reply buried in a thread is a dead end).
 - `-is:quote` — drop quote-tweets (they flood the results with reaction noise).
 - `-filter:links` — favor discussion tweets over pure link-drops.
@@ -344,16 +345,16 @@ Then add per-query:
 
 - `min_faves:N` / `min_retweets:N` — traction floor (start ~10–30 faves; tune per topic).
 - `lang:en` (Gil's X audience).
-- `since:` / `until:` for a date window, or just use X's "Latest" tab.
+- Tighten the window further (`within_time:7d`, or `since:`/`until:` for a specific span) when a topic is hot, but never widen past 30 days.
 - Quote multi-word phrases; combine 2–3 concepts with `OR` sparingly.
 
 A complete query looks like:
 
 ```
-"AI" ("solidity" OR "smart contract") (vibe OR generated OR wrote) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+"AI" ("solidity" OR "smart contract") (vibe OR generated OR wrote) min_faves:15 within_time:30d -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
 ```
 
-If a topic is so niche that the full stack returns almost nothing, loosen the optional filters (`-filter:links`, `-filter:mentions`) rather than the keywords.
+If a topic is so niche that the full stack returns almost nothing, loosen the optional filters (`-filter:links`, `-filter:mentions`) or the keywords — but keep `within_time:30d`; surfacing stale tweets is worse than surfacing fewer.
 
 ### Procedure
 
@@ -513,4 +514,5 @@ These sit on top of the shared formatting conventions in `.claude/skills/_shared
 | the-solidity-ci-pipeline-you-should-have-set-up-on-day-one | The Solidity CI Pipeline You Should Have Set Up on Day One | Ten CI gates built before writing the first contract — from formatter enforcement to slither, size caps, and optimizer pinning. | Solidity, CI/CD, Smart Contracts, Tooling |
 | turning-feature-plans-into-a-technical-execution-strategy | Turning Feature Plans Into a Technical Execution Strategy | How to go from MVP feature list to something a team can actually start building: tasks, dependencies, and effort estimation. | Product Process, Technical Execution, Planning |
 | we-can-t-scale-web3-until-we-nail-onboarding | We Can't Scale Web3 Until We Nail Onboarding | Private keys and gas tokens are still the wall keeping mainstream users out of Web3 — and what builders can actually do about it. | Web3, Onboarding, UX, Mainstream Adoption |
+| what-aws-blocks-is-really-for | What AWS Blocks Is Really For | AWS Blocks brings Infrastructure-from-Code to AWS; a suspicious-but-optimistic look at its real goals, the Encore/Nitric prior art, the lock-in and single-Lambda trade-offs, and why AWS's weight could standardize IFC. | AWS, Infrastructure-from-Code, DevOps, Cloud, Serverless |
 | when-dependency-injection-goes-too-far | When Dependency Injection Goes Too Far | DIP is a tool, not a rule. Two real projects where every class had an interface — and why that made the code worse. | Architecture, SOLID, DIP, Overengineering |

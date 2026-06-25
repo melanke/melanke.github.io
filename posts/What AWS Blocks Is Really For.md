@@ -40,9 +40,9 @@ twitter-post: |-
 
   Fine for a prototype or small/medium API, not microservices. AWS sells "no ceiling on what you can build." There's a ceiling, and it's that Lambda.
   ---
-  Why I'm optimistic anyway: I built a smaller version of this at Mosaic, pre-audited composable modules with AI tooling that assembled them from natural language.
+  Why I'm optimistic anyway: the abstraction has escape hatches. Drop to raw CDK, adopt existing resources, or eject a Block entirely. The simple path is a default, not a cage.
 
-  Give the agent a safe vocabulary and a non-expert can ship something sound.
+  And tying your app code to your infra is how you stop the two from rotting out of sync.
   ---
   So the real question for backend folks: does infra-from-code finally make every product dev own the deploy, or does AWS-shaped lock-in scare you off?
 
@@ -77,23 +77,23 @@ reddit-posts:
       be ready to defend the Lambda-lith claim with the preview docs. Blog is secondary — the
       in-thread discussion is the real post. Do not cross-post simultaneously to r/devops.
 twitter-engagement-queries:
-  - query: ("AWS Blocks" OR "infrastructure from code" OR "infra from code") (lock-in OR abstraction OR skeptical OR worried) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+  - query: ("AWS Blocks" OR "infrastructure from code" OR "infra from code") (lock-in OR abstraction OR skeptical OR worried) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en within_time:30d
     targets: devs reacting to AWS Blocks / Infrastructure-from-Code with doubt or curiosity
     why: directly on this article's subject — AWS Blocks and the IFC trade-off
     angle: share the leaky-lock-in nuance (open-source, runs locally, CDK underneath) and the single-Lambda caveat; mention I wrote a suspicious-but-optimistic take
-  - query: ("AWS Blocks") (tried OR preview OR shipped OR deploy) min_faves:10 -filter:replies -is:quote -filter:mentions -min_replies:10 -has:cashtags lang:en
+  - query: ("AWS Blocks") (tried OR preview OR shipped OR deploy) min_faves:10 -filter:replies -is:quote -filter:mentions -min_replies:10 -has:cashtags lang:en within_time:30d
     targets: early adopters posting first impressions of the Blocks preview
     why: same subject; people testing it are primed to discuss the per-method scaling limit
     angle: ask whether they hit the single-Lambda ceiling yet; offer the Lambda-lith framing from the article
-  - query: ("vendor lock-in" OR "aws lock-in" OR "cloud lock-in") (avoid OR escape OR trapped OR "worth it") min_faves:20 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+  - query: ("vendor lock-in" OR "aws lock-in" OR "cloud lock-in") (avoid OR escape OR trapped OR "worth it") min_faves:20 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en within_time:30d
     targets: devs debating whether cloud lock-in is worth the convenience
     why: the article's "leaky lock-in" framing of IFC
     angle: distinguish leaky lock-in (portable-ish code) from an AWS-shaped mental model — that's the part you can't easily migrate
-  - query: (AI OR agent OR LLM) ("infrastructure as code" OR terraform OR backend) (generated OR wrote OR vibe) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+  - query: (AI OR agent OR LLM) ("infrastructure as code" OR terraform OR backend) (generated OR wrote OR vibe) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en within_time:30d
     targets: people posting about agents generating infra or backend code
     why: overlaps "Discovery and Spec" — constrain the agent before line 1; Blocks does it with steering files
     angle: the Mosaic parallel — give the agent a safe, pre-audited vocabulary so a non-expert ships something sound; link the Discovery-and-Spec harness idea
-  - query: ("leaky abstraction" OR "too much magic" OR "over-abstracted") (framework OR backend OR infra OR cloud) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en
+  - query: ("leaky abstraction" OR "too much magic" OR "over-abstracted") (framework OR backend OR infra OR cloud) min_faves:15 -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en within_time:30d
     targets: devs venting about frameworks that hide too much
     why: overlaps "When Dependency Injection Goes Too Far" — abstraction as a tool, not a virtue
     angle: Blocks' escape hatches (raw CDK, fromExisting, vendorize) are the right shape for an abstraction; the DI-too-far lesson is knowing when it stops paying off
