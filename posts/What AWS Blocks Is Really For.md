@@ -164,6 +164,8 @@ AWS's product page promises "no ceiling on what you can build." I'd push back on
 
 To be fair, the single Lambda is just the current default. Anything you model as an `AsyncJob` or `CronJob` already deploys as its own function, so you can peel heavy work off the lith today, and the raw-CDK escape hatch lets you stand up more compute by hand. What Blocks won't do for you yet is split the API surface itself into per-method functions, so granular scaling and IAM per endpoint aren't on the table. The developers who've dug into it expect that to change, and so do I. I just wouldn't design around a promise.
 
+_Update (June 2026): after this piece went out, a member of the AWS Blocks team reached out to me to confirm they recognize the single-Lambda limitation and are already working on it. I'll take that as a good sign, and as confirmation the team sees the ceiling the same way the rest of us do._
+
 ---
 
 ### The AI-agent premise, and where it ties to my own work
