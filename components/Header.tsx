@@ -2,13 +2,10 @@ import Link from "next/link";
 import {
   FaGithub,
   FaLinkedin,
-  FaLocationDot,
   FaTelegram,
   FaXTwitter,
 } from "react-icons/fa6";
-import { LuLanguages } from "react-icons/lu";
 import { MdEmail } from "react-icons/md";
-import { RiGraduationCapFill, RiIdCardFill } from "react-icons/ri";
 import { TypingTitle } from "./TypingTitle";
 import { StarIcon } from "./StarIcon";
 
@@ -129,25 +126,6 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
             compact ? "max-h-0 opacity-0 mt-0" : "max-h-96 opacity-100 mt-2.5"
           }`}
         >
-          {/* Personal details — print only */}
-          <div className="hidden print:flex flex-col gap-1">
-            <div className="flex gap-1.5 items-center self-start">
-              <RiIdCardFill className="w-4 h-4" />
-              <div className="self-stretch my-auto">{contacts.fullName}</div>
-            </div>
-            <div className="flex gap-1.5 items-end self-stretch">
-              <RiGraduationCapFill className="w-4 h-4" />
-              <div>{contacts.education}</div>
-            </div>
-            <div className="flex gap-1.5 items-center">
-              <LuLanguages className="w-4 h-4" />
-              <div className="self-stretch my-auto">{contacts.languages}</div>
-            </div>
-            <div className="flex gap-1.5 items-center">
-              <FaLocationDot className="w-4 h-4" />
-              <div className="self-stretch my-auto">{contacts.location}</div>
-            </div>
-          </div>
           <div
             className={`flex print:flex-row print:flex print:py-1 gap-y-1 gap-x-6 w-full items-center justify-center ${
               compact ? "lg:hidden" : "min-[1220px]:hidden"
