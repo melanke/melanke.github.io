@@ -57,9 +57,9 @@ og-image-prompt: "DALL-E prompt used to generate the OG image"
 ---
 ```
 
-## Slug convention
+## Title & slug convention
 
-Slug = `slugify(filename)` — lowercase, non-alphanumeric → hyphens. Defined in `lib/posts.ts:slugify()`. Do not add a `slug` frontmatter field.
+The **filename is the post title**, used verbatim (`title = filename without .md`), so name post files with the human-readable title (spaces, capitals, punctuation) — never a slug, or the title renders as the slug. Slug = `slugify(filename)` — lowercase, non-alphanumeric → hyphens. Defined in `lib/posts.ts:slugify()`. Do not add `slug` or `title` frontmatter fields. Note: `slugify` turns every non-alphanumeric char into a hyphen, so "Developer's" → `developer-s`; prefer a title that slugifies cleanly.
 
 ## OG images
 
@@ -74,8 +74,8 @@ Phase is inferred from file state — no explicit field except `status: ready`:
 | No frontmatter, body has `[HOOK — refinar]` | Phase 1-2: drafting/hook |
 | No `linkedin-post` in frontmatter | Phase 3: needs social content |
 | Has `linkedin-post`, no `reddit-posts` | Phase 4: needs Reddit communities |
-| Has `reddit-posts`, no `og-image-prompt` | Phase 5: needs OG prompt |
-| Has `og-image-prompt`, no `twitter-engagement-queries` | Phase 6: needs X engagement targets |
+| Has `reddit-posts`, missing `og-image-prompt` or `twitter-image-prompt` | Phase 5: needs image prompts (OG + Twitter) |
+| Has both `og-image-prompt` and `twitter-image-prompt`, no `twitter-engagement-queries` | Phase 6: needs X engagement targets |
 | Has `twitter-engagement-queries`, no `status: ready` | Phase 7: needs scoring |
 | Has `status: ready` | Phase 8: ready to publish |
 

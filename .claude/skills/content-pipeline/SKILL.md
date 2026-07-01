@@ -13,6 +13,12 @@ Jump directly to **Phase Detection** below. Do not summarize this skill. Do not 
 
 ---
 
+## CRITICAL: Always write to the draft, never just to the chat
+
+Every artifact a phase produces — body, hook, `linkedin-post`, `twitter-post`, `twitter-image-prompt`, `reddit-posts`, `og-image-prompt`, `twitter-engagement-queries`, `status` — must be written into the draft file (body or frontmatter) **as you generate it**, before you present it for review. The conversation is for reviewing and iterating on what is already in the file, not for holding content that hasn't been saved. When the user asks for a change, edit the file, then show the result. A phase is not complete until its output lives in `content/drafts/{Title}.md` (the draft filename is the human-readable title — see Phase 1).
+
+---
+
 ## Step 0: Read context files
 
 Before anything else, read these files. They are the live source of truth — updated when the website is updated:
@@ -36,8 +42,8 @@ Determine entry point from context:
 | Draft file exists in `content/drafts/` AND body contains `[HOOK — refinar]` | Phase 2: Hook Refinement |
 | Draft body is complete (no `[HOOK — refinar]`), but no `linkedin-post` in frontmatter | Phase 3: Social Content |
 | Frontmatter has `linkedin-post` but no `reddit-posts` | Phase 4: Reddit Communities |
-| Frontmatter has `reddit-posts` but no `og-image-prompt` | Phase 5: OG Image Prompt |
-| Frontmatter has `og-image-prompt` but no `twitter-engagement-queries` | Phase 6: X Engagement Targets |
+| Frontmatter has `reddit-posts` but is missing `og-image-prompt` **or** `twitter-image-prompt` | Phase 5: Image Prompts (OG + Twitter) |
+| Frontmatter has **both** `og-image-prompt` and `twitter-image-prompt` but no `twitter-engagement-queries` | Phase 6: X Engagement Targets |
 | Frontmatter has `twitter-engagement-queries` but no `status: ready` | Phase 7: Score |
 | Frontmatter has `status: ready` | Phase 8: Publish |
 | User explicitly names a phase | Jump to that phase |
@@ -107,7 +113,9 @@ Present as a table. Ask user to pick a cell. Carry the chosen Format into Phase 
 **If coming from Phase 0:** use the Format→Article Type mapping above to pre-select the type; only ask if it's ambiguous.
 **If type is still unclear:** ask the user to confirm.
 
-**Slug:** derive from the headline — lowercase, hyphens, no accents, no special characters. Numbers stay as digits (e.g., "5 patterns" → `5-patterns`, not `five-patterns`).
+**Title & slug — read this before naming the file.** The blog uses the **filename as the post title**, verbatim (`title = filename without .md`), and derives the URL slug with `slugify(filename)`. So the draft must be named with the **human-readable title** (spaces, capitals, punctuation), *not* a slug — otherwise the published title renders as the slug. Everywhere this skill says `{slug}`, it means `slugify(title)`: lowercase, each run of non-alphanumeric → a single hyphen, numbers stay as digits (e.g. "5 patterns" → `5-patterns`, not `five-patterns`).
+
+> ⚠️ **Apostrophe / colon trap:** `slugify` turns every non-alphanumeric char into a hyphen, so "Developer's" → `developer-s` and "Spec:" → `spec-`. Pick a title that slugifies cleanly when you can (e.g. "A Developers Map" → `a-developers-map`). Whatever you pick, compute the slug **once** and reuse that exact string for the `og-image` path, the blog URLs in social/Reddit posts, the OG PNG filename, and the Published Articles Cache — they must all match.
 
 **Article types:**
 
@@ -133,7 +141,7 @@ Present as a table. Ask user to pick a cell. Carry the chosen Format into Phase 
 - Cross-links to published articles: only where the link adds genuine reader value — the reader should benefit from following the link, not just feel like Gil is promoting his other work. One forced link is worse than no link.
 - Conclusion + CTA + italicized bio line
 
-**Save to:** `content/drafts/{slug}.md`
+**Save to:** `content/drafts/{Title}.md` — the filename **is** the title (spaces, capitals and punctuation included), so it carries straight through to the published post. Do **not** save as `{slug}.md`; a slug-named draft publishes with the slug as its title.
 
 ---
 
@@ -196,7 +204,7 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 - **End with a genuine, specific question** that invites replies, in Gil's voice — curious, peer-to-peer, naming the concrete dimensions it's really asking about (e.g. "how much do you constrain the model before line 1 — prompts, specs, kill criteria?") rather than a vague "what do you think?". Never hype ("test it and tell me 🚀"). Early replies are what keep the algorithm distributing.
 - **Prefer concrete numbers where they're real** — "six spec phases", "before line 1 of Solidity". They sharpen a technical claim and read as specific, not salesy.
 - **Every tweet — each `---` segment — must be ≤280 characters. Count each before saving; if one is over, split it.** The classic failure is cramming the honest limitation + the question + the link into one closing tweet (a 600-char "tweet"). One idea per segment.
-- **Generate a single-image prompt** for the thread and store it as `twitter-image-prompt` (see *Twitter image prompt* below). Text-only threads underperform on X. Keep it in its own frontmatter field — never paste the prompt into the `twitter-post` value.
+- **The thread's image prompt is not made here.** It's generated in **Phase 5**, right after the OG image prompt, so the two images can be made deliberately distinct in one pass. Text-only threads underperform on X, so the prompt is still required — just produced later. Never paste any image prompt into the `twitter-post` value.
 - **Hashtags: the 3 most relevant, only at the very end of the last tweet** (the link tweet in a thread / the link reply in a single-tweet post) — never in the hook, never scattered through the body. Plain `#Word` format (not LinkedIn's `hashtag#`). Pick the 3 that genuinely match the article's topic; no filler tags.
 
 **Option A — Single tweet + link reply** (best for Type C/D shorter pieces):
@@ -209,19 +217,9 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 - Closing content tweet: the genuine question (≤280 chars), **no link**.
 - Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command + the 3 hashtags (the only place hashtags appear). Keep this segment ≤280 like the rest.
 
-Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). Then surface the **operational reminder**: generate the image from `twitter-image-prompt` and attach it, and reply to / engage with others in the first 30–60 min after posting.
+Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). Then surface the **operational reminder**: at posting time, attach the thread image (its prompt is produced in Phase 5) and reply to / engage with others in the first 30–60 min after posting.
 
-### Twitter image prompt (`twitter-image-prompt`)
-
-After the thread, generate **one** image prompt — a single image, **not** a carousel — that the user pastes into an image model. Requirements:
-
-- **16:9 and fully self-contained** (pasteable with no extra context).
-- **Visualizes the thread's hook** — the specific contrast the opener sets up (what the reader's tooling *does* catch vs. what it *misses*), not a generic article illustration.
-- **Deliberately different from the OG image** (`og-image-prompt`), so the thread doesn't reuse the blog thumbnail in-feed.
-- **On-brand:** dark near-black / deep-navy background, electric-blue + purple + emerald accents, clean minimal vector, technical and precise — no stock-photo people, no cyberpunk/meme styling. A *short* bold text overlay of the core contrast (≤6 words) is allowed for feed-stopping power; keep it on-brand.
-- Specify palette, the central contrast visual, and composition.
-
-Store as `twitter-image-prompt` in frontmatter.
+> 📝 The thread's image prompt (`twitter-image-prompt`) is produced in **Phase 5**, immediately after `og-image-prompt`, so the two images can be made deliberately distinct in one pass.
 
 ---
 
@@ -290,9 +288,15 @@ reddit-posts:
 
 ---
 
-## Phase 5 — OG Image Prompt
+## Phase 5 — Image Prompts (OG + Twitter)
 
-**Detected by:** has `reddit-posts`, no `og-image-prompt` in frontmatter
+**Detected by:** has `reddit-posts`, and `og-image-prompt` **or** `twitter-image-prompt` is still missing
+
+Produce **both** image prompts in this phase, back to back: the OG image prompt first, then the Twitter image prompt immediately after. Doing them in one pass is what lets you make them deliberately distinct.
+
+**Resume rule:** this phase isn't done until **both** fields exist. If `og-image-prompt` is already present but `twitter-image-prompt` is missing (e.g. the phase was interrupted, or the draft predates this pairing), resume here and generate **only** the missing Twitter image prompt — don't redo the OG one. Likewise if only the OG is missing.
+
+### OG image prompt (`og-image-prompt`)
 
 Generate a prompt for DALL-E or Gemini. The prompt must:
 
@@ -305,11 +309,23 @@ The prompt must be fully self-contained — paste it directly into DALL-E or Gem
 
 Add as `og-image-prompt` to the draft's frontmatter.
 
+### Twitter image prompt (`twitter-image-prompt`)
+
+Generate this **immediately after** the OG prompt above, while it's fresh, so the two can be made deliberately different. One image, **not** a carousel — the user pastes it into an image model. Requirements:
+
+- **16:9 and fully self-contained** (pasteable with no extra context).
+- **Visualizes the thread's hook** — the specific contrast the opener sets up (what the reader's tooling *does* catch vs. what it *misses*), not a generic article illustration.
+- **Deliberately different from the OG image you just wrote** (`og-image-prompt`), so the thread doesn't reuse the blog thumbnail in-feed. Vary the composition, the focal metaphor, and any text overlay.
+- **On-brand:** dark near-black / deep-navy background, electric-blue + purple + emerald accents, clean minimal vector, technical and precise — no stock-photo people, no cyberpunk/meme styling. A *short* bold text overlay of the core contrast (≤6 words) is allowed for feed-stopping power; keep it on-brand.
+- Specify palette, the central contrast visual, and composition.
+
+Store as `twitter-image-prompt` in frontmatter.
+
 ---
 
 ## Phase 6 — X Engagement Targets
 
-**Detected by:** has `og-image-prompt`, no `twitter-engagement-queries` in frontmatter
+**Detected by:** has **both** `og-image-prompt` and `twitter-image-prompt`, no `twitter-engagement-queries` in frontmatter
 
 **Goal:** Produce a set of **X (Twitter) search queries** that surface *fresh, easy-to-comment* tweets thematically tied to this article — so Gil can drop a substantive reply (via `/comment-writer`) that pulls attention back toward the article's topic. This step **finds the hunting grounds**; it does not write comments — that's `/comment-writer`'s job.
 
@@ -433,7 +449,7 @@ og-image-prompt: "{from Phase 5}"
 ---
 ```
 
-2. Move file: `content/drafts/{slug}.md` → `posts/{slug}.md`
+2. Move file: `content/drafts/{Title}.md` → `posts/{Title}.md`. The blog renders the filename verbatim as the post title and derives the slug via `slugify(filename)`, so **before moving, confirm the filename is the human-readable title, not a slug** — if an older draft was saved slug-named, rename it to the title now. Then verify `slugify(title)` still equals the `{slug}` used in `og-image`, the blog URLs, and the OG PNG filename; fix any mismatch.
 
 3. **Update Published Articles Cache** (the table at the bottom of this file). Add one new row matching the exact column format of the existing table: `| {slug} | {title} | {1-sentence summary} | {comma-separated tags} |`
 
@@ -516,3 +532,4 @@ These sit on top of the shared formatting conventions in `.claude/skills/_shared
 | we-can-t-scale-web3-until-we-nail-onboarding | We Can't Scale Web3 Until We Nail Onboarding | Private keys and gas tokens are still the wall keeping mainstream users out of Web3 — and what builders can actually do about it. | Web3, Onboarding, UX, Mainstream Adoption |
 | what-aws-blocks-is-really-for | What AWS Blocks Is Really For | AWS Blocks brings Infrastructure-from-Code to AWS; a suspicious-but-optimistic look at its real goals, the Encore/Nitric prior art, the lock-in and single-Lambda trade-offs, and why AWS's weight could standardize IFC. | AWS, Infrastructure-from-Code, DevOps, Cloud, Serverless |
 | when-dependency-injection-goes-too-far | When Dependency Injection Goes Too Far | DIP is a tool, not a rule. Two real projects where every class had an interface — and why that made the code worse. | Architecture, SOLID, DIP, Overengineering |
+| ai-and-blockchain-in-2026-a-developers-map | AI and Blockchain in 2026 - A Developers Map | A skeptical, current map of where AI and blockchain actually meet in 2026 — agent payments (x402), agent identity (ERC-8004), AI in the contract writing/audit loop, and decentralized/verifiable compute — with a filter for telling what shipped from what's still a toy, and where a dev can start. | AI, Blockchain, Web3, AI Agents, Smart Contracts, x402, ERC-8004, Verifiable AI |
