@@ -3,6 +3,7 @@
 import { TimelineItem } from "./TimelineItem";
 import { TimelineIcon } from "./TimelineIcon";
 import { useState } from "react";
+import { ContentVersion } from "@/app/contentVersion";
 
 function TimelineHeader({ className }: { className?: string }) {
   return (
@@ -17,7 +18,7 @@ function TimelineHeader({ className }: { className?: string }) {
   );
 }
 
-export function Timeline() {
+export function Timeline({ version }: { version: ContentVersion }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -26,7 +27,7 @@ export function Timeline() {
 
       <TimelineItem
         title="33Labs"
-        dateRange="Sep 2025 - May"
+        dateRange="Sep 2025 - May 2026"
         technologies={[]}
         role="Software Engineer | Main Smart Contract Developer"
         description={
@@ -42,7 +43,7 @@ export function Timeline() {
       <TimelineItem
         nested
         title="American Spend"
-        dateRange="Mar 2026 - May"
+        dateRange="Mar 2026 - May 2026"
         technologies={[
           "Solidity",
           "Foundry",
@@ -64,16 +65,16 @@ export function Timeline() {
               Designed a hybrid market model starting with a parimutuel phase
               and transitioning into a Central Limit Order Book (CLOB).
             </p>
-            <p>
+            <p className={version === "general" ? "print:hidden" : undefined}>
               Integrated vault-based yield strategies to generate returns on
               idle capital during market activity.
             </p>
-            <p>
+            <p className={version === "general" ? "print:hidden" : undefined}>
               Led the end-to-end design and implementation of the smart contract
               architecture, ensuring seamless transitions between market phases
               without disrupting user positions or incentives.
             </p>
-            <p>
+            <p className={version === "general" ? "print:hidden" : undefined}>
               Drove close collaboration with auditors throughout development,
               incorporating feedback early to strengthen security and reduce
               iteration cycles.
@@ -130,6 +131,7 @@ export function Timeline() {
 
       <TimelineItem
         title="BuidlGuidl Batch Program"
+        print={version === "web3"}
         dateRange="Feb 2025 - Jan 2026"
         technologies={[
           "Solidity",
@@ -261,6 +263,25 @@ export function Timeline() {
         image="/projects/neon.webp"
         link="https://coz.io/neon-wallet/"
       />
+      <TimelineItem
+        title="Sharity"
+        print={false}
+        nested
+        dateRange="Mar 2021 - Mar 2022"
+        technologies={[
+          "TypeScript",
+          "React.js",
+          "Kotlin",
+          "Java",
+          "Node.js",
+          "Next.js",
+          "GraphQL",
+        ]}
+        role="Software Engineer | TechLead"
+        description="A crowdfunding for charitable causes with more than 100 thousand users. I played a key role at the outset of the project, where I designed the database architecture, structured the project, and developed the most critical components of the application."
+        image="/projects/sharity.webp"
+        link="https://sharity.com.br"
+      />
       {!isExpanded && (
         <button
           type="button"
@@ -278,25 +299,6 @@ export function Timeline() {
             : "max-h-0 opacity-0 print:max-h-[5000px] print:opacity-100"
         }`}
       >
-        <TimelineItem
-          title="Sharity"
-          print={false}
-          nested
-          dateRange="Mar 2021 - Mar 2022"
-          technologies={[
-            "TypeScript",
-            "React.js",
-            "Kotlin",
-            "Java",
-            "Node.js",
-            "Next.js",
-            "GraphQL",
-          ]}
-          role="Software Engineer | TechLead"
-          description="A crowdfunding for charitable causes with more than 100 thousand users. I played a key role at the outset of the project, where I designed the database architecture, structured the project, and developed the most critical components of the application."
-          image="/projects/sharity.webp"
-          link="https://sharity.com.br"
-        />
         <TimelineItem
           title="NDapp"
           print={false}
@@ -401,6 +403,7 @@ export function Timeline() {
           title="Multilaser Runin"
           nested
           lastNested
+          print={version === "general"}
           dateRange="Aug 2014 - Out 2014"
           technologies={["Android", "Java"]}
           role="Software Engineer"
@@ -410,6 +413,7 @@ export function Timeline() {
         <TimelineItem
           dateRange="2010 - 2013"
           technologies={["JQuery", "Backbone", "Java", "Android"]}
+          print={version === "general"}
           title="SIMET - NIC.br"
           role="Software Engineer"
           description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."
