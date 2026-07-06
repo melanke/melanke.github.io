@@ -110,4 +110,4 @@ Reentrancy taught the Ethereum community one of its first and hardest lessons. A
 
 ---
 
-_Written by Gil, a fullstack developer with 15+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._
+_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._

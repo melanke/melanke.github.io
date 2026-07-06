@@ -79,4 +79,4 @@ Have you used it in production? Let’s connect and exchange ideas.
 
 ---
 
-_Written by Gil, a fullstack developer with 15+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._
+_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._

@@ -124,3 +124,10 @@ source worth adding, source that consistently produces nothing useful).
 - `2026-06-23` — Catalog seeded. Erigon org confirmed as `erigontech`, Teku org as
   `Consensys`, Nimbus repo as `status-im/nimbus-eth2`. All Discourse JSON endpoints assumed
   live (verify on first run; update here if any 404/redirect).
+- `2026-06-26` — First live run. All Discourse endpoints (magicians + ethresear) returned
+  clean JSON. `gh api` failed with **HTTP 401 Bad credentials** (token expired in this env);
+  the unauthenticated public REST API (`curl -s https://api.github.com/...`) worked fine for
+  EIPs/ERCs PRs, ethereum/pm commits, and client releases — use it as the GitHub fallback
+  (watch the 60 req/hr limit, batch the calls). Prysm releases endpoint `301`-redirects on
+  the `releases?per_page` form; skip or follow the redirect. Geth `v1.17.4` and Lighthouse
+  `v8.2.0` were the only client releases in-window.

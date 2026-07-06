@@ -152,4 +152,4 @@ If you're building a product or just interested in improving your process, feel 
 
 ---
 
-_Written by Gil, a fullstack developer with 15+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._
+_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._

@@ -25,4 +25,4 @@ After working hands-on to solve this in practice, I remain convinced that onboar
 
 ---
 
-**_Written by Gil_**_, a fullstack developer with 15+ years of experience and a deep focus on blockchain technology. He is the creator of Enclave Wallet, a keyless, cost-free smart wallet designed to make decentralized applications accessible to everyone. Gil is passionate about building the infrastructure for a truly user-centric Web3._
+**_Written by Gil_**_, a fullstack developer with 19+ years of experience and a deep focus on blockchain technology. He is the creator of Enclave Wallet, a keyless, cost-free smart wallet designed to make decentralized applications accessible to everyone. Gil is passionate about building the infrastructure for a truly user-centric Web3._

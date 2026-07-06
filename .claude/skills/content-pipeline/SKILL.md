@@ -435,7 +435,6 @@ published-at: '{current ISO 8601 datetime, e.g. 2026-06-17T12:00:00.000+00:00}'
 summary: >-
   {2-3 sentence factual description of the article — different from linkedin-post; informational, not a hook}
 og-image: /blog-images/{slug}.png
-linkedin-url: ''
 linkedin-post: |-
   {from Phase 3}
 twitter-post: |-
@@ -455,7 +454,6 @@ og-image-prompt: "{from Phase 5}"
 
 4. Remind user:
    - Generate OG image using `og-image-prompt`, save to `public/blog-images/{slug}.png` (16:9, PNG)
-   - Fill in `linkedin-url` after posting on LinkedIn
    - Run `npm run build` to verify no errors before pushing
 
 ---
@@ -490,7 +488,7 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
    - "If you're building a dapp and care about this challenge, let's talk."
 4. `---`
 5. Bio line (italicized) — choose by article type:
-   - General/process: `_Written by Gil, a fullstack developer with 15+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._`
+   - General/process: `_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._`
    - Technical/blockchain: `_Written by Gil, a fullstack developer with over 15 years of experience and a strong focus on practical software architecture and blockchain technology._`
 
 ### Blog-specific formatting & rules

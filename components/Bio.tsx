@@ -28,7 +28,7 @@ export function Bio({ version }: { version: ContentVersion }) {
   ) : (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-4 print:mt-2">
-        I am a Senior Backend &amp; AI Engineer with 15+ years of experience and
+        I am a Senior Backend &amp; AI Engineer with 19+ years of experience and
         over 50 delivered projects. Most of my career has gone into backend
         systems that hold up under real scale. I architected a logistics
         platform that processed 50M+ invoices for 60,000 couriers, and a wallet
