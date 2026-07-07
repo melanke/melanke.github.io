@@ -91,7 +91,7 @@ export function StickyHeader(props: HeaderProps) {
         {/* Expanded layer (full header). Fades + slightly scales out as you scroll. */}
         <div
           ref={expandedRef}
-          className="sticky-expanded pt-6 pb-8 pl-5 pr-8 max-md:pr-5 origin-top-left will-change-[opacity,transform]"
+          className="sticky-expanded pt-6 pb-8 print:pb-0 pl-5 pr-8 max-md:pr-5 origin-top-left will-change-[opacity,transform]"
           style={{
             opacity: "clamp(0, calc(1.2 - var(--p) * 2.4), 1)",
             transform: "scale(calc(1 - 0.8 * var(--p)))",

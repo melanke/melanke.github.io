@@ -162,6 +162,8 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         title={
           version === "web3"
             ? "Senior Blockchain Engineer"
+            : version === "leader"
+            ? "Tech Lead / Engineering Manager"
             : "Senior Backend & AI Engineer"
         }
         contacts={{
@@ -183,6 +185,8 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             href={
               version === "web3"
                 ? "/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Blockchain%20Engineer.pdf"
+                : version === "leader"
+                ? "/documents/Gil%20Lopes%20Bueno%20-%20Tech%20Lead%20%26%20Engineering%20Manager.pdf"
                 : "/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Software%20Engineer.pdf"
             }
             download
@@ -196,6 +200,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           <div className="flex flex-col max-w-[740px] print:block">
             <Bio version={version} />
             <Achievements />
+            {version === "leader" && <LeadershipSection version={version} />}
             <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-5 text-xl">
               Technical Skills
             </div>
@@ -204,7 +209,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
               {orderedSkills}
             </div>
 
-            <LeadershipSection />
+            {version !== "leader" && <LeadershipSection version={version} />}
             <OtherSection />
 
             <History text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />

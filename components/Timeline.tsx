@@ -65,16 +65,16 @@ export function Timeline({ version }: { version: ContentVersion }) {
               Designed a hybrid market model starting with a parimutuel phase
               and transitioning into a Central Limit Order Book (CLOB).
             </p>
-            <p className={version === "general" ? "print:hidden" : undefined}>
+            <p className={version !== "web3" ? "print:hidden" : undefined}>
               Integrated vault-based yield strategies to generate returns on
               idle capital during market activity.
             </p>
-            <p className={version === "general" ? "print:hidden" : undefined}>
+            <p className={version !== "web3" ? "print:hidden" : undefined}>
               Led the end-to-end design and implementation of the smart contract
               architecture, ensuring seamless transitions between market phases
               without disrupting user positions or incentives.
             </p>
-            <p className={version === "general" ? "print:hidden" : undefined}>
+            <p className={version !== "web3" ? "print:hidden" : undefined}>
               Drove close collaboration with auditors throughout development,
               incorporating feedback early to strengthen security and reduce
               iteration cycles.
@@ -131,7 +131,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
 
       <TimelineItem
         title="BuidlGuidl Batch Program"
-        print={version === "web3"}
+        print={version === "web3" || version === "leader"}
         dateRange="Feb 2025 - Jan 2026"
         technologies={[
           "Solidity",
@@ -403,7 +403,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           title="Multilaser Runin"
           nested
           lastNested
-          print={version === "general"}
+          print={version === "general" || version === "leader"}
           dateRange="Aug 2014 - Out 2014"
           technologies={["Android", "Java"]}
           role="Software Engineer"

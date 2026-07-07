@@ -1,12 +1,17 @@
 import { SkillItem } from "./SkillItem";
 import { HiOutlineUserGroup } from "react-icons/hi2";
+import { ContentVersion } from "@/app/contentVersion";
 
-export function LeadershipSection() {
+export function LeadershipSection({ version }: { version?: ContentVersion }) {
   return (
-    <div className="flex flex-col mt-10 w-full text-black break-inside-avoid dark:text-white max-md:max-w-full print:hidden">
-      <div className="flex gap-1.5 justify-center items-center self-start text-2xl font-semibold leading-none animate-fade-up opacity-0">
-        <HiOutlineUserGroup size={20} className="text-[#f9b800]" />
-        <div className="self-stretch my-auto font-clash font-semibold">
+    <div
+      className={`flex flex-col mt-10 print:mt-5 w-full text-black break-inside-avoid dark:text-white max-md:max-w-full ${
+        version === "leader" ? "" : "print:hidden"
+      }`}
+    >
+      <div className="flex gap-1.5 justify-center items-center self-start text-2xl print:text-xl font-semibold leading-none animate-fade-up opacity-0">
+        <HiOutlineUserGroup size={20} className="print:hidden text-[#f9b800]" />
+        <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
           Leadership Experience
         </div>
       </div>
@@ -33,15 +38,13 @@ export function LeadershipSection() {
           </div>
         </div>
         <div className="flex-1 shrink basis-0 text-xs leading-4 min-w-[240px] w-[258px] text-black dark:text-white animate-fade-up [animation-delay:1200ms] opacity-0">
-          From college onward, my advanced experience set me apart from my
-          peers, fostering a natural leadership spirit and a drive to guide
-          others toward achieving the best results. Leading teams has taught me
-          the importance of listening, inclusivity, delegation, and
-          collaborative discussion.
-          <br />I excel in architecting solutions, understanding customer and
-          stakeholder demands, documenting requirements, and planning and
-          documenting solution structures. Recently, I have also ventured into
-          discovery processes and project roadmap management.
+          From college onward, my advanced experience fostered a natural
+          leadership spirit and a drive to guide others toward the best
+          results. Leading teams taught me the importance of listening,
+          inclusivity, delegation, and collaborative discussion.
+          <br />I excel in architecting solutions, understanding stakeholder
+          demands, documenting requirements, and planning solution structures,
+          along with discovery processes and roadmap management.
         </div>
       </div>
     </div>
