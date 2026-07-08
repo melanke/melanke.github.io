@@ -174,7 +174,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
       />
       <TimelineItem
         title="Simpli"
-        dateRange="Out 2013 - May 2025"
+        dateRange="Oct 2013 - May 2025"
         technologies={[]}
         role="Software Engineer | CTO"
         description={
@@ -303,7 +303,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           title="NDapp"
           print={false}
           nested
-          dateRange="Feb 2021 - Set 2024"
+          dateRange="Feb 2021 - Sep 2024"
           technologies={["TypeScript", "React.js", "Kotlin", "Java"]}
           role="Software Engineer | TechLead"
           description="NDapp became the official dApps galery of Neo network. Provides detailed information and automatic updates about each dApp, with data pulled directly from the NeoLegacy, Neo N3 and Neo X blockchains. I worked defining the initial structure of the project and developing the first functionalities."
@@ -394,7 +394,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           title="Band Radios App"
           print={false}
           nested
-          dateRange="Out 2014 - Nov 2015"
+          dateRange="Oct 2014 - Nov 2015"
           technologies={["Xamarin"]}
           role="Software Engineer"
           description="Bandeirantes, a major Brazilian media conglomerate, established Band Radios in 1937 and selected my team in 2014 to modernize their mobile app. The project presented several challenges, including the requirement to establish a UDP connection before the user selected a radio station. I served as the lead developer for the Android and iOS apps."
@@ -404,7 +404,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           nested
           lastNested
           print={version === "general" || version === "leader"}
-          dateRange="Aug 2014 - Out 2014"
+          dateRange="Aug 2014 - Oct 2014"
           technologies={["Android", "Java"]}
           role="Software Engineer"
           description="Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control tests, which were previously done manually. I helped develop an Android application to automate these tests, covering CPU, RAM, GPS, screen brightness, and touch functionality. This automation significantly improved productivity in tablet production, and the app has since tested over 20 million devices."
