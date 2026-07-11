@@ -165,4 +165,4 @@ If you're building tools that needed exactly this, or you've found other ways ar
 
 ---
 
-_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._
+_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._

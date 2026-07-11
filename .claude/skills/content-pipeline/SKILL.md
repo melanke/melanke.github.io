@@ -501,9 +501,13 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
    - "Have you used it in production? Let's connect and exchange ideas."
    - "If you're building a dapp and care about this challenge, let's talk."
 4. `---`
-5. Bio line (italicized) — choose by article type:
-   - General/process: `_Written by Gil, a fullstack developer with 19+ years of experience, passionate about practical architecture, clean UX, and blockchain-powered applications._`
-   - Technical/blockchain: `_Written by Gil, a fullstack developer with over 15 years of experience and a strong focus on practical software architecture and blockchain technology._`
+5. Bio line (italicized) — **choose by the article's primary subject, not its Type (A/B/C/D).** Type is a structural/format choice (how it's built); the bio is about what the piece is actually about, and the two are independent — a Type C opinion piece can be about AI, blockchain, or neither. Don't default to the blockchain-flavored line just because most of the archive is blockchain content; check what *this* article covers.
+   - **AI-focused** (LLM agents, AI tooling/protocols, AI-assisted dev, MCP/agent infra — little or no blockchain content): `_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._`
+   - **Blockchain/Web3-technical** (smart contracts, DeFi, on-chain protocol design — little or no AI content): `_Written by Gil, a fullstack developer with over 15 years of experience and a strong focus on practical software architecture and blockchain technology._`
+   - **AI + Blockchain intersection** (AI applied to smart contracts/auditing, on-chain AI agents, or any piece that genuinely bridges both — not just one passing mention): `_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, 8 of them in Web3, who's spent the last stretch integrating LLM agents into smart contract development and audit workflows._`
+   - **Process/leadership/general** (product process, team rituals, requirements, estimation, career — not chain- or AI-specific): `_Written by Gil, a Tech Lead with 19+ years in software and 12+ years leading teams of up to 30, focused on turning product goals into technical execution._`
+
+   If a new subject area doesn't fit any of the four, write a new one-line variant grounded in `components/Bio.tsx` / `components/Timeline.tsx` (never invented) instead of forcing a mismatched existing line, and add it to this list.
 
 ### Blog-specific formatting & rules
 
