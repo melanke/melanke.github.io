@@ -392,6 +392,8 @@ twitter-engagement-queries:
 
 Write **only** these four keys per entry (`query`, `targets`, `why`, `angle`) — no extra fields and no top-level note field. Operational reminders are not stored; the handoff to `/comment-writer` is implicit in each `angle`.
 
+> ⚠️ **YAML trap:** if a `query` value's very first character is a `"` (e.g. it opens with `"MCP" "sampling" ...`), the YAML parser reads it as an opening double-quoted scalar and the build breaks at export (`YAMLException: bad indentation of a sequence entry`) — this passes `npm run build`'s compile step and only fails at static export, so it's easy to miss. Queries that start with `(` are fine. **Wrap the entire query value in single quotes** (`query: '"MCP" "sampling" ...'`) whenever it starts with a bare `"`; single quotes don't need escaping for the double quotes inside. Check every query in the list, not just the first — this exact bug shipped in the 2026-07-11 "Anthropic Killed the Cheapest Way to Add AI to Your App" post and was only caught by actually running `npm run build` before considering Phase 8 done.
+
 If no theme has a credible engagement angle, write `twitter-engagement-queries: []` with a YAML comment saying why, and tell the user. Don't pad with weak queries.
 
 Then offer Phase 7 (Score).
@@ -427,6 +429,20 @@ When **all dimensions ≥ 7**: add `status: ready` to the draft's frontmatter. C
 
 **Detected by:** `status: ready` present in `content/drafts/`
 
+### Step 0 — Hard image gate (blocking — do this before anything else in this phase)
+
+`status: ready` means the *content* is done; it says nothing about the images. Step 1 below commits this post to the live site, so verify the OG image exists **before running it** — never move the file, write `og-image`, or touch the Published Articles Cache first and check after.
+
+1. Compute `{slug}` from the draft's title (`slugify(title)`, the same string already used in the draft's social posts and image prompts).
+2. **Always print both prompts verbatim first**, copied straight from the draft's `og-image-prompt` and `twitter-image-prompt` frontmatter fields, each in its own fenced block — *before* reporting any check result. Do this every time this gate runs, not only on failure: the user should never have to open the draft file to get either prompt.
+3. **Check the OG image file for real (blocking):** run `ls "public/blog-images/{slug}.png"` (or equivalent). This file is what `og-image` in the published frontmatter will point to — if it's missing, the live post ships with a broken image on every share.
+   - **Missing → STOP.** Do not proceed to step 1 below under any circumstance, including if the user asks you to publish anyway or says to skip it — tell them the gate is blocking on the missing file (the prompt is already printed above, ready to paste). Wait for the file to exist, then re-check.
+   - **Present → continue.**
+4. **Remind about the Twitter thread image (non-blocking).** It's generated from `twitter-image-prompt` but is never saved into this project — it's attached by hand when the thread is posted, so there's nothing on disk to check and this step does not gate publishing. Just surface a one-line reminder alongside the printed prompt from step 2: it still needs to be generated before the thread goes out, separately from this publish.
+5. Once the OG image check passes, proceed to step 1 below.
+
+---
+
 1. Generate complete frontmatter for the published version. **Remove `status: ready`** — it is a pipeline field, not a published post field.
 
 ```yaml
@@ -452,9 +468,7 @@ og-image-prompt: "{from Phase 5}"
 
 3. **Update Published Articles Cache** (the table at the bottom of this file). Add one new row matching the exact column format of the existing table: `| {slug} | {title} | {1-sentence summary} | {comma-separated tags} |`
 
-4. Remind user:
-   - Generate OG image using `og-image-prompt`, save to `public/blog-images/{slug}.png` (16:9, PNG)
-   - Run `npm run build` to verify no errors before pushing
+4. **Run `npm run build` yourself** (don't just remind the user) and read the output. This is not optional: YAML frontmatter errors (see the trap noted under Phase 6) and other mistakes routinely pass the compile step and only surface at static export (`Generating static pages` / `Exporting`), so a clean compile is not enough evidence. If the build fails, fix the file and rebuild — do not consider Phase 8 done until `npm run build` exits clean and the new slug appears in the generated `/blog/[slug]` paths.
 
 ---
 
@@ -531,3 +545,4 @@ These sit on top of the shared formatting conventions in `.claude/skills/_shared
 | what-aws-blocks-is-really-for | What AWS Blocks Is Really For | AWS Blocks brings Infrastructure-from-Code to AWS; a suspicious-but-optimistic look at its real goals, the Encore/Nitric prior art, the lock-in and single-Lambda trade-offs, and why AWS's weight could standardize IFC. | AWS, Infrastructure-from-Code, DevOps, Cloud, Serverless |
 | when-dependency-injection-goes-too-far | When Dependency Injection Goes Too Far | DIP is a tool, not a rule. Two real projects where every class had an interface — and why that made the code worse. | Architecture, SOLID, DIP, Overengineering |
 | ai-and-blockchain-in-2026-a-developers-map | AI and Blockchain in 2026 - A Developers Map | A skeptical, current map of where AI and blockchain actually meet in 2026 — agent payments (x402), agent identity (ERC-8004), AI in the contract writing/audit loop, and decentralized/verifiable compute — with a filter for telling what shipped from what's still a toy, and where a dev can start. | AI, Blockchain, Web3, AI Agents, Smart Contracts, x402, ERC-8004, Verifiable AI |
+| anthropic-killed-the-cheapest-way-to-add-ai-to-your-app | Anthropic Killed the Cheapest Way to Add AI to Your App | MCP is deprecating Sampling for "low adoption" on July 28, even though Claude Desktop and Claude Code never shipped client support for it — what that circularity reveals about AI platforms wanting apps inside their walls, and the one pattern that still borrows a user's AI for free. | AI, MCP, Anthropic, Developer Tools, Platform Strategy |
