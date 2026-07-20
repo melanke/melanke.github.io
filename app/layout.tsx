@@ -12,10 +12,10 @@ const display = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gil.solutions"),
-  title: "Gil Lopes Bueno - Senior Software Engineer",
+  title: "Gil Lopes Bueno - Principal Software Engineer",
   description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
   keywords: [
-    "Senior Developer",
+    "Principal Developer",
     "Full Stack",
     "Blockchain",
     "Web Development",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Gil Lopes Bueno" }],
   creator: "Gil Lopes Bueno",
   openGraph: {
-    title: "Gil Lopes Bueno - Senior Software Engineer",
+    title: "Gil Lopes Bueno - Principal Software Engineer",
     description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
     type: "website",
     locale: "en_US",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Gil Lopes Bueno - Senior Software Engineer",
+    title: "Gil Lopes Bueno - Principal Software Engineer",
     description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
     images: ["/profile.webp"],
   },

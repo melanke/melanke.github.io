@@ -164,7 +164,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             ? "Senior Blockchain Engineer"
             : version === "leader"
             ? "Tech Lead / Engineering Manager"
-            : "Senior Backend & AI Engineer"
+            : "Principal Software Engineer"
         }
         contacts={{
           fullName: "Gil L Bueno",
@@ -187,7 +187,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
                 ? "/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Blockchain%20Engineer.pdf"
                 : version === "leader"
                 ? "/documents/Gil%20Lopes%20Bueno%20-%20Tech%20Lead%20%26%20Engineering%20Manager.pdf"
-                : "/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Software%20Engineer.pdf"
+                : "/documents/Gil%20Lopes%20Bueno%20-%20Principal%20Software%20Engineer.pdf"
             }
             download
             className="flex items-center gap-1.5 text-xs text-black dark:text-white opacity-60 hover:opacity-100 transition-opacity"

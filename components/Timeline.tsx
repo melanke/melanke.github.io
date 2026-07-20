@@ -27,7 +27,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
 
       <TimelineItem
         title="33Labs"
-        dateRange="Sep 2025 - May 2026"
+        dateRange="Sep 2025 - current"
         technologies={[]}
         role="Software Engineer | Main Smart Contract Developer"
         description={

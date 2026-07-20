@@ -39,7 +39,7 @@ Determine entry point from context:
 |-----------|----------|
 | No topic provided, or user says "give me ideas" | Phase 0: Ideation |
 | Topic/headline provided but no draft file exists yet | Phase 1: Draft |
-| Draft file exists in `content/drafts/` AND body contains `[HOOK — refinar]` | Phase 2: Hook Refinement |
+| Draft file exists in `content/drafts/` AND body contains `[HOOK — refinar]` | Phase 2: Hook & Title Refinement |
 | Draft body is complete (no `[HOOK — refinar]`), but no `linkedin-post` in frontmatter | Phase 3: Social Content |
 | Frontmatter has `linkedin-post` but no `reddit-posts` | Phase 4: Reddit Communities |
 | Frontmatter has `reddit-posts` but is missing `og-image-prompt` **or** `twitter-image-prompt` | Phase 5: Image Prompts (OG + Twitter) |
@@ -145,9 +145,21 @@ Present as a table. Ask user to pick a cell. Carry the chosen Format into Phase 
 
 ---
 
-## Phase 2 — Hook Refinement
+## Phase 2 — Hook & Title Refinement
 
 **Detected by:** body contains `[HOOK — refinar]`
+
+This phase covers both the opening hook and the **title** — they're read together as a pair, so revisit both here, not the hook alone.
+
+### Title check (do this first)
+
+Before generating hook options, look at the current title with the same critical eye Phase 7 will later apply to the hook. In particular:
+
+- **Don't lead the title (or the hook) with "I already built/shipped this."** Reasserting Gil's own credibility as the opening pitch, especially for something modest, reads as an unearned flex rather than an earned one — a small brag dressed up as a headline. Let the body's real examples make that case; the reader should arrive at "oh, he's actually done this" on their own partway through, not be told upfront. That angle is completely fine **later in the body**, backed by specifics — it just can't be the first thing the reader sees.
+- If the title trips this (or reads generic, or buries the real angle), rewrite it now, alongside the hook. A title fix found here doesn't wait for a later pass.
+- **If the title changes, rename the file** — `content/drafts/{Old Title}.md` → `content/drafts/{New Title}.md` — don't leave a stale duplicate draft behind. Recompute `{slug}` from the new title and check anywhere it may already be in use downstream (og-image path, blog URLs in social/Reddit posts) before later phases lock it in.
+
+### Hook
 
 Generate **6 hook variations** for the article opening. Format: exactly 2 lines, each ≤40 characters.
 
@@ -502,9 +514,9 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
    - "If you're building a dapp and care about this challenge, let's talk."
 4. `---`
 5. Bio line (italicized) — **choose by the article's primary subject, not its Type (A/B/C/D).** Type is a structural/format choice (how it's built); the bio is about what the piece is actually about, and the two are independent — a Type C opinion piece can be about AI, blockchain, or neither. Don't default to the blockchain-flavored line just because most of the archive is blockchain content; check what *this* article covers.
-   - **AI-focused** (LLM agents, AI tooling/protocols, AI-assisted dev, MCP/agent infra — little or no blockchain content): `_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._`
+   - **AI-focused** (LLM agents, AI tooling/protocols, AI-assisted dev, MCP/agent infra — little or no blockchain content): `_Written by Gil, a Principal Software Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._`
    - **Blockchain/Web3-technical** (smart contracts, DeFi, on-chain protocol design — little or no AI content): `_Written by Gil, a fullstack developer with over 15 years of experience and a strong focus on practical software architecture and blockchain technology._`
-   - **AI + Blockchain intersection** (AI applied to smart contracts/auditing, on-chain AI agents, or any piece that genuinely bridges both — not just one passing mention): `_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, 8 of them in Web3, who's spent the last stretch integrating LLM agents into smart contract development and audit workflows._`
+   - **AI + Blockchain intersection** (AI applied to smart contracts/auditing, on-chain AI agents, or any piece that genuinely bridges both — not just one passing mention): `_Written by Gil, a Principal Software Engineer with 19+ years of experience, 8 of them in Web3, who's spent the last stretch integrating LLM agents into smart contract development and audit workflows._`
    - **Process/leadership/general** (product process, team rituals, requirements, estimation, career — not chain- or AI-specific): `_Written by Gil, a Tech Lead with 19+ years in software and 12+ years leading teams of up to 30, focused on turning product goals into technical execution._`
 
    If a new subject area doesn't fit any of the four, write a new one-line variant grounded in `components/Bio.tsx` / `components/Timeline.tsx` (never invented) instead of forcing a mismatched existing line, and add it to this list.

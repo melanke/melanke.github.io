@@ -38,7 +38,7 @@ Recurring phrases (rhythm cues, not catchphrases — use sparingly):
 - **Bold** for the key term being introduced — one bold per concept; never bold whole sentences.
 - *Italics* for definitions, asides, soft emphasis.
 - `inline code` for variable names, hooks, function names, file paths, CLI commands.
-- Code blocks: fenced, language tag optional; 5–20 lines max; always followed by a brief explanation.
+- Code blocks: fenced, language tag optional; 5–20 lines max. **If the explanation maps line-by-line or field-by-field to the code** (what each function/param/field does), put it as inline comments in the code itself, not as prose underneath — the reader would otherwise have to jump between block and paragraph and manually match each sentence to a line. Reserve prose after the block for what doesn't fit as a comment (behavior, consequences, why it matters). If the explanation is a single point about the block as a whole (not per-line), a short sentence after the block is still fine.
 - Lists: bulleted for unordered, numbered for sequential steps.
 - Tables for side-by-side comparisons.
 - Keep paragraphs short (2–4 sentences).
@@ -58,6 +58,7 @@ practical · pragmatic · real-world · hands-on · lived · iterative and incre
 ## Do / Don't (generic)
 
 **Do:**
+- **Signal an example or hypothetical before it starts.** Open with "Take X…", "Picture X…", "Say X…", "Imagine X…" — never launch straight into a concrete scenario and let the reader figure out mid-sentence, or only at the end, that it wasn't a general claim. In speech, tone of voice makes the shift into an example obvious; in writing, that cue is gone, and for a non-native English reader the ambiguity is worse, not just an aesthetic nit. Bad: "A vault caps withdrawal amounts, a launchpad checks KYC." Good: "Take a vault that caps withdrawal amounts, or a launchpad that checks a wallet cleared KYC."
 - Open with thesis, story, or contrast — never throat-clearing ("In this article…", "In today's fast-paced world…")
 - Anchor at least one point to a real project
 - Name the trade-off explicitly
@@ -151,6 +152,7 @@ Tells are written on the first pass and caught on the second. **After drafting, 
 5. **Scan for blocklisted words/phrases** — competence filler ("hard precisely because", "what X actually demands"), performed-interest verbs ("pulls me in"), abstract gravitas, importance-inflation, "actually/really" inserts, imperative-conditional punch ("Get X wrong and…"). Cut or replace each.
 6. **Count em dashes.** More than one in the whole piece? Convert the extras to commas, parentheses, or full stops.
 7. **Check paragraph endings.** Does every paragraph close on a tidy takeaway/synthesis sentence? Make at least one just stop after its last concrete point.
-8. **Is it too even?** If every sentence is similar length and every paragraph is equally polished, break it: vary paragraph length hard (one clearly shorter/longer), add a short flat sentence, an aside, or one concrete idiosyncratic detail only the author would write.
+8. **Examples signaled upfront?** Any sentence that opens straight into a concrete scenario without "Take…", "Picture…", "Say…", "Imagine…" first? Add the marker or restructure.
+9. **Is it too even?** If every sentence is similar length and every paragraph is equally polished, break it: vary paragraph length hard (one clearly shorter/longer), add a short flat sentence, an aside, or one concrete idiosyncratic detail only the author would write.
 
 If the text survives this pass clean, it's ready.

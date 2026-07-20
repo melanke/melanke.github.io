@@ -50,7 +50,7 @@ export function TypingTitle({ className }: { className?: string }) {
   }, [text, deleting, index]);
 
   return (
-    <span className={className} aria-label="Senior Software Engineer">
+    <span className={className} aria-label="Principal Software Engineer">
       {text}
       <span className="inline-block w-px -mb-0.5 animate-pulse" aria-hidden>
         |

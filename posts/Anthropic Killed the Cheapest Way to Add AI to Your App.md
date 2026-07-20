@@ -4,7 +4,7 @@ summary: >-
   MCP officially deprecates Sampling on July 28 — the feature that let a third-party app borrow a user's own AI subscription instead of paying for inference itself. A look at which clients ever actually implemented it (Claude Desktop and Claude Code never did), why the "low adoption" rationale is circular, and the one pattern for free AI in your app that survives the change.
 og-image: /blog-images/anthropic-killed-the-cheapest-way-to-add-ai-to-your-app.png
 linkedin-post: |-
-  🤔 MCP is killing its most generous feature, citing low adoption. The catch? Its creator never implemented it.
+  🤔 Anthropic killed MCP's most generous feature, citing low adoption. The catch? Anthropic never shipped it in its own clients.
 
   On July 28, Sampling gets deprecated: the feature that let any app borrow the user's own AI subscription instead of making everyone pay for inference twice.
 
@@ -16,9 +16,9 @@ linkedin-post: |-
 
   hashtag#MCP hashtag#AI hashtag#GenAI hashtag#SoftwareEngineering hashtag#DevTools hashtag#Anthropic hashtag#Claude hashtag#ChatGPT hashtag#APIs hashtag#ProductStrategy
 twitter-post: |-
-  MCP is deprecating Sampling on July 28. Official reason: low adoption.
+  Anthropic killed Sampling on July 28. Official reason: low adoption.
 
-  The company that designed the feature never shipped it in its own clients.
+  Its own clients — Claude Desktop, Claude Code — never shipped it in the first place.
 
   Let's talk about that 🧵
   ---
@@ -165,4 +165,4 @@ If you're building tools that needed exactly this, or you've found other ways ar
 
 ---
 
-_Written by Gil, a Senior Backend & AI Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._
+_Written by Gil, a Principal Software Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._
