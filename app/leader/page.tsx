@@ -4,6 +4,9 @@ import { ResumePage } from "@/components/ResumePage";
 export const metadata: Metadata = {
   title: "Gil Lopes Bueno - Tech Lead & Engineering Manager",
   description: "Engineering leader with 12+ years managing teams of up to 30 — CTO, Tech Lead, Product Owner",
+  alternates: {
+    canonical: "/leader",
+  },
   openGraph: {
     title: "Gil Lopes Bueno - Tech Lead & Engineering Manager",
     description: "Engineering leader with 12+ years managing teams of up to 30 — CTO, Tech Lead, Product Owner",

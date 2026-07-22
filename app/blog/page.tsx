@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Blog - Gil Lopes Bueno',
   description: 'Articles about software engineering, blockchain, and product development by Gil Lopes Bueno.',
   alternates: {
+    canonical: '/blog',
     types: {
       'application/rss+xml': 'https://gil.solutions/feed.xml',
     },

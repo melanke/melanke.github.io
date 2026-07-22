@@ -3,6 +3,7 @@ import { getAllSlugs, getPost, getAdjacentPosts } from '@/lib/posts'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { CompactHeader } from '@/components/CompactHeader'
+import { AUTHOR, SITE_URL } from '@/lib/site'
 import 'highlight.js/styles/github-dark.css'
 
 export function generateStaticParams() {
@@ -20,10 +21,14 @@ export async function generateMetadata({
   return {
     title: `${post.title} - Gil Lopes Bueno`,
     description: post.summary,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
       type: 'article',
+      url: `${SITE_URL}/blog/${slug}`,
       publishedTime: post.publishedAt,
       images: post.ogImage ? [{ url: post.ogImage }] : [],
     },
@@ -72,8 +77,53 @@ export default async function PostPage({
 
   const { prev, next } = getAdjacentPosts(slug)
 
+  const url = `${SITE_URL}/blog/${slug}`
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.summary,
+    url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    ...(post.ogImage ? { image: `${SITE_URL}${post.ogImage}` } : {}),
+    ...(post.publishedAt
+      ? { datePublished: post.publishedAt, dateModified: post.publishedAt }
+      : {}),
+    timeRequired: `PT${post.readingTime}M`,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Person',
+      name: AUTHOR.name,
+      url: AUTHOR.url,
+      sameAs: [...AUTHOR.sameAs],
+    },
+    publisher: {
+      '@type': 'Person',
+      name: AUTHOR.name,
+      url: AUTHOR.url,
+    },
+  }
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Gil Lopes Bueno', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <CompactHeader {...headerProps} />
 
       {post.ogImage && (

@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   // verification: {
   // google: "your-google-site-verification", // Opcional: se você tiver verificação do Google Search Console
   // },
-  alternates: {
-    canonical: "https://www.linkedin.com/in/gilbueno/",
-  },
+  // NOTE: no `alternates.canonical` here on purpose — Next.js inherits it into
+  // every child segment, which would make all pages canonicalize to one URL.
+  // Each page declares its own canonical instead.
   other: {
     education: "Computer Science, Bachelor's Degree PUC-SP",
     languages: "English and Portuguese",

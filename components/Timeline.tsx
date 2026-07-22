@@ -183,8 +183,8 @@ export function Timeline({ version }: { version: ContentVersion }) {
               Simpli started as a startup focused on building a B2C mobile
               product, but quickly evolved into a fast-growing software house
               serving a wide range of clients. In its first year, the company
-              pivoted to delivering custom distributed applications, and scaled
-              organically to a 30-person team through consistent delivery and
+              pivoted to delivering custom distributed applications and scaled
+              organically through consistent delivery and
               client satisfaction. Over 11 years, we delivered 50+ successful
               digital products for both startups and enterprise clients, while
               also launching and maintaining our own proprietary platforms.
@@ -193,12 +193,12 @@ export function Timeline({ version }: { version: ContentVersion }) {
               From the beginning, Simpli was an early adopter of emerging
               technologies like mobile development and blockchain. I played a
               key role in shaping both the technical direction and business
-              strategy of the company. My work ranged from hands-on technical
+              strategy of the company, leading system architecture, technical
+              roadmaps, and documentation, and building an engineering org of
+              30 including 5 team leads. My work ranged from hands-on technical
               leadership to driving innovation through research, process design,
-              and technology adoption. I led system architecture, created
-              technical roadmaps and documentation, and helped turn product
-              ideas into real businesses by aligning technical execution with
-              market opportunities.
+              and technology adoption — helping turn product ideas into real
+              businesses by aligning technical execution with market opportunities.
             </p>
             <p>Below are more details about some key projects:</p>
           </div>
