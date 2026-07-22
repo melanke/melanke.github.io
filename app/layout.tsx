@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   // google: "your-google-site-verification", // Opcional: se você tiver verificação do Google Search Console
   // },
   alternates: {
-    canonical: "https://www.linkedin.com/in/gilsolutions/",
+    canonical: "https://www.linkedin.com/in/gilbueno/",
   },
   other: {
     education: "Computer Science, Bachelor's Degree PUC-SP",
