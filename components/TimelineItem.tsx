@@ -14,6 +14,13 @@ export interface TimelineItemProps {
   nested?: boolean;
   lastNested?: boolean;
   print?: boolean;
+  /**
+   * When true, the item is never rendered — neither on the site nor in the CV/print view.
+   * It exists purely as a source-of-truth record read by the content skills
+   * (see .claude/skills/_shared/professional-background.md).
+   * Flip to false (or remove) to start showing it.
+   */
+  hidden?: boolean;
 }
 
 export function TimelineItem({
@@ -28,7 +35,10 @@ export function TimelineItem({
   nested = false,
   lastNested = false,
   print = true,
+  hidden = false,
 }: TimelineItemProps) {
+  if (hidden) return null;
+
   const allLinks = [...(link ? [link] : []), ...(links || [])];
   return (
     <div

@@ -173,6 +173,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
         ]}
       />
       <TimelineItem
+        hidden
+        title="COZ"
+        dateRange="Jun 2022 - Feb 2023"
+        technologies={["Blockchain", "Web3"]}
+        role="Director | Software Engineer"
+        description="COZ is the first and most well-known group of developers on the Neo network, renowned for numerous significant projects within the ecosystem. After years of partnership, I was honored to be invited to join the group's board of directors."
+        link="https://coz.io/"
+      />
+      <TimelineItem
         title="Simpli"
         dateRange="Oct 2013 - May 2025"
         technologies={[]}
@@ -223,6 +232,24 @@ export function Timeline({ version }: { version: ContentVersion }) {
         link="https://enclavewallet.com"
       />
       <TimelineItem
+        hidden
+        nested
+        title="Linkd Academy"
+        dateRange="Jan 2024 - Aug 2024"
+        technologies={["TypeScript", "SvelteKit", "Python", "Web3", "Smart Contracts"]}
+        role="Tech Consultant"
+        description="Linkd is the largest educational platform on the Neo network. This project features a website with extensive materials teaching users how to develop dApps on the network, along with a VSCode extension to streamline installation and integration with the platform's development environment and a token. I was responsible for reviewing the platform's content, providing technical leadership on specific aspects of the project, and developing the dApp related to the token."
+      />
+      <TimelineItem
+        hidden
+        nested
+        title="Icon Dapp"
+        dateRange="Oct 2023 - Jun 2024"
+        technologies={["SvelteKit", "Python", "Web3", "Smart Contracts", "TypeScript"]}
+        role="Software Engineer"
+        description="This platform allows dApp administrators to upload their application icons to a decentralized File System and save the URL into a SmartContract, which organizes and makes these icons available to other applications. I was responsible for architecting the dApp to operate in a fully decentralized manner."
+      />
+      <TimelineItem
         title="Blockchain Services Library"
         nested
         dateRange="Aug 2023 - Jul 2024"
@@ -231,6 +258,31 @@ export function Timeline({ version }: { version: ContentVersion }) {
         description="BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team."
         image="/projects/github.png"
         link="https://github.com/CityOfZion/blockchain-services"
+      />
+      <TimelineItem
+        hidden
+        nested
+        title="ClickClock"
+        dateRange="Jun 2023 - Mar 2024"
+        technologies={["TypeScript", "SvelteKit", "Node.js", "MySQL", "GraphQL"]}
+        role="Software Engineer | Tech Lead"
+        description="This tool was developed to enhance ClickUp's functionalities, primarily focusing on time management and employee performance. It began as a proof of concept (POC) that I developed based on the needs I identified while managing the team. As the tool proved its value, I involved the team in its development, allowing me to transition into the role of Tech Lead and conduct interviews to better organize and prioritize demands."
+      />
+      <TimelineItem
+        hidden
+        nested
+        title="Abacashi"
+        dateRange="Mar 2022 - Aug 2024"
+        technologies={["TypeScript", "React.js", "Node.js", "Next.js", "GraphQL"]}
+        role="Software Engineer"
+        description="Abacashi is a crowdfunding platform that acquired Sharity, the system I previously worked on. Following this acquisition, my team was invited to undertake a significant refactoring of Abacashi to modernize its technologies and enhance code scalability. I led this refactoring effort, selecting technologies, defining the system architecture, guiding developers, and conducting code reviews."
+        links={[
+          "https://www.abacashi.com/",
+          {
+            label: "NeoFeed: Abacashi acquires Sharity",
+            url: "https://neofeed.com.br/finde/abacashi-compra-sharity-e-quer-colocar-empresas-nas-vaquinhas-online/",
+          },
+        ]}
       />
       <TimelineItem
         title="Letter"
@@ -246,6 +298,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
         role="Software Engineer | TechLead"
         description="In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations."
         image="/projects/letter.png"
+      />
+      <TimelineItem
+        hidden
+        nested
+        title="AcroMatch"
+        dateRange="Nov 2021 - Jan 2023"
+        technologies={["TypeScript", "React.js", "Node.js", "MySQL", "Next.js", "GraphQL"]}
+        role="Software Engineer | Tech Lead"
+        description="AcroMatch is a niche platform designed to connect users based on their experience in circus acrobatics. My objective in leading this project was to experiment with new technologies for automatically generating code for GraphQL APIs. The experiment proved successful, and the resulting architecture was adopted in subsequent projects, including Abacashi and ClickClock."
       />
       <TimelineItem
         title="Neon Wallet"
@@ -326,6 +387,16 @@ export function Timeline({ version }: { version: ContentVersion }) {
           description="Wow Talents was a comprehensive agency platform for child models. Its primary features included model registration, job listing, and match-making between models and opportunities. The system also supported various functionalities, such as subscription payments and five different user types. Organizing all the demands into functional requirements, developing wireframes, managing the project roadmap, designing the database architecture, structuring the project, creating the permissions system and delegating tasks were significant challenges. This project was a tremendous learning experience."
         />
         <TimelineItem
+          hidden
+          nested
+          title="Neo3-boa"
+          dateRange="Feb 2020 - Jun 2024"
+          technologies={["Blockchain", "Python", "Web3"]}
+          role="Software Engineer"
+          description="An essential tool for Python developers on the Neo network, this project is a compiler for NeoVM. Although compilers are not my specialty, my role in the project primarily involved defining objectives, managing priorities, and assisting with technical decision-making."
+          link="https://github.com/CityOfZion/neo3-boa"
+        />
+        <TimelineItem
           nested
           dateRange="Oct 2019 - Nov 2020"
           technologies={["TypeScript", "React.js", "Kotlin", "Java", "MySQL"]}
@@ -343,6 +414,24 @@ export function Timeline({ version }: { version: ContentVersion }) {
           description="Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data due to significant performance issues with the old dashboard. Initially, my responsibility was focused solely on the frontend. However, I quickly realized that structural changes were necessary. I provided several recommendations to Jamef's team on improving the data structure and delivery for better performance. Ultimately, I delivered a complex dashboard featuring various customized graphs and contributed to enhancing the overall structure of the central system."
         />
         <TimelineItem
+          hidden
+          nested
+          title="FishEffect"
+          dateRange="Aug 2018 - Sep 2018"
+          technologies={["TypeScript", "Python", "Web3", "Smart Contracts"]}
+          role="Software Engineer"
+          description="FishEffect was a cryptogame similar to CryptoKitties, where players had an aquarium linked to their account, and each fish NFT appeared in their aquarium. The game included a dynamic where players could feed the fish, which would eventually reproduce."
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Neo-Sharp"
+          dateRange="May 2018 - Oct 2018"
+          technologies={["C#", "Web3"]}
+          role="Software Engineer"
+          description="Neo-Sharp was a C# implementation of Neo Node (v2). A fundamental part of the Neo ecosystem, restricted to developers in the 'Core Dev' group. I contributed to various aspects of the project, with a primary focus on the implementation of the RPC server."
+        />
+        <TimelineItem
           title="SimpliData"
           nested
           print={false}
@@ -350,6 +439,33 @@ export function Timeline({ version }: { version: ContentVersion }) {
           technologies={["TypeScript", "React.js", "Kotlin", "R"]}
           role="Software Engineer | TechLead"
           description="In partnership with the macroeconomics firm Parallaxis, my team and I developed SimpliData, a Data Science application akin to the Bloomberg dashboard. Our goal was to combine various market tools and techniques into a platform that was significantly more practical and user-friendly."
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Bettie"
+          dateRange="Aug 2017 - Mar 2019"
+          technologies={["Android", "MySQL", "Java"]}
+          role="Software Engineer"
+          description="Bettie was a cosmetics marketplace that integrated its product listings with Google Shopping. I was primarily responsible for structuring the architecture of the Android application, utilizing the cutting-edge technology of the time, 'Android Data Binding'."
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Zerum's Falcon"
+          dateRange="Jul 2017 - May 2018"
+          technologies={["TypeScript", "React.js"]}
+          role="Software Engineer"
+          description="Zerum was developing Falcon, an advanced network monitoring system. To create the system's complex visual interface, they needed a developer with my level of experience. The application's frontend was highly customizable and managed complex, recursively structured data, which needed to be presented in flexible tables and graphs."
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Panorist"
+          dateRange="Dec 2016 - Apr 2020"
+          technologies={["React.js", "Java", "MySQL"]}
+          role="Software Engineer"
+          description="Panorist was a photo sharing and sales application. I was responsible for documenting the client's requirements and architecting a scalable framework for storing and reading high-definition images. Additionally, I worked on critical aspects of the application, including simultaneous uploading and processing of multiple files, as well as integrating a split-payment system with PayPal."
         />
         <TimelineItem
           title="iTrack"
@@ -370,6 +486,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
           role="Software Engineer | TechLead"
           description="Mapix is a platform that connects students with their drivers, enhancing predictability and safety for children and parents while simplifying route planning and communication for drivers. I handled all the planning and structuring of the solution, and developed critical components of the application, including the route-building system, chat, and GPS mode."
           link="https://mapixapp.com/"
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Ativo Coach"
+          dateRange="Mar 2016 - Apr 2018"
+          technologies={["JQuery", "Android", "Java", "MySQL"]}
+          role="Software Engineer"
+          description="Ativo Coach was one of the first mobile applications to enable asynchronous communication between coaches and athletes, allowing for the comprehensive, practical, and flexible configuration of training sessions. I focused primarily on project planning and structure, and contributed to the development of both the coach platform and the Android application."
         />
         <TimelineItem
           title="Apptite"
@@ -400,6 +525,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
           description="Bandeirantes, a major Brazilian media conglomerate, established Band Radios in 1937 and selected my team in 2014 to modernize their mobile app. The project presented several challenges, including the requirement to establish a UDP connection before the user selected a radio station. I served as the lead developer for the Android and iOS apps."
         />
         <TimelineItem
+          hidden
+          nested
+          title="iFrete"
+          dateRange="Sep 2014 - Jun 2015"
+          technologies={["Xamarin", "Android", "JQuery", "Java", "MySQL", "iOS"]}
+          role="Software Engineer"
+          description="iFrete was a comprehensive platform for managing and discovering freight services, featuring applications for iOS, Android, and Web, as well as an administrative panel. My role involved end-to-end responsibilities, including planning, architecture, and development, ensuring seamless integration and functionality across all components."
+        />
+        <TimelineItem
           title="Multilaser Runin"
           nested
           lastNested
@@ -409,6 +543,24 @@ export function Timeline({ version }: { version: ContentVersion }) {
           role="Software Engineer"
           description="Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control tests, which were previously done manually. I helped develop an Android application to automate these tests, covering CPU, RAM, GPS, screen brightness, and touch functionality. This automation significantly improved productivity in tablet production, and the app has since tested over 20 million devices."
           image="/projects/runin.webp"
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="SelfChef"
+          dateRange="Jan 2014 - Apr 2015"
+          technologies={["Xamarin", "Android", "iOS", "Java", "MySQL"]}
+          role="Software Engineer"
+          description="SelfChef was an idea I developed with my team, designed to help users find recipes based on the ingredients they had at home. Using adaptive intelligence, the app suggested compatible recipes. We managed to turn the concept into reality by creating a sophisticated architecture and developing apps for iOS and Android."
+        />
+        <TimelineItem
+          hidden
+          nested
+          title="Diário da Dor (Pain Diary)"
+          dateRange="Aug 2013 - Feb 2014"
+          technologies={["Android", "Java", "MySQL"]}
+          role="Software Engineer"
+          description="'Diário da Dor' was an app designed to assist people with chronic migraines in tracking headache occurrences and associated habits. By analyzing statistical data, users could investigate potential pain triggers. I developed the Android version of the application."
         />
         <TimelineItem
           dateRange="2010 - 2013"
