@@ -38,7 +38,7 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
 
   return (
     <div
-      className={`flex flex-col sm:flex-row gap-2 w-full text-black print:min-h-[128px] max-sm:max-w-full items-center justify-center sm:justify-start transition-[min-height] duration-300 ease-out ${
+      className={`flex flex-col sm:flex-row gap-2 w-full text-black print:min-h-[88px] max-sm:max-w-full items-center justify-center sm:justify-start transition-[min-height] duration-300 ease-out ${
         compact ? "min-h-0" : "min-h-[128px]"
       }`}
     >

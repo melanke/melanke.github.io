@@ -290,11 +290,11 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             <Bio version={version} />
             <Achievements />
             {version === "leader" && <LeadershipSection version={version} />}
-            <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-5 text-xl">
+            <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-3 text-xl">
               Technical Skills
             </div>
 
-            <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-14 print:gap-y-3 items-start mt-14 print:mt-2 w-full text-black max-md:max-w-full">
+            <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-14 print:gap-y-1.5 items-start mt-14 print:mt-2 w-full text-black max-md:max-w-full">
               {orderedSkills}
             </div>
 

@@ -5,7 +5,7 @@ import { ContentVersion } from "@/app/contentVersion";
 export function LeadershipSection({ version }: { version?: ContentVersion }) {
   return (
     <div
-      className={`flex flex-col mt-10 print:mt-5 w-full text-black break-inside-avoid dark:text-white max-md:max-w-full ${
+      className={`flex flex-col mt-10 print:mt-3 w-full text-black break-inside-avoid dark:text-white max-md:max-w-full ${
         version === "leader" ? "" : "print:hidden"
       }`}
     >

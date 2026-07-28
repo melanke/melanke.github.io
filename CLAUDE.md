@@ -42,9 +42,33 @@ A version changes wording and ordering, never the facts. The pieces that vary:
 decides which items reach the PDF). Adding a version means touching all four
 plus `app/<route>/page.tsx` and `app/sitemap.ts`.
 
-PDFs live in `public/documents/{title}.pdf` and are print-to-PDF exports of each
-route (Ctrl+P). The Download CV button only renders when the file exists, so a
-new version is safe to ship before its PDF is exported.
+### CV PDFs are generated, not hand-exported
+
+`scripts/print-cv.mjs` renders each route through the site's own print
+stylesheet with Gil's exact print settings (Letter, 0 vertical margin, 0.31"
+horizontal) and writes `public/documents/{title}.pdf`. It runs as `postbuild`,
+so `npm run build` refreshes all four. CI calls `next build` directly, so it
+never runs on deploy.
+
+**Before committing any change that affects the resume or its print output
+(`components/`, `app/globals.css`, timeline content), run `npm run build` so the
+committed PDFs match the site.**
+
+The script fails the build if any version exceeds **3 pages** — that budget is
+the reason the print styles are tuned the way they are. To find space, look at
+the print-only spacing first (`components/TimelineItem.tsx` `print:pt-*`, the
+`@media print` block in `app/globals.css`, `print:min-h` in `Header.tsx`) before
+cutting content. Useful env vars: `CV_MAX_PAGES` (test the guard),
+`SKIP_CV_PDF=1` (skip generation), `CHROME_PATH` (non-standard Chrome).
+
+Per-item CV content lives in `Timeline.tsx`: `technologies` renders as pills on
+the site and as a plain `Tech: a, b, c` line in the PDF (recruiters asked for
+running text, not tags), with links appended to that same line. `print={false}`
+keeps an item off the PDF only; it can be version-aware, e.g.
+`print={version === "web3" || version === "leader"}`.
+
+The Download CV button only renders when the file exists, so a new version is
+safe to ship before its PDF is generated.
 
 ## Post frontmatter schema
 

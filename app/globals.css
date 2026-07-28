@@ -50,4 +50,11 @@
   .sticky-spacer {
     display: none !important;
   }
+
+  /* Timeline descriptions stack paragraphs with `space-y-2`, which reads well
+     on screen but is expensive on paper. Tighten it for the CV only — same
+     text, less vertical cost. */
+  .cv-entry .space-y-2 > * + * {
+    margin-top: 0.25rem !important;
+  }
 }

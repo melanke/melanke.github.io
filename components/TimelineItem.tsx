@@ -81,7 +81,7 @@ export function TimelineItem({
           </div>
         </div>
 
-        <div className="mt-1 print:mt-0 leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
+        <div className="cv-entry mt-1 print:mt-0 leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
           {image && (
             <Image
               src={image}
@@ -92,8 +92,30 @@ export function TimelineItem({
             />
           )}
           {description}
+          {/* Print gets a single running-text line instead of the pill row:
+              technologies comma-separated (recruiters asked for plain text,
+              not tags), with the links appended to the same line to keep the
+              CV within its page budget. */}
           {(technologies.length > 0 || allLinks.length > 0) && (
-            <div className="mt-2.5 flex flex-wrap gap-1 text-xs">
+            <div className="hidden print:block mt-1 text-xs">
+              {technologies.length > 0 && (
+                <>
+                  <span className="font-semibold">Tech:</span>{" "}
+                  {technologies.join(", ")}
+                </>
+              )}
+              {allLinks.map((link, index) => (
+                <span key={index}>
+                  {index > 0 || technologies.length > 0 ? " · " : ""}
+                  <a href={typeof link === "string" ? link : link.url}>
+                    {typeof link === "string" ? link : link.label}
+                  </a>
+                </span>
+              ))}
+            </div>
+          )}
+          {(technologies.length > 0 || allLinks.length > 0) && (
+            <div className="print:hidden mt-2.5 flex flex-wrap gap-1 text-xs">
               {technologies.map((tech, index) => (
                 <span
                   className="print:hidden px-3 py-[0.19rem] bg-neutral-100 font-clash print:font-sans dark:bg-neutral-800 rounded-full text-black dark:text-white"

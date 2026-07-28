@@ -20,7 +20,7 @@ export function SkillSection({
 }: SkillSectionProps) {
   return (
     <div
-      className={`flex flex-col flex-1 shrink basis-0 min-w-[240px] animate-fade-up opacity-0 ${className}`}
+      className={`flex flex-col flex-1 shrink basis-0 min-w-[240px] animate-fade-up opacity-0 print:break-inside-avoid ${className}`}
     >
       <div className="flex gap-2 items-center w-full text-2xl print:text-base font-semibold leading-none text-black dark:text-white">
         {typeof icon === "string" ? (

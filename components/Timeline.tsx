@@ -34,7 +34,30 @@ export function Timeline({ version }: { version: ContentVersion }) {
       <TimelineItem
         title="33Labs"
         dateRange="Sep 2025 - current"
-        technologies={[]}
+        // Employer-level aggregate: the union of the projects nested below.
+        // REVIEW/EDIT FREELY.
+        technologies={
+          isEnterprise
+            ? [
+                "Solidity",
+                "Foundry",
+                "Ethereum",
+                "EVM",
+                "Distributed Systems",
+                "System Architecture",
+                "AI Tooling",
+              ]
+            : [
+                "Solidity",
+                "Foundry",
+                "Ethereum",
+                "EVM",
+                "Uniswap V3",
+                "Uniswap V4",
+                "System Architecture",
+                "AI Tooling",
+              ]
+        }
         role={
           isEnterprise
             ? "Software Engineer"
@@ -283,7 +306,22 @@ export function Timeline({ version }: { version: ContentVersion }) {
       <TimelineItem
         title="Simpli"
         dateRange="Oct 2013 - May 2025"
-        technologies={[]}
+        // Employer-level aggregate: the union of the projects nested below,
+        // trimmed to what a recruiter scans for. REVIEW/EDIT FREELY.
+        technologies={[
+          "Java",
+          "Kotlin",
+          "TypeScript",
+          "Node.js",
+          "React.js",
+          "Next.js",
+          "React Native",
+          "Android",
+          "MySQL",
+          "GraphQL",
+          "Electron.js",
+          "Smart Contracts",
+        ]}
         role="Software Engineer | CTO"
         description={
           isEnterprise ? (
