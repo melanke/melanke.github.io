@@ -21,6 +21,12 @@ function TimelineHeader({ className }: { className?: string }) {
 export function Timeline({ version }: { version: ContentVersion }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // The enterprise resume describes the same work in backend / distributed
+  // systems language instead of protocol-engineering language, and drops the
+  // "Main Smart Contract Developer" role suffix. Nothing is omitted or
+  // overstated — only framed for a backend-focused reader.
+  const isEnterprise = version === "enterprise";
+
   return (
     <div className="flex flex-col max-xl:mt-14 xl:mt-4 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
@@ -29,13 +35,25 @@ export function Timeline({ version }: { version: ContentVersion }) {
         title="33Labs"
         dateRange="Sep 2025 - current"
         technologies={[]}
-        role="Software Engineer | Main Smart Contract Developer"
+        role={
+          isEnterprise
+            ? "Software Engineer"
+            : "Software Engineer | Main Smart Contract Developer"
+        }
         description={
+          isEnterprise ? (
+            <div className="space-y-2">
+              <p>At 33Labs (formerly 33Audits), I design and implement scalable backend services and application architecture for decentralized financial products.</p>
+
+              <p>The company began as a security auditing firm, which gave me daily experience preventing vulnerabilities in production systems. I work end to end — architecture, implementation, and automated testing — with security engineers involved throughout. This led me to a key conviction: review should start at the architecture stage, before any code is written. To support it, I built developer tooling and AI-assisted workflows that improved the team&apos;s productivity.</p>
+            </div>
+          ) : (
           <div className="space-y-2">
             <p>At 33Labs (formerly 33Audits), I worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience.</p>
- 
+
             <p>The company began as a smart contract auditing firm, which gave me hands-on, daily experience identifying and preventing vulnerabilities. I developed protocols end to end — architecture, implementation, and testing — with security and gas optimization as constant priorities throughout. This led me to a key conviction: the auditing process should start at the architecture stage, before any code is written. To support this, I integrated specialized tooling and AI agents into our development and auditing workflow.</p>
             </div>
+          )
         }
         image="/projects/33labs.webp"
         link="https://www.33labs.ai/"
@@ -44,17 +62,52 @@ export function Timeline({ version }: { version: ContentVersion }) {
         nested
         title="American Spend"
         dateRange="Mar 2026 - May 2026"
-        technologies={[
-          "Solidity",
-          "Foundry",
-          "Prediction Market",
-          "Vault",
-          "CLOB",
-          "Ethereum",
-          "EVM",
-        ]}
-        role="Software Engineer | Main Smart Contract Developer"
+        technologies={
+          isEnterprise
+            ? [
+                "Solidity",
+                "Foundry",
+                "Distributed Systems",
+                "System Architecture",
+                "Ethereum",
+                "EVM",
+              ]
+            : [
+                "Solidity",
+                "Foundry",
+                "Prediction Market",
+                "Vault",
+                "CLOB",
+                "Ethereum",
+                "EVM",
+              ]
+        }
+        role={
+          isEnterprise
+            ? "Software Engineer"
+            : "Software Engineer | Main Smart Contract Developer"
+        }
         description={
+          isEnterprise ? (
+            <div className="space-y-2">
+              <p>
+                American Spend is a high-throughput financial platform
+                combining yield generation with market-based price discovery.
+              </p>
+              <p>
+                Designed the backend architecture, including a hybrid market
+                model that transitions between two distinct operating phases.
+              </p>
+              <p className="print:hidden">
+                Developed distributed components for real-time market
+                operations, with yield strategies on idle capital.
+              </p>
+              <p className="print:hidden">
+                Worked closely with security engineers throughout development,
+                incorporating feedback early to reduce iteration cycles.
+              </p>
+            </div>
+          ) : (
           <div className="space-y-2">
             <p>
               American Spend is a prediction market protocol combining yield
@@ -80,6 +133,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
               iteration cycles.
             </p>
           </div>
+          )
         }
         image="/projects/american-spend.webp"
         link="https://spend.market/"
@@ -89,16 +143,60 @@ export function Timeline({ version }: { version: ContentVersion }) {
         lastNested
         title="Mosaic"
         dateRange="Sep 2025 - Feb 2026"
-        technologies={[
-          "Solidity",
-          "Foundry",
-          "Uniswap V3",
-          "Uniswap V4",
-          "Ethereum",
-          "EVM",
-        ]}
-        role="Software Engineer | Main Smart Contract Developer"
+        technologies={
+          isEnterprise
+            ? [
+                "Solidity",
+                "Foundry",
+                "AI Tooling",
+                "System Architecture",
+                "Ethereum",
+                "EVM",
+              ]
+            : [
+                "Solidity",
+                "Foundry",
+                "Uniswap V3",
+                "Uniswap V4",
+                "Ethereum",
+                "EVM",
+              ]
+        }
+        role={
+          isEnterprise
+            ? "Software Engineer"
+            : "Software Engineer | Main Smart Contract Developer"
+        }
         description={
+          isEnterprise ? (
+            <div className="space-y-2">
+              <p>
+                Mosaic is a developer platform designed to make application
+                development more accessible, cost-efficient, and secure through
+                flexible, pre-audited, and composable components, with
+                AI-assisted tooling for generating compositions from natural
+                language.
+              </p>
+              <p>
+                Designed reusable backend components and contributed to the core
+                architecture of the platform.
+              </p>
+              <p>
+                Built modular application services focused on scalability and
+                maintainability, including a workflow for automated liquidity
+                and price discovery.
+              </p>
+              <p>
+                Improved developer productivity through automation and
+                AI-assisted tooling.
+              </p>
+              <p>
+                Collaborated on architecture decisions for distributed
+                applications and developed abstractions supporting modular,
+                extensible services.
+              </p>
+            </div>
+          ) : (
           <div className="space-y-2">
             <p>
               Mosaic is a protocol designed to make smart contract development
@@ -124,6 +222,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
               primitives.
             </p>
           </div>
+          )
         }
         image="/projects/mosaic.webp"
         link="https://mosaic.build/"
@@ -187,6 +286,32 @@ export function Timeline({ version }: { version: ContentVersion }) {
         technologies={[]}
         role="Software Engineer | CTO"
         description={
+          isEnterprise ? (
+            <div className="space-y-2">
+              <p>
+                Over 11 years I led engineering teams of up to 30 developers,
+                including 5 team leads, and delivered 50+ production software
+                projects — distributed enterprise systems for logistics,
+                fintech, media, education and SaaS clients, plus our own
+                proprietary platforms. I defined software architecture,
+                technical roadmaps, engineering standards and delivery
+                processes, and built scalable backend services using Java,
+                Kotlin, Node.js, TypeScript, MySQL/PostgreSQL and REST/GraphQL
+                APIs.
+              </p>
+              <p>
+                Simpli started as a startup building a B2C mobile product and
+                pivoted within its first year into a software house delivering
+                custom distributed applications, scaling organically through
+                consistent delivery and client satisfaction. I played a key role
+                in shaping both the technical direction and the business
+                strategy, ranging from hands-on technical leadership to driving
+                innovation through research, process design and early adoption
+                of emerging technologies such as mobile and blockchain.
+              </p>
+              <p>Below are more details about some key projects:</p>
+            </div>
+          ) : (
           <div className="space-y-2">
             <p>
               Simpli started as a startup focused on building a B2C mobile
@@ -211,6 +336,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
             </p>
             <p>Below are more details about some key projects:</p>
           </div>
+          )
         }
         image="/projects/simpli.webp"
       />
@@ -227,7 +353,11 @@ export function Timeline({ version }: { version: ContentVersion }) {
           "Cryptography",
         ]}
         role="Software Engineer | Product Owner | UI/UX Designer"
-        description="Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, development of the whole wallet frontend and contributing to the Smart Contracts."
+        description={
+          isEnterprise
+            ? "Enclave is an application for secure digital asset management, built so non-technical users can onboard as smoothly as in a traditional web app. It combines Abstract Accounts, WebAuthn authentication and sponsored transactions. In a small team, I owned the product vision, usability and the entire frontend, and contributed to the backend services it relies on."
+            : "Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, development of the whole wallet frontend and contributing to the Smart Contracts."
+        }
         image="/projects/enclave.webp"
         link="https://enclavewallet.com"
       />
@@ -255,7 +385,11 @@ export function Timeline({ version }: { version: ContentVersion }) {
         dateRange="Aug 2023 - Jul 2024"
         technologies={["TypeScript", "Node.js", "Blockchain", "Cryptography"]}
         role="Software Engineer | Techlead"
-        description="BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team."
+        description={
+          isEnterprise
+            ? "BSLib is a multi-network TypeScript SDK that exposes common asset-management operations behind a single generic API, normalizing the characteristics of each underlying network. It ships implementations for NeoN3, NeoLegacy and EVM networks, and runs in production in desktop and mobile applications. As its creator, I designed the abstraction to maximize code reuse across my team's products."
+            : "BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team."
+        }
         image="/projects/github.png"
         link="https://github.com/CityOfZion/blockchain-services"
       />
@@ -296,7 +430,11 @@ export function Timeline({ version }: { version: ContentVersion }) {
           "Flow",
         ]}
         role="Software Engineer | TechLead"
-        description="In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations."
+        description={
+          isEnterprise
+            ? "In partnership with the Associated Press, Dapper Labs and COZ, Letter is a distributed authentication platform that lets systems validate access in a decentralized manner. I architected the solution: services on both networks (Neo and Flow), a reusable SDK that integrates both simultaneously behind one interface, and several key integrations."
+            : "In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations."
+        }
         image="/projects/letter.png"
       />
       <TimelineItem
@@ -320,7 +458,11 @@ export function Timeline({ version }: { version: ContentVersion }) {
           "Electron.js",
         ]}
         role="Software Engineer | TechLead"
-        description="Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations."
+        description={
+          isEnterprise
+            ? "Led the architecture of a production mobile application for secure digital asset management, with over $1 billion in traded volume, and later contributed to its desktop counterpart. Responsibilities included application architecture, backend and API integration, multi-network connectivity, secure authentication, managing multiple accounts simultaneously, WalletConnect integration, the protocol for network communication, and performance optimization."
+            : "Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations."
+        }
         image="/projects/neon.webp"
         link="https://coz.io/neon-wallet/"
       />
@@ -537,7 +679,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           title="Multilaser Runin"
           nested
           lastNested
-          print={version === "general" || version === "leader"}
+          print={version !== "web3"}
           dateRange="Aug 2014 - Oct 2014"
           technologies={["Android", "Java"]}
           role="Software Engineer"
@@ -565,7 +707,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
         <TimelineItem
           dateRange="2010 - 2013"
           technologies={["JQuery", "Backbone", "Java", "Android"]}
-          print={version === "general"}
+          print={version === "general" || isEnterprise}
           title="SIMET - NIC.br"
           role="Software Engineer"
           description="At NIC.br, I worked on applications for SIMET, an internet quality measurement tool. I proposed and designed a new version of the main SIMET application, transitioning from Java Applet to JavaScript. I developed SimetMapas, visualizing internet quality heat maps across Brazil, and created dashboards for internet operators and regulatory agencies. Additionally, I helped develop SimetBox, a Wi-Fi router for automatic tests, and an Android app for quality testing with a custom graphics library."

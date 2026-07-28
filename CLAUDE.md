@@ -24,6 +24,28 @@ public/
   blog-images/   # OG images — one PNG per post, named {slug}.png
 ```
 
+## Resume versions
+
+The site is the source of truth for Gil's CV. Each audience is a `ContentVersion`
+(`app/contentVersion.ts`) rendered by the same `components/ResumePage.tsx`:
+
+| Version | Route | Positioning |
+|---------|-------|-------------|
+| `general` | `/` | Principal Software Engineer — backend + AI first |
+| `web3` | `/web3` | Senior Blockchain Engineer — protocol/DeFi first |
+| `leader` | `/leader` | Tech Lead / Engineering Manager — leadership first |
+| `enterprise` | `/enterprise` | Principal Software Engineer — Java/Kotlin, distributed systems; Web3 last, framed as integration work |
+
+A version changes wording and ordering, never the facts. The pieces that vary:
+`Bio.tsx` (summary), `ResumePage.tsx` (skill sections + order), `Timeline.tsx`
+(per-item `role`, `description`, `technologies`, and the `print` flag that
+decides which items reach the PDF). Adding a version means touching all four
+plus `app/<route>/page.tsx` and `app/sitemap.ts`.
+
+PDFs live in `public/documents/{title}.pdf` and are print-to-PDF exports of each
+route (Ctrl+P). The Download CV button only renders when the file exists, so a
+new version is safe to ship before its PDF is exported.
+
 ## Post frontmatter schema
 
 ```yaml
@@ -83,3 +105,7 @@ Phase is inferred from file state — no explicit field except `status: ready`:
 
 - `/content-pipeline` — Full publishing pipeline: ideation → draft → hooks → social → OG image → score → publish
 - `/comment-writer` — Write comments on third-party posts that reflect Gil's voice and optionally reference his published articles
+- `/eth-radar` — Fresh Ethereum protocol/dev topics from tier-1 sources → content hooks (catalog: `_shared/ethereum-news-sources.md`)
+- `/ai-radar` — Fresh genAI *integration* topics (agents, MCP, frameworks) from tier-1 sources → content hooks (catalog: `_shared/ai-dev-news-sources.md`)
+- `/web-radar` — Fresh JS/TS, Node, React/Next, Postgres, AWS and web-platform topics from tier-1 sources → content hooks (catalog: `_shared/webdev-news-sources.md`)
+- `/linkedin-carousel` — Single humorous LinkedIn carousel post (not a blog article): funny caption + one self-contained image prompt per slide, all in Gil's recognizable carousel house style (see `.claude/skills/_shared/carousel-visual-identity.md`)

@@ -13,6 +13,8 @@ import { BiServer } from "react-icons/bi";
 import { FaFileDownload } from "react-icons/fa";
 import { ContentVersion } from "@/app/contentVersion";
 import { getAllPosts } from "@/lib/posts";
+import { existsSync } from "fs";
+import { join } from "path";
 
 export function ResumePage({ version }: { version: ContentVersion }) {
   const latestPosts = getAllPosts().slice(0, 3);
@@ -43,6 +45,45 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         "Jersey",
         "JDBC",
         "PayPal",
+        "ElasticSearch",
+        "and more...",
+      ]}
+    />
+  );
+
+  // Enterprise variant of the backend section: same real skills, ordered so a
+  // recruiter reads Java/Kotlin and distributed systems before anything else.
+  const backendEnterpriseSection = (
+    <SkillSection
+      key="backend"
+      title="Backend"
+      icon={BiServer}
+      skills={[
+        { name: "Java / Kotlin", since: "2008", level: "expert" },
+        { name: "Node.JS / TypeScript", since: "2012", level: "expert" },
+        {
+          name: "REST / GraphQL / WebSockets / Microservices",
+          since: "2018",
+          level: "expert",
+        },
+        {
+          name: "MySQL / PostgreSQL / MongoDB / Prisma",
+          since: "2007",
+          level: "expert",
+        },
+      ]}
+      otherSkills={[
+        "Distributed Systems",
+        "Solution Architecture",
+        "Docker",
+        "AWS",
+        "CI/CD",
+        "GitHub Actions",
+        "C#",
+        "Python",
+        "Express",
+        "Jersey",
+        "JDBC",
         "ElasticSearch",
         "and more...",
       ]}
@@ -148,12 +189,64 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     />
   );
 
+  // Enterprise variant of the blockchain section: framed as Web3 integration
+  // work (multi-chain, wallets, SDKs) rather than DeFi/protocol engineering.
+  const web3IntegrationSection = (
+    <SkillSection
+      key="blockchain"
+      title="Web3"
+      icon={BlockchainIcon}
+      skills={[
+        {
+          name: "Ethereum / EVM / Multi-chain Integration",
+          since: "2018",
+          level: "expert",
+        },
+        {
+          name: "Wallet Infrastructure / WalletConnect",
+          since: "2021",
+          level: "expert",
+        },
+        { name: "Ethers / Wagmi / Viem / The Graph", since: "2023", level: "expert" },
+        { name: "Solidity / Foundry", since: "2020", level: "expert" },
+      ]}
+      otherSkills={[
+        "SDK Development",
+        "Cryptography",
+        "Account Abstraction",
+        "Solana / Flow / Neo N3",
+        "Hardhat",
+        "Automated Testing",
+        "Audit Prep",
+        "and more...",
+      ]}
+    />
+  );
+
   // Skill order is version-driven: the primary resume (general) leads with
-  // Backend + AI, the web3 resume leads with Blockchain + AI.
+  // Backend + AI, the web3 resume leads with Blockchain + AI, and the
+  // enterprise resume pushes Web3 to the end (backend-first positioning).
   const orderedSkills =
     version === "web3"
       ? [blockchainSection, aiSection, backendSection, frontendSection]
+      : version === "enterprise"
+      ? [
+          backendEnterpriseSection,
+          frontendSection,
+          aiSection,
+          web3IntegrationSection,
+        ]
       : [backendSection, aiSection, frontendSection, blockchainSection];
+
+  // The PDFs are print-to-PDF exports done by hand, so a version may not have
+  // one yet — only render the download button when the file actually exists.
+  const pdfFileName = {
+    web3: "Gil Lopes Bueno - Senior Blockchain Engineer.pdf",
+    leader: "Gil Lopes Bueno - Tech Lead & Engineering Manager.pdf",
+    enterprise: "Gil Lopes Bueno - Principal Backend Engineer.pdf",
+    general: "Gil Lopes Bueno - Principal Software Engineer.pdf",
+  }[version];
+  const hasPdf = existsSync(join(process.cwd(), "public", "documents", pdfFileName));
 
   return (
     <div className="print:p-0 print:max-w-[740px]">
@@ -181,20 +274,16 @@ export function ResumePage({ version }: { version: ContentVersion }) {
 
       <div className="pb-6 pl-5 pr-8 max-md:pr-5 print:p-0">
         <div className="flex justify-end print:hidden mt-4">
-          <a
-            href={
-              version === "web3"
-                ? "/documents/Gil%20Lopes%20Bueno%20-%20Senior%20Blockchain%20Engineer.pdf"
-                : version === "leader"
-                ? "/documents/Gil%20Lopes%20Bueno%20-%20Tech%20Lead%20%26%20Engineering%20Manager.pdf"
-                : "/documents/Gil%20Lopes%20Bueno%20-%20Principal%20Software%20Engineer.pdf"
-            }
-            download
-            className="flex items-center gap-1.5 text-xs text-black dark:text-white opacity-60 hover:opacity-100 transition-opacity"
-          >
-            <FaFileDownload className="w-3.5 h-3.5" />
-            Download CV
-          </a>
+          {hasPdf && (
+            <a
+              href={`/documents/${encodeURIComponent(pdfFileName)}`}
+              download
+              className="flex items-center gap-1.5 text-xs text-black dark:text-white opacity-60 hover:opacity-100 transition-opacity"
+            >
+              <FaFileDownload className="w-3.5 h-3.5" />
+              Download CV
+            </a>
+          )}
         </div>
         <div className="flex overflow-hidden print:overflow-visible max-xl:flex-col max-xl:max-w-[740px] max-xl:mx-auto print:mx-0 print:block gap-x-32">
           <div className="flex flex-col max-w-[740px] print:block">

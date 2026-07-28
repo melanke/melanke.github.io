@@ -229,7 +229,7 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 - Closing content tweet: the genuine question (≤280 chars), **no link**.
 - Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command + the 3 hashtags (the only place hashtags appear). Keep this segment ≤280 like the rest.
 
-Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). Then surface the **operational reminder**: at posting time, attach the thread image (its prompt is produced in Phase 5) and reply to / engage with others in the first 30–60 min after posting.
+Lean toward Option B for dense/technical articles; offer A for lighter pieces. Save the user's choice in `twitter-post`, tweets/reply separated by `---` (so the link tweet is always a distinct segment). **Do not surface posting-time reminders here** — attaching the thread image and engaging in the first 30–60 min are actions for when the thread actually goes out, and the thread image doesn't even exist yet (its prompt is produced in Phase 5). Those reminders live at publish time (Phase 8, Step 4). Raising them now, several phases before anything is postable, just adds noise the user can't act on.
 
 > 📝 The thread's image prompt (`twitter-image-prompt`) is produced in **Phase 5**, immediately after `og-image-prompt`, so the two images can be made deliberately distinct in one pass.
 
@@ -450,7 +450,7 @@ When **all dimensions ≥ 7**: add `status: ready` to the draft's frontmatter. C
 3. **Check the OG image file for real (blocking):** run `ls "public/blog-images/{slug}.png"` (or equivalent). This file is what `og-image` in the published frontmatter will point to — if it's missing, the live post ships with a broken image on every share.
    - **Missing → STOP.** Do not proceed to step 1 below under any circumstance, including if the user asks you to publish anyway or says to skip it — tell them the gate is blocking on the missing file (the prompt is already printed above, ready to paste). Wait for the file to exist, then re-check.
    - **Present → continue.**
-4. **Remind about the Twitter thread image (non-blocking).** It's generated from `twitter-image-prompt` but is never saved into this project — it's attached by hand when the thread is posted, so there's nothing on disk to check and this step does not gate publishing. Just surface a one-line reminder alongside the printed prompt from step 2: it still needs to be generated before the thread goes out, separately from this publish.
+4. **Remind about the Twitter thread image + early engagement (non-blocking).** The thread image is generated from `twitter-image-prompt` but is never saved into this project — it's attached by hand when the thread is posted, so there's nothing on disk to check and this step does not gate publishing. Surface a one-line reminder alongside the printed prompt from step 2: it still needs to be generated before the thread goes out, separately from this publish. This is also the right moment (not Phase 3) to remind about posting-time engagement — reply to / engage with others in the first 30–60 min after the thread goes out, since early replies are what keep X distributing the post.
 5. Once the OG image check passes, proceed to step 1 below.
 
 ---

@@ -25,6 +25,32 @@ export function Bio({ version }: { version: ContentVersion }) {
         blockchain feel as smooth as a normal web app.
       </div>
     </>
+  ) : version === "enterprise" ? (
+    <>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-4 print:mt-2">
+        I am a Principal Software Engineer with 19+ years designing and
+        delivering scalable backend systems, distributed applications and
+        enterprise software, with 50+ delivered projects across logistics,
+        fintech, media, enterprise SaaS and Web3. I architected a logistics
+        platform that processed 50M+ invoices for 60,000 couriers, and a wallet
+        application that moved more than $1 billion in volume.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
+        My core expertise is Java, Kotlin, Node.js and TypeScript — REST and
+        GraphQL APIs, distributed systems, and solution architecture. I have led
+        engineering teams of up to 30 people while staying hands-on in design and
+        implementation, defining architecture, technical roadmaps, engineering
+        standards and delivery processes.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
+        More recently I have worked on AI-assisted engineering workflows,
+        integrating LLM agents into development and review processes and
+        building tooling that turns natural language into working software, and
+        on Web3-enabled applications, building backend services, wallet
+        infrastructure, multi-chain integrations and developer tooling. What I
+        care about is shipping systems that stay reliable in production.
+      </div>
+    </>
   ) : version === "leader" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
