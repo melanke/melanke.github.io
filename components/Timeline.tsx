@@ -349,16 +349,17 @@ export function Timeline({ version }: { version: ContentVersion }) {
         ]}
         role={
           isProduct
-            ? "Product Owner | Business Analyst | Project Manager | CTO"
+            ? "Co-founder | Product Owner | Business Analyst | Project Manager | CTO"
             : isLeader
-              ? "CTO | Engineering Manager | Project Manager | TechLead | Product Owner"
-              : "Software Engineer | CTO"
+              ? "Co-founder | CTO | Engineering Manager | TechLead | Product Owner"
+              : "Co-founder | Software Engineer | CTO"
         }
         description={
           isEnterprise ? (
             <div className="space-y-2">
               <p>
-                Over 11 years I led engineering teams of up to 30 developers,
+                I co-founded Simpli and, over 11 years, led engineering teams
+                of up to 30 developers,
                 including 5 team leads, and delivered 50+ production software
                 projects — distributed enterprise systems for logistics,
                 fintech, media, education and SaaS clients, plus our own
@@ -369,8 +370,9 @@ export function Timeline({ version }: { version: ContentVersion }) {
                 APIs.
               </p>
               <p>
-                Simpli started as a startup building a B2C mobile product and
-                pivoted within its first year into a software house delivering
+                We started Simpli as a two-person startup building a B2C mobile
+                product and pivoted within its first year into a software house
+                delivering
                 custom distributed applications, scaling organically through
                 consistent delivery and client satisfaction. I played a key role
                 in shaping both the technical direction and the business
@@ -383,9 +385,10 @@ export function Timeline({ version }: { version: ContentVersion }) {
           ) : (
           <div className="space-y-2">
             <p>
-              Simpli started as a startup focused on building a B2C mobile
-              product, but quickly evolved into a fast-growing software house
-              serving a wide range of clients. In its first year, the company
+              I co-founded Simpli as a two-person startup focused on building a
+              B2C mobile product, which quickly evolved into a fast-growing
+              software house serving a wide range of clients. In its first year,
+              the company
               pivoted to delivering custom distributed applications and scaled
               organically through consistent delivery and
               client satisfaction. Over 11 years, we delivered 50+ successful
