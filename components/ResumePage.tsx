@@ -8,11 +8,13 @@ import { LeadershipSection } from "@/components/LeadershipSection";
 import { OtherSection } from "@/components/OtherSection";
 import { LatestPosts } from "@/components/LatestPosts";
 import { PiGlobe, PiRobot } from "react-icons/pi";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { BlockchainIcon } from "@/components/BlockchainIcon";
 import { BiServer } from "react-icons/bi";
 import { FaFileDownload } from "react-icons/fa";
 import { ContentVersion } from "@/app/contentVersion";
 import { getAllPosts } from "@/lib/posts";
+import { cloneElement } from "react";
 import { existsSync } from "fs";
 import { join } from "path";
 
@@ -223,9 +225,37 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     />
   );
 
+  // Product resume only: the competencies behind the PO/BA hats listed in the
+  // Leadership section — what he does, as opposed to what he was called.
+  const productSection = (
+    <SkillSection
+      key="product"
+      title="Product"
+      icon={HiOutlineClipboardDocumentList}
+      skills={[
+        { name: "Discovery / Requirements", since: "2010", level: "expert" },
+        { name: "Backlog / Roadmap / Prioritization", since: "2016", level: "expert" },
+        { name: "Stakeholder Management", since: "2013", level: "expert" },
+        { name: "Wireframing / UX", since: "2011", level: "advanced" },
+      ]}
+      otherSkills={[
+        "User Stories",
+        "Acceptance Criteria",
+        "Functional Specs",
+        "Stakeholder Interviews",
+        "Technical Feasibility",
+        "Scope Negotiation",
+        "Figma",
+        "ClickUp",
+        "and more...",
+      ]}
+    />
+  );
+
   // Skill order is version-driven: the primary resume (general) leads with
-  // Backend + AI, the web3 resume leads with Blockchain + AI, and the
-  // enterprise resume pushes Web3 to the end (backend-first positioning).
+  // Backend + AI, the web3 resume leads with Blockchain + AI, the enterprise
+  // resume pushes Web3 to the end (backend-first positioning), and the product
+  // resume leads with Product and keeps the technical stack as evidence.
   const orderedSkills =
     version === "web3"
       ? [blockchainSection, aiSection, backendSection, frontendSection]
@@ -236,6 +266,16 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           aiSection,
           web3IntegrationSection,
         ]
+      : version === "product"
+      ? [
+          productSection,
+          backendSection,
+          frontendSection,
+          aiSection,
+          // Blockchain stays on the site as range evidence, but the PDF's
+          // 3-page budget is better spent on the product content.
+          cloneElement(blockchainSection, { className: "print:hidden" }),
+        ]
       : [backendSection, aiSection, frontendSection, blockchainSection];
 
   // The PDFs are print-to-PDF exports done by hand, so a version may not have
@@ -244,6 +284,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     web3: "Gil Lopes Bueno - Senior Blockchain Engineer.pdf",
     leader: "Gil Lopes Bueno - Tech Lead & Engineering Manager.pdf",
     enterprise: "Gil Lopes Bueno - Principal Backend Engineer.pdf",
+    product: "Gil Lopes Bueno - Technical Product Owner.pdf",
     general: "Gil Lopes Bueno - Principal Software Engineer.pdf",
   }[version];
   const hasPdf = existsSync(join(process.cwd(), "public", "documents", pdfFileName));
@@ -257,6 +298,8 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             ? "Senior Blockchain Engineer"
             : version === "leader"
             ? "Tech Lead / Engineering Manager"
+            : version === "product"
+            ? "Technical Product Owner"
             : "Principal Software Engineer"
         }
         contacts={{
@@ -289,7 +332,9 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           <div className="flex flex-col max-w-[740px] print:block">
             <Bio version={version} />
             <Achievements />
-            {version === "leader" && <LeadershipSection version={version} />}
+            {(version === "leader" || version === "product") && (
+              <LeadershipSection version={version} />
+            )}
             <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-3 text-xl">
               Technical Skills
             </div>
@@ -298,7 +343,9 @@ export function ResumePage({ version }: { version: ContentVersion }) {
               {orderedSkills}
             </div>
 
-            {version !== "leader" && <LeadershipSection version={version} />}
+            {version !== "leader" && version !== "product" && (
+              <LeadershipSection version={version} />
+            )}
             <OtherSection />
 
             <History text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />

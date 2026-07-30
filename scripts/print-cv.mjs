@@ -27,6 +27,7 @@ const VERSIONS = [
   { route: "/web3", file: "Gil Lopes Bueno - Senior Blockchain Engineer.pdf" },
   { route: "/leader", file: "Gil Lopes Bueno - Tech Lead & Engineering Manager.pdf" },
   { route: "/enterprise", file: "Gil Lopes Bueno - Principal Backend Engineer.pdf" },
+  { route: "/product", file: "Gil Lopes Bueno - Technical Product Owner.pdf" },
 ];
 
 const CHROME_CANDIDATES = [

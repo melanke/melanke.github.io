@@ -35,12 +35,15 @@ The site is the source of truth for Gil's CV. Each audience is a `ContentVersion
 | `web3` | `/web3` | Senior Blockchain Engineer — protocol/DeFi first |
 | `leader` | `/leader` | Tech Lead / Engineering Manager — leadership first |
 | `enterprise` | `/enterprise` | Principal Software Engineer — Java/Kotlin, distributed systems; Web3 last, framed as integration work |
+| `product` | `/product` | Technical Product Owner — discovery/requirements/roadmap first, engineering as the credibility behind it |
 
 A version changes wording and ordering, never the facts. The pieces that vary:
 `Bio.tsx` (summary), `ResumePage.tsx` (skill sections + order), `Timeline.tsx`
 (per-item `role`, `description`, `technologies`, and the `print` flag that
-decides which items reach the PDF). Adding a version means touching all four
-plus `app/<route>/page.tsx` and `app/sitemap.ts`.
+decides which items reach the PDF), and `LeadershipSection.tsx` (role order +
+blurb; it also prints only on `leader` and `product`). Adding a version means
+touching those plus `app/<route>/page.tsx`, `app/sitemap.ts` and the `VERSIONS`
+list in `scripts/print-cv.mjs`.
 
 ### CV PDFs are generated, not hand-exported
 

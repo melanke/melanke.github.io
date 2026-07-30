@@ -51,6 +51,34 @@ export function Bio({ version }: { version: ContentVersion }) {
         care about is shipping systems that stay reliable in production.
       </div>
     </>
+  ) : version === "product" ? (
+    <>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
+        I&apos;m a Technical Product Owner with 19+ years in software and 12+
+        years owning product decisions next to engineering teams of up to 30. I
+        co-founded Simpli and grew it from a two-person startup into a
+        30-person software house that delivered 50+ products — which meant
+        running discovery, requirements and roadmap for a new product every few
+        months, across logistics, fintech, media, education and Web3.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
+        My work is turning stakeholder needs into functional requirements,
+        wireframes and a prioritized backlog, then staying close to delivery so
+        scope, feasibility and deadlines stay honest. I owned the product
+        vision and usability of Enclave Wallet, wrote the requirements and
+        roadmap for Louis Dreyfus Company&apos;s global Safety, Health and
+        Environment platform, and shaped products that reached real numbers:
+        50M+ invoices on iTrack, US$1.6M GMV on Apptite, 100k users on Sharity.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
+        Coming from engineering means I can size technical trade-offs myself,
+        argue architecture with the team, and cut scope without breaking the
+        system. Lately I&apos;ve been putting AI to work inside product and
+        delivery workflows, from agent-assisted development to process
+        automation. I&apos;m looking for a role where I own the problem, the
+        backlog and the outcome.
+      </div>
+    </>
   ) : version === "leader" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
