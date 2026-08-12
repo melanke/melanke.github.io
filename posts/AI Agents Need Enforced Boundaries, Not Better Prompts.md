@@ -1,12 +1,12 @@
 ---
 published-at: '2026-08-11T16:29:49.000+00:00'
 summary: >-
-  Two 2025 incidents, an agent that deleted a production database and one that nearly wiped a codebase, weren't prompt failures. They were identity failures. A look at why AWS's security team, OWASP, and Okta are all converging on treating coding agents as a scoped, first-class identity, and where scoped access still isn't enough.
-og-image: /blog-images/ai-agents-need-iam-more-than-prompts.png
+  Two 2025 incidents, an agent that deleted a production database and one that nearly wiped a codebase, weren't prompt failures. They were boundary failures. A look at why AWS's security team, OWASP, and Okta are all converging on treating coding agents as a scoped, first-class identity, and why the same instinct has to extend to code review, not just access.
+og-image: /blog-images/ai-agents-need-enforced-boundaries-not-better-prompts.png
 linkedin-post: |-
   🤔 An AI agent deleted a production database in July, despite being told not to.
 
-  That instruction existed only as text in a prompt. This piece looks at why AWS's security team, OWASP, and Okta are all converging on the same fix, and why it has nothing to do with writing better prompts.
+  That instruction existed only as text in a prompt. This piece looks at why AWS's security team, OWASP, and Okta are all converging on the same idea, and why it has nothing to do with writing better prompts.
 
   If you're rolling out coding agents on your team, or trying to figure out what they should actually be allowed to touch, this one's for you.
 
@@ -32,7 +32,7 @@ twitter-post: |-
   ---
   If you're rolling out coding agents on your team: how are you scoping what they're actually allowed to reach?
   ---
-  Full breakdown: https://gil.solutions/blog/ai-agents-need-iam-more-than-prompts
+  Full breakdown: https://gil.solutions/blog/ai-agents-need-enforced-boundaries-not-better-prompts
 
   #AI #IAM #AICoding
 twitter-image-prompt: "A 16:9 wide, feed-stopping technical illustration on a dark near-black deep-navy background, clean minimal vector style, technical and precise, no people, no stock photos, no cyberpunk or meme styling. Central image: a translucent, faintly glowing instruction plaque hovers motionless in the middle of the frame, inert and ignored. A glowing electric-blue agent cursor/hand-shaped icon reaches straight through the plaque toward a database cylinder icon behind it, which is visibly cracked with a few small emerald-green data fragments spilling out. The plaque itself is thin and ghost-like, clearly bypassed rather than blocking anything. Accent colors: electric blue on the agent icon, deep purple on the plaque's faint glow, emerald green on the spilling data fragments, a single warm amber crack line on the database. Include a short bold uppercase text overlay in the lower third reading 'TOLD NOT TO. DID IT ANYWAY.' in clean sans-serif white with a subtle blue-to-purple glow. Mood: technical, precise, quietly alarming. Composition: instruction plaque centered, agent icon and cracked database layered behind/through it, text overlay bottom third, balanced negative space around the central metaphor. 16:9 aspect ratio."
@@ -56,7 +56,7 @@ reddit-posts:
 
       What still worries me: least-privilege shrinks blast radius, it doesn't replace review. A scoped IAM role can still trash everything inside its own scope if the agent misreads the task. I haven't seen much guidance yet on keeping this from becoming checkbox IAM hygiene nobody actually enforces day to day.
 
-      I wrote up the fuller argument, including where I think "just review everything" stops being realistic and what should get walled off instead: https://gil.solutions/blog/ai-agents-need-iam-more-than-prompts
+      I wrote up the fuller argument, including where I think "just review everything" stops being realistic and what should get walled off instead: https://gil.solutions/blog/ai-agents-need-enforced-boundaries-not-better-prompts
 
       Curious how people running AWS shops are actually scoping this in practice, dedicated IAM roles per agent, session-scoped STS creds, something else? Or is it still mostly "the agent uses my creds" in most of your environments?
     notes: >-
@@ -72,7 +72,7 @@ twitter-engagement-queries:
     angle: Note the two 2025 incidents (Replit prod-database deletion during a code freeze, Amazon Q's near-miss wiper prompt) and ask whether their team scopes agent write access at all.
   - query: '(coding agent OR "AI agent") (autoApprove OR "auto-approve" OR "full access" OR unrestricted) min_faves:10 within_time:30d -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en'
     targets: Devs discussing giving their coding agent broad or unrestricted permissions.
-    why: Overlaps AWS's framework banning autoApprove:["*"] and the article's core IAM argument.
+    why: Overlaps AWS's framework banning autoApprove:["*"] and the article's core argument that agents need an enforced boundary, not a request they can choose to honor.
     angle: Ask what they've actually scoped down versus left wide open, and mention AWS's new framework now treats that as a config smell, not a convenience.
   - query: '"agent identity" OR "non-human identity" (IAM OR credentials OR "access management") min_faves:10 within_time:30d -filter:replies -is:quote -filter:links -filter:mentions -min_replies:10 -has:cashtags lang:en'
     targets: Threads specifically about the emerging "agent identity" or non-human identity space.
@@ -92,7 +92,7 @@ twitter-engagement-queries:
     angle: Point out the prompt never mentions MCP or what servers it's about to auto-run, and link that to the TrustFall research and the Miasma worm.
 ---
 
-Better prompts won't save you. Better permissions might.
+Better prompts won't save you. A real boundary might.
 
 In July 2025, an AI coding agent inside Replit [deleted a production database](https://incidentdatabase.ai/cite/1152/). Real records: over 1,200 executive contacts, spanning nearly 1,200 companies. The team had put the system into a [twelve-day code freeze](https://medium.com/@ismailkovvuru/replit-ai-deletes-production-database-2025-devops-security-lessons-for-aws-engineers-4984c6e7a73d) and told the agent, in plain language, not to touch production. The instruction existed. It just existed as text in a prompt, not as anything the agent's execution path actually enforced.
 
@@ -116,21 +116,21 @@ OWASP moved in parallel, publishing a [Top 10 for Agentic Applications](https://
 
 ---
 
-### This is not a new question. It just has a new subject.
+### Two boundaries, same instinct
 
-Strip away the AI framing and everything above is an identity and access problem. [Okta](https://www.okta.com/identity-101/what-is-ai-agent-identity/) and [AWS](https://aws.amazon.com/marketplace/build-learn/ai-agent-learning-series/agent-identity-access-management/) are both shipping primitives for **agent identity** now. A coding agent gets its own session-scoped token and a task-scoped IAM role instead of borrowing a developer's, its credentials expire on a timer instead of sitting in a `.env` file, and every action it takes lands in an audit trail a human can't quietly edit. AWS's own materials cite non-human identities already outnumbering human ones 25 to 50 times over inside a typical enterprise. The subject changed. The discipline didn't.
+Strip away the AI framing and both incidents above come down to the same missing piece. A boundary the agent's own execution path enforces, not a request it can choose to honor. [Okta](https://www.okta.com/identity-101/what-is-ai-agent-identity/) and [AWS](https://aws.amazon.com/marketplace/build-learn/ai-agent-learning-series/agent-identity-access-management/) are both shipping primitives for **agent identity** now. A coding agent gets its own session-scoped token and a task-scoped IAM role instead of borrowing a developer's, its credentials expire on a timer instead of sitting in a `.env` file, and every action it takes lands in an audit trail a human can't quietly edit. AWS's own materials cite non-human identities already outnumbering human ones 25 to 50 times over inside a typical enterprise. The subject changed. The discipline didn't.
 
-Key trade-off: scoping an agent's access does not stop it from doing damage inside the scope you gave it. Take a task-scoped IAM role with write access to one S3 bucket. It can still corrupt everything inside that bucket if the agent misreads the task. **Least-privilege** shrinks the blast radius. It doesn't replace review, and review has its own ceiling now.
+Key trade-off: scoping an agent's access does not stop it from doing damage inside the scope you gave it. Take a task-scoped IAM role with write access to one S3 bucket. It can still corrupt everything inside that bucket if the agent misreads the task. **Least-privilege** shrinks the blast radius. It doesn't replace review, and review has the same problem prompts do.
 
-Here's where I land personally: reviewing all of AI-generated code was never a real option. PRs with heavy AI involvement run [51% larger and carry 54% more bugs](https://www.helpnetsecurity.com/2026/06/15/ai-generated-code-review-issues/) than the ones before them, while still reading clean enough to slip past a tired reviewer. Uncle Bob, who spent decades teaching a generation of engineers to treat every line as something they own, now argues the only way to profit from an agent is to [stop reading its code at all](https://x.com/unclebobmartin/status/2080257779395154409) and let a harder automated gauntlet do the judging instead. I made a version of this same argument in an article about [Harness Engineering](https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development): a pipeline alone only ever catches what happens after the code already exists. If neither scoped access nor a review queue can cover everything, the only thing left to scale is judgment about where to spend it.
+Here's where I land personally: reviewing all of AI-generated code was never a real option. PRs with heavy AI involvement run [51% larger and carry 54% more bugs](https://www.helpnetsecurity.com/2026/06/15/ai-generated-code-review-issues/) than the ones before them, while still reading clean enough to slip past a tired reviewer — a clean diff is a signal, not a boundary, and a tired reviewer trusts the signal. Uncle Bob, who spent decades teaching a generation of engineers to treat every line as something they own, now argues the only way to profit from an agent is to [stop reading its code at all](https://x.com/unclebobmartin/status/2080257779395154409) and let a harder automated gauntlet do the judging instead. I made a version of this same argument in an article about [Harness Engineering](https://gil.solutions/blog/discovery-and-spec-the-missing-harness-in-ai-assisted-defi-development): a pipeline alone only ever catches what happens after the code already exists. If neither scoped access nor a review queue can cover everything, the only thing left to scale is judgment about where to spend it.
 
-There's a limit to "stop reading entirely," though. Take a change that deletes production data or rewrites an IAM policy. It shouldn't get to hide inside an ordinary feature diff, waved through by the same gauntlet that clears everything else. That code needs to be visibly separated at the architecture level and routed to a human every time, while the agent runs unsupervised everywhere the blast radius is small. It's the same instinct as treating who, or what, wrote a PR as an input to review, just aimed at what the PR can actually reach instead of who opened it.
+There's a limit to "stop reading entirely," though. Take a change that deletes production data or rewrites an IAM policy. It shouldn't get to hide inside an ordinary feature diff, waved through by the same gauntlet that clears everything else. That code needs to be visibly separated at the architecture level and routed to a human every time, while the agent runs unsupervised everywhere the blast radius is small. It's a different boundary than the IAM role two paragraphs up, enforced by the pipeline instead of the cloud, but it's built on the same refusal: don't let something that can do real damage through on a signal alone.
 
 ---
 
 I've written before about [agent identity from the other direction](/blog/ai-and-blockchain-in-2026-a-developers-map), where standards like ERC-8004 try to give autonomous agents a verifiable identity on-chain. What AWS and OWASP are converging on now is the infrastructure-side mirror of that same question: how a system decides who, or what, is running it, and what it's allowed to reach.
 
-The Replit incident wasn't a prompt failure. The instruction was right there in plain English. It was an identity failure. Nothing in the execution path knew the difference between the agent talking to itself and the agent about to run a delete on a production table. Fix that layer and the prompt stops being the last line of defense.
+The Replit incident wasn't a prompt failure. The instruction was right there in plain English. It was a boundary failure. Nothing in the execution path enforced it, and whether that boundary would have been an IAM role or a mandatory review gate almost doesn't matter. What matters is that one exists, somewhere the agent can't talk its way past. Fix that layer and the prompt stops being the last line of defense.
 
 ---
 
