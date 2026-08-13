@@ -1,7 +1,7 @@
 // Generates the CV PDFs from the site's own print stylesheet, with the exact
-// settings used in Chrome's print dialog: Letter, 0 vertical margin, 0.31"
-// horizontal margin. The site is the source of truth for the CV, so the PDFs
-// are build output — not hand-made exports.
+// settings used in Chrome's print dialog: Letter, 0.31" top/left/right
+// margin, 0 bottom margin. The site is the source of truth for the CV, so
+// the PDFs are build output — not hand-made exports.
 //
 // Runs as `postbuild`, so `npm run build` refreshes them. CI calls `next build`
 // directly (see .github/workflows/nextjs.yml), so this never runs on deploy.
@@ -123,7 +123,7 @@ for (const { route, file } of VERSIONS) {
   const pdf = await page.pdf({
     format: "Letter",
     printBackground: false,
-    margin: { top: "0", bottom: "0", left: "0.31in", right: "0.31in" },
+    margin: { top: "0.31in", bottom: "0", left: "0.31in", right: "0.31in" },
   });
 
   // Chrome writes the page count into the page-tree root's /Count.

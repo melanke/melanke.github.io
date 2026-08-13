@@ -23,7 +23,7 @@ Every artifact a phase produces — body, hook, `linkedin-post`, `twitter-post`,
 
 Before anything else, read these files. They are the live source of truth — updated when the website is updated:
 
-1. `.claude/skills/_shared/professional-background.md` — the index of where Gil's experience lives. Follow it to the portfolio source files and read them: `components/Timeline.tsx` is the **primary anchor source for every article** (employer, active and past projects, dates, tech), plus `components/Achievements.tsx` for scale numbers and `app/page.tsx` for skills/contacts.
+1. `.claude/skills/_shared/professional-background.md` — the index of where Gil's experience lives. Follow it to the portfolio source files and read them: `content/timeline-items.ts` is the **primary anchor source for every article** (employer, active and past projects, dates, tech), plus `components/Achievements.tsx` for scale numbers and `app/page.tsx` for skills/contacts.
 2. `content/INDEX.md` — index of topics and lessons
 3. `.claude/skills/_shared/author-voice.md` — Gil's base writing voice & mannerisms (always active; the Author Voice & Style section below only adds blog-specific rules on top)
 
@@ -127,7 +127,7 @@ Present as a table. Ask user to pick a cell. Carry the chosen Format into Phase 
 | D | Quick technical tip | 350–700 |
 
 **Before writing:**
-1. Context is already loaded from Step 0 (Timeline.tsx, Achievements.tsx, app/page.tsx)
+1. Context is already loaded from Step 0 (timeline-items.ts, Achievements.tsx, app/page.tsx)
 2. Scan the **Published Articles Cache** at the end of this file — note articles with genuine thematic overlap for potential cross-links
 3. If a matching topic or lesson file exists in `content/INDEX.md`, read that full file and use it as base material
 
@@ -136,7 +136,7 @@ Present as a table. Ask user to pick a cell. Carry the chosen Format into Phase 
 **Mandatory structure:**
 - Opening: placeholder `[HOOK — refinar]` + 2–3 short paragraphs around it that will be adjusted in Phase 2
 - Body: `###` headers, `---` between major sections
-- ≥1 concrete example anchored in a real project from Timeline.tsx
+- ≥1 concrete example anchored in a real project from timeline-items.ts
 - Explicit trade-off paragraph ("Key trade-off:", "But:", "The catch?")
 - Cross-links to published articles: only where the link adds genuine reader value — the reader should benefit from following the link, not just feel like Gil is promoting his other work. One forced link is worse than no link.
 - Conclusion + CTA + italicized bio line
@@ -225,7 +225,7 @@ Do not: enumerate article sections, reveal conclusions, use marketing language (
 
 **Option B — Thread** (default for Type A/B technical deep-dives — higher reach, fits dense content):
 - Tweet 1: felt-tension hook (≤40 chars/line if 2-line) + 🧵. No link.
-- Tweets 2–6: one concrete point per tweet, ≤280 chars each, a brief example from a real `Timeline.tsx` project. Optionally include one *why-now* beat — the scale/urgency of the problem (e.g. as agents ship code faster, the upstream gap bites harder) — kept matter-of-fact, not alarmist.
+- Tweets 2–6: one concrete point per tweet, ≤280 chars each, a brief example from a real `timeline-items.ts` project. Optionally include one *why-now* beat — the scale/urgency of the problem (e.g. as agents ship code faster, the upstream gap bites harder) — kept matter-of-fact, not alarmist.
 - Closing content tweet: the genuine question (≤280 chars), **no link**.
 - Link tweet (a separate trailing `---` segment): blog URL (https://gil.solutions/blog/{slug}) + install command + the 3 hashtags (the only place hashtags appear). Keep this segment ≤280 like the rest.
 
@@ -259,7 +259,7 @@ Lean toward Option B for dense/technical articles; offer A for lighter pieces. S
 5. **For each surviving sub, write a tailored post** following *that sub's* entry:
    - **flair** — pick from the sub's actual flair list; one line of rationale.
    - **title** — follow the sub's winning title archetype (e.g. r/ethdev = problem/curiosity first, project name never). One idea, single clause. Lead with the concrete gap *and* name plainly what the thing is. **Then count the characters before shipping (mirror the Phase 2 hook discipline): target ≤65, hard ceiling 70. If it's over the ceiling, cut words until it fits — do not ship a title over 70 chars.** Two more hard checks: (a) **no `+`, `&`, or "and" joining two features** to cram more in — that reads as a feature list, not a hook; pick the single sharpest angle. (b) **no second sentence and no mid-title period** — if you need one, the angle isn't sharp enough yet, tighten it. The top posts in these subs are uniformly tight titles (the r/ethdev examples are 46/63/64 chars); match that.
-   - **body** — follow the sub's winning body skeleton. Anchor every role/project/metric claim in Gil's real experience from `components/Timeline.tsx` specifically — never invent. Hero asset first, blog as a depth link (match the article's own URL domain), honest limitations, open question at the end. No marketing hashtags/emoji/hype.
+   - **body** — follow the sub's winning body skeleton. Anchor every role/project/metric claim in Gil's real experience from `content/timeline-items.ts` specifically — never invent. Hero asset first, blog as a depth link (match the article's own URL domain), honest limitations, open question at the end. No marketing hashtags/emoji/hype.
    - **notes** — operational reminders for Gil *about this surviving sub only* (best posting window, "reply to all comments in the first 2–3 hours", cross-post caveats). Reasons for dropped/deferred subs belong in the user-facing summary (step 7), not in any sub's `notes`.
 
 6. **If no sub passes the fit-gate:** write `reddit-posts: []` to the frontmatter with a YAML comment noting no strong fit and why, and tell the user. Don't force a bad post.
@@ -279,7 +279,7 @@ reddit-posts:
     title: >-
       <title built from the sub's winning archetype; lead with the gap, hook in first ~75 chars>
     body: |-
-      <Personal context — a real role/project from Timeline.tsx, never invented>
+      <Personal context — a real role/project from timeline-items.ts, never invented>
 
       <The concrete problem this audience actually feels>
 
@@ -388,7 +388,7 @@ If a topic is so niche that the full stack returns almost nothing, loosen the op
 
 1. Identify the article's 2–4 core themes and which Published-Articles-Cache rows it overlaps (these define the comment angle later).
 2. For each theme, write **2–3 query variants** (a tight phrase-match one, a broader `OR` one, a "people complaining/asking" one).
-3. For each query, note: what kind of tweet it targets, *why* it's a fit (the overlap), and the **comment angle** Gil would take — a one-line handoff for `/comment-writer`, grounded in a real project from `components/Timeline.tsx` or in a concrete detail from the overlapping article. Don't invent details, but the article itself is a valid source for specifics (named repos, tools, steps it describes).
+3. For each query, note: what kind of tweet it targets, *why* it's a fit (the overlap), and the **comment angle** Gil would take — a one-line handoff for `/comment-writer`, grounded in a real project from `content/timeline-items.ts` or in a concrete detail from the overlapping article. Don't invent details, but the article itself is a valid source for specifics (named repos, tools, steps it describes).
 4. Add the `twitter-engagement-queries` list to frontmatter.
 
 ### Write to frontmatter
@@ -427,7 +427,7 @@ Evaluate the draft on 5 dimensions. Score each 1–10.
 | Dimension | Criterion |
 |-----------|-----------|
 | **Hook strength** | Do the first 2 sentences earn attention without throat-clearing? Does the opening follow one of the 6 angles (no "In this article…", no "In today's fast-paced world…")? Score 5–6 if the hook is generic or could belong to any developer's blog. |
-| **Voice match** | Practitioner voice (not theorist)? Every claim grounded in something Gil actually built (projects from Timeline.tsx)? Score 5–6 if the article sounds like it could have been written by anyone. |
+| **Voice match** | Practitioner voice (not theorist)? Every claim grounded in something Gil actually built (projects from timeline-items.ts)? Score 5–6 if the article sounds like it could have been written by anyone. |
 | **Value density** | ≥1 concrete example from a real project? Trade-off explicitly named (not implied)? Does the reader leave with something actionable? Score 5–6 if there are no real examples or the trade-off is vague. |
 | **Structure** | Paragraphs 2–4 sentences? `---` between all major sections? Bold used only on key terms, not whole sentences? No padding/summary paragraphs? Score 5–6 if paragraphs are long walls or structure is missing. |
 | **Publish readiness** | CTA present and warm? Italicized bio line correct? `linkedin-post` filled? `twitter-post` filled? `twitter-image-prompt` present? `reddit-posts` resolved (a tailored list, or an explicit empty list with a no-fit note)? `twitter-engagement-queries` resolved (a list, or an explicit empty list with a no-fit note)? Opening has no placeholder? Score 5–6 if any of these fields are missing. |
@@ -489,7 +489,7 @@ og-image-prompt: "{from Phase 5}"
 > **Base voice & mannerisms live in `.claude/skills/_shared/author-voice.md` — read that file first; it is always active.**
 > The sections below are the **blog-article-specific** additions on top of that shared base (opening patterns tied to article types, the mandatory closing stack with CTA + bio). When anything here conflicts with the shared base, these blog rules win for articles.
 >
-> In this skill, "anchored to a real project" means anchored to a project from `components/Timeline.tsx` specifically.
+> In this skill, "anchored to a real project" means anchored to a project from `content/timeline-items.ts` specifically.
 
 ### Opening patterns — and when to use each
 
@@ -519,7 +519,7 @@ Avoid: "In this article we will discuss…" / "In today's fast-paced world…" /
    - **AI + Blockchain intersection** (AI applied to smart contracts/auditing, on-chain AI agents, or any piece that genuinely bridges both — not just one passing mention): `_Written by Gil, a Principal Software Engineer with 19+ years of experience, 8 of them in Web3, who's spent the last stretch integrating LLM agents into smart contract development and audit workflows._`
    - **Process/leadership/general** (product process, team rituals, requirements, estimation, career — not chain- or AI-specific): `_Written by Gil, a Tech Lead with 19+ years in software and 12+ years leading teams of up to 30, focused on turning product goals into technical execution._`
 
-   If a new subject area doesn't fit any of the four, write a new one-line variant grounded in `components/Bio.tsx` / `components/Timeline.tsx` (never invented) instead of forcing a mismatched existing line, and add it to this list.
+   If a new subject area doesn't fit any of the four, write a new one-line variant grounded in `components/Bio.tsx` / `content/timeline-items.ts` (never invented) instead of forcing a mismatched existing line, and add it to this list.
 
 ### Blog-specific formatting & rules
 
@@ -527,7 +527,7 @@ These sit on top of the shared formatting conventions in `.claude/skills/_shared
 
 - `---` horizontal rule between **every** major section.
 - `> 📝 _Note:_` style for side facts.
-- **Anchor** every "real project" claim to a project from `components/Timeline.tsx` — never invent details not in it.
+- **Anchor** every "real project" claim to a project from `content/timeline-items.ts` — never invent details not in it.
 - **Vocabulary bank:** use 2–4 of the shared vocabulary terms per article — at moments that match Gil's natural rhythm, not as decoration.
 - **Cross-links:** link to published articles only where the reader genuinely benefits from following the link. One forced link is worse than no link — never force a cross-link that feels like promotion rather than navigation.
 - **Emoji:** series how-tos (Type A) may use emoji section icons; opinion (C) and technical (B/D) pieces should not. Don't over-emoji.

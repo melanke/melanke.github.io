@@ -1,19 +1,22 @@
-import React from "react";
 import Image from "next/image";
+import { marked } from "marked";
 import { FaLink } from "react-icons/fa";
+import { Tech } from "@/lib/technologies";
 
 export interface TimelineItemProps {
   dateRange: string;
-  technologies: string[];
+  technologies: Tech[];
   title: string;
   role: string;
-  description: string | React.ReactNode;
+  /** Markdown. */
+  description: string;
   image?: string;
   link?: string;
   links?: (string | { label: string; url: string })[];
-  nested?: boolean;
-  lastNested?: boolean;
   print?: boolean;
+  /** Whether this item's image is currently toggled to 3x size. */
+  imageEnlarged?: boolean;
+  onToggleImage?: () => void;
   /**
    * When true, the item is never rendered — neither on the site nor in the CV/print view.
    * It exists purely as a source-of-truth record read by the content skills
@@ -32,10 +35,10 @@ export function TimelineItem({
   image,
   link,
   links = [],
-  nested = false,
-  lastNested = false,
   print = true,
   hidden = false,
+  imageEnlarged = false,
+  onToggleImage,
 }: TimelineItemProps) {
   if (hidden) return null;
 
@@ -46,27 +49,7 @@ export function TimelineItem({
         !print ? "print:hidden" : ""
       }`}
     >
-      {nested && (
-        <div className="flex flex-col items-start relative">
-          <div
-            className="
-              w-3.5
-              h-20
-              ml-1
-              md:ml-2 
-              border-b-2
-              border-l-2
-              border-neutral-200
-              dark:border-neutral-800
-              rounded-bl-xl
-            "
-          ></div>
-          {!lastNested && (
-            <div className="absolute top-0 w-3.5 h-full ml-1 md:ml-2 border-l-2 border-neutral-200 dark:border-neutral-800"></div>
-          )}
-        </div>
-      )}
-      <div className="flex flex-col pt-10 print:pt-5">
+      <div className="flex flex-col">
         <div className="flex items-center w-full leading-snug min-h-[14px] max-md:max-w-full">
           <div className="font-bold text-black dark:text-white">{title}</div>
           <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">
@@ -83,15 +66,28 @@ export function TimelineItem({
 
         <div className="cv-entry mt-1 print:mt-0 leading-4 text-black dark:text-white max-md:max-w-full print:text-xs">
           {image && (
-            <Image
-              src={image}
-              alt={title}
-              width={128}
-              height={0}
-              className="w-32 h-auto float-left mr-3 rounded-lg border border-neutral-200 dark:border-neutral-800 print:hidden"
-            />
+            <button
+              type="button"
+              onClick={onToggleImage}
+              aria-pressed={imageEnlarged}
+              aria-label={imageEnlarged ? `Shrink ${title} image` : `Enlarge ${title} image`}
+              className="float-left mr-3 print:hidden bg-transparent border-0 p-0 cursor-pointer"
+            >
+              <Image
+                src={image}
+                alt={title}
+                width={128}
+                height={0}
+                className={`h-auto rounded-lg border border-neutral-200 dark:border-neutral-800 transition-[width] duration-300 ease-in-out ${
+                  imageEnlarged ? "w-[40rem]" : "w-32"
+                }`}
+              />
+            </button>
           )}
-          {description}
+          <div
+            className="space-y-2"
+            dangerouslySetInnerHTML={{ __html: marked.parse(description) as string }}
+          />
           {/* Print gets a single running-text line instead of the pill row:
               technologies comma-separated (recruiters asked for plain text,
               not tags), with the links appended to the same line to keep the
@@ -101,7 +97,7 @@ export function TimelineItem({
               {technologies.length > 0 && (
                 <>
                   <span className="font-semibold">Tech:</span>{" "}
-                  {technologies.join(", ")}
+                  {technologies.map((tech) => tech.name).join(", ")}
                 </>
               )}
               {allLinks.map((link, index) => (
@@ -121,7 +117,7 @@ export function TimelineItem({
                   className="print:hidden px-3 py-[0.19rem] bg-neutral-100 font-clash print:font-sans dark:bg-neutral-800 rounded-full text-black dark:text-white"
                   key={index}
                 >
-                  {tech}
+                  {tech.name}
                 </span>
               ))}
               {allLinks.map((link, index) => (

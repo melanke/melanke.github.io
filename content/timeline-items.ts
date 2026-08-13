@@ -1,0 +1,1232 @@
+import { ContentVersion } from "@/app/contentVersion";
+import { Tech, backend, frontend, mobile, blockchain, ai } from "@/lib/technologies";
+
+export interface TimelineEntry {
+  id: string;
+  /** Groups nested children under their employer's id (e.g. "simpli"). */
+  parentId?: string;
+  title: string;
+  /** Display string, e.g. "Nov 2016 - Jun 2018". */
+  dateRange: string;
+  /** Sortable "YYYY-MM", derived from dateRange's start. */
+  startDate: string;
+  technologies: Tech[] | Partial<Record<ContentVersion, Tech[]>>;
+  role: string | Partial<Record<ContentVersion, string>>;
+  /** Markdown. */
+  description: string | Partial<Record<ContentVersion, string>>;
+  image?: string;
+  link?: string;
+  links?: (string | { label: string; url: string })[];
+  /**
+   * Declared explicitly per version — not derived. 1 = relevant to that
+   * version (shows near the top), 2 = relevant elsewhere but still shown
+   * here (sinks lower), 3 = never relevant but still rendered, sorted last
+   * of all. 4 = truly invisible — excluded from render on that version's
+   * page entirely. Nothing is auto-assigned to 4; it's a deliberate,
+   * per-item, per-version call.
+   */
+  priority: Record<ContentVersion, 1 | 2 | 3 | 4>;
+  /**
+   * Independent of priority: which versions print this in the PDF. Omitted
+   * = prints wherever priority !== 4. A narrower list preserves today's
+   * `print={false}` / `print={version !== "x"}` behavior even though the
+   * item may now be visible (priority 2 or 3) on more pages than it prints
+   * on.
+   */
+  printIn?: ContentVersion[];
+}
+
+export const ALL_VERSIONS: ContentVersion[] = [
+  "general",
+  "web3",
+  "leader",
+  "enterprise",
+  "product",
+];
+
+const shownEverywhere: Record<ContentVersion, 1 | 2 | 3 | 4> = {
+  general: 1,
+  web3: 1,
+  leader: 1,
+  enterprise: 1,
+  product: 1,
+};
+
+// Truly invisible — excluded from render entirely. Nothing is assigned this
+// automatically; move an item here only when explicitly asked.
+const invisible: Record<ContentVersion, 1 | 2 | 3 | 4> = {
+  general: 4,
+  web3: 4,
+  leader: 4,
+  enterprise: 4,
+  product: 4,
+};
+
+export const timelineItems: TimelineEntry[] = [
+  {
+    id: "33labs",
+    title: "33Labs",
+    dateRange: "Sep 2025 - current",
+    startDate: "2025-09",
+    technologies: {
+      general: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.ethereum,
+        blockchain.evm,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.systemArchitecture,
+        ai.aiTooling,
+      ],
+      web3: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.ethereum,
+        blockchain.evm,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.systemArchitecture,
+        ai.aiTooling,
+      ],
+      leader: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.ethereum,
+        blockchain.evm,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.systemArchitecture,
+        ai.aiTooling,
+      ],
+      product: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.ethereum,
+        blockchain.evm,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.systemArchitecture,
+        ai.aiTooling,
+      ],
+      enterprise: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.ethereum,
+        blockchain.evm,
+        backend.distributedSystems,
+        blockchain.systemArchitecture,
+        ai.aiTooling,
+      ],
+    },
+    role: {
+      general: "Software Engineer | Main Smart Contract Developer",
+      web3: "Software Engineer | Main Smart Contract Developer",
+      leader: "Principal Engineer | Smart Contract Engineer",
+      product: "Principal Engineer | Smart Contract Engineer",
+      enterprise: "Software Engineer",
+    },
+    description: {
+      general:
+        "At 33Labs (formerly 33Audits), I worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience.\n\nThe company began as a smart contract auditing firm, which gave me hands-on, daily experience identifying and preventing vulnerabilities. I developed protocols end to end — architecture, implementation, and testing — with security and gas optimization as constant priorities throughout. This led me to a key conviction: the auditing process should start at the architecture stage, before any code is written. To support this, I integrated specialized tooling and AI agents into our development and auditing workflow.",
+      web3:
+        "At 33Labs (formerly 33Audits), I worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience.\n\nThe company began as a smart contract auditing firm, which gave me hands-on, daily experience identifying and preventing vulnerabilities. I developed protocols end to end — architecture, implementation, and testing — with security and gas optimization as constant priorities throughout. This led me to a key conviction: the auditing process should start at the architecture stage, before any code is written. To support this, I integrated specialized tooling and AI agents into our development and auditing workflow.",
+      leader:
+        "Taking a hands-on IC role here was a deliberate choice: I had been building smart contracts for years, but DeFi raises the security bar far higher, so before leading a team on this architecture I wanted to build it myself, alongside the engineers who audit it. At 33Labs (formerly 33Audits), I worked on advanced DeFi protocols, and the company's roots as a smart contract auditing firm gave me daily, hands-on exposure to how vulnerabilities actually get through in production. That shaped a conviction I now bring to any team I lead: review has to start at the architecture stage, before any code is written — not bolted on as a late-stage audit.",
+      product:
+        "Taking a hands-on engineering role here was a deliberate choice: after 11 years as CTO, I wanted to go deep on DeFi architecture next to the engineers who audit it, so that when I own a product in this space I know exactly what I'm asking a team to build and what it costs. At 33Labs (formerly 33Audits), I worked on advanced DeFi protocols, and the company's roots as a smart contract auditing firm sharpened a conviction I now carry into product decisions: security and feasibility have to be weighed at the architecture stage, before a single requirement gets locked in.",
+      enterprise:
+        "At 33Labs (formerly 33Audits), I design and implement scalable backend services and application architecture for decentralized financial products.\n\nThe company began as a security auditing firm, which gave me daily experience preventing vulnerabilities in production systems. I work end to end — architecture, implementation, and automated testing — with security engineers involved throughout. This led me to a key conviction: review should start at the architecture stage, before any code is written. To support it, I built developer tooling and AI-assisted workflows that improved the team's productivity.",
+    },
+    image: "/projects/33labs.webp",
+    link: "https://www.33labs.ai/",
+    priority: shownEverywhere,
+  },
+  {
+    id: "american-spend",
+    parentId: "33labs",
+    title: "American Spend",
+    dateRange: "Mar 2026 - May 2026",
+    startDate: "2026-03",
+    technologies: {
+      general: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.predictionMarket,
+        blockchain.vault,
+        blockchain.clob,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      web3: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.predictionMarket,
+        blockchain.vault,
+        blockchain.clob,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      leader: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.predictionMarket,
+        blockchain.vault,
+        blockchain.clob,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      product: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.predictionMarket,
+        blockchain.vault,
+        blockchain.clob,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      enterprise: [
+        blockchain.solidity,
+        blockchain.foundry,
+        backend.distributedSystems,
+        blockchain.systemArchitecture,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+    },
+    role: {
+      general: "Software Engineer | Main Smart Contract Developer",
+      web3: "Software Engineer | Main Smart Contract Developer",
+      leader: "Principal Engineer | Smart Contract Engineer",
+      product: "Principal Engineer | Smart Contract Engineer",
+      enterprise: "Software Engineer",
+    },
+    description: {
+      general:
+        "American Spend is a prediction market protocol combining yield generation with market-based price discovery through a hybrid market structure.\n\nDesigned a hybrid market model starting with a parimutuel phase and transitioning into a Central Limit Order Book (CLOB).\n\nIntegrated vault-based yield strategies to generate returns on idle capital during market activity.\n\nLed the end-to-end design and implementation of the smart contract architecture, ensuring seamless transitions between market phases without disrupting user positions or incentives.\n\nDrove close collaboration with auditors throughout development, incorporating feedback early to strengthen security and reduce iteration cycles.",
+      web3:
+        "American Spend is a prediction market protocol combining yield generation with market-based price discovery through a hybrid market structure.\n\nDesigned a hybrid market model starting with a parimutuel phase and transitioning into a Central Limit Order Book (CLOB).\n\nIntegrated vault-based yield strategies to generate returns on idle capital during market activity.\n\nLed the end-to-end design and implementation of the smart contract architecture, ensuring seamless transitions between market phases without disrupting user positions or incentives.\n\nDrove close collaboration with auditors throughout development, incorporating feedback early to strengthen security and reduce iteration cycles.",
+      leader:
+        "American Spend is a prediction market protocol combining yield generation with market-based price discovery through a hybrid market structure.\n\nDesigned a hybrid market model starting with a parimutuel phase and transitioning into a Central Limit Order Book (CLOB).\n\nIntegrated vault-based yield strategies to generate returns on idle capital during market activity.\n\nLed the end-to-end design and implementation of the smart contract architecture, ensuring seamless transitions between market phases without disrupting user positions or incentives.\n\nDrove close collaboration with auditors throughout development, incorporating feedback early to strengthen security and reduce iteration cycles.",
+      product:
+        "American Spend is a prediction market protocol combining yield generation with market-based price discovery through a hybrid market structure.\n\nDesigned a hybrid market model starting with a parimutuel phase and transitioning into a Central Limit Order Book (CLOB).\n\nIntegrated vault-based yield strategies to generate returns on idle capital during market activity.\n\nLed the end-to-end design and implementation of the smart contract architecture, ensuring seamless transitions between market phases without disrupting user positions or incentives.\n\nDrove close collaboration with auditors throughout development, incorporating feedback early to strengthen security and reduce iteration cycles.",
+      enterprise:
+        "American Spend is a high-throughput financial platform combining yield generation with market-based price discovery.\n\nDesigned the backend architecture, including a hybrid market model that transitions between two distinct operating phases.\n\nDeveloped distributed components for real-time market operations, with yield strategies on idle capital.\n\nWorked closely with security engineers throughout development, incorporating feedback early to reduce iteration cycles.",
+    },
+    image: "/projects/american-spend.webp",
+    link: "https://spend.market/",
+    priority: {
+  general: 2,
+  web3: 1,
+  leader: 2,
+  enterprise: 2,
+  product: 2,
+},
+    printIn: ["web3"],
+  },
+  {
+    id: "mosaic",
+    parentId: "33labs",
+    title: "Mosaic",
+    dateRange: "Sep 2025 - Feb 2026",
+    startDate: "2025-09",
+    technologies: {
+      general: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      web3: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      leader: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      product: [
+        blockchain.solidity,
+        blockchain.foundry,
+        blockchain.uniswapV3,
+        blockchain.uniswapV4,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+      enterprise: [
+        blockchain.solidity,
+        blockchain.foundry,
+        ai.aiTooling,
+        blockchain.systemArchitecture,
+        blockchain.ethereum,
+        blockchain.evm,
+      ],
+    },
+    role: {
+      general: "Software Engineer | Main Smart Contract Developer",
+      web3: "Software Engineer | Main Smart Contract Developer",
+      leader: "Principal Engineer | Smart Contract Engineer",
+      product: "Principal Engineer | Smart Contract Engineer",
+      enterprise: "Software Engineer",
+    },
+    description: {
+      general:
+        "Mosaic is a protocol designed to make smart contract development more accessible, cost-efficient, and secure through flexible, pre-audited, and composable contracts, with AI-assisted tooling for generating contract compositions from natural language.\n\nContributed to the core architecture and designed reusable protocol modules with a strong focus on composability.\n\nDesigned and implemented a Launchpad workflow powered by a bonding curve, graduating into a Uniswap v3 liquidity pool for smooth price discovery and liquidity transition.\n\nBuilt a Uniswap v4 hook combining CLMM behavior with a bonding curve model, later transitioning into a standard AMM.\n\nDeveloped abstractions to support modular and extensible DeFi primitives.",
+      web3:
+        "Mosaic is a protocol designed to make smart contract development more accessible, cost-efficient, and secure through flexible, pre-audited, and composable contracts, with AI-assisted tooling for generating contract compositions from natural language.\n\nContributed to the core architecture and designed reusable protocol modules with a strong focus on composability.\n\nDesigned and implemented a Launchpad workflow powered by a bonding curve, graduating into a Uniswap v3 liquidity pool for smooth price discovery and liquidity transition.\n\nBuilt a Uniswap v4 hook combining CLMM behavior with a bonding curve model, later transitioning into a standard AMM.\n\nDeveloped abstractions to support modular and extensible DeFi primitives.",
+      leader:
+        "Mosaic is a protocol designed to make smart contract development more accessible, cost-efficient, and secure through flexible, pre-audited, and composable contracts, with AI-assisted tooling for generating contract compositions from natural language.\n\nContributed to the core architecture and designed reusable protocol modules with a strong focus on composability.\n\nDesigned and implemented a Launchpad workflow powered by a bonding curve, graduating into a Uniswap v3 liquidity pool for smooth price discovery and liquidity transition.\n\nBuilt a Uniswap v4 hook combining CLMM behavior with a bonding curve model, later transitioning into a standard AMM.\n\nDeveloped abstractions to support modular and extensible DeFi primitives.",
+      product:
+        "Mosaic is a protocol designed to make smart contract development more accessible, cost-efficient, and secure through flexible, pre-audited, and composable contracts, with AI-assisted tooling for generating contract compositions from natural language.\n\nContributed to the core architecture and designed reusable protocol modules with a strong focus on composability.\n\nDesigned and implemented a Launchpad workflow powered by a bonding curve, graduating into a Uniswap v3 liquidity pool for smooth price discovery and liquidity transition.\n\nBuilt a Uniswap v4 hook combining CLMM behavior with a bonding curve model, later transitioning into a standard AMM.\n\nDeveloped abstractions to support modular and extensible DeFi primitives.",
+      enterprise:
+        "Mosaic is a developer platform designed to make application development more accessible, cost-efficient, and secure through flexible, pre-audited, and composable components, with AI-assisted tooling for generating compositions from natural language.\n\nDesigned reusable backend components and contributed to the core architecture of the platform.\n\nBuilt modular application services focused on scalability and maintainability, including a workflow for automated liquidity and price discovery.\n\nImproved developer productivity through automation and AI-assisted tooling.\n\nCollaborated on architecture decisions for distributed applications and developed abstractions supporting modular, extensible services.",
+    },
+    image: "/projects/mosaic.webp",
+    link: "https://mosaic.build/",
+    priority: {
+  general: 2,
+  web3: 1,
+  leader: 2,
+  enterprise: 2,
+  product: 2,
+},
+    printIn: ["web3"],
+  },
+  {
+    id: "buidlguidl-batch-program",
+    title: "BuidlGuidl Batch Program",
+    dateRange: "Feb 2025 - Jan 2026",
+    startDate: "2025-02",
+    technologies: [
+      blockchain.solidity,
+      blockchain.hardhat,
+      frontend.typescript,
+      frontend.reactjs,
+      frontend.nextjs,
+      blockchain.ethereum,
+      blockchain.evm,
+    ],
+    role: "Mentor",
+    description:
+      "BuidlGuidl is one of the most impactful builder communities in the Ethereum ecosystem. One of its core initiatives is the Batch Program, which helps onboard new developers into the Ethereum space. As a mentor in the program, I guide participants through their first steps contributing to open source using Solidity, Hardhat, Wagmi, and Next.js.",
+    image: "/projects/buidlguidl.webp",
+    link: "https://buidlguidl.com/batches",
+    priority: {
+  general: 2,
+  web3: 1,
+  leader: 2,
+  enterprise: 2,
+  product: 2,
+},
+    printIn: ["web3"],
+  },
+  {
+    id: "jodobix",
+    title: "Jodobix",
+    dateRange: "Mar 2025 - Jun 2025",
+    startDate: "2025-03",
+    technologies: [
+      blockchain.solidity,
+      blockchain.hardhat,
+      blockchain.optimism,
+      frontend.typescript,
+      frontend.reactjs,
+      frontend.nextjs,
+      blockchain.ethereum,
+      blockchain.evm,
+    ],
+    role: "Software Engineer | Creator",
+    description:
+      "Jodobix is a decentralized betting game designed to be fully fair and autonomous. It leverages blockchain technology to eliminate intermediaries and guarantees that all betting value is distributed among players and contributors. I developed the entire project on my own, including the design of secure random number generation strategies that do not rely on trusted third parties.",
+    image: "/projects/jodobix.png",
+    links: [
+      "https://jodobix.com",
+      {
+        label: "Contract on Optimism",
+        url: "https://optimistic.etherscan.io/address/0xB23Bd5Eb9986B03E83197BBD22cD12f52607B06C#code",
+      },
+    ],
+    priority: {
+  general: 2,
+  web3: 1,
+  leader: 2,
+  enterprise: 2,
+  product: 2,
+},
+    printIn: ["web3"],
+  },
+  {
+    id: "coz",
+    title: "COZ",
+    dateRange: "Jun 2022 - Feb 2023",
+    startDate: "2022-06",
+    technologies: [blockchain.blockchain, blockchain.web3],
+    role: "Director | Tech Lead",
+    description:
+      "COZ is the first and most well-known group of developers on the Neo network, renowned for numerous significant projects within the ecosystem. After years of partnership, I was honored to be invited to join the group's board of directors.",
+    image: "/projects/coz.webp",
+    link: "https://coz.io/",
+    priority: {
+      general: 2,
+      web3: 1,
+      leader: 1,
+      enterprise: 2,
+      product: 2,
+    },
+    printIn: ["leader", "enterprise", "product"],
+  },
+  {
+    id: "simpli",
+    title: "Simpli",
+    dateRange: "Oct 2013 - May 2025",
+    startDate: "2013-10",
+    technologies: [
+      backend.java,
+      backend.kotlin,
+      backend.csharp,
+      frontend.typescript,
+      backend.nodejs,
+      frontend.reactjs,
+      mobile.reactNative,
+      frontend.nextjs,
+      frontend.angular,
+      frontend.sveltekit,
+      mobile.android,
+      mobile.ios,
+      mobile.xamarin,
+      frontend.electronjs,
+      frontend.jquery,
+      frontend.backbone,
+      backend.python,
+      backend.r,
+      backend.mysql,
+      backend.postgresql,
+      backend.redis,
+      backend.graphql,
+      backend.jersey,
+      backend.aws,
+      backend.ecs,
+      backend.s3,
+      backend.sns,
+      backend.sqs,
+      blockchain.web3,
+      blockchain.blockchain,
+      blockchain.smartContracts,
+      blockchain.cryptography,
+      blockchain.cadence,
+      blockchain.flow,
+    ],
+    role: {
+      general: "Co-founder | Software Engineer | CTO",
+      web3: "Co-founder | Software Engineer | CTO",
+      leader: "Co-founder | CTO | Engineering Manager | TechLead | Product Owner",
+      enterprise: "Co-founder | Software Engineer | CTO",
+      product: "Co-founder | Product Owner | Business Analyst | Project Manager | CTO",
+    },
+    description: {
+      general:
+        "I co-founded Simpli as a two-person startup focused on building a B2C mobile product, which quickly evolved into a fast-growing software house serving a wide range of clients. In its first year, the company pivoted to delivering custom distributed applications and scaled organically through consistent delivery and client satisfaction. Over 11 years, we delivered 50+ successful digital products for both startups and enterprise clients, while also launching and maintaining our own proprietary platforms.\n\nFrom the beginning, Simpli was an early adopter of emerging technologies like mobile development and blockchain. I played a key role in shaping both the technical direction and business strategy of the company, leading system architecture, technical roadmaps, and documentation, and building an engineering org of 30 including 5 team leads. My work ranged from hands-on technical leadership to driving innovation through research, process design, and technology adoption — helping turn product ideas into real businesses by aligning technical execution with market opportunities.\n\nProvisioning AWS infrastructure was a recurring part of that work. With 50+ projects, we needed a standard: a checklist for spinning up a new account, a baseline set of IAM roles, and a reusable Terraform starter kit so no project's infra started from a blank page — the same template became a paved road that sped up every project's first deploy. Cost optimization started reactively, after a client flagged a high AWS bill, but past a certain point we set up anomaly-alert triggers instead of waiting for the next complaint.\n\nBelow are more details about some key projects:",
+      web3:
+        "I co-founded Simpli as a two-person startup focused on building a B2C mobile product, which quickly evolved into a fast-growing software house serving a wide range of clients. In its first year, the company pivoted to delivering custom distributed applications and scaled organically through consistent delivery and client satisfaction. Over 11 years, we delivered 50+ successful digital products for both startups and enterprise clients, while also launching and maintaining our own proprietary platforms.\n\nFrom the beginning, Simpli was an early adopter of emerging technologies like mobile development and blockchain. I played a key role in shaping both the technical direction and business strategy of the company, leading system architecture, technical roadmaps, and documentation, and building an engineering org of 30 including 5 team leads. My work ranged from hands-on technical leadership to driving innovation through research, process design, and technology adoption — helping turn product ideas into real businesses by aligning technical execution with market opportunities.\n\nProvisioning AWS infrastructure was a recurring part of that work. With 50+ projects, we needed a standard: a checklist for spinning up a new account, a baseline set of IAM roles, and a reusable Terraform starter kit so no project's infra started from a blank page — the same template became a paved road that sped up every project's first deploy. Cost optimization started reactively, after a client flagged a high AWS bill, but past a certain point we set up anomaly-alert triggers instead of waiting for the next complaint.\n\nBelow are more details about some key projects:",
+      leader:
+        "I co-founded Simpli as a two-person startup focused on building a B2C mobile product, which quickly evolved into a fast-growing software house serving a wide range of clients. In its first year, the company pivoted to delivering custom distributed applications and scaled organically through consistent delivery and client satisfaction. Over 11 years, we delivered 50+ successful digital products for both startups and enterprise clients, while also launching and maintaining our own proprietary platforms.\n\nFrom the beginning, Simpli was an early adopter of emerging technologies like mobile development and blockchain. I played a key role in shaping both the technical direction and business strategy of the company, leading system architecture, technical roadmaps, and documentation, and building an engineering org of 30 including 5 team leads. My work ranged from hands-on technical leadership to driving innovation through research, process design, and technology adoption — helping turn product ideas into real businesses by aligning technical execution with market opportunities.\n\nProvisioning AWS infrastructure was a recurring part of that work. With 50+ projects, we needed a standard: a checklist for spinning up a new account, a baseline set of IAM roles, and a reusable Terraform starter kit so no project's infra started from a blank page — the same template became a paved road that sped up every project's first deploy. Cost optimization started reactively, after a client flagged a high AWS bill, but past a certain point we set up anomaly-alert triggers instead of waiting for the next complaint.\n\nBelow are more details about some key projects:",
+      product:
+        "I co-founded Simpli as a two-person startup focused on building a B2C mobile product, which quickly evolved into a fast-growing software house serving a wide range of clients. In its first year, the company pivoted to delivering custom distributed applications and scaled organically through consistent delivery and client satisfaction. Over 11 years, we delivered 50+ successful digital products for both startups and enterprise clients, while also launching and maintaining our own proprietary platforms.\n\nFrom the beginning, Simpli was an early adopter of emerging technologies like mobile development and blockchain. I played a key role in shaping both the technical direction and business strategy of the company, leading system architecture, technical roadmaps, and documentation, and building an engineering org of 30 including 5 team leads. My work ranged from hands-on technical leadership to driving innovation through research, process design, and technology adoption — helping turn product ideas into real businesses by aligning technical execution with market opportunities.\n\nProvisioning AWS infrastructure was a recurring part of that work. With 50+ projects, we needed a standard: a checklist for spinning up a new account, a baseline set of IAM roles, and a reusable Terraform starter kit so no project's infra started from a blank page — the same template became a paved road that sped up every project's first deploy. Cost optimization started reactively, after a client flagged a high AWS bill, but past a certain point we set up anomaly-alert triggers instead of waiting for the next complaint.\n\nBelow are more details about some key projects:",
+      enterprise:
+        "I co-founded Simpli and, over 11 years, led engineering teams of up to 30 developers, including 5 team leads, and delivered 50+ production software projects — distributed enterprise systems for logistics, fintech, media, education and SaaS clients, plus our own proprietary platforms. I defined software architecture, technical roadmaps, engineering standards and delivery processes, and built scalable backend services using Java, Kotlin, Node.js, TypeScript, MySQL/PostgreSQL and REST/GraphQL APIs.\n\nWe started Simpli as a two-person startup building a B2C mobile product and pivoted within its first year into a software house delivering custom distributed applications, scaling organically through consistent delivery and client satisfaction. I played a key role in shaping both the technical direction and the business strategy, ranging from hands-on technical leadership to driving innovation through research, process design and early adoption of emerging technologies such as mobile and blockchain.\n\nProvisioning AWS infrastructure was a recurring part of that work. Across 50+ projects, I standardized it: a checklist for spinning up new accounts, a baseline set of IAM roles, and a reusable Terraform starter kit so no project's infrastructure started from scratch — the same template became a paved road that sped up every project's first deploy. Cost management started reactively, triggered by a client flagging a high AWS bill, but past a certain point I put anomaly-alert triggers in place instead of waiting for the next complaint.\n\nBelow are more details about some key projects:",
+    },
+    image: "/projects/simpli.webp",
+    priority: shownEverywhere,
+  },
+  {
+    id: "enclave-wallet",
+    parentId: "simpli",
+    title: "Enclave Wallet",
+    dateRange: "Jun 2024 - Feb 2025",
+    startDate: "2024-06",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      frontend.nextjs,
+      backend.nodejs,
+      backend.postgresql,
+      backend.aws,
+      backend.ecs,
+      backend.s3,
+      backend.sns,
+      backend.sqs,
+      blockchain.smartContracts,
+      blockchain.cryptography,
+    ],
+    role: {
+      general: "Software Engineer | Product Owner | UI/UX Designer",
+      web3: "Software Engineer | Product Owner | UI/UX Designer",
+      leader: "TechLead | Product Owner | Project Manager | UI/UX Designer",
+      enterprise: "Software Engineer | Product Owner | UI/UX Designer",
+      product: "Product Owner | Project Manager | UI/UX Designer | TechLead",
+    },
+    description: {
+      general:
+        "Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions to make onboarding as smooth as a traditional web application — paired with a full on-chain activity explorer. Working with a small team, I was responsible for the product vision, usability, and development of the whole wallet frontend, contributed to the Smart Contracts, and led the system design of the indexer and API behind the explorer. One example of that indexing work: handling chain reorgs. Every block was stored keyed by its own hash and its parent's, so detecting a reorg meant walking back parent hashes until the indexer found one it already had — the fork point. From there, the orphaned blocks and the balances derived from them were invalidated, and the canonical chain was replayed forward through idempotent handlers, so reprocessing never double-counted a transaction.",
+      web3: "Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions, to allow the onboarding to be smooth as traditional web applications. Working with a small team, I was responsible for the product vision, usability, development of the whole wallet frontend and contributing to the Smart Contracts.",
+      leader:
+        "Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions to make onboarding as smooth as a traditional web application — paired with a full on-chain activity explorer. Working with a small team, I was responsible for the product vision, usability, and development of the whole wallet frontend, contributed to the Smart Contracts, and led the system design of the indexer and API behind the explorer. One example of that indexing work: handling chain reorgs. Every block was stored keyed by its own hash and its parent's, so detecting a reorg meant walking back parent hashes until the indexer found one it already had — the fork point. From there, the orphaned blocks and the balances derived from them were invalidated, and the canonical chain was replayed forward through idempotent handlers, so reprocessing never double-counted a transaction.",
+      product:
+        "Enclave is a Wallet built to embrace non-blockchain users. It combines cutting edge technologies like Abstract Accounts, WebAuthn and Gasless transactions to make onboarding as smooth as a traditional web application — paired with a full on-chain activity explorer. Working with a small team, I was responsible for the product vision, usability, and development of the whole wallet frontend, contributed to the Smart Contracts, and led the system design of the indexer and API behind the explorer. One example of that indexing work: handling chain reorgs. Every block was stored keyed by its own hash and its parent's, so detecting a reorg meant walking back parent hashes until the indexer found one it already had — the fork point. From there, the orphaned blocks and the balances derived from them were invalidated, and the canonical chain was replayed forward through idempotent handlers, so reprocessing never double-counted a transaction.",
+      enterprise:
+        "Enclave is an application for secure digital asset management, built so non-technical users can onboard as smoothly as in a traditional web app. It combines Abstract Accounts, WebAuthn authentication and sponsored transactions, paired with a full on-chain activity explorer. In a small team, I owned the product vision, usability and the entire frontend, contributed to the backend services it relies on, and led the system design of the indexer and API behind the explorer. One example of that indexing work: handling chain reorgs. Every block was stored keyed by its own hash and its parent's, so detecting a reorg meant walking back parent hashes until the indexer found one it already had — the fork point. From there, the orphaned blocks and the balances derived from them were invalidated, and the canonical chain was replayed forward through idempotent handlers, so reprocessing never double-counted a transaction.",
+    },
+    image: "/projects/enclave.webp",
+    link: "https://enclavewallet.com",
+    priority: {
+    general: 1,
+    web3: 1,
+    leader: 1,
+    enterprise: 2,
+    product: 1,
+  },
+  },
+  {
+    id: "linkd-academy",
+    parentId: "simpli",
+    title: "Linkd Academy",
+    dateRange: "Jan 2024 - Aug 2024",
+    startDate: "2024-01",
+    technologies: [
+      frontend.typescript,
+      frontend.sveltekit,
+      backend.python,
+      blockchain.web3,
+      blockchain.smartContracts,
+    ],
+    role: "Tech Consultant",
+    description:
+      "Linkd is the largest educational platform on the Neo network. This project features a website with extensive materials teaching users how to develop dApps on the network, along with a VSCode extension to streamline installation and integration with the platform's development environment and a token. I was responsible for reviewing the platform's content, providing technical leadership on specific aspects of the project, and developing the dApp related to the token.",
+    image: "/projects/linkd.webp",
+    priority: { general: 4, web3: 2, leader: 4, enterprise: 4, product: 4 },
+    printIn: [],
+  },
+  {
+    id: "icon-dapp",
+    parentId: "simpli",
+    title: "Icon Dapp",
+    dateRange: "Oct 2023 - Jun 2024",
+    startDate: "2023-10",
+    technologies: [
+      frontend.sveltekit,
+      backend.python,
+      blockchain.web3,
+      blockchain.smartContracts,
+      frontend.typescript,
+    ],
+    role: "Software Engineer",
+    description:
+      "This platform allows dApp administrators to upload their application icons to a decentralized File System and save the URL into a SmartContract, which organizes and makes these icons available to other applications. I was responsible for architecting the dApp to operate in a fully decentralized manner.",
+    priority: { general: 4, web3: 3, leader: 4, enterprise: 4, product: 4 },
+    printIn: [],
+  },
+  {
+    id: "blockchain-services-library",
+    parentId: "simpli",
+    title: "Blockchain Services Library",
+    dateRange: "Aug 2023 - Jul 2024",
+    startDate: "2023-08",
+    technologies: [
+      frontend.typescript,
+      backend.nodejs,
+      blockchain.blockchain,
+      blockchain.cryptography,
+    ],
+    role: {
+      general: "Software Engineer | Techlead",
+      web3: "Software Engineer | Techlead",
+      leader: "TechLead",
+      enterprise: "Software Engineer | Techlead",
+      product: "TechLead",
+    },
+    description: {
+      general:
+        "BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team.",
+      web3: "BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team.",
+      leader:
+        "BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team.",
+      product:
+        "BSLib is a multi-chain library designed to perform common wallet operations in a generic manner, abstracting and normalizing the unique characteristics of each blockchain. It includes implementations for NeoN3, NeoLegacy, and various EVM networks. This library is extensively used by Neon Wallet Desktop and Mobile applications. As the creator of BSLib, I aimed to enable code reuse across the wallets maintained by my team.",
+      enterprise:
+        "BSLib is a multi-network TypeScript SDK that exposes common asset-management operations behind a single generic API, normalizing the characteristics of each underlying network. It ships implementations for NeoN3, NeoLegacy and EVM networks, and runs in production in desktop and mobile applications. As its creator, I designed the abstraction to maximize code reuse across my team's products.",
+    },
+    image: "/projects/github.png",
+    link: "https://github.com/CityOfZion/blockchain-services",
+    priority: {
+      general: 4,
+      web3: 1,
+      leader: 4,
+      enterprise: 4,
+      product: 4,
+    },
+    printIn: ["web3"],
+  },
+  {
+    id: "clickclock",
+    parentId: "simpli",
+    title: "ClickClock",
+    dateRange: "Jun 2023 - Mar 2024",
+    startDate: "2023-06",
+    technologies: [
+      frontend.typescript,
+      frontend.sveltekit,
+      backend.nodejs,
+      backend.mysql,
+      backend.graphql,
+    ],
+    role: "Software Engineer | Tech Lead",
+    description:
+      "This tool was developed to enhance ClickUp's functionalities, primarily focusing on time management and employee performance. It began as a proof of concept (POC) that I developed based on the needs I identified while managing the team. As the tool proved its value, I involved the team in its development, allowing me to transition into the role of Tech Lead and conduct interviews to better organize and prioritize demands.",
+    priority: { general: 4, web3: 4, leader: 3, enterprise: 4, product: 3 },
+    printIn: [],
+  },
+  {
+    id: "abacashi",
+    parentId: "simpli",
+    title: "Abacashi",
+    dateRange: "Mar 2022 - Aug 2024",
+    startDate: "2022-03",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.nodejs,
+      frontend.nextjs,
+      backend.graphql,
+    ],
+    role: "Software Engineer",
+    description:
+      "Abacashi is a crowdfunding platform that acquired Sharity, the system I previously worked on. Following this acquisition, my team was invited to undertake a significant refactoring of Abacashi to modernize its technologies and enhance code scalability. I led this refactoring effort, selecting technologies, defining the system architecture, guiding developers, and conducting code reviews.",
+    links: [
+      "https://www.abacashi.com/",
+      {
+        label: "NeoFeed: Abacashi acquires Sharity",
+        url: "https://neofeed.com.br/finde/abacashi-compra-sharity-e-quer-colocar-empresas-nas-vaquinhas-online/",
+      },
+    ],
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "letter",
+    parentId: "simpli",
+    title: "Letter",
+    dateRange: "Feb 2022 - Apr 2023",
+    startDate: "2022-02",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      blockchain.smartContracts,
+      blockchain.cadence,
+      blockchain.flow,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Engineering Manager",
+      enterprise: "Software Engineer | TechLead",
+      product: "Engineering Manager",
+    },
+    description: {
+      general:
+        "In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations.",
+      web3: "In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations.",
+      leader:
+        "In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations.",
+      product:
+        "In partnership with the Associated Press, Dapper Labs, and COZ, Letter is a multi-chain (Neo and Flow) platform that provides authentication mechanisms based on NFTs. This allows systems to validate access in a decentralized manner. I was responsible for architecting the solution, which included SmartContracts on both networks, an SDK that integrates both networks simultaneously, and several key integrations.",
+      enterprise:
+        "In partnership with the Associated Press, Dapper Labs and COZ, Letter is a distributed authentication platform that lets systems validate access in a decentralized manner. I architected the solution: services on both networks (Neo and Flow), a reusable SDK that integrates both simultaneously behind one interface, and several key integrations.",
+    },
+    image: "/projects/letter.png",
+    priority: {
+  general: 2,
+  web3: 1,
+  leader: 2,
+  enterprise: 2,
+  product: 2,
+},
+    printIn: ["web3"],
+  },
+  {
+    id: "acromatch",
+    parentId: "simpli",
+    title: "AcroMatch",
+    dateRange: "Nov 2021 - Jan 2023",
+    startDate: "2021-11",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.nodejs,
+      backend.mysql,
+      frontend.nextjs,
+      backend.graphql,
+    ],
+    role: "Software Engineer | Tech Lead",
+    description:
+      "AcroMatch is a niche platform designed to connect users based on their experience in circus acrobatics. My objective in leading this project was to experiment with new technologies for automatically generating code for GraphQL APIs. The experiment proved successful, and the resulting architecture was adopted in subsequent projects, including Abacashi and ClickClock.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "neon-wallet",
+    parentId: "simpli",
+    title: "Neon Wallet",
+    dateRange: "July 2021 - July 2024",
+    startDate: "2021-07",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      mobile.reactNative,
+      blockchain.blockchain,
+      frontend.electronjs,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Engineering Manager",
+      enterprise: "Software Engineer | TechLead",
+      product: "Engineering Manager",
+    },
+    description: {
+      general:
+        "Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations.",
+      web3: "Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations.",
+      leader:
+        "Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations.",
+      product:
+        "Neon is the leading wallet in the Neo ecosystem, with over $1 billion in traded volume. I was responsible for architecting its mobile version and later contributed to the desktop app. During my time on the project, I tackled key challenges such as supporting multiple blockchain networks, managing multiple accounts simultaneously, implementing WalletConnect integration, and developing the protocol for network interaction, along with several other critical integrations.",
+      enterprise:
+        "Led the architecture of a production mobile application for secure digital asset management, with over $1 billion in traded volume, and later contributed to its desktop counterpart. Responsibilities included application architecture, backend and API integration, multi-network connectivity, secure authentication, managing multiple accounts simultaneously, WalletConnect integration, the protocol for network communication, and performance optimization.",
+    },
+    image: "/projects/neon.webp",
+    link: "https://coz.io/neon-wallet/",
+    priority: shownEverywhere,
+  },
+  {
+    id: "sharity",
+    parentId: "simpli",
+    title: "Sharity",
+    dateRange: "Mar 2021 - Aug 2024",
+    startDate: "2021-03",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.java,
+      backend.nodejs,
+      frontend.nextjs,
+      backend.graphql,
+      backend.mysql,
+      backend.aws,
+      backend.sqs,
+      backend.csharp,
+      frontend.angular,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Engineering Manager",
+      enterprise: "Software Engineer | TechLead",
+      product: "Engineering Manager",
+    },
+    description:
+      "Sharity was a crowdfunding platform for charitable causes that I built from creation through scaling, growing it past 100 thousand users. It was eventually sold to Abacashi, a bigger competitor, and I was invited to lead the engineering side of that merger in recognition of the quality of Sharity's system — refactoring Abacashi's legacy C#/Angular codebase over to Node.js and React with the platform staying live the whole time, using a Strangler Fig strategy to migrate it piece by piece instead of a big-bang rewrite. One example of the work on Sharity itself: an event-driven achievements system, with badges and real-time progress bars for challenges that could chain off one another. Business events flowed through SQS, and idempotency was enforced by inserting each event's ID into a dedupe table in the same MySQL transaction as the counter increment, so a duplicate delivery just aborted instead of double-counting; chained challenges unlocked themselves by publishing a follow-up event back onto the queue, with no need for global ordering. It held up at 100k+ users, and was later reused as-is inside Abacashi after the merger.",
+    image: "/projects/sharity.webp",
+    links: [
+      "https://sharity.com.br",
+      {
+        label: "NeoFeed: Abacashi acquires Sharity",
+        url: "https://neofeed.com.br/finde/abacashi-compra-sharity-e-quer-colocar-empresas-nas-vaquinhas-online/",
+      },
+    ],
+    priority: shownEverywhere,
+    printIn: [],
+  },
+  {
+    id: "ndapp",
+    parentId: "simpli",
+    title: "NDapp",
+    dateRange: "Feb 2021 - Sep 2024",
+    startDate: "2021-02",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.java,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Engineering Manager",
+      enterprise: "Software Engineer | TechLead",
+      product: "Engineering Manager",
+    },
+    description:
+      "NDapp earned its way into becoming the official dApps gallery of the Neo network on its own merit — its traction and the quality of its data got it adopted and featured on the network's official site, not built as an official project from day one. I worked on defining the initial project structure and building its first functionalities, including the indexer and analytics pipeline behind the catalog. That meant reconciling three genuinely different chains — NeoLegacy, Neo N3, and Neo X — each with its own RPC shape and contract metadata format, into one consistent data model with automatic updates: polling each network on its own cadence, normalizing every chain-specific quirk, and keeping every dApp's stats fresh without one network's hiccup stalling the other two.",
+    image: "/projects/ndapp.webp",
+    link: "https://ndapp.org",
+    priority: { general: 2, web3: 1, leader: 2, enterprise: 1, product: 2 },
+    printIn: [],
+  },
+  {
+    id: "wow-talents",
+    parentId: "simpli",
+    title: "Wow Talents",
+    dateRange: "Mar 2020 - Aug 2023",
+    startDate: "2020-03",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.java,
+      backend.jersey,
+      backend.mysql,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Project Manager | TechLead",
+      enterprise: "Software Engineer | TechLead",
+      product: "Business Analyst | Project Manager",
+    },
+    description:
+      "Wow Talents was a comprehensive agency platform connecting child models with modeling opportunities, supporting subscription payments and five distinct user types — models, guardians, agency staff, clients, and admins — each with its own view and permissions. I owned it end to end: turning a loosely defined set of demands into functional requirements and wireframes, designing the database architecture, and structuring the project from scratch. One example of that structuring work: since every model account belonged to a minor, every read and write had to be scoped through a guardian relationship as well as a role, so I designed the permission model around both the user type and that guardianship chain — letting new user types and rules get added later without touching the core matching logic.",
+    image: "/projects/wowtalents.webp",
+    priority: { general: 2, web3: 4, leader: 1, enterprise: 1, product: 1 },
+    printIn: [],
+  },
+  {
+    id: "neo3-boa",
+    parentId: "simpli",
+    title: "Neo3-boa",
+    dateRange: "Feb 2020 - Jun 2024",
+    startDate: "2020-02",
+    technologies: [blockchain.blockchain, backend.python, blockchain.web3],
+    role: "Software Engineer",
+    description:
+      "An essential tool for Python developers on the Neo network, this project is a compiler for NeoVM. Although compilers are not my specialty, my role in the project primarily involved defining objectives, managing priorities, and assisting with technical decision-making.",
+    link: "https://github.com/CityOfZion/neo3-boa",
+    priority: { general: 4, web3: 3, leader: 4, enterprise: 4, product: 4 },
+    printIn: [],
+  },
+  {
+    id: "ldcs-she-digital",
+    parentId: "simpli",
+    title: "LDC's She Digital",
+    dateRange: "Oct 2019 - Nov 2020",
+    startDate: "2019-10",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.java,
+      backend.mysql,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Product Owner | Project Manager | TechLead",
+      enterprise: "Software Engineer | TechLead",
+      product: "Product Owner | Project Manager | TechLead",
+    },
+    description:
+      "Louis Dreyfus Company, one of the largest commodity traders in the world, commissioned a 'Safety, Health, and Environment' management platform for use across all its global units — each with its own local regulations, forms, and reporting requirements. I owned it end to end: architecture, development, and integration with Azure Active Directory for authentication and user management. The core challenge was translating that sprawl of per-unit requirements into one flexible application instead of one branch per country, so I modeled forms, fields, and workflows as configurable data instead of hardcoded screens — letting a compliance team in a new unit stand up its own SHE process by configuring the platform, not by requesting a code change and a deploy.",
+    image: "/projects/ldc.webp",
+    priority: shownEverywhere,
+  },
+  {
+    id: "jamef-customers-dashboard",
+    parentId: "simpli",
+    title: "Jamef Customers Dashboard",
+    dateRange: "Jun 2019 - May 2022",
+    startDate: "2019-06",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.java,
+      backend.redis,
+    ],
+    role: {
+      general: "Software Engineer",
+      web3: "Project Manager | TechLead",
+      leader: "Project Manager | TechLead",
+      enterprise: "Software Engineer",
+      product: "Project Manager | TechLead",
+    },
+    description:
+      "Jamef, the largest shipping company in Brazil, needed a new dashboard for customers to track delivery data, but the existing one suffered from severe performance problems. My scope started as frontend-only, but tracing the slowness back to its source pulled me into the data layer. I introduced a caching layer and a server-side pagination policy for the result set, taking a query that took 8 seconds down to a few milliseconds. I delivered a complex dashboard with several customized graphs and contributed to restructuring the underlying central system.",
+    image: "/projects/jamef.webp",
+    priority: {
+      general: 1,
+      web3: 2,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: ["general", "leader", "enterprise", "product"],
+  },
+  {
+    id: "fisheffect",
+    parentId: "simpli",
+    title: "FishEffect",
+    dateRange: "Aug 2018 - Sep 2018",
+    startDate: "2018-08",
+    technologies: [
+      frontend.typescript,
+      backend.python,
+      blockchain.web3,
+      blockchain.smartContracts,
+    ],
+    role: "Software Engineer",
+    description:
+      "FishEffect was a cryptogame similar to CryptoKitties, where players had an aquarium linked to their account, and each fish NFT appeared in their aquarium. The game included a dynamic where players could feed the fish, which would eventually reproduce.",
+    priority: { general: 4, web3: 3, leader: 4, enterprise: 4, product: 4 },
+    printIn: [],
+  },
+  {
+    id: "neo-sharp",
+    parentId: "simpli",
+    title: "Neo-Sharp",
+    dateRange: "May 2018 - Oct 2018",
+    startDate: "2018-05",
+    technologies: [backend.csharp, blockchain.web3],
+    role: "Software Engineer",
+    description:
+      "Neo-Sharp was a C# implementation of Neo Node (v2). A fundamental part of the Neo ecosystem, restricted to developers in the 'Core Dev' group. I contributed to various aspects of the project, with a primary focus on the implementation of the RPC server.",
+    priority: { general: 4, web3: 3, leader: 4, enterprise: 4, product: 4 },
+    printIn: [],
+  },
+  {
+    id: "simplidata",
+    parentId: "simpli",
+    title: "SimpliData",
+    dateRange: "Jan 2018 - May 2019",
+    startDate: "2018-01",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.r,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Product Owner | Project Manager | TechLead",
+      enterprise: "Software Engineer | TechLead",
+      product: "Product Owner | Project Manager | TechLead",
+    },
+    description:
+      "In partnership with the macroeconomics firm Parallaxis, my team and I developed SimpliData, a Data Science application akin to the Bloomberg dashboard. Our goal was to combine various market tools and techniques into a platform that was significantly more practical and user-friendly.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "bettie",
+    parentId: "simpli",
+    title: "Bettie",
+    dateRange: "Aug 2017 - Mar 2019",
+    startDate: "2017-08",
+    technologies: [mobile.android, backend.mysql, backend.java],
+    role: "Software Engineer",
+    description:
+      "Bettie was a cosmetics marketplace that integrated its product listings with Google Shopping. I was primarily responsible for structuring the architecture of the Android application, utilizing the cutting-edge technology of the time, 'Android Data Binding'.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "zerums-falcon",
+    parentId: "simpli",
+    title: "Zerum's Falcon",
+    dateRange: "Jul 2017 - May 2018",
+    startDate: "2017-07",
+    technologies: [frontend.typescript, frontend.reactjs],
+    role: "Software Engineer",
+    description:
+      "Zerum was developing Falcon, an advanced network monitoring system. To create the system's complex visual interface, they needed a developer with my level of experience. The application's frontend was highly customizable and managed complex, recursively structured data, which needed to be presented in flexible tables and graphs.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "panorist",
+    parentId: "simpli",
+    title: "Panorist",
+    dateRange: "Dec 2016 - Apr 2020",
+    startDate: "2016-12",
+    technologies: [
+      frontend.reactjs,
+      backend.java,
+      backend.mysql,
+      backend.aws,
+      backend.s3,
+    ],
+    role: "Software Engineer",
+    description:
+      "Panorist was a photo sharing and sales application. I was responsible for gathering the client's requirements and architecting a scalable framework for storing and reading high-definition images — tiering images across S3 storage classes to cut cost on older, rarely-accessed files, and handling simultaneous multi-file uploads through a buffered queue that processed them without blocking the request path. I also integrated a split-payment system with PayPal.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "itrack",
+    parentId: "simpli",
+    title: "iTrack",
+    dateRange: "Nov 2016 - Jun 2018",
+    startDate: "2016-11",
+    technologies: [
+      frontend.typescript,
+      frontend.reactjs,
+      backend.kotlin,
+      backend.java,
+      backend.aws,
+      backend.s3,
+      backend.sns,
+      backend.sqs,
+      backend.redis,
+      backend.mysql,
+      backend.ecs,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "Engineering Manager | TechLead | Business Analyst",
+      enterprise: "Software Engineer | TechLead",
+      product: "Business Analyst | Engineering Manager | TechLead",
+    },
+    description:
+      "I was the lead engineer who built iTrack Brasil from the ground up, owning its system design and scaling it into a B2B delivery platform integrating multiple systems, with nearly 60,000 couriers and over 50 million invoices processed across 2,000 registered companies — growth that led to its acquisition by MadeiraMadeira in 2021. One example of that scaling work: as invoice volume and courier position updates grew, the database hit a write bottleneck, surfaced by a spike at the end of a fiscal month. The system stayed up, but latency and AWS costs climbed, so I redesigned the write path at its source — courier position pings now land as Parquet files on S3, backed by a Redis cache holding each courier's last known position for fast reads, while invoice processing moved behind an SNS/SQS pipeline that absorbs bursts asynchronously.",
+    image: "/projects/itrack.webp",
+    link: "https://itrackbrasil.com.br",
+    priority: shownEverywhere,
+  },
+  {
+    id: "mapix",
+    parentId: "simpli",
+    title: "Mapix",
+    dateRange: "Mar 2016 - Jan 2018",
+    startDate: "2016-03",
+    technologies: [mobile.android, backend.java],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "TechLead | Project Manager | Business Analyst",
+      enterprise: "Software Engineer | TechLead",
+      product: "Business Analyst | Project Manager | TechLead",
+    },
+    description:
+      "Mapix connects students with their school drivers, giving children and parents predictability and safety while simplifying route planning and communication for drivers. I owned the planning and structuring of the solution end to end and built its most critical components: the route-building system, in-app chat, and a live GPS mode. One example of that work: building a route wasn't just point-to-point — each van carried several students with different pickup and drop-off points on a shared trip, so the routing logic had to sequence stops for the whole group at once, and the GPS mode had to keep parents' ETAs accurate against a background location stream over unreliable mobile connections, without draining a driver's phone battery on a multi-hour shift.",
+    image: "/projects/mapix.webp",
+    link: "https://mapixapp.com/",
+    priority: {
+      general: 1,
+      web3: 3,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: [],
+  },
+  {
+    id: "ativo-coach",
+    parentId: "simpli",
+    title: "Ativo Coach",
+    dateRange: "Mar 2016 - Apr 2018",
+    startDate: "2016-03",
+    technologies: [frontend.jquery, mobile.android, backend.java, backend.mysql],
+    role: "Software Engineer",
+    description:
+      "Ativo Coach was one of the first mobile applications to enable asynchronous communication between coaches and athletes, allowing for the comprehensive, practical, and flexible configuration of training sessions. I focused primarily on project planning and structure, and contributed to the development of both the coach platform and the Android application.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "apptite",
+    parentId: "simpli",
+    title: "Apptite",
+    dateRange: "Sep 2015 - July 2017",
+    startDate: "2015-09",
+    technologies: [
+      mobile.android,
+      backend.java,
+      backend.mysql,
+      backend.redis,
+      backend.s3,
+      backend.sns,
+      backend.sqs,
+      backend.ecs,
+    ],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "TechLead | Project Manager | Business Analyst",
+      enterprise: "Software Engineer | TechLead",
+      product: "Business Analyst | Project Manager | TechLead",
+    },
+    description:
+      "Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups' and media coverage that established it as an important platform in the artisanal food market. I was the main engineer responsible for the platform from its initial planning and structuring through scaling it as it grew. One example of that scaling work: the dish recommendation engine. The map was discretized into cells, each holding the list of stores that served it, updated in batch whenever delivery areas changed — so the geographic lookup itself was just a cached read. Personalization ran on top of that already-filtered set, combining complementary signals in parallel (repurchase history, regional popularity, among others), with the heavier estimates — including a store-by-cell matrix — precomputed offline.",
+    image: "/projects/apptite.webp",
+    priority: {
+      general: 1,
+      web3: 3,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: ["general", "leader", "enterprise", "product"],
+  },
+  {
+    id: "desabafa",
+    parentId: "simpli",
+    title: "Desabafa",
+    dateRange: "Aug 2015 - July 2017",
+    startDate: "2015-08",
+    technologies: [mobile.android, backend.java],
+    role: {
+      general: "Software Engineer | TechLead",
+      web3: "Software Engineer | TechLead",
+      leader: "TechLead | Project Manager | Business Analyst",
+      enterprise: "Software Engineer | TechLead",
+      product: "Business Analyst | Project Manager | TechLead",
+    },
+    description:
+      "Desabafa was an anonymous social network built for emotional support and mutual understanding, and it went on to receive media recognition in the mental health sector while facilitating over 1 million interactions. I was responsible for planning, structuring, and building the platform, including its moderation and safety systems. One example of that work: anonymity was the whole point of the product, so any moderation approach that relied on identifying users to punish or filter them was off the table. I built the safety layer around behavior instead of identity — rate-limiting and pattern detection on posting activity, plus keyword and pattern-based flagging tuned for crisis language — so harmful content and abuse could be caught and escalated without ever unmasking a user.",
+    image: "/projects/desabafa.webp",
+    priority: {
+      general: 1,
+      web3: 3,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: [],
+  },
+  {
+    id: "band-radios-app",
+    parentId: "simpli",
+    title: "Band Radios App",
+    dateRange: "Oct 2014 - Nov 2015",
+    startDate: "2014-10",
+    technologies: [mobile.xamarin],
+    role: {
+      general: "Software Engineer",
+      web3: "Software Engineer",
+      leader: "TechLead",
+      enterprise: "Software Engineer",
+      product: "TechLead",
+    },
+    description:
+      "Bandeirantes, one of Brazil's largest media conglomerates, has run Band Radios since 1937 and selected my team in 2014 to modernize its mobile app. I served as lead developer for both the Android and iOS apps. One example of the technical work: streaming ran over UDP, and the naive approach — opening the connection only after a listener picked a station — meant a noticeable delay before audio started. I pre-established the UDP connection ahead of the station choice instead, trading a bit of idle network and battery use for audio that started the instant a user tapped a station.",
+    priority: {
+      general: 1,
+      web3: 3,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: [],
+  },
+  {
+    id: "ifrete",
+    parentId: "simpli",
+    title: "iFrete",
+    dateRange: "Sep 2014 - Jun 2015",
+    startDate: "2014-09",
+    technologies: [
+      mobile.xamarin,
+      mobile.android,
+      frontend.jquery,
+      backend.java,
+      backend.mysql,
+      mobile.ios,
+    ],
+    role: "Software Engineer",
+    description:
+      "iFrete was a comprehensive platform for managing and discovering freight services, featuring applications for iOS, Android, and Web, as well as an administrative panel. My role involved end-to-end responsibilities, including planning, architecture, and development, ensuring seamless integration and functionality across all components.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "multilaser-runin",
+    parentId: "simpli",
+    title: "Multilaser Runin",
+    dateRange: "Aug 2014 - Oct 2014",
+    startDate: "2014-08",
+    technologies: [mobile.android, backend.java],
+    role: {
+      general: "Software Engineer",
+      web3: "TechLead",
+      leader: "TechLead",
+      enterprise: "Software Engineer",
+      product: "TechLead",
+    },
+    description:
+      "Multilaser, one of Brazil's largest cell phone and tablet manufacturers, faced high demand for quality control testing that had been done by hand on the assembly line. I led development of the Android app that automated it instead — running CPU, RAM, GPS, screen brightness, and touch checks — and it has since tested over 20 million devices. One example of that work: each check had its own pass/fail criteria and its own margin for hardware variance, so the real problem wasn't running the tests, it was collapsing five independent, noisy hardware signals into one deterministic pass/fail a line worker could act on in a couple of seconds, fast enough to keep up with a production line moving tens of thousands of units.",
+    image: "/projects/runin.webp",
+    priority: {
+      general: 1,
+      web3: 3,
+      leader: 1,
+      enterprise: 1,
+      product: 1,
+    },
+    printIn: ["general", "leader", "enterprise"],
+  },
+  {
+    id: "selfchef",
+    parentId: "simpli",
+    title: "SelfChef",
+    dateRange: "Jan 2014 - Apr 2015",
+    startDate: "2014-01",
+    technologies: [
+      mobile.xamarin,
+      mobile.android,
+      mobile.ios,
+      backend.java,
+      backend.mysql,
+    ],
+    role: "Software Engineer",
+    description:
+      "SelfChef was an idea I developed with my team, designed to help users find recipes based on the ingredients they had at home. Using adaptive intelligence, the app suggested compatible recipes. We managed to turn the concept into reality by creating a sophisticated architecture and developing apps for iOS and Android.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "diario-da-dor",
+    parentId: "simpli",
+    title: "Diário da Dor (Pain Diary)",
+    dateRange: "Aug 2013 - Feb 2014",
+    startDate: "2013-08",
+    technologies: [mobile.android, backend.java, backend.mysql],
+    role: "Software Engineer",
+    description:
+      "'Diário da Dor' was an app designed to assist people with chronic migraines in tracking headache occurrences and associated habits. By analyzing statistical data, users could investigate potential pain triggers. I developed the Android version of the application.",
+    priority: invisible,
+    printIn: [],
+  },
+  {
+    id: "simet-nicbr",
+    title: "SIMET - NIC.br",
+    dateRange: "2010 - 2013",
+    startDate: "2010-01",
+    technologies: [frontend.jquery, frontend.backbone, backend.java, mobile.android],
+    role: "Software Engineer",
+    description:
+      "At NIC.br, I worked on SIMET, Brazil's official internet quality measurement tool used by regulators and ISPs alike. The flagship SIMET application still ran as a Java Applet at a time when browsers were starting to lock those out for security reasons, so I proposed and led its migration to plain JavaScript before that became an emergency. Beyond the core tool, I built SimetMapas, visualizing internet quality heat maps across Brazil, and dashboards consumed directly by internet operators and regulatory agencies. I also contributed to SimetBox, a Wi-Fi router built to run these tests automatically, and to an Android testing app with its own custom graphics library for rendering results on constrained hardware.",
+    link: "https://simet.nic.br",
+    priority: { general: 2, web3: 2, leader: 2, enterprise: 2, product: 2 },
+    printIn: ["general", "enterprise"],
+  },
+];

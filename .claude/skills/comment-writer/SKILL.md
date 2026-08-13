@@ -100,7 +100,7 @@ No rejection list, no per-tweet praise. Then offer to regenerate any single repl
 
 Read:
 1. `.claude/skills/_shared/author-voice.md` — Gil's base voice & mannerisms (always applied; see the Gil's Voice section below).
-2. `.claude/skills/_shared/professional-background.md` — the index of where Gil's real experience lives. Use it to ground the comment in an actual project; follow it to the source files (e.g. `components/Timeline.tsx`) when you need a specific project's detail.
+2. `.claude/skills/_shared/professional-background.md` — the index of where Gil's real experience lives. Use it to ground the comment in an actual project; follow it to the source files (e.g. `content/timeline-items.ts`) when you need a specific project's detail.
 3. The Published Articles Cache from `content-pipeline/SKILL.md` (the table at the end of that file).
 
 Identify articles that have **genuine topical overlap** with the third-party post — not just keyword match, but real conceptual connection.

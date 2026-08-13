@@ -39,9 +39,22 @@ Decide whether producing the text requires knowing Gil's real background — his
 When background is needed:
 
 1. Read `.claude/skills/_shared/professional-background.md`. It holds **no facts** — it is a map of which portfolio source files contain what. Use it to pick which files to read.
-2. Read the actual source files it points to (start with `components/Bio.tsx`; add `components/Timeline.tsx` and others as the task demands). These are Gil's live portfolio components, so they are always current with his latest edits. Read them every run — never recite experience from memory or a past summary. Do this before stating a fact, not after.
+2. Read the actual source files it points to (start with `components/Bio.tsx`; add `content/timeline-items.ts` and others as the task demands). These are Gil's live portfolio components, so they are always current with his latest edits. Read them every run — never recite experience from memory or a past summary. Do this before stating a fact, not after.
 3. **Never invent** project names, dates, metrics, roles, employers, or biographical details. If the source doesn't support a claim, leave it out or keep it general. When a form field asks for something Gil's record doesn't cover, answer honestly at the level the record supports rather than fabricating.
 4. Match the claims to the prompt: for a smart-contract/DeFi role, lead with the blockchain work; for a fullstack/frontend or leadership role, lead with that side. Use only what's real either way.
+
+### Job-application mode — never write a gap into the answer
+
+If the text is going to a recruiter or a hiring company (application form field, cover letter, job-post reply, recruiter DM, "why you for this role"), **never state, concede, or apologize for a missing requirement.** No "I haven't worked in X", "that domain would be new to me", "I don't have experience with Y", "my background is more Z than what you're asking for". A weakness Gil volunteers is one the recruiter did not have to find, and it costs him the screen.
+
+This does **not** license invention. Rule 3 still holds — no fake employers, dates, metrics, tools, or certifications. The move is **omission plus the closest real thing**:
+
+- Silence beats confession. If the record doesn't cover a requirement, just don't raise it. An answer that never mentions the gap is complete.
+- Where the record holds something adjacent, lead with that on its own terms, stated as fact, not as a substitute ("I've run delivery for enterprise clients under contract deadlines"), never as an excuse ("no call center experience, but…").
+- Forward-looking framing is fine when it's true and carries no admission ("I'd like to bring that to your operation").
+- Never use "but", "although", "honestly", "to be straight with you", or a similar hinge to set up a shortfall.
+
+If a form field asks point-blank about something Gil has never done, answer with what he has done in the nearest area and stop. Do not narrate the absence.
 
 ---
 
@@ -106,6 +119,9 @@ I'm a software developer specialized in blockchain.
 
 **Input:** `Create a long text about MEV`
 → Mode A (instruction). Output: a long-form English text about MEV, in Gil's voice.
+
+**Input:** `Responda em até 1500 chars: fale sobre sua trajetória e como pode ajudar` + a project-coordinator job post for a call center company
+→ Mode A, job-application mode. Gil's record has no call center work, so the answer never mentions it. Bad (never do this): *"I should be straight with you. I have not managed projects inside a call center operation, so the domain would be new to me. What I bring is…"*. Good: drop that sentence entirely and let the adjacent real experience stand on its own — *"What I bring is a long record of delivering on schedule for paying clients, and the habit of running debriefs and turning what went wrong into a process change."*
 
 **Input:** `Create a short post about why onboarding blocks Web3 adoption`
 → Mode A (instruction). The output runs over 100 words, so Step 4 applies: there is **exactly one** deliberate typo near the 60% mark. Here it is `chamce` (for "chance", n→m adjacent). Notice the output below is otherwise clean and the typo is NOT fixed:

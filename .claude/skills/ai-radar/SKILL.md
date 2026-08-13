@@ -104,7 +104,7 @@ Order by buzz. Be honest when a week is quiet — a thin list of real signals be
 This is the payoff: turn the hottest topics into angles **only Gil could write**.
 
 First read the anchors deferred in Step 0: `professional-background.md` → the portfolio
-source files it points to (`components/Timeline.tsx` etc.), and `author-voice.md`.
+source files it points to (`content/timeline-items.ts` etc.), and `author-voice.md`.
 
 For the **top 3–4 topics**, propose **2–3 hooks each**:
 
