@@ -4,7 +4,6 @@ import { Achievements } from "@/components/Achievements";
 import { History } from "@/components/History";
 import { SkillSection } from "@/components/SkillSection";
 import { Timeline } from "@/components/Timeline";
-import { LeadershipSection } from "@/components/LeadershipSection";
 import { OtherSection } from "@/components/OtherSection";
 import { LatestPosts } from "@/components/LatestPosts";
 import { PiGlobe, PiRobot } from "react-icons/pi";
@@ -19,7 +18,7 @@ import { existsSync } from "fs";
 import { join } from "path";
 
 export function ResumePage({ version }: { version: ContentVersion }) {
-  const latestPosts = getAllPosts().slice(0, 3);
+  const latestPosts = getAllPosts().slice(0, 5);
 
   const backendSection = (
     <SkillSection
@@ -27,28 +26,27 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Backend"
       icon={BiServer}
       skills={[
-        { name: "Node.JS", since: "2012", level: "expert" },
-        { name: "GraphQL / REST / WebSockets", since: "2018", level: "expert" },
-        {
-          name: "MySQL / PostgreSQL / MongoDB / Prisma",
-          since: "2007",
-          level: "expert",
-        },
-        { name: "Java / Kotlin", since: "2008", level: "expert" },
-      ]}
-      otherSkills={[
-        "Docker",
-        "AWS",
-        "C#",
-        "Python",
-        "Express",
-        "TypeGraphQL",
-        "Apollo",
-        "Jersey",
-        "JDBC",
-        "PayPal",
-        "ElasticSearch",
-        "and more...",
+        { name: "Node.js", since: "2012" },
+        { name: "Java", since: "2008" },
+        { name: "Kotlin", since: "2016" },
+        { name: "MySQL", since: "2013" },
+        { name: "PostgreSQL", since: "2013" },
+        { name: "MongoDB", since: "2018" },
+        { name: "Prisma", since: "2021" },
+        { name: "GraphQL", since: "2021" },
+        { name: "REST", since: "2012" },
+        { name: "WebSockets", since: "2016" },
+        { name: "Docker", since: "2016" },
+        { name: "AWS", since: "2013" },
+        { name: "C#", since: "2018" },
+        { name: "Python", since: "2018" },
+        { name: "Express", since: "2012" },
+        { name: "TypeGraphQL", since: "2021" },
+        { name: "Apollo", since: "2021" },
+        { name: "Jersey", since: "2020" },
+        { name: "JDBC", since: "2020" },
+        { name: "PayPal", since: "2016" },
+        { name: "ElasticSearch", since: "2019" },
       ]}
     />
   );
@@ -61,33 +59,30 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Backend"
       icon={BiServer}
       skills={[
-        { name: "Java / Kotlin", since: "2008", level: "expert" },
-        { name: "Node.JS / TypeScript", since: "2012", level: "expert" },
-        {
-          name: "REST / GraphQL / WebSockets / Microservices",
-          since: "2018",
-          level: "expert",
-        },
-        {
-          name: "MySQL / PostgreSQL / MongoDB / Prisma",
-          since: "2007",
-          level: "expert",
-        },
-      ]}
-      otherSkills={[
-        "Distributed Systems",
-        "Solution Architecture",
-        "Docker",
-        "AWS",
-        "CI/CD",
-        "GitHub Actions",
-        "C#",
-        "Python",
-        "Express",
-        "Jersey",
-        "JDBC",
-        "ElasticSearch",
-        "and more...",
+        { name: "Java", since: "2008" },
+        { name: "Kotlin", since: "2016" },
+        { name: "Node.js", since: "2012" },
+        { name: "TypeScript", since: "2016" },
+        { name: "REST", since: "2012" },
+        { name: "GraphQL", since: "2021" },
+        { name: "WebSockets", since: "2016" },
+        { name: "Microservices", since: "2019" },
+        { name: "MySQL", since: "2013" },
+        { name: "PostgreSQL", since: "2013" },
+        { name: "MongoDB", since: "2018" },
+        { name: "Prisma", since: "2021" },
+        { name: "Distributed Systems", since: "2019" },
+        { name: "Solution Architecture", since: "2016" },
+        { name: "Docker", since: "2016" },
+        { name: "AWS", since: "2013" },
+        { name: "CI/CD", since: "2018" },
+        { name: "GitHub Actions", since: "2020" },
+        { name: "C#", since: "2018" },
+        { name: "Python", since: "2018" },
+        { name: "Express", since: "2012" },
+        { name: "Jersey", since: "2020" },
+        { name: "JDBC", since: "2020" },
+        { name: "ElasticSearch", since: "2019" },
       ]}
     />
   );
@@ -98,29 +93,21 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="AI Engineering"
       icon={PiRobot}
       skills={[
-        {
-          name: "AI Process Automation",
-          since: "2025",
-          level: "advanced",
-        },
-        {
-          name: "Agent Development / MCP / Skills",
-          since: "2025",
-          level: "advanced",
-        },
-        { name: "Harness Engineering", since: "2026", level: "advanced" },
-        { name: "Spec-Driven Development", since: "2025", level: "advanced" },
-      ]}
-      otherSkills={[
-        "Claude / Anthropic API",
-        "OpenAI API",
-        "Claude Code",
-        "Cursor",
-        "Context Engineering",
-        "Agentic Workflows",
-        "Evals",
-        "RAG",
-        "and more...",
+        { name: "AI Process Automation", since: "2025" },
+        { name: "Agent Development", since: "2025" },
+        { name: "MCP", since: "2025" },
+        { name: "Claude Skills", since: "2025" },
+        { name: "Harness Engineering", since: "2026" },
+        { name: "Spec-Driven Development", since: "2025" },
+        { name: "Claude", since: "2025" },
+        { name: "Anthropic API", since: "2025" },
+        { name: "OpenAI API", since: "2023" },
+        { name: "Claude Code", since: "2025" },
+        { name: "Cursor", since: "2024" },
+        { name: "Context Engineering", since: "2025" },
+        { name: "Agentic Workflows", since: "2025" },
+        { name: "Evals", since: "2025" },
+        { name: "RAG", since: "2024" },
       ]}
     />
   );
@@ -131,27 +118,25 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Web Frontend"
       icon={PiGlobe}
       skills={[
-        { name: "Javascript", since: "2008", level: "expert" },
-        { name: "Typescript", since: "2018", level: "expert" },
-        { name: "ReactJS / NextJS", since: "2017", level: "expert" },
-        { name: "Tailwind", since: "2020", level: "expert" },
-      ]}
-      otherSkills={[
-        "Vue 2",
-        "SvelteKit",
-        "Chakra UI",
-        "ReactQuery",
-        "ReduxToolkit",
-        "Echarts",
-        "Valtio",
-        "Vite",
-        "Jest",
-        "Playwright",
-        "Storybook",
-        "URQL",
-        "ReactHookForm",
-        "Lighthouse",
-        "and more...",
+        { name: "JavaScript", since: "2008" },
+        { name: "TypeScript", since: "2016" },
+        { name: "React.js", since: "2016" },
+        { name: "Next.js", since: "2021" },
+        { name: "Tailwind", since: "2020" },
+        { name: "Vue 2", since: "2015" },
+        { name: "SvelteKit", since: "2023" },
+        { name: "Chakra UI", since: "2020" },
+        { name: "React Query", since: "2021" },
+        { name: "Redux Toolkit", since: "2018" },
+        { name: "ECharts", since: "2019" },
+        { name: "Valtio", since: "2022" },
+        { name: "Vite", since: "2022" },
+        { name: "Jest", since: "2018" },
+        { name: "Playwright", since: "2023" },
+        { name: "Storybook", since: "2020" },
+        { name: "URQL", since: "2021" },
+        { name: "React Hook Form", since: "2020" },
+        { name: "Lighthouse", since: "2019" },
       ]}
     />
   );
@@ -162,31 +147,28 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Blockchain"
       icon={BlockchainIcon}
       skills={[
-        {
-          name: "Ethereum / Solidity / Foundry",
-          since: "2020",
-          level: "expert",
-        },
-        {
-          name: "Architecture / Fuzzing / Gas Optimization",
-          since: "2023",
-          level: "expert",
-        },
-        { name: "Wagmi / Viem / The Graph", since: "2023", level: "expert" },
-        { name: "Solana / Flow / Neo N3", since: "2018", level: "intermediate" },
-      ]}
-      otherSkills={[
-        "VM Compiler Development",
-        "Wallet Development",
-        "NFT",
-        "Crypto Currency",
-        "DEX",
-        "AMM",
-        "Ethers",
-        "Hardhat",
-        "Audit Prep",
-        "Slither",
-        "and more...",
+        { name: "Ethereum", since: "2020" },
+        { name: "Solidity", since: "2020" },
+        { name: "Foundry", since: "2020" },
+        { name: "Protocol Architecture", since: "2023" },
+        { name: "Fuzzing", since: "2023" },
+        { name: "Gas Optimization", since: "2023" },
+        { name: "Wagmi", since: "2023" },
+        { name: "Viem", since: "2023" },
+        { name: "The Graph", since: "2023" },
+        { name: "Solana", since: "2018" },
+        { name: "Flow", since: "2022" },
+        { name: "Neo N3", since: "2021" },
+        { name: "VM Compiler Development", since: "2018" },
+        { name: "Wallet Development", since: "2021" },
+        { name: "NFT", since: "2018" },
+        { name: "Crypto Currency", since: "2018" },
+        { name: "DEX", since: "2021" },
+        { name: "AMM", since: "2023" },
+        { name: "Ethers", since: "2021" },
+        { name: "Hardhat", since: "2020" },
+        { name: "Audit Prep", since: "2023" },
+        { name: "Slither", since: "2023" },
       ]}
     />
   );
@@ -199,28 +181,26 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Web3"
       icon={BlockchainIcon}
       skills={[
-        {
-          name: "Ethereum / EVM / Multi-chain Integration",
-          since: "2018",
-          level: "expert",
-        },
-        {
-          name: "Wallet Infrastructure / WalletConnect",
-          since: "2021",
-          level: "expert",
-        },
-        { name: "Ethers / Wagmi / Viem / The Graph", since: "2023", level: "expert" },
-        { name: "Solidity / Foundry", since: "2020", level: "expert" },
-      ]}
-      otherSkills={[
-        "SDK Development",
-        "Cryptography",
-        "Account Abstraction",
-        "Solana / Flow / Neo N3",
-        "Hardhat",
-        "Automated Testing",
-        "Audit Prep",
-        "and more...",
+        { name: "Ethereum", since: "2020" },
+        { name: "EVM", since: "2020" },
+        { name: "Multi-chain Integration", since: "2018" },
+        { name: "Wallet Infrastructure", since: "2021" },
+        { name: "WalletConnect", since: "2021" },
+        { name: "Ethers", since: "2021" },
+        { name: "Wagmi", since: "2023" },
+        { name: "Viem", since: "2023" },
+        { name: "The Graph", since: "2023" },
+        { name: "Solidity", since: "2020" },
+        { name: "Foundry", since: "2020" },
+        { name: "SDK Development", since: "2022" },
+        { name: "Cryptography", since: "2023" },
+        { name: "Account Abstraction", since: "2024" },
+        { name: "Solana", since: "2018" },
+        { name: "Flow", since: "2022" },
+        { name: "Neo N3", since: "2021" },
+        { name: "Hardhat", since: "2020" },
+        { name: "Automated Testing", since: "2020" },
+        { name: "Audit Prep", since: "2023" },
       ]}
     />
   );
@@ -233,21 +213,22 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       title="Product"
       icon={HiOutlineClipboardDocumentList}
       skills={[
-        { name: "Discovery / Requirements", since: "2010", level: "expert" },
-        { name: "Backlog / Roadmap / Prioritization", since: "2016", level: "expert" },
-        { name: "Stakeholder Management", since: "2013", level: "expert" },
-        { name: "Wireframing / UX", since: "2011", level: "advanced" },
-      ]}
-      otherSkills={[
-        "User Stories",
-        "Acceptance Criteria",
-        "Functional Specs",
-        "Stakeholder Interviews",
-        "Technical Feasibility",
-        "Scope Negotiation",
-        "Figma",
-        "ClickUp",
-        "and more...",
+        { name: "Discovery", since: "2010" },
+        { name: "Requirements", since: "2010" },
+        { name: "Backlog Management", since: "2016" },
+        { name: "Roadmap", since: "2016" },
+        { name: "Prioritization", since: "2016" },
+        { name: "Stakeholder Management", since: "2013" },
+        { name: "Wireframing", since: "2011" },
+        { name: "UX", since: "2011" },
+        { name: "User Stories", since: "2016" },
+        { name: "Acceptance Criteria", since: "2016" },
+        { name: "Functional Specs", since: "2016" },
+        { name: "Stakeholder Interviews", since: "2013" },
+        { name: "Technical Feasibility", since: "2013" },
+        { name: "Scope Negotiation", since: "2013" },
+        { name: "Figma", since: "2018" },
+        { name: "ClickUp", since: "2019" },
       ]}
     />
   );
@@ -303,14 +284,14 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             : "Principal Software Engineer"
         }
         contacts={{
-          fullName: "Gil L Bueno",
+          fullName: "Gil Bueno",
           email: "gilbueno.mail@gmail.com",
           github: "github.com/melanke",
           telegram: "melankeee",
           x: "melanke",
           education: "Computer Science, Bachelor's Degree PUC-SP",
           languages: "English and Portuguese",
-          location: "Sao Paulo, Brazil (UTC-3)",
+          location: "UTC-3",
           linkedin: "linkedin.com/in/gilbueno",
         }}
       />
@@ -332,20 +313,10 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           <div className="flex flex-col max-w-[740px] print:block">
             <Bio version={version} />
             <Achievements />
-            {(version === "leader" || version === "product") && (
-              <LeadershipSection version={version} />
-            )}
-            <div className="hidden print:block font-clash print:font-sans font-semibold text-black dark:text-white print:mt-3 text-xl">
-              Technical Skills
-            </div>
-
-            <div className="flex flex-wrap print:flex-col gap-x-5 gap-y-14 print:gap-y-1.5 items-start mt-14 print:mt-2 w-full text-black max-md:max-w-full">
+            <div className="flex flex-col gap-y-8 print:gap-y-1.5 items-start mt-14 print:mt-3 w-full text-black max-md:max-w-full">
               {orderedSkills}
             </div>
 
-            {version !== "leader" && version !== "product" && (
-              <LeadershipSection version={version} />
-            )}
             <OtherSection />
 
             <History text="I began my software development journey as a self-taught learner in middle school and pursued a technical programming course in high school. After high school, I worked as a full-stack web developer and then earned a Computer Science degree, gaining valuable experience at various companies, including NIC.br. There, I specialized in full-stack web and native Android development. Later, I co-founded Simpli, a startup that grew into a successful software house, delivering diverse projects, including blockchain development. This period helped me evolve as both a developer and a leader." />
@@ -353,7 +324,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             {/* Latest Posts — xl+ only (left column) */}
             <LatestPosts posts={latestPosts} className="hidden xl:block print:hidden" />
           </div>
-          <div className="flex flex-col print:block print:break-before-page">
+          <div className="flex flex-col print:block">
             <Timeline version={version} />
           </div>
         </div>

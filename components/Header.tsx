@@ -67,11 +67,14 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
               </div>
               {/* PRINT: full name + static title */}
               <div className="hidden print:flex items-baseline gap-2.5">
-                <div className="font-sans text-6xl font-bold">
+                <div className="font-sans text-5xl font-bold">
                   {contacts.fullName}
                 </div>
                 <div className="font-sans font-semibold text-2xl leading-6">
                   {title}
+                </div>
+                <div className="font-sans text-sm text-black/60">
+                  {contacts.location}
                 </div>
               </div>
             </Link>
@@ -143,13 +146,10 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
             </a>
             <a
               href={`https://t.me/${contacts.telegram}`}
-              className="flex gap-1.5 items-center rounded-full hover:bg-black hover:p-1.5 hover:-m-1.5 hover:text-white hover:z-10 transition-all duration-200"
+              className="print:hidden flex gap-1.5 items-center rounded-full hover:bg-black hover:p-1.5 hover:-m-1.5 hover:text-white hover:z-10 transition-all duration-200"
               title={contacts.telegram}
             >
-              <FaTelegram className="w-7 h-7 print:hidden" />
-              <div className="self-stretch my-auto hidden print:block">
-                Telegram
-              </div>
+              <FaTelegram className="w-7 h-7" />
             </a>
             <a
               href={formatUrl(contacts.github)}
@@ -159,7 +159,7 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
             >
               <FaGithub className="w-7 h-7 print:hidden" />
               <div className="self-stretch my-auto hidden print:block">
-                Github
+                {contacts.github}
               </div>
             </a>
             <a
@@ -170,23 +170,24 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
             >
               <FaLinkedin className="w-7 h-7 print:hidden" />
               <div className="self-stretch my-auto hidden print:block">
-                LinkedIn
+                {contacts.linkedin}
               </div>
             </a>
             <a
               href={`https://x.com/${contacts.x}`}
               target="_blank"
-              className="flex gap-1.5 items-center rounded-full hover:bg-black hover:p-1.5 hover:-m-1.5 hover:text-white hover:z-10 transition-all duration-200"
+              className="print:hidden flex gap-1.5 items-center rounded-full hover:bg-black hover:p-1.5 hover:-m-1.5 hover:text-white hover:z-10 transition-all duration-200"
               title={`x.com/${contacts.x}`}
             >
-              <FaXTwitter className="w-7 h-7 print:hidden" />
-              <div className="self-stretch my-auto hidden print:block">
-                {`x.com/${contacts.x}`}
-              </div>
+              <FaXTwitter className="w-7 h-7" />
             </a>
-            <div className="self-stretch my-auto hidden print:block">
-              {contacts.location}
-            </div>
+            <a
+              href="https://gil.solutions"
+              target="_blank"
+              className="hidden print:block self-stretch my-auto"
+            >
+              https://gil.solutions
+            </a>
           </div>
         </div>
       </div>

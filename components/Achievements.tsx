@@ -10,7 +10,7 @@ export function Achievements() {
         </div>
       </div>
       <div className="text-sm leading-5 text-black dark:text-white max-md:max-w-full mt-2.5 print:mt-1">
-        <ul className="grid grid-cols-2 gap-x-4 gap-y-1 print:grid-cols-1 print:gap-y-0 text-sm list-disc list-outside pl-5">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-1 print:gap-y-0 text-sm list-disc list-outside pl-5">
           <li>
             <a
               href="https://coz.io/neon-wallet/"

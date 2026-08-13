@@ -28,55 +28,55 @@ export function Bio({ version }: { version: ContentVersion }) {
   ) : version === "enterprise" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-4 print:mt-2">
-        I am a Principal Software Engineer with 19+ years designing and
-        delivering scalable backend systems, distributed applications and
-        enterprise software, with 50+ delivered projects across logistics,
-        fintech, media, enterprise SaaS and Web3. I architected a logistics
-        platform that processed 50M+ invoices for 60,000 couriers, and a wallet
-        application that moved more than $1 billion in volume.
+        I am a Principal Software Engineer with 19+ years delivering scalable
+        backend systems, distributed applications and enterprise software,
+        with 50+ projects across logistics, fintech, media, enterprise SaaS
+        and Web3. I architected a logistics platform processing 50M+ invoices
+        for 60,000 couriers, and a wallet that moved over $1 billion in
+        volume.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
         My core expertise is Java, Kotlin, Node.js and TypeScript — REST and
-        GraphQL APIs, distributed systems, and solution architecture. I have led
-        engineering teams of up to 30 people while staying hands-on in design and
-        implementation, defining architecture, technical roadmaps, engineering
-        standards and delivery processes.
+        GraphQL APIs, distributed systems, and solution architecture. I&apos;ve
+        led engineering teams of up to 30 while staying hands-on in design and
+        implementation, defining architecture, roadmaps, and engineering
+        standards.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
-        More recently I have worked on AI-assisted engineering workflows,
-        integrating LLM agents into development and review processes and
-        building tooling that turns natural language into working software, and
-        on Web3-enabled applications, building backend services, wallet
-        infrastructure, multi-chain integrations and developer tooling. What I
-        care about is shipping systems that stay reliable in production.
+        More recently I&apos;ve worked on AI-assisted engineering workflows —
+        integrating LLM agents into development and review, and building
+        tooling that turns natural language into working software — plus Web3
+        applications: backend services, wallet infrastructure, and multi-chain
+        integrations. What I care about is shipping systems that stay reliable
+        in production.
       </div>
     </>
   ) : version === "product" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
         I&apos;m a Technical Product Owner with 19+ years in software and 12+
-        years owning product decisions next to engineering teams of up to 30. I
-        co-founded Simpli and grew it from a two-person startup into a
-        30-person software house that delivered 50+ products — which meant
-        running discovery, requirements and roadmap for a new product every few
-        months, across logistics, fintech, media, education and Web3.
+        years owning product decisions alongside engineering teams of up to
+        30. I co-founded Simpli and grew it from a two-person startup into a
+        30-person software house delivering 50+ products — running discovery,
+        requirements and roadmap across logistics, fintech, media, education
+        and Web3.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
         My work is turning stakeholder needs into functional requirements,
         wireframes and a prioritized backlog, then staying close to delivery so
-        scope, feasibility and deadlines stay honest. I owned the product
-        vision and usability of Enclave Wallet, wrote the requirements and
-        roadmap for Louis Dreyfus Company&apos;s global Safety, Health and
-        Environment platform, and shaped products that reached real numbers:
-        50M+ invoices on iTrack, US$1.6M GMV on Apptite, 100k users on Sharity.
+        scope, feasibility and deadlines stay honest. I owned product vision
+        and usability for Enclave Wallet, wrote requirements and roadmap for
+        Louis Dreyfus Company&apos;s global Safety, Health and Environment
+        platform, and shaped products that reached real numbers: 50M+ invoices
+        on iTrack, 100k users on Sharity.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
-        Coming from engineering means I can size technical trade-offs myself,
-        argue architecture with the team, and cut scope without breaking the
-        system. Lately I&apos;ve been putting AI to work inside product and
-        delivery workflows, from agent-assisted development to process
-        automation. I&apos;m looking for a role where I own the problem, the
-        backlog and the outcome.
+        Coming from engineering, I size technical trade-offs myself, argue
+        architecture with the team, and cut scope without breaking the system.
+        Lately I&apos;ve put AI to work inside product and delivery workflows,
+        from agent-assisted development to process automation. I&apos;m
+        looking for a role where I own the problem, the backlog and the
+        outcome.
       </div>
     </>
   ) : version === "leader" ? (
