@@ -8,7 +8,7 @@ import { ContentVersion } from "@/app/contentVersion";
 function TimelineHeader({ className }: { className?: string }) {
   return (
     <div
-      className={`flex gap-1.5 justify-center items-center self-start text-xl font-semibold leading-none print:mt-8 ${className}`}
+      className={`flex gap-1.5 justify-center items-center self-start text-xl print:text-[14pt] font-semibold leading-none print:mt-8 ${className}`}
     >
       <TimelineIcon size={17} className="print:hidden text-[#f9b800]" />
       <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
@@ -318,6 +318,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
       />
       <TimelineItem
         hidden={version !== "web3" && version !== "leader"}
+        print={version !== "web3"}
         title="COZ"
         dateRange="Jun 2022 - Feb 2023"
         technologies={["Blockchain", "Web3"]}
@@ -922,7 +923,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           link="https://simet.nic.br"
         />
       </div>
-      <div className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-xl">
+      <div className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-[14pt]">
         Academic Qualifications
       </div>
       <div className="-mt-7 print:-mt-3">

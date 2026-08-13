@@ -113,6 +113,13 @@ const oversized = [];
 for (const { route, file } of VERSIONS) {
   await page.goto(`http://localhost:${port}${route}`, { waitUntil: "networkidle" });
   await page.emulateMedia({ media: "print" });
+  // `networkidle` only guarantees requests were kicked off, not that every
+  // @font-face weight finished parsing. Without this wait, Chrome's PDF
+  // snapshot can catch some weights (e.g. font-semibold headings) before
+  // they've swapped in, embedding just the Regular weight and faking the
+  // rest with synthetic bold — which renders visibly heavier than a real
+  // browser print of the same page.
+  await page.evaluate(() => document.fonts.ready);
   const pdf = await page.pdf({
     format: "Letter",
     printBackground: false,

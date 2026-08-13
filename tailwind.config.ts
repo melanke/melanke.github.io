@@ -11,6 +11,7 @@ export default {
     extend: {
       fontFamily: {
         clash: ["var(--font-display)", "sans-serif"],
+        sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       screens: {
         xs: "375px",

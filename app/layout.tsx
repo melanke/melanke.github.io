@@ -1,12 +1,36 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+// Both families are self-hosted (next/font/local) instead of fetched from
+// Google Fonts at build time via next/font/google. In this build environment
+// that fetch silently resolved every requested weight to the same Regular
+// file — every heading rendered as browser-synthesized fake bold instead of
+// the real weight, which is also why the headless Chrome that generates the
+// CV PDFs looked bolder/different than an actual browser print. Self-hosting
+// the exact per-weight files sidesteps the fetch entirely.
+const display = localFont({
+  src: [
+    { path: "./fonts/bricolage/Bricolage-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/bricolage/Bricolage-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/bricolage/Bricolage-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/bricolage/Bricolage-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/bricolage/Bricolage-800.woff2", weight: "800", style: "normal" },
+  ],
   variable: "--font-display",
+  display: "swap",
+});
+
+const body = localFont({
+  src: [
+    { path: "./fonts/inter/Inter-300.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/inter/Inter-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/inter/Inter-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/inter/Inter-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/inter/Inter-700.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -77,7 +101,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${display.variable} transition-colors`}>
+    <html lang="en" className={`${display.variable} ${body.variable} transition-colors`}>
       <head>
         <script defer src="https://cloud.umami.is/script.js" data-website-id="6232833a-5ec5-4e89-b8f8-9cbdb7ce1dae" />
       </head>

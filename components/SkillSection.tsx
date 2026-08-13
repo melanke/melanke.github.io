@@ -19,7 +19,7 @@ export function SkillSection({
     <div
       className={`flex flex-col w-full animate-fade-up opacity-0 print:break-inside-avoid ${className}`}
     >
-      <div className="flex gap-2 items-center w-full text-2xl print:text-xl font-semibold leading-none text-black dark:text-white">
+      <div className="flex gap-2 items-center w-full text-2xl print:text-[14pt] font-semibold leading-none text-black dark:text-white">
         {typeof icon === "string" ? (
           <Image
             src={icon}
