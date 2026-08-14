@@ -79,6 +79,34 @@ export function Bio({ version }: { version: ContentVersion }) {
         outcome.
       </div>
     </>
+  ) : version === "webdev" ? (
+    <>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
+        I&apos;m a Senior Full-Stack Engineer with 19+ years building
+        production web applications in React, Next.js, TypeScript and
+        Node.js. I&apos;ve shipped complex dashboards, configurable
+        form-driven platforms, and the backend systems behind them —
+        including a logistics platform processing 50M+ invoices for 60,000
+        couriers.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
+        On the frontend, I traced a slow customer dashboard down to its data
+        layer and took an 8-second query to a few milliseconds, then rebuilt
+        it with several customized graphs. I also designed a form engine
+        that lets non-technical teams configure entire workflows without a
+        deploy, for Louis Dreyfus Company&apos;s global compliance platform.
+        On the backend I work in Node.js, Java and Kotlin, with REST/GraphQL
+        APIs, PostgreSQL/MySQL, and AWS.
+      </div>
+      <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
+        I co-founded Simpli and grew it from a two-person startup into a
+        30-person software house delivering 50+ products, which built the
+        habit of owning a feature end to end — from the database schema to
+        the pixel on screen. Lately I&apos;ve also put AI coding agents to
+        work inside real development workflows. I&apos;m looking for a
+        hands-on role building web products end to end.
+      </div>
+    </>
   ) : version === "leader" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">

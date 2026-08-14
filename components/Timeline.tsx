@@ -5,7 +5,7 @@ import { TimelineItem } from "./TimelineItem";
 import { TimelineIcon } from "./TimelineIcon";
 import { ContentVersion } from "@/app/contentVersion";
 import { timelineItems, TimelineEntry } from "@/content/timeline-items";
-import { Tech } from "@/lib/technologies";
+import { Tech, crossCutting } from "@/lib/technologies";
 
 // How many items — top-level and nested combined, in final render order —
 // show unconditionally before the rest fold behind "Show more". Tune this
@@ -16,12 +16,12 @@ const VISIBLE_ITEM_COUNT = 10;
 function TimelineHeader({ className }: { className?: string }) {
   return (
     <div
-      className={`flex gap-1.5 justify-center items-center self-start text-xl print:text-[14pt] font-semibold leading-none print:mt-8 ${className}`}
+      className={`flex gap-1.5 justify-center items-center self-start text-xl print:text-[14pt] font-semibold leading-none print:mt-5 ${className}`}
     >
       <TimelineIcon size={17} className="print:hidden text-[#f9b800]" />
-      <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
+      <h2 className="self-stretch my-auto font-clash print:font-sans font-semibold">
         Work Experience
-      </div>
+      </h2>
     </div>
   );
 }
@@ -38,8 +38,10 @@ function resolveTechnologies(
   value: Tech[] | Partial<Record<ContentVersion, Tech[]>>,
   version: ContentVersion
 ): Tech[] {
-  if (Array.isArray(value)) return value;
-  return value[version] ?? [];
+  const list = Array.isArray(value) ? value : value[version] ?? [];
+  // Cross-cutting competencies stay in the data (they feed `lastUsed`) but not
+  // in the per-project list — see the note on `crossCutting`.
+  return list.filter((t) => !crossCutting.includes(t));
 }
 
 function shouldPrint(item: TimelineEntry, version: ContentVersion): boolean {
@@ -55,6 +57,18 @@ function byPriorityThenDate(
     return b.startDate.localeCompare(a.startDate);
   };
 }
+
+/**
+ * Print ordering: newest first, priority ignored.
+ *
+ * `priority` is a positioning device — the enterprise resume deliberately sinks
+ * Enclave Wallet and COZ because they are the Web3 work. That reads fine on a
+ * page the reader scrolls, but on paper it puts a 2024 project below a 2014 one,
+ * and a resume that breaks reverse-chronological order reads as careless (and
+ * confuses date parsing). So the two media sort differently.
+ */
+const byDate = (a: TimelineEntry, b: TimelineEntry) =>
+  b.startDate.localeCompare(a.startDate);
 
 export function Timeline({ version }: { version: ContentVersion }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -81,6 +95,9 @@ export function Timeline({ version }: { version: ContentVersion }) {
       key={item.id}
       print={shouldPrint(item, version)}
       title={item.title}
+      parentTitle={
+        item.parentId ? byId.get(item.parentId)?.title : undefined
+      }
       dateRange={item.dateRange}
       technologies={resolveTechnologies(item.technologies, version)}
       role={resolveText(item.role, version)}
@@ -222,26 +239,56 @@ export function Timeline({ version }: { version: ContentVersion }) {
 
   const afterOnlyItems = afterOnlyRuns.flat();
 
+  // The print tree renders the same items through the same `renderItem`, so the
+  // two can't drift on props — only the order differs. It needs none of the
+  // machinery above: no "Show more" cutoff (print expands everything anyway),
+  // no run grouping, no nesting bar. Employer attribution travels with the item
+  // instead, as the `parentTitle` prefix.
+  const printable = timelineItems.filter((item) =>
+    item.printIn ? item.printIn.includes(version) : item.priority[version] !== 4
+  );
+  const printTopLevel = printable.filter((i) => !i.parentId).sort(byDate);
+  const printChildren = (parentId: string) =>
+    printable.filter((i) => i.parentId === parentId).sort(byDate);
+  // A child whose employer doesn't print would otherwise vanish from the PDF.
+  const printOrphans = printable.filter(
+    (i) => i.parentId && !printTopLevel.some((p) => p.id === i.parentId)
+  );
+
   return (
     <div className="flex flex-col max-xl:mt-14 xl:mt-4 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
       <TimelineHeader />
 
-      <div className="flex flex-col space-y-10 print:space-y-5 mt-10 print:mt-5">
-        {beforeBlocks}
+      {/* SCREEN: priority order, with the collapse + nesting bars. */}
+      <div className="print:hidden">
+        <div className="flex flex-col space-y-10 mt-10">{beforeBlocks}</div>
+        {afterOnlyItems.length > 0 && (
+          <>
+            {!buttonPlaced && !isExpanded && showMoreButton}
+            <div className={collapsibleClass}>
+              {itemsList(afterOnlyItems, "mt-10")}
+            </div>
+          </>
+        )}
       </div>
-      {afterOnlyItems.length > 0 && (
-        <>
-          {!buttonPlaced && !isExpanded && showMoreButton}
-          <div className={collapsibleClass}>
-            {itemsList(afterOnlyItems, "mt-10 print:mt-5")}
-          </div>
-        </>
-      )}
 
-      <div className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-[14pt]">
-        Academic Qualifications
+      {/* PRINT: chronological. print:mt-2.5 is the shared "heading -> its
+          content" gap (10px), the same distance Skills and Notable
+          Achievements use; headings carry print:mt-5 (20px) above. */}
+      <div className="hidden print:flex print:flex-col print:space-y-5 print:mt-2.5">
+        {printTopLevel.map((employer) => (
+          <div key={employer.id} className="print:space-y-5 print:flex print:flex-col">
+            {renderItem(employer)}
+            {printChildren(employer.id).map(renderItem)}
+          </div>
+        ))}
+        {printOrphans.map(renderItem)}
       </div>
-      <div className="mt-10 print:mt-5">
+
+      <h2 className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-[14pt]">
+        Education
+      </h2>
+      <div className="mt-10 print:mt-2.5">
         <TimelineItem
           dateRange="2008 - 2011"
           technologies={[]}

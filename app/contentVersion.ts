@@ -3,5 +3,6 @@ export type ContentVersion =
   | "web3"
   | "leader"
   | "enterprise"
-  | "product";
+  | "product"
+  | "webdev";
 export const contentVersion: ContentVersion = "general";

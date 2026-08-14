@@ -7,7 +7,11 @@ import { Timeline } from "@/components/Timeline";
 import { OtherSection } from "@/components/OtherSection";
 import { LatestPosts } from "@/components/LatestPosts";
 import { PiGlobe, PiRobot } from "react-icons/pi";
-import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
+import {
+  HiOutlineClipboardDocumentList,
+  HiOutlineLanguage,
+  HiOutlineUserGroup,
+} from "react-icons/hi2";
 import { BlockchainIcon } from "@/components/BlockchainIcon";
 import { BiServer } from "react-icons/bi";
 import { FaFileDownload } from "react-icons/fa";
@@ -32,20 +36,30 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         backend.kotlin,
         backend.mysql,
         backend.postgresql,
-        backend.mongodb,
+        backend.nosql,
         backend.prisma,
         backend.graphql,
         backend.rest,
         backend.websockets,
+        backend.microservices,
+        backend.distributedSystems,
+        backend.solutionArchitecture,
+        backend.redis,
         backend.docker,
         backend.aws,
+        backend.ecs,
+        backend.s3,
+        backend.sns,
+        backend.sqs,
+        backend.terraform,
+        backend.cicd,
+        backend.githubActions,
         backend.csharp,
         backend.python,
         backend.express,
         backend.typegraphql,
         backend.apollo,
         backend.jersey,
-        backend.jdbc,
         backend.paypal,
         backend.elasticsearch,
       ]}
@@ -70,19 +84,24 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         backend.microservices,
         backend.mysql,
         backend.postgresql,
-        backend.mongodb,
+        backend.nosql,
         backend.prisma,
         backend.distributedSystems,
         backend.solutionArchitecture,
+        backend.redis,
         backend.docker,
         backend.aws,
+        backend.ecs,
+        backend.s3,
+        backend.sns,
+        backend.sqs,
+        backend.terraform,
         backend.cicd,
         backend.githubActions,
         backend.csharp,
         backend.python,
         backend.express,
         backend.jersey,
-        backend.jdbc,
         backend.elasticsearch,
       ]}
     />
@@ -124,7 +143,6 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         frontend.reactjs,
         frontend.nextjs,
         frontend.tailwind,
-        frontend.vue2,
         frontend.sveltekit,
         frontend.chakraUi,
         frontend.reactQuery,
@@ -135,9 +153,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         frontend.jest,
         frontend.playwright,
         frontend.storybook,
-        frontend.urql,
         frontend.reactHookForm,
-        frontend.lighthouse,
       ]}
     />
   );
@@ -150,6 +166,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
       skills={[
         blockchain.ethereum,
         blockchain.solidity,
+        blockchain.hardhat,
         blockchain.foundry,
         blockchain.protocolArchitecture,
         blockchain.fuzzing,
@@ -167,7 +184,6 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         blockchain.dex,
         blockchain.amm,
         blockchain.ethers,
-        blockchain.hardhat,
         blockchain.auditPrep,
         blockchain.slither,
       ]}
@@ -192,6 +208,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         blockchain.viem,
         blockchain.theGraph,
         blockchain.solidity,
+        blockchain.hardhat,
         blockchain.foundry,
         blockchain.sdkDevelopment,
         blockchain.cryptography,
@@ -199,7 +216,6 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         blockchain.solana,
         blockchain.flow,
         blockchain.neoN3,
-        blockchain.hardhat,
         blockchain.automatedTesting,
         blockchain.auditPrep,
       ]}
@@ -234,13 +250,64 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     />
   );
 
+  // Leader resume only: the competencies behind 12+ years running an
+  // engineering org, mirroring how productSection lists the PO/BA
+  // competencies rather than tying each pill to a specific project mention.
+  const leadershipSection = (
+    <SkillSection
+      key="leadership"
+      title="Leadership"
+      icon={HiOutlineUserGroup}
+      skills={[
+        { name: "People Management", since: "2013" },
+        { name: "Hiring", since: "2013" },
+        { name: "Team Building", since: "2013" },
+        { name: "Mentoring & Coaching", since: "2013" },
+        { name: "Delegation", since: "2013" },
+        { name: "Technical Roadmap", since: "2013" },
+        { name: "Stakeholder Management", since: "2013" },
+        { name: "Performance Management", since: "2016" },
+        { name: "1:1s", since: "2016" },
+        { name: "Cross-functional Leadership", since: "2016" },
+        { name: "Agile Delivery", since: "2016" },
+        { name: "Engineering Standards", since: "2016" },
+      ]}
+    />
+  );
+
+  // Languages rides in the skills list rather than as a section of its own:
+  // on paper the categories are inline labels, so this costs one line instead
+  // of a heading plus a block. `since` carries the proficiency, which renders
+  // through the same "Name (value)" shape the technologies use.
+  const languagesSection = (
+    <SkillSection
+      key="languages"
+      title="Languages"
+      icon={HiOutlineLanguage}
+      skills={[
+        { name: "English", since: "C2" },
+        { name: "Portuguese", since: "Native" },
+      ]}
+    />
+  );
+
   // Skill order is version-driven: the primary resume (general) leads with
   // Backend + AI, the web3 resume leads with Blockchain + AI, the enterprise
   // resume pushes Web3 to the end (backend-first positioning), and the product
   // resume leads with Product and keeps the technical stack as evidence.
-  const orderedSkills =
-    version === "web3"
+  const orderedSkills = [
+    ...(version === "web3"
       ? [blockchainSection, aiSection, backendSection, frontendSection]
+      : version === "webdev"
+      ? [
+          frontendSection,
+          backendSection,
+          aiSection,
+          // Blockchain stays on the site as range evidence, but the PDF's
+          // 3-page budget is better spent on the frontend/backend content
+          // this audience is actually screening for.
+          cloneElement(blockchainSection, { className: "print:hidden" }),
+        ]
       : version === "enterprise"
       ? [
           backendEnterpriseSection,
@@ -258,16 +325,31 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           // 3-page budget is better spent on the product content.
           cloneElement(blockchainSection, { className: "print:hidden" }),
         ]
-      : [backendSection, aiSection, frontendSection, blockchainSection];
+      : version === "leader"
+      ? [
+          leadershipSection,
+          backendSection,
+          aiSection,
+          frontendSection,
+          // Blockchain stays on the site as range evidence, but the new
+          // Leadership block needs the print budget more for this audience.
+          cloneElement(blockchainSection, { className: "print:hidden" }),
+        ]
+      : [backendSection, aiSection, frontendSection, blockchainSection]),
+    // Last on every version: it is the one row that is not about the stack, and
+    // the version-specific lead has to keep the top of the list.
+    languagesSection,
+  ];
 
   // The PDFs are print-to-PDF exports done by hand, so a version may not have
   // one yet — only render the download button when the file actually exists.
   const pdfFileName = {
-    web3: "Gil Lopes Bueno - Senior Blockchain Engineer.pdf",
-    leader: "Gil Lopes Bueno - Tech Lead & Engineering Manager.pdf",
-    enterprise: "Gil Lopes Bueno - Principal Backend Engineer.pdf",
-    product: "Gil Lopes Bueno - Technical Product Owner.pdf",
-    general: "Gil Lopes Bueno - Principal Software Engineer.pdf",
+    web3: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf",
+    webdev: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf",
+    leader: "Gil-Lopes-Bueno-Tech-Lead-Engineering-Manager.pdf",
+    enterprise: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf",
+    product: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf",
+    general: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf",
   }[version];
   const hasPdf = existsSync(join(process.cwd(), "public", "documents", pdfFileName));
 
@@ -278,21 +360,26 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         title={
           version === "web3"
             ? "Senior Blockchain Engineer"
+            : version === "webdev"
+            ? "Senior Full-Stack Engineer"
             : version === "leader"
             ? "Tech Lead / Engineering Manager"
             : version === "product"
             ? "Technical Product Owner"
+            : version === "enterprise"
+            ? "Principal Backend Engineer"
             : "Principal Software Engineer"
         }
         contacts={{
-          fullName: "Gil Bueno",
+          fullName: "Gil Lopes Bueno",
           email: "gilbueno.mail@gmail.com",
+          phone: "+55 11970629099",
           github: "github.com/melanke",
           telegram: "melankeee",
           x: "melanke",
           education: "Computer Science, Bachelor's Degree PUC-SP",
           languages: "English and Portuguese",
-          location: "UTC-3",
+          location: "Sao Paulo, Brazil (UTC-3)",
           linkedin: "linkedin.com/in/gilbueno",
         }}
       />
@@ -314,7 +401,15 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           <div className="flex flex-col max-w-[740px] print:block">
             <Bio version={version} />
             <Achievements />
-            <div className="flex flex-col gap-y-8 print:gap-y-1.5 items-start mt-14 print:mt-3 w-full text-black max-md:max-w-full">
+            <div className="flex flex-col gap-y-8 print:gap-y-1.5 items-start mt-14 print:mt-5 w-full text-black max-md:max-w-full">
+              {/* Print only: the site already labels each block with its own
+                  heading and icon, but the PDF collapses those into inline
+                  labels, so the section needs one heading of its own. It is
+                  also the canonical header ATS match on to fill their skills
+                  field — without it the blocks parse as loose text. */}
+              <h2 className="hidden print:block font-sans font-semibold text-[14pt] leading-none">
+                Skills
+              </h2>
               {orderedSkills}
             </div>
 

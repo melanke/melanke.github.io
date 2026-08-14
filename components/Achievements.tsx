@@ -2,14 +2,14 @@ import { MdEmojiEvents } from "react-icons/md";
 
 export function Achievements() {
   return (
-    <div className="flex flex-col mt-10 print:mt-3 w-full text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:600ms] opacity-0">
+    <div className="flex flex-col mt-10 print:mt-5 w-full text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:600ms] opacity-0">
       <div className="flex gap-1.5 justify-center items-center self-start text-2xl print:text-[14pt] font-semibold leading-none">
         <MdEmojiEvents size={20} className="print:hidden text-[#f9b800]" />
-        <div className="self-stretch my-auto font-clash print:font-sans font-semibold">
+        <h2 className="self-stretch my-auto font-clash print:font-sans font-semibold">
           Notable Achievements
-        </div>
+        </h2>
       </div>
-      <div className="text-sm leading-5 text-black dark:text-white max-md:max-w-full mt-2.5 print:mt-1">
+      <div className="text-sm leading-5 text-black dark:text-white max-md:max-w-full mt-2.5 print:mt-2.5">
         <ul className="grid grid-cols-2 gap-x-4 gap-y-1 print:gap-y-0 text-sm list-disc list-outside pl-5">
           <li>
             <a
@@ -19,9 +19,9 @@ export function Achievements() {
             >
               Neon Wallet
             </a>{" "}
-            – Over US$1 Billion in traded volume
+            – US$1B+ in traded volume
           </li>
-          <li>Runin Multilaser – Embedded in over 20 Million devices</li>
+          <li>Multilaser Runin – Embedded in 20M+ devices</li>
           <li>
             <a
               href="https://itrackbrasil.com.br/"
@@ -30,9 +30,9 @@ export function Achievements() {
             >
               iTrack
             </a>{" "}
-            – 50 Million invoices registered; 60k delivery mans; 2k companies
+            – 50M invoices; 60k couriers; 2k companies
           </li>
-          <li>Apptite – US$1.6 Million in GMV; 100k deliveries; 50k users</li>
+          <li>Apptite – US$1.6M GMV; 100k orders; 50k users</li>
           <li>
             <a
               href="https://sharity.com.br/"
@@ -41,9 +41,9 @@ export function Achievements() {
             >
               Sharity
             </a>{" "}
-            – R$ 2 Million in donations; 100k users
+            – R$2M in donations; 100k users
           </li>
-          <li>Desabafa - 700k posts</li>
+          <li>Desabafa – 700k posts</li>
         </ul>
       </div>
     </div>

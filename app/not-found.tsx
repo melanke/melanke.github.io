@@ -5,14 +5,15 @@ const headerProps = {
   name: 'Gil',
   title: 'Principal Software Engineer',
   contacts: {
-    fullName: 'Gil Bueno',
+    fullName: 'Gil Lopes Bueno',
     email: 'gilbueno.mail@gmail.com',
+    phone: '+55 11970629099',
     github: 'github.com/melanke',
     telegram: 'melankeee',
     x: 'melanke',
     education: "Computer Science, Bachelor's Degree PUC-SP",
     languages: 'English and Portuguese',
-    location: 'UTC-3',
+    location: 'Sao Paulo, Brazil (UTC-3)',
     linkedin: 'linkedin.com/in/gilbueno',
   },
 }

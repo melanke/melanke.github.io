@@ -34,6 +34,20 @@
    print so the CV renders the full expanded header in normal flow. !important
    is required to override the component's inline (scroll-driven) styles. */
 @media print {
+  /* A PDF is a single snapshot, so any transition still in flight when Chrome
+     captures the page gets frozen into the file. The header's
+     `transition-[min-height]` did exactly that: switching to print media
+     starts a 300ms animation toward the print min-height, and the export runs
+     sooner, so the PDF kept the taller screen header. Animations are left
+     alone on purpose — the entrance ones pair with `opacity-0` and only reach
+     opacity 1 via the keyframes, so cancelling them would freeze content
+     invisible. */
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+
   .sticky-bar {
     position: static !important;
     height: auto !important;

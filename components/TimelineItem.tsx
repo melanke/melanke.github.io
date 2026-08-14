@@ -7,6 +7,13 @@ export interface TimelineItemProps {
   dateRange: string;
   technologies: Tech[];
   title: string;
+  /**
+   * Employer this item sits under, rendered inline before the title in print
+   * only. On screen the indentation and the nested bar already say it; on
+   * paper there is no such cue, so a resume parser reads a nested project as
+   * one more employer overlapping the rest.
+   */
+  parentTitle?: string;
   role: string;
   /** Markdown. */
   description: string;
@@ -30,6 +37,7 @@ export function TimelineItem({
   dateRange,
   technologies,
   title,
+  parentTitle,
   role,
   description,
   image,
@@ -45,13 +53,18 @@ export function TimelineItem({
   const allLinks = [...(link ? [link] : []), ...(links || [])];
   return (
     <div
-      className={`flex w-full max-md:max-w-full break-inside-avoid text-[0.89rem] min-w-[288px] max-md:max-w-full ${
+      className={`flex w-full max-md:max-w-full print:break-inside-auto text-[0.89rem] min-w-[288px] max-md:max-w-full ${
         !print ? "print:hidden" : ""
       }`}
     >
       <div className="flex flex-col">
         <div className="flex items-center w-full leading-snug min-h-[14px] max-md:max-w-full">
-          <div className="font-bold text-black dark:text-white">{title}</div>
+          <h3 className="font-bold text-black dark:text-white">
+            {parentTitle && (
+              <span className="hidden print:inline">{parentTitle} &middot; </span>
+            )}
+            {title}
+          </h3>
           <span className="mx-2 text-black text-opacity-60 dark:text-white dark:text-opacity-60">
             •
           </span>

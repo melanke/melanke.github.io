@@ -23,11 +23,12 @@ const PUBLIC_DOCS = join(process.cwd(), "public", "documents");
 const OUT_DOCS = join(ROOT, "documents");
 
 const VERSIONS = [
-  { route: "/", file: "Gil Lopes Bueno - Principal Software Engineer.pdf" },
-  { route: "/web3", file: "Gil Lopes Bueno - Senior Blockchain Engineer.pdf" },
-  { route: "/leader", file: "Gil Lopes Bueno - Tech Lead & Engineering Manager.pdf" },
-  { route: "/enterprise", file: "Gil Lopes Bueno - Principal Backend Engineer.pdf" },
-  { route: "/product", file: "Gil Lopes Bueno - Technical Product Owner.pdf" },
+  { route: "/", file: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf" },
+  { route: "/web3", file: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf" },
+  { route: "/webdev", file: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf" },
+  { route: "/leader", file: "Gil-Lopes-Bueno-Tech-Lead-Engineering-Manager.pdf" },
+  { route: "/enterprise", file: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf" },
+  { route: "/product", file: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf" },
 ];
 
 const CHROME_CANDIDATES = [
@@ -123,6 +124,10 @@ for (const { route, file } of VERSIONS) {
   const pdf = await page.pdf({
     format: "Letter",
     printBackground: false,
+    // Emits the PDF structure tree (headings, lists, links) from the page's
+    // own semantics. Screen readers need it, and it gives a resume parser a
+    // real outline instead of a flat bag of text runs.
+    tagged: true,
     margin: { top: "0.31in", bottom: "0", left: "0.31in", right: "0.31in" },
   });
 
