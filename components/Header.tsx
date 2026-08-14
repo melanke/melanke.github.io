@@ -6,7 +6,6 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { TypingTitle } from "./TypingTitle";
 import { StarIcon } from "./StarIcon";
 
 export interface HeaderProps {
@@ -61,9 +60,6 @@ export function Header({ name, title, contacts, compact = false }: HeaderProps) 
                   />
                   <span>Solutions</span>
                 </div>
-                {!compact && (
-                  <TypingTitle className="self-end font-clash font-semibold leading-none -mt-1 md:-mt-4 min-h-[1em] text-[clamp(1.1rem,3.2vw,2.6rem)]" />
-                )}
               </div>
               {/* PRINT: full name + static title */}
               <div className="hidden print:flex items-baseline gap-2.5">
