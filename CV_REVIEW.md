@@ -430,18 +430,34 @@ naquela data. Excluí-lo demoveria as três injustamente.
     Kubernetes, JUnit/Mockito, gRPC — está listado lá em §1, junto com o bloqueio (falta
     recuperar projeto e ano no histórico). **Trilha enterprise adiada por decisão
     explícita**
-14. ⬜ **Fechar Sharity/Desabafa em enterprise e web3**, e os 3 anos que faltam em 4 das 5
-15. ⬜ **Achievements em coluna única** (hoje grid de 2 colunas quebra o pareamento na
-    extração crua)
-16. ⬜ **Metadata `Author`/`Keywords`** via `pdf-lib` no pós-build (o Chrome ignora
-    `<meta name="author">`)
+14. ✅ **Os 3 anos, fechados nas 6 versões.** A entrada `early-career` (FingerPrint,
+    Escala, NetStartup, 2007-2010) só imprimia na enterprise; agora imprime em todas, e
+    a experiência começa em 2007 em vez de 2010 — a conta bate com os "19+ years". Para
+    caber, ganhou `printDescriptionIn`: o detalhe de PHP/Java júnior imprime nos CVs de
+    engenharia e some no de PM e PO, onde só as datas trabalham.
+    🟡 **Sharity/Desabafa em enterprise e web3** seguem sem entrada própria, mas a nota
+    nova (item 19) responde a pergunta que o leitor faria
+15. ❌ **Achievements em coluna única — desnecessário, premissa não se confirma.** Testado
+    com `pdftotext` sem `-layout` nos 6 PDFs: cada conquista sai em linha própria, com o
+    projeto e as métricas dele juntos. O grid não cola "Neon Wallet" em "Multilaser
+    Runin". A ordem de leitura é por coluna em vez de por linha, o que é inofensivo —
+    são bullets independentes, sem semântica de par
+16. ✅ **Metadata gravado.** `scripts/print-cv.mjs` carimba `Title`, `Author`, `Subject`,
+    `Keywords` e `Creator` com `pdf-lib` depois do render do Chrome, com keywords por
+    versão (o vocabulário que a própria página já sustenta, nunca termos que o CV não
+    tem). `Tagged: yes` sobrevive ao re-save, verificado. A contagem de páginas passou a
+    sair do `getPageCount()` do pdf-lib em vez do regex no `/Count`
 17. ✅ ~~`lastUsed` nos blocos de competência~~ — migrados para `practice` e
     `deliveryTools` em `lib/technologies.ts`. Ver §3.1
-18. ⬜ **`/leader` e `/project-manager` servem a mesma página** — export estático não faz
-    redirect, então são duas URLs com o mesmo conteúdo. O `canonical` já aponta para
-    `/project-manager` e só ela está no sitemap, o que resolve o lado do SEO; falta
-    decidir se `/leader` sai de vez (quebra links já enviados) ou vira um stub com
-    `<meta http-equiv="refresh">`
+18. ✅ ~~`/leader` e `/project-manager` servem a mesma página~~ — `/leader` foi removida
+    por decisão do Gil (19/08). A página real vive em `app/project-manager/page.tsx`
+19. ✅ **Nota de seleção no fim da experiência** (print-only): "Selected projects — the
+    full history is at gil.solutions". Um CV de 3 páginas não cabe 50+ projetos, e os
+    Achievements citam alguns que não entraram na versão; a nota transforma um buraco
+    que o leitor notaria num ponteiro, e dá a URL ao parser
+20. ⬜ **A linha `Tech:` agregada da Simpli** saiu do PM e do PO (é a união de 31
+    projetos-filhos, que listam a própria stack logo abaixo). Continua em general, web3,
+    enterprise e webdev — vale reavaliar se ela ajuda mesmo nessas quatro
 
 ---
 

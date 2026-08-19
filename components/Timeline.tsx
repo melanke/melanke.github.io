@@ -102,6 +102,10 @@ export function Timeline({ version }: { version: ContentVersion }) {
       technologies={resolveTechnologies(item.technologies, version)}
       role={resolveText(item.role, version)}
       description={resolveText(item.description, version)}
+      printDescription={
+        item.printDescriptionIn ? item.printDescriptionIn.includes(version) : true
+      }
+      printTech={item.printTechIn ? item.printTechIn.includes(version) : true}
       image={item.image}
       link={item.link}
       links={item.links}
@@ -284,6 +288,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
         ))}
         {printOrphans.map(renderItem)}
       </div>
+
+      {/* Print only: the PDF carries a selection of the 50+ projects — a
+          3-page budget cannot hold them all, and Notable Achievements cites a
+          couple that did not make this version's cut. Saying so turns a gap a
+          reader would notice into a pointer, and gives the parser the URL. */}
+      <p className="hidden print:block print:mt-2.5 text-xs text-black">
+        Selected projects — the full history is at{" "}
+        <a href="https://gil.solutions">gil.solutions</a>.
+      </p>
 
       {/* Print keeps far less air than the screen here: the heading and the
           single entry below it are the last thing on the page, so every pixel

@@ -23,6 +23,12 @@ export interface TimelineItemProps {
    * years), the paragraph is redundant on paper and costs page budget.
    */
   printDescription?: boolean;
+  /**
+   * Keeps the technology pills on screen but off the printed `Tech:` line.
+   * For an aggregate entry (an employer whose list is the union of its
+   * projects) the line is noise the children already carry better.
+   */
+  printTech?: boolean;
   image?: string;
   link?: string;
   links?: (string | { label: string; url: string })[];
@@ -47,6 +53,7 @@ export function TimelineItem({
   role,
   description,
   printDescription = true,
+  printTech = true,
   image,
   link,
   links = [],
@@ -58,6 +65,8 @@ export function TimelineItem({
   if (hidden) return null;
 
   const allLinks = [...(link ? [link] : []), ...(links || [])];
+  // Screen keeps the full pill row either way; only the printed line is cut.
+  const printedTech = printTech ? technologies : [];
   return (
     <div
       className={`flex w-full max-md:max-w-full print:break-inside-auto text-[0.89rem] min-w-[288px] max-md:max-w-full ${
@@ -112,17 +121,17 @@ export function TimelineItem({
               technologies comma-separated (recruiters asked for plain text,
               not tags), with the links appended to the same line to keep the
               CV within its page budget. */}
-          {(technologies.length > 0 || allLinks.length > 0) && (
+          {(printedTech.length > 0 || allLinks.length > 0) && (
             <div className="hidden print:block mt-1 text-xs">
-              {technologies.length > 0 && (
+              {printedTech.length > 0 && (
                 <>
                   <span className="font-semibold">Tech:</span>{" "}
-                  {technologies.map((tech) => tech.name).join(", ")}
+                  {printedTech.map((tech) => tech.name).join(", ")}
                 </>
               )}
               {allLinks.map((link, index) => (
                 <span key={index}>
-                  {index > 0 || technologies.length > 0 ? " · " : ""}
+                  {index > 0 || printedTech.length > 0 ? " · " : ""}
                   <a href={typeof link === "string" ? link : link.url}>
                     {typeof link === "string" ? link : link.label}
                   </a>

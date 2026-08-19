@@ -13,6 +13,7 @@
 // Fails the build if any version exceeds MAX_PAGES: the whole point of the
 // print layout is that a recruiter gets a 3-page CV.
 import { createServer } from "http";
+import { PDFDocument } from "pdf-lib";
 import { readFile, writeFile } from "fs/promises";
 import { existsSync, mkdirSync } from "fs";
 import { join, extname } from "path";
@@ -22,13 +23,84 @@ const ROOT = join(process.cwd(), "out");
 const PUBLIC_DOCS = join(process.cwd(), "public", "documents");
 const OUT_DOCS = join(ROOT, "documents");
 
+const AUTHOR = "Gil Lopes Bueno";
+
+// `title` and `keywords` are stamped into the PDF's document information
+// dictionary after Chrome renders it. Chrome ignores `<meta name="author">`,
+// so without this pass every CV ships with an empty Author — a field a lot of
+// applicant tracking systems read before they read the page text. `keywords`
+// is deliberately the role's vocabulary, matching what the skill blocks
+// already claim on the page; it is not a place to smuggle in terms the CV
+// itself does not support (see content/career-gaps.md).
 const VERSIONS = [
-  { route: "/", file: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf" },
-  { route: "/web3", file: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf" },
-  { route: "/webdev", file: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf" },
-  { route: "/project-manager", file: "Gil-Lopes-Bueno-Technical-Project-Manager.pdf" },
-  { route: "/enterprise", file: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf" },
-  { route: "/product", file: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf" },
+  {
+    route: "/",
+    file: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf",
+    title: `${AUTHOR} — Principal Software Engineer`,
+    keywords: [
+      "Principal Software Engineer", "Backend Engineer", "AI Engineering",
+      "Node.js", "TypeScript", "Java", "Kotlin", "PostgreSQL", "AWS",
+      "Microservices", "Distributed Systems", "Solution Architecture",
+      "Agent Development", "MCP", "RAG", "Blockchain", "Solidity",
+    ],
+  },
+  {
+    route: "/web3",
+    file: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf",
+    title: `${AUTHOR} — Senior Blockchain Engineer`,
+    keywords: [
+      "Blockchain Engineer", "Smart Contract Engineer", "Solidity", "EVM",
+      "Ethereum", "DeFi", "Protocol Architecture", "Foundry", "Hardhat",
+      "Uniswap", "AMM", "DEX", "Gas Optimization", "Fuzzing", "Audit Prep",
+      "Account Abstraction", "wagmi", "viem", "TypeScript",
+    ],
+  },
+  {
+    route: "/webdev",
+    file: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf",
+    title: `${AUTHOR} — Senior Full-Stack Engineer`,
+    keywords: [
+      "Full-Stack Engineer", "Frontend Engineer", "React", "Next.js",
+      "TypeScript", "JavaScript", "Node.js", "Tailwind", "GraphQL", "REST",
+      "PostgreSQL", "AWS", "Playwright", "Jest", "Storybook",
+    ],
+  },
+  {
+    route: "/project-manager",
+    file: "Gil-Lopes-Bueno-Technical-Project-Manager.pdf",
+    title: `${AUTHOR} — Technical Project Manager`,
+    keywords: [
+      "Technical Project Manager", "Project Manager", "Delivery Manager",
+      "Engineering Manager", "Project Delivery", "Scrum", "Kanban",
+      "Sprint Planning", "Backlog Refinement", "Estimation",
+      "Project Scheduling", "Budget Management", "Risk Management",
+      "Stakeholder Management", "People Management", "Jira", "YouTrack",
+      "ZenHub", "ClickUp", "Linear",
+    ],
+  },
+  {
+    route: "/enterprise",
+    file: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf",
+    title: `${AUTHOR} — Principal Backend Engineer`,
+    keywords: [
+      "Principal Backend Engineer", "Java", "Kotlin", "Node.js", "TypeScript",
+      "Microservices", "Distributed Systems", "Solution Architecture",
+      "PostgreSQL", "MySQL", "Redis", "ElasticSearch", "AWS", "Docker",
+      "Terraform", "CI/CD", "REST", "GraphQL",
+    ],
+  },
+  {
+    route: "/product",
+    file: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf",
+    title: `${AUTHOR} — Technical Product Owner`,
+    keywords: [
+      "Technical Product Owner", "Product Owner", "Business Analyst",
+      "Discovery", "Requirements", "Backlog Management", "Roadmap",
+      "Prioritization", "User Stories", "Acceptance Criteria",
+      "Functional Specs", "Stakeholder Management", "Scope Negotiation",
+      "Scrum", "Kanban", "Jira", "ClickUp", "Figma",
+    ],
+  },
 ];
 
 const CHROME_CANDIDATES = [
@@ -111,7 +183,7 @@ const browser = await chromium.launch({ executablePath: chrome });
 const page = await browser.newPage();
 const oversized = [];
 
-for (const { route, file } of VERSIONS) {
+for (const { route, file, title, keywords } of VERSIONS) {
   await page.goto(`http://localhost:${port}${route}`, { waitUntil: "networkidle" });
   await page.emulateMedia({ media: "print" });
   // `networkidle` only guarantees requests were kicked off, not that every
@@ -131,11 +203,23 @@ for (const { route, file } of VERSIONS) {
     margin: { top: "0.31in", bottom: "0", left: "0.31in", right: "0.31in" },
   });
 
-  // Chrome writes the page count into the page-tree root's /Count.
-  const counts = [...pdf.toString("latin1").matchAll(/\/Count\s+(\d+)/g)];
-  const pages = counts.length ? Math.max(...counts.map((m) => +m[1])) : 0;
+  // Chrome leaves Author, Title and Keywords empty — it has no way to know
+  // them — so they get stamped on here. Re-saving through pdf-lib preserves
+  // the structure tree emitted by `tagged: true` above.
+  const doc = await PDFDocument.load(pdf);
+  doc.setTitle(title, { showInWindowTitleBar: true });
+  doc.setAuthor(AUTHOR);
+  doc.setSubject(title);
+  // pdf-lib joins the array with spaces, which makes multi-word keywords
+  // run together ("Project Manager Delivery Manager"). Pre-joining with
+  // commas gives a parser separable terms.
+  doc.setKeywords([keywords.join(", ")]);
+  doc.setCreator("gil.solutions");
+  const stamped = await doc.save();
 
-  for (const dir of targets) await writeFile(join(dir, file), pdf);
+  const pages = doc.getPageCount();
+
+  for (const dir of targets) await writeFile(join(dir, file), stamped);
   console.log(`  ${pages} pages  ${file}`);
   if (pages > MAX_PAGES) oversized.push({ file, pages });
 }
