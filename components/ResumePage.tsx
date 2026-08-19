@@ -17,7 +17,15 @@ import { BiServer } from "react-icons/bi";
 import { FaFileDownload } from "react-icons/fa";
 import { ContentVersion } from "@/app/contentVersion";
 import { getAllPosts } from "@/lib/posts";
-import { backend, frontend, blockchain, ai } from "@/lib/technologies";
+import {
+  backend,
+  frontend,
+  blockchain,
+  ai,
+  other,
+  practice,
+  deliveryTools,
+} from "@/lib/technologies";
 import { cloneElement } from "react";
 import { existsSync } from "fs";
 import { join } from "path";
@@ -222,55 +230,74 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     />
   );
 
-  // Product resume only: the competencies behind the PO/BA hats listed in the
-  // Leadership section — what he does, as opposed to what he was called.
+  // Product resume only: the competencies behind the PO/BA hats — what he did,
+  // as opposed to what he was called. Declared in `lib/technologies.ts` under
+  // `practice`, so the years stay owned in one place and always carry an end.
   const productSection = (
     <SkillSection
       key="product"
       title="Product"
       icon={HiOutlineClipboardDocumentList}
       skills={[
-        { name: "Discovery", since: "2010" },
-        { name: "Requirements", since: "2010" },
-        { name: "Backlog Management", since: "2016" },
-        { name: "Roadmap", since: "2016" },
-        { name: "Prioritization", since: "2016" },
-        { name: "Stakeholder Management", since: "2013" },
-        { name: "Wireframing", since: "2011" },
-        { name: "UX", since: "2011" },
-        { name: "User Stories", since: "2016" },
-        { name: "Acceptance Criteria", since: "2016" },
-        { name: "Functional Specs", since: "2016" },
-        { name: "Stakeholder Interviews", since: "2013" },
-        { name: "Technical Feasibility", since: "2013" },
-        { name: "Scope Negotiation", since: "2013" },
-        { name: "Figma", since: "2018" },
-        { name: "ClickUp", since: "2019" },
+        // Requirements leads and Discovery follows: same two keywords a PO
+        // recruiter scans for, but the first one a reader hits now carries
+        // 2013-2025 instead of the block's youngest range.
+        practice.requirements,
+        practice.discovery,
+        practice.backlogManagement,
+        practice.roadmap,
+        practice.prioritization,
+        practice.stakeholderManagement,
+        practice.wireframing,
+        practice.ux,
+        practice.userStories,
+        practice.acceptanceCriteria,
+        practice.functionalSpecs,
+        practice.stakeholderInterviews,
+        practice.technicalFeasibility,
+        practice.scopeNegotiation,
+        practice.scrum,
+        practice.kanban,
+        practice.backlogRefinement,
+        practice.estimation,
+        other.figma,
+        deliveryTools.jira,
+        deliveryTools.clickup,
       ]}
     />
   );
 
-  // Leader resume only: the competencies behind 12+ years running an
-  // engineering org, mirroring how productSection lists the PO/BA
-  // competencies rather than tying each pill to a specific project mention.
-  const leadershipSection = (
+  // Technical Project Manager resume only: the delivery disciplines and tools
+  // behind the PM responsibilities he held at Simpli from 2013 onward. The
+  // people-management competencies ride in this same block instead of a
+  // Leadership section of their own — a second heading costs five lines of the
+  // 3-page budget, four extra pills cost one.
+  const projectManagementSection = (
     <SkillSection
-      key="leadership"
-      title="Leadership"
+      key="project-management"
+      title="Project Management"
       icon={HiOutlineUserGroup}
       skills={[
-        { name: "People Management", since: "2013" },
-        { name: "Hiring", since: "2013" },
-        { name: "Team Building", since: "2013" },
-        { name: "Mentoring & Coaching", since: "2013" },
-        { name: "Delegation", since: "2013" },
-        { name: "Technical Roadmap", since: "2013" },
-        { name: "Stakeholder Management", since: "2013" },
-        { name: "Performance Management", since: "2016" },
-        { name: "1:1s", since: "2016" },
-        { name: "Cross-functional Leadership", since: "2016" },
-        { name: "Agile Delivery", since: "2016" },
-        { name: "Engineering Standards", since: "2016" },
+        practice.projectDelivery,
+        practice.scrum,
+        practice.kanban,
+        practice.sprintPlanning,
+        practice.backlogRefinement,
+        practice.estimationProposals,
+        practice.projectScheduling,
+        practice.budgetManagement,
+        practice.riskManagement,
+        practice.stakeholderManagement,
+        practice.peopleManagement,
+        practice.mentoringCoaching,
+        practice.crossFunctionalLeadership,
+        practice.performanceManagement,
+        practice.oneOnOnes,
+        deliveryTools.jira,
+        deliveryTools.youtrack,
+        deliveryTools.zenhub,
+        deliveryTools.clickup,
+        deliveryTools.linear,
       ]}
     />
   );
@@ -327,12 +354,14 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         ]
       : version === "leader"
       ? [
-          leadershipSection,
+          projectManagementSection,
           backendSection,
-          aiSection,
-          frontendSection,
-          // Blockchain stays on the site as range evidence, but the new
-          // Leadership block needs the print budget more for this audience.
+          // AI and frontend remain visible on screen as technical range, but
+          // backend is the relevant technical proof on the 3-page PM PDF.
+          cloneElement(aiSection, { className: "print:hidden" }),
+          cloneElement(frontendSection, { className: "print:hidden" }),
+          // Blockchain stays on the site as range evidence, but Project
+          // Management needs the print budget more for this audience.
           cloneElement(blockchainSection, { className: "print:hidden" }),
         ]
       : [backendSection, aiSection, frontendSection, blockchainSection]),
@@ -346,7 +375,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
   const pdfFileName = {
     web3: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf",
     webdev: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf",
-    leader: "Gil-Lopes-Bueno-Tech-Lead-Engineering-Manager.pdf",
+    leader: "Gil-Lopes-Bueno-Technical-Project-Manager.pdf",
     enterprise: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf",
     product: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf",
     general: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf",
@@ -363,7 +392,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
             : version === "webdev"
             ? "Senior Full-Stack Engineer"
             : version === "leader"
-            ? "Tech Lead / Engineering Manager"
+            ? "Technical Project Manager"
             : version === "product"
             ? "Technical Product Owner"
             : version === "enterprise"

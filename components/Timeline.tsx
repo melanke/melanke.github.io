@@ -285,16 +285,20 @@ export function Timeline({ version }: { version: ContentVersion }) {
         {printOrphans.map(renderItem)}
       </div>
 
-      <h2 className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-5 text-2xl print:text-[14pt]">
+      {/* Print keeps far less air than the screen here: the heading and the
+          single entry below it are the last thing on the page, so every pixel
+          of margin is what decides whether Education breaks onto a 4th page. */}
+      <h2 className="font-clash print:font-sans font-semibold text-black dark:text-white mt-10 print:mt-2.5 text-2xl print:text-[14pt]">
         Education
       </h2>
-      <div className="mt-10 print:mt-2.5">
+      <div className="mt-10 print:mt-1">
         <TimelineItem
           dateRange="2008 - 2011"
           technologies={[]}
           title="Pontifícia Universidade Católica de São Paulo (PUC-SP)"
           role="Bachelor, Computer Science"
           description="Bachelor's degree in Computer Science from Pontifícia Universidade Católica de São Paulo, one of Brazil's leading higher education institutions."
+          printDescription={false}
         />
       </div>
       <div className="xl:h-48"></div>

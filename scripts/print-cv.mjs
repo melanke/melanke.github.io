@@ -26,7 +26,7 @@ const VERSIONS = [
   { route: "/", file: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf" },
   { route: "/web3", file: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf" },
   { route: "/webdev", file: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf" },
-  { route: "/leader", file: "Gil-Lopes-Bueno-Tech-Lead-Engineering-Manager.pdf" },
+  { route: "/project-manager", file: "Gil-Lopes-Bueno-Technical-Project-Manager.pdf" },
   { route: "/enterprise", file: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf" },
   { route: "/product", file: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf" },
 ];

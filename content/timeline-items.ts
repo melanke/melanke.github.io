@@ -211,7 +211,7 @@ export const timelineItems: TimelineEntry[] = [
       web3:
         "At 33Labs (formerly 33Audits), I've worked on the design and development of advanced DeFi protocols, focusing on composability, capital efficiency, and developer experience.\n\nThe company began as a smart contract auditing firm, which has given me hands-on, daily experience identifying and preventing vulnerabilities. I've developed protocols end to end — architecture, implementation, and testing — with security and gas optimization as constant priorities. That led me to a key conviction: the auditing process should start at the architecture stage, before any code is written. To support it, I've integrated specialized tooling and AI agents into the development and auditing workflow.",
       leader:
-        "Taking a hands-on IC role here was a deliberate choice: I had built smart contracts for years, but DeFi raises the security bar far higher, so before leading a team on it I wanted to build it myself, alongside the engineers who audit it. At 33Labs (formerly 33Audits), I've worked on advanced DeFi protocols, and the company's roots as a smart contract auditing firm have given me daily exposure to how vulnerabilities actually reach production. That shaped a conviction I now bring to any team I lead: review has to start at the architecture stage, before any code is written — not bolted on as a late-stage audit.",
+        "Taking a hands-on engineering role here was a deliberate choice: after 11 years as CTO, I wanted to go deep on DeFi architecture next to the engineers who audit it, so that when I manage delivery in this space I know exactly what I'm asking a team to build and what it costs. At 33Labs (formerly 33Audits), I've worked on advanced DeFi protocols, and the company's roots as a smart contract auditing firm have sharpened a conviction I carry into project decisions: security and feasibility have to be weighed at the architecture stage, before a single requirement gets locked in.",
       product:
         "Taking a hands-on engineering role here was a deliberate choice: after 11 years as CTO, I wanted to go deep on DeFi architecture next to the engineers who audit it, so that when I own a product in this space I know exactly what I'm asking a team to build and what it costs. At 33Labs (formerly 33Audits), I've worked on advanced DeFi protocols, and the company's roots as a smart contract auditing firm have sharpened a conviction I now carry into product decisions: security and feasibility have to be weighed at the architecture stage, before a single requirement gets locked in.",
       enterprise:
@@ -596,7 +596,11 @@ export const timelineItems: TimelineEntry[] = [
     role: {
       general: "Co-founder | Software Engineer | CTO",
       web3: "Co-founder | Software Engineer | CTO",
-      leader: "Co-founder | CTO | Engineering Manager | TechLead | Product Owner",
+      // Keep this line short: it renders inline with the title and date, and a
+      // wrap splits "Oct 2013 - May" from "2025" in the PDF text layer.
+      // "Technical" is already in the document title, and TechLead/Product
+      // Owner both appear on the child entries below.
+      leader: "Co-founder | CTO | Project Manager | Engineering Manager",
       enterprise: "Co-founder | Software Engineer | CTO",
       product: "Co-founder | Product Owner | Business Analyst | Project Manager | CTO",
       webdev: "Co-founder | Software Engineer | CTO",
@@ -825,8 +829,8 @@ export const timelineItems: TimelineEntry[] = [
     role: "Software Engineer | Tech Lead",
     description:
       "This tool was developed to enhance ClickUp's functionalities, primarily focusing on time management and employee performance. It began as a proof of concept (POC) that I developed based on the needs I identified while managing the team. As the tool proved its value, I involved the team in its development, allowing me to transition into the role of Tech Lead and conduct interviews to better organize and prioritize demands.",
-    priority: { general: 4, web3: 4, leader: 3, enterprise: 4, product: 3, webdev: 4 },
-    printIn: [],
+    priority: { general: 4, web3: 4, leader: 1, enterprise: 4, product: 3, webdev: 4 },
+    printIn: ["leader"],
   },
   {
     id: "abacashi",

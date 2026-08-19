@@ -110,27 +110,21 @@ export function Bio({ version }: { version: ContentVersion }) {
   ) : version === "leader" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-8 print:mt-2">
-        I&apos;m a Tech Lead and Engineering Manager with 19+ years in software
-        and 12+ years leading teams of up to 30, across roles as CTO, Tech
-        Lead, Business Analyst, and Product Owner. I co-founded Simpli and
-        grew it from a two-person startup into a 30-person software house that
-        delivered 50+ products for startups and enterprise clients.
+        I&apos;m a Technical Project Manager with 19+ years in software and 12+
+        years leading delivery. I co-founded Simpli and grew it from a
+        two-person startup into a 30-person software house that delivered 50+
+        products for startups and enterprise clients.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:200ms] opacity-0 mt-5 print:mt-2">
-        My focus as a leader is translating business goals into technical
-        roadmaps: gathering requirements, architecting solutions, and keeping
-        delivery aligned with what the product and the business actually need.
-        I favor listening, delegation, and collaborative decision-making over
-        top-down direction, and I make a point of mentoring engineers, including
-        a stint as a mentor in the BuidlGuidl Batch Program onboarding new Web3
-        developers.
+        At Simpli, I led client delivery end to end: scoped and estimated
+        proposals, set schedules and budgets, and tracked hours, costs, risks
+        and scope through launch. Scrum and Kanban kept clients and teams
+        aligned; my engineering background let me judge feasibility directly.
       </div>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up [animation-delay:400ms] opacity-0 mt-5 print:mt-2">
-        Lately I&apos;ve been bringing AI into how teams work, from
-        agent-assisted development workflows to process automation, while
-        staying hands-on enough to keep credibility with the engineers I lead.
-        I&apos;m looking for a role where I can own both the technical
-        direction and the people side of a team.
+        As Technical Project Manager I ran up to 3 client projects at a time;
+        as Engineering Manager, up to 7. I want to own delivery end to end:
+        scope, schedule and budget, close to the engineers doing the work.
       </div>
     </>
   ) : (

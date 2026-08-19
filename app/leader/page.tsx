@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import { ResumePage } from "@/components/ResumePage";
 
 export const metadata: Metadata = {
-  title: "Gil Lopes Bueno - Tech Lead & Engineering Manager",
-  description: "Engineering leader with 12+ years managing teams of up to 30 — CTO, Tech Lead, Product Owner",
+  title: "Gil Lopes Bueno - Technical Project Manager",
+  description: "Technical Project Manager with 12+ years leading delivery — scope, estimates, schedules, budgets and software teams",
   alternates: {
-    canonical: "/leader",
+    canonical: "/project-manager",
   },
   openGraph: {
-    title: "Gil Lopes Bueno - Tech Lead & Engineering Manager",
-    description: "Engineering leader with 12+ years managing teams of up to 30 — CTO, Tech Lead, Product Owner",
+    title: "Gil Lopes Bueno - Technical Project Manager",
+    description: "Technical Project Manager with 12+ years leading delivery — scope, estimates, schedules, budgets and software teams",
   },
   twitter: {
-    title: "Gil Lopes Bueno - Tech Lead & Engineering Manager",
-    description: "Engineering leader with 12+ years managing teams of up to 30 — CTO, Tech Lead, Product Owner",
+    title: "Gil Lopes Bueno - Technical Project Manager",
+    description: "Technical Project Manager with 12+ years leading delivery — scope, estimates, schedules, budgets and software teams",
   },
 };
 
-export default function LeaderResume() {
+export default function ProjectManagerResume() {
   return <ResumePage version="leader" />;
 }

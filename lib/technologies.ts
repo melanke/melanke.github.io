@@ -216,3 +216,80 @@ export const ai = {
   rag: tech("RAG", "2024", "2026"),
   aiTooling: tech("AI Tooling", "2025", "2026"),
 } as const;
+
+/**
+ * Delivery, product and people competencies — the disciplines behind the PO/BA
+ * and Technical Project Manager hats, as opposed to the technologies used to
+ * build things.
+ *
+ * These live here rather than as literals in `components/ResumePage.tsx` for
+ * two reasons. First, format: `techYears` renders a bare `since` when
+ * `lastUsed` is missing, so a hand-typed competency printed as
+ * `Project Delivery (2013)` right next to `Node.js (2012-2025)` and read as a
+ * skill abandoned in 2013. Declaring them through `tech()` makes the end year
+ * impossible to forget. Second, ownership: `Scrum`, `Kanban`, `Stakeholder
+ * Management`, `Backlog Refinement`, `Jira` and `ClickUp` appear in more than
+ * one skill block, and `Figma` had already drifted to two different `since`
+ * years across two files.
+ *
+ * None of these is ever referenced from a `content/timeline-items.ts` entry —
+ * they would print as `Tech: Budget Management` on the CV, which is not what
+ * that line is for. So unlike the groups above, their years cannot be derived
+ * from the timeline and are set by hand from the role that backs them.
+ *
+ * **The 2025 end year is the Simpli end date, not an oversight.** Simpli closed
+ * in May 2025 and 33Labs is a hands-on IC role, so this is where the practice
+ * of these competencies currently stops. Anything Gil resumes doing moves to
+ * `"now"`, one entry at a time, with the role that justifies it.
+ */
+export const practice = {
+  // Product / BA
+  // Discovery is the youngest competency in this block on purpose: Gil started
+  // doing it in 2022, and Requirements professionally in 2013 (he was a junior
+  // engineer in 2010, which is why the old 2010 on both read as inflation).
+  discovery: tech("Discovery", "2022", "2025"),
+  requirements: tech("Requirements", "2013", "2025"),
+  backlogManagement: tech("Backlog Management", "2016", "2025"),
+  roadmap: tech("Roadmap", "2016", "2025"),
+  prioritization: tech("Prioritization", "2016", "2025"),
+  wireframing: tech("Wireframing", "2011", "2025"),
+  ux: tech("UX", "2011", "2025"),
+  userStories: tech("User Stories", "2016", "2025"),
+  acceptanceCriteria: tech("Acceptance Criteria", "2016", "2025"),
+  functionalSpecs: tech("Functional Specs", "2016", "2025"),
+  stakeholderInterviews: tech("Stakeholder Interviews", "2013", "2025"),
+  technicalFeasibility: tech("Technical Feasibility", "2013", "2025"),
+  scopeNegotiation: tech("Scope Negotiation", "2013", "2025"),
+  // Agile, shared by the Product and Project Management blocks
+  scrum: tech("Scrum", "2013", "2025"),
+  kanban: tech("Kanban", "2013", "2025"),
+  sprintPlanning: tech("Sprint Planning", "2013", "2025"),
+  backlogRefinement: tech("Backlog Refinement", "2013", "2025"),
+  stakeholderManagement: tech("Stakeholder Management", "2013", "2025"),
+  // Project management
+  projectDelivery: tech("Project Delivery", "2013", "2025"),
+  estimation: tech("Estimation", "2013", "2025"),
+  estimationProposals: tech("Estimation & Proposals", "2013", "2025"),
+  projectScheduling: tech("Project Scheduling", "2013", "2025"),
+  budgetManagement: tech("Budget Management", "2013", "2025"),
+  riskManagement: tech("Risk Management", "2013", "2025"),
+  // People
+  peopleManagement: tech("People Management", "2013", "2025"),
+  mentoringCoaching: tech("Mentoring & Coaching", "2013", "2025"),
+  crossFunctionalLeadership: tech("Cross-functional Leadership", "2016", "2025"),
+  performanceManagement: tech("Performance Management", "2022", "2025"),
+  oneOnOnes: tech("1:1s", "2022", "2025"),
+} as const;
+
+/**
+ * Project-tracking tools. Kept out of `other` on purpose: `OtherSection`
+ * renders `Object.values(other)` wholesale, so anything added there shows up in
+ * the design/mobile/game block on the site.
+ */
+export const deliveryTools = {
+  jira: tech("Jira", "2010", "2025"),
+  youtrack: tech("YouTrack", "2016", "2025"),
+  zenhub: tech("ZenHub", "2020", "2025"),
+  clickup: tech("ClickUp", "2022", "2025"),
+  linear: tech("Linear", "2025", "now"),
+} as const;

@@ -17,6 +17,12 @@ export interface TimelineItemProps {
   role: string;
   /** Markdown. */
   description: string;
+  /**
+   * Keeps the description on screen but off the printed CV. For entries whose
+   * header line already carries the whole fact (Education: school, course and
+   * years), the paragraph is redundant on paper and costs page budget.
+   */
+  printDescription?: boolean;
   image?: string;
   link?: string;
   links?: (string | { label: string; url: string })[];
@@ -40,6 +46,7 @@ export function TimelineItem({
   parentTitle,
   role,
   description,
+  printDescription = true,
   image,
   link,
   links = [],
@@ -98,7 +105,7 @@ export function TimelineItem({
             </button>
           )}
           <div
-            className="space-y-2"
+            className={`space-y-2${printDescription ? "" : " print:hidden"}`}
             dangerouslySetInnerHTML={{ __html: marked.parse(description) as string }}
           />
           {/* Print gets a single running-text line instead of the pill row:
