@@ -291,11 +291,14 @@ export function Timeline({ version }: { version: ContentVersion }) {
           Saying so turns a gap the reader would notice into a pointer, and
           hands the parser the URL. The rule above it matters as much as the
           words: without it the line sits flush under the last entry and reads
-          as a comment about that project. */}
+          as a comment about that project. Keep it to one printed line — it
+          wraps past roughly 125 characters at this size. */}
       <p className="hidden print:block print:mt-2.5 print:pt-1.5 border-t border-black/25 text-xs italic text-black/70">
-        This CV lists a selection of projects. The complete history — including
-        the ones named under Notable Achievements — is at{" "}
-        <a href="https://gil.solutions">gil.solutions</a>.
+        A selection of projects — the complete history, including those under
+        Notable Achievements, is at{" "}
+        {/* No trailing period: glued to a URL it gets swallowed into the
+            link by some extractors. The line is a caption, not a sentence. */}
+        <a href="https://gil.solutions">https://gil.solutions</a>
       </p>
 
       {/* Print keeps far less air than the screen here: the heading and the
