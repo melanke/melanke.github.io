@@ -6,6 +6,11 @@ cruzando com o código-fonte que gera os PDFs.
 
 **Data:** 14/08/2026 · **Versões analisadas:** general, web3, leader, enterprise, product
 
+**Atualizado em 19/08/2026** — 6 versões agora (entrou `webdev`), e a versão `leader`
+passou a ser publicada como **Technical Project Manager** em `/project-manager`. Os
+gaps que sobraram desta revisão foram movidos para `content/career-gaps.md`, que
+separa "nunca usei" de "usei e enferrujou" de "tenho mas não registrei".
+
 **O que já está bom:** fontes embutidas com mapa Unicode, zero texto em imagem, o texto
 extrai limpo e na ordem certa. A base do PDF é sólida — os problemas são de conteúdo,
 estrutura e campos ausentes.
@@ -224,15 +229,37 @@ versão (fica só na tela, como range evidence), mesmo tratamento que o `product
 - O parágrafo explicando por que o papel atual é IC está muito bem escrito e resolve a
   maior objeção; o resto não acompanha. ⬜ Não revisitado nesta rodada.
 
-### Project Manager — não existe versão
+### ✅ Project Manager — resolvido reaproveitando o `leader`
 
-O Product é o mais próximo mas não serve. PM quer cronograma, orçamento, gestão de risco,
-gestão de fornecedor, Gantt, Jira.
+O Product era o mais próximo mas não servia. PM quer cronograma, orçamento, gestão de
+risco, gestão de fornecedor, Gantt, Jira.
 
-Contagem nos 5 PDFs: `Jira` = 0 · `Agile` = 0 · `Scrum` = 0 · `Kanban` = 0 · `Certif` = 0.
+Contagem nos 5 PDFs de 14/08: `Jira` = 0 · `Agile` = 0 · `Scrum` = 0 · `Kanban` = 0 ·
+`Certif` = 0.
 
-PMP/CSM/PSPO/SAFe são hard filter em boa parte das vagas de PM — não ter é escolha
-legítima, mas não ter *nem o vocabulário* fecha a porta antes do humano.
+**Corrigido em 19/08 sem criar uma sétima versão.** Como a frente de Engineering Manager
+foi descartada, a versão `leader` foi republicada como **Technical Project Manager**:
+rota `/project-manager` (com `/leader` ainda servindo a mesma página), PDF
+`Gil-Lopes-Bueno-Technical-Project-Manager.pdf`, título e metadata trocados, e bio
+reescrito para delivery end-to-end — escopo, proposta, estimativa, cronograma, orçamento,
+horas, custos e risco, com o ClickClock como exemplo de melhoria operacional que nasceu
+de uma dor de gestão. `leader` segue como identificador **interno** para não ter que
+reescrever todas as entradas da timeline de uma vez.
+
+O bloco `Leadership` virou `Project Management` e absorveu o vocabulário da vaga: Project
+Delivery, Scrum, Kanban, Sprint Planning, Backlog Refinement, Estimation & Proposals,
+Project Scheduling, Budget Management, Risk Management, Stakeholder Management, e as
+ferramentas com data real — Jira (2010), YouTrack (2016), ZenHub (2020), ClickUp (2022),
+Linear (2025). As competências de pessoas que valem para TPM (People Management,
+Mentoring & Coaching, Cross-functional Leadership, Performance Management 2022, 1:1s
+2022) entraram **no mesmo bloco** em vez de virar seção própria: um heading custa ~5
+linhas do orçamento de 3 páginas, quatro pills custam 1. ClickClock subiu para prioridade
+1 e passou a imprimir nessa versão.
+
+⬜ **O que continua faltando:** certificação (`Certif` segue = 0), Gantt/caminho crítico,
+gestão de fornecedor, e qualquer métrica de delivery (previsibilidade, throughput, lead
+time). Detalhado em `content/career-gaps.md` §2.3 — PSM I é apontado ali como o item de
+maior ROI da trilha.
 
 ### Product Owner — boa base, credibilidade frágil
 
@@ -271,7 +298,41 @@ datado, e Jersey/JDBC crus sugerem que ele não usou framework moderno de JVM.
 `lib/technologies.ts` ganhou `lastUsed?: string` — o ano em que a tecnologia foi usada
 pela última vez, derivado da timeline: o maior ano de término entre todas as entradas de
 `content/timeline-items.ts` que a listam (entrada "current" conta como o ano atual).
-**Nada renderiza esse campo ainda.**
+
+> ⚠️ **Esta seção foi escrita quando nada renderizava o campo. Isso mudou.**
+> `techYears()` em `components/TechSkillItem.tsx` renderiza hoje, na tela e no PDF:
+> `since-lastUsed`, com `lastUsed` do ano corrente virando `now` (`Node.js (2012-2025)`,
+> `REST (2012-now)`). O catálogo de `lib/technologies.ts` também está preenchido — os
+> "56 vazias" abaixo não valem mais.
+>
+> ✅ **Efeito colateral resolvido em 19/08.** Os blocos de competência
+> (`Project Management`, `Product`) não tinham `lastUsed`, então `techYears`
+> devolvia só o `since` e o PDF imprimia `Project Delivery (2013)` ao lado de
+> `Node.js (2012-2025)` — um ano solto entre intervalos lê como "fez em 2013 e
+> parou". As 41 competências e ferramentas que eram literais em
+> `components/ResumePage.tsx` foram migradas para `lib/technologies.ts` como
+> `practice` e `deliveryTools`, declaradas pelo mesmo `tech()`, que torna o ano
+> de término impossível de esquecer. Fim de 2025 em todas: é quando a Simpli
+> fechou, e o 33Labs é papel de IC. Ganho colateral: `Scrum`, `Kanban`,
+> `Stakeholder Management`, `Backlog Refinement`, `Jira` e `ClickUp` apareciam em
+> dois blocos, e `Figma` já tinha divergido — `other.figma` dizia 2021 e o bloco
+> Product dizia 2018. Agora cada um tem um dono só.
+>
+> `deliveryTools` ficou fora de `other` de propósito: `OtherSection` renderiza
+> `Object.values(other)` inteiro, então Jira apareceria no bloco de design/mobile.
+>
+> **Duas decisões confirmadas pelo Gil em 19/08, não reabrir:** `Linear` é
+> `2025-now` (33Labs, é a ferramenta corrente — é a única entrada dos dois
+> grupos que não termina em 2025); e a repetição de `(2013-2025)` ao longo do
+> bloco de PM **fica como está** — foi avaliada a alternativa de fatorar o ano
+> comum para o rótulo (`PROJECT MANAGEMENT (2013-2025): …`) e descartada, o ano
+> por entrada vale mais para o ATS do que a limpeza visual custa.
+>
+> Também confirmado: `Discovery` é `2022-2025` e `Requirements` `2013-2025` — o
+> `2010` dos dois era o caso de inflação apontado em §3. O bio da versão Product
+> cita discovery sem data de propósito: os "12+ years" da primeira frase se ligam
+> a *owning product decisions*, e o discovery de 2022 em diante cabe dentro do
+> período da Simpli que a frase descreve.
 
 Das 115 tecnologias (JDBC foi removido), **59 estão preenchidas e 56 vazias**. As vazias
 não aparecem em nenhum item da timeline, só nos blocos de skills do `ResumePage.tsx`;
@@ -361,16 +422,26 @@ naquela data. Excluí-lo demoveria as três injustamente.
 
 **Pendente, na ordem que eu atacaria**
 
-12. ⬜ **Seção de skills de liderança para o `leader`** — espelhando o `productSection`.
-    Continua o maior gap estrutural: o CV de liderança tem a mesma lista de skills do
-    general, sem vocabulário de gestão nenhum
-13. ⬜ **Spring (se aplicável) e os ausentes de backend no `enterprise`** — `Spring` segue
-    com 0 ocorrências nos 5 PDFs, e é a keyword nº 1 de vaga Java enterprise
+12. ✅ ~~Seção de skills de liderança para o `leader`~~ — virou o bloco `Project
+    Management` da versão Technical Project Manager (ver §3)
+13. ❌ **Spring** — **fechado, não pendente.** Gil confirmou em 19/08 que nunca usou
+    Spring. Não é questão de registrar, é de aprender: foi para `content/career-gaps.md`
+    §2.1. O que ele *usou* e ainda não está no CV — Hibernate/JPA, Kafka/RabbitMQ,
+    Kubernetes, JUnit/Mockito, gRPC — está listado lá em §1, junto com o bloqueio (falta
+    recuperar projeto e ano no histórico). **Trilha enterprise adiada por decisão
+    explícita**
 14. ⬜ **Fechar Sharity/Desabafa em enterprise e web3**, e os 3 anos que faltam em 4 das 5
 15. ⬜ **Achievements em coluna única** (hoje grid de 2 colunas quebra o pareamento na
     extração crua)
 16. ⬜ **Metadata `Author`/`Keywords`** via `pdf-lib` no pós-build (o Chrome ignora
     `<meta name="author">`)
+17. ✅ ~~`lastUsed` nos blocos de competência~~ — migrados para `practice` e
+    `deliveryTools` em `lib/technologies.ts`. Ver §3.1
+18. ⬜ **`/leader` e `/project-manager` servem a mesma página** — export estático não faz
+    redirect, então são duas URLs com o mesmo conteúdo. O `canonical` já aponta para
+    `/project-manager` e só ela está no sitemap, o que resolve o lado do SEO; falta
+    decidir se `/leader` sai de vez (quebra links já enviados) ou vira um stub com
+    `<meta http-equiv="refresh">`
 
 ---
 

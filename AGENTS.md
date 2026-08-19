@@ -139,5 +139,5 @@ Phase is inferred from file state — no explicit field except `status: ready`:
 - `/eth-radar` — Fresh Ethereum protocol/dev topics from tier-1 sources → content hooks (catalog: `_shared/ethereum-news-sources.md`)
 - `/ai-radar` — Fresh genAI *integration* topics (agents, MCP, frameworks) from tier-1 sources → content hooks (catalog: `_shared/ai-dev-news-sources.md`)
 - `/web-radar` — Fresh JS/TS, Node, React/Next, Postgres, AWS and web-platform topics from tier-1 sources → content hooks (catalog: `_shared/webdev-news-sources.md`)
-- `/linkedin-carousel` — Single humorous LinkedIn carousel post (not a blog article): funny caption + one self-contained image prompt per slide, all in Gil's recognizable carousel house style (see `.claude/skills/_shared/carousel-visual-identity.md`)
+- `/linkedin-carousel` — Single humorous LinkedIn carousel post (not a blog article): funny caption + one self-contained image prompt per slide, all in Gil's recognizable carousel house style (see `.Codex/skills/_shared/carousel-visual-identity.md`)
 - `/linkedin-post` — One idea or rough draft → a finished, ready-to-paste LinkedIn **text** post (60–150 words, funny, plain text), in a single run with no questions asked. Built for volume; accepts several ideas at once. Output lands in `content/linkedin-posts/`
