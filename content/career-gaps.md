@@ -27,7 +27,7 @@
 | ⬜ | **Tenho, não está no CV.** Experiência real, atual, só não registrada | Adicionar ao CV — não é estudo |
 | 🟡 | **Tive, enferrujou.** Usei em produção, faz anos; preciso revisar antes de defender em entrevista | Revisar + adicionar com a data honesta |
 | ❌ | **Nunca usei.** Não pode aparecer no CV até existir uso real | Estudar e construir algo |
-| 🔒 | **Tenho, mas não posso provar.** NDA / código de cliente | Construir um equivalente público |
+| 🔒 | **Tenho, mas não posso provar.** NDA, código de cliente, ou dado histórico ao qual ele perdeu acesso | Construir um equivalente público, ou falar da prática sem citar número |
 
 ---
 
@@ -108,7 +108,7 @@ Proposals, Scheduling, Budget, Risk, Stakeholder e as ferramentas
 | Gantt / caminho crítico / MS Project | ❌ | Vaga de PM tradicional (não-ágil) pede explicitamente |
 | Gestão de fornecedor / terceiros | ❌ | Ele geria **entrega para** cliente, não **contrato com** fornecedor. São coisas diferentes e a vaga sabe |
 | Orçamento gerido (total, ticket médio, faixa) | 🟡 | Ele estimava para proposta comercial, aprovava gastos e acompanhava custos — **nenhum valor está no CV**. Fonte provável: arquivo de propostas ou notas fiscais da Simpli |
-| Throughput / lead time de sprint | 🟡 | Existiu em Jira/YouTrack/ZenHub/ClickUp; as contas antigas provavelmente estão encerradas. Só vale o esforço se o ClickUp ainda estiver ativo |
+| Throughput / lead time de sprint | 🔒 | **Foi medido de verdade na época** — não é gap de prática, é de prova: o Gil não tem mais acesso aos dados históricos das ferramentas. Pode ser afirmado como prática passada, nunca com número |
 
 > **Em grande parte fechado em 19/08.** Três métricas de entrega entraram:
 >

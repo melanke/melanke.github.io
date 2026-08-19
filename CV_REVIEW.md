@@ -461,6 +461,58 @@ naquela data. Excluí-lo demoveria as três injustamente.
 
 ---
 
+## Onde esta frente parou — 19/08/2026
+
+Tudo commitado no branch `cv/technical-project-manager` (6 commits, **sem push**).
+Seis CVs em 3 páginas, build verde.
+
+**A frente aberta é métricas de entrega para o CV de TPM.** Já entraram duas —
+simultaneidade (bio) e precisão de estimativa ±2h (ClickClock). O estado
+completo do que fechou e do que falta está em `content/career-gaps.md` §2.3.
+
+**Retomar por aqui:**
+
+1. ⬜ **O mecanismo de sprint da Simpli.** Gil descreveu: tarefas prioritárias vs.
+   filler; toda prioritária não entregue no sprint exigia justificativa no fim;
+   urgências entravam no meio do sprint e forçavam remanejar carga; cada dev
+   tinha fila individual, não compartilhada. **Decisão tomada:** entra no CV em
+   2-3 frases só (um mecanismo, não cinco — o objetivo da linha é fazer o
+   entrevistador perguntar, não responder tudo). O resto é munição de entrevista.
+   Uma edição foi preparada e não aplicada: substituir o 3º parágrafo da
+   descrição `leader` da Simpli — hoje é sobre provisionar AWS, checklist de
+   conta, IAM e Terraform starter kit, conteúdo de engenharia no CV que argumenta
+   gestão — mantendo só o beat de controle de custo (alerta de anomalia em vez de
+   esperar o cliente reclamar), que é trabalho de PM. **Essa troca vale por si,
+   independente do mecanismo de sprint entrar ou não.**
+2. ⬜ **Retenção de cliente, já pronta no registro e nunca contada.** Duração
+   média de engajamento de 20,6 meses (mediana 16), 8 de 31 projetos acima de 2,5
+   anos. E o cluster Neo/COZ: Neo-Sharp, Neo3-boa, NDapp, Neon Wallet, Icon Dapp e
+   Blockchain Services Library — 6+ projetos para uma mesma relação de cliente ao
+   longo de 6 anos, terminando com convite para o board da COZ.
+3. ⬜ **Orçamento gerido** — a única categoria de métrica de PM sem nenhuma
+   representante no CV. Fonte mais provável: notas fiscais (mais fáceis de achar
+   que propostas antigas).
+4. ⬜ **Arquivo de material de entrevista** — sugerido, não criado. O que não cabe
+   no CV (filas individuais, remanejamento sob urgência, filler como buffer de
+   variância) não tem hoje onde ser guardado; `career-gaps.md` é o registro
+   negativo, não serve. As mesmas skills que leem `professional-background.md` se
+   beneficiariam.
+
+**Fora desta frente**, por ROI (detalhe em `content/career-gaps.md` §4):
+contrato Solidity público · registrar este portfólio como item da timeline
+(destrava App Router/RSC na trilha `webdev`, é questão de horas) · PSM I.
+
+**Também em aberto:** `CV_REVIEW-plano-codex.md` foi commitado sem querer em
+`1783b48` e o Gil ainda não decidiu se apaga — o conteúdo já está absorvido aqui
+e em `career-gaps.md`.
+
+**Nota de build:** os PDFs mudam de bytes a cada build mesmo sem mudança de
+conteúdo, porque `CreationDate`/`ModDate` carregam o horário. Se o `git status`
+acusar PDF modificado depois de um build, confira o texto com `pdftotext` antes
+de assumir que mudou algo de verdade.
+
+---
+
 ## Apêndice — mudanças já aplicadas nesta revisão
 
 ### Header impresso (`components/Header.tsx`, `components/StickyHeader.tsx`)
