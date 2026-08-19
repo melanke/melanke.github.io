@@ -107,17 +107,27 @@ Proposals, Scheduling, Budget, Risk, Stakeholder e as ferramentas
 | **Certificação (PMP, CSM, PSM I, PSPO, SAFe)** | ❌ | **Hard filter em boa parte das vagas de PM.** `Certif` = 0 ocorrências nos PDFs. **Maior ROI desta trilha** — PSM I (Scrum.org) é o caminho mais curto: ~US$200, sem curso obrigatório, e o Gil já pratica Scrum desde 2013 |
 | Gantt / caminho crítico / MS Project | ❌ | Vaga de PM tradicional (não-ágil) pede explicitamente |
 | Gestão de fornecedor / terceiros | ❌ | Ele geria **entrega para** cliente, não **contrato com** fornecedor. São coisas diferentes e a vaga sabe |
-| Métricas de delivery (previsibilidade, throughput, lead time, burn) | 🟡 | Ele acompanhava horas e custos de verdade, mas **nenhum número disso está no CV** — nem no timeline, nem nos Achievements |
+| Orçamento gerido (total, ticket médio, faixa) | 🟡 | Ele estimava para proposta comercial, aprovava gastos e acompanhava custos — **nenhum valor está no CV**. Fonte provável: arquivo de propostas ou notas fiscais da Simpli |
+| Throughput / lead time de sprint | 🟡 | Existiu em Jira/YouTrack/ZenHub/ClickUp; as contas antigas provavelmente estão encerradas. Só vale o esforço se o ClickUp ainda estiver ativo |
 
-> **Parcialmente fechado em 19/08:** a métrica de simultaneidade entrou no bio do
-> TPM — **3 projetos de cliente hands-on ao mesmo tempo, até 7 supervisionados**
-> (3 como PM/Tech Lead, 7 como Engineering Manager). Os dois números juntos são
-> de propósito: só o 7 infla, só o 3 subvende.
+> **Em grande parte fechado em 19/08.** Três métricas de entrega entraram:
 >
-> **O que continua faltando** é a linha 🟡 acima: qualquer número de
-> previsibilidade, orçamento ou desvio de prazo de um projeto real da Simpli.
-> Não é estudo, é recuperar do histórico — e seria o dado mais forte do CV de
-> TPM, que ainda só tem métricas de escala do produto.
+> - **Simultaneidade** — "3 projetos de cliente ao mesmo tempo, até 7" no bio do
+>   TPM. Corroborado pelo próprio registro: média 3,1 e pico 7 em papéis de
+>   gestão, calculado sobre os 31 projetos-filhos documentados (de 50+
+>   entregues, então é piso).
+> - **Precisão de estimativa** — na entrada do ClickClock, versão `leader`:
+>   estimativa em dois níveis (alto nível para o cliente, por tarefa pelos
+>   próprios devs), meta de **não passar 2h do estimado**, muito ultrapassada no
+>   início e rara ao fim, conforme o dado voltava aos devs como feedback. É a
+>   resposta para a pergunta nº 1 de entrevista de PM.
+> - **Retenção** — duração média de engajamento de 20,6 meses (mediana 16), 8 de
+>   31 projetos acima de 2,5 anos. **Ainda não está dito no CV** (ver abaixo).
+>
+> **O que continua faltando:** orçamento (linha nova acima), throughput, e a
+> retenção — inclusive o cluster Neo/COZ, que são 6+ projetos para uma mesma
+> relação de cliente ao longo de 6 anos, terminando com convite para o board.
+> Está inteiro no registro, nunca foi contado como uma coisa só.
 
 ### 2.4 Web dev moderno
 

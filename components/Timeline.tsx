@@ -1,17 +1,17 @@
- "use client";
+"use client"
 
-import { useState, ReactNode } from "react";
-import { TimelineItem } from "./TimelineItem";
-import { TimelineIcon } from "./TimelineIcon";
-import { ContentVersion } from "@/app/contentVersion";
-import { timelineItems, TimelineEntry } from "@/content/timeline-items";
-import { Tech, crossCutting } from "@/lib/technologies";
+import { useState, ReactNode } from "react"
+import { TimelineItem } from "./TimelineItem"
+import { TimelineIcon } from "./TimelineIcon"
+import { ContentVersion } from "@/app/contentVersion"
+import { timelineItems, TimelineEntry } from "@/content/timeline-items"
+import { Tech, crossCutting } from "@/lib/technologies"
 
 // How many items — top-level and nested combined, in final render order —
 // show unconditionally before the rest fold behind "Show more". Tune this
 // single number to make the page denser/lighter; it's not tied to any
 // group boundary.
-const VISIBLE_ITEM_COUNT = 10;
+const VISIBLE_ITEM_COUNT = 13
 
 function TimelineHeader({ className }: { className?: string }) {
   return (
@@ -23,39 +23,39 @@ function TimelineHeader({ className }: { className?: string }) {
         Work Experience
       </h2>
     </div>
-  );
+  )
 }
 
 function resolveText(
   value: string | Partial<Record<ContentVersion, string>>,
   version: ContentVersion
 ): string {
-  if (typeof value === "string") return value;
-  return value[version] ?? "";
+  if (typeof value === "string") return value
+  return value[version] ?? ""
 }
 
 function resolveTechnologies(
   value: Tech[] | Partial<Record<ContentVersion, Tech[]>>,
   version: ContentVersion
 ): Tech[] {
-  const list = Array.isArray(value) ? value : value[version] ?? [];
+  const list = Array.isArray(value) ? value : value[version] ?? []
   // Cross-cutting competencies stay in the data (they feed `lastUsed`) but not
   // in the per-project list — see the note on `crossCutting`.
-  return list.filter((t) => !crossCutting.includes(t));
+  return list.filter((t) => !crossCutting.includes(t))
 }
 
 function shouldPrint(item: TimelineEntry, version: ContentVersion): boolean {
-  return item.printIn ? item.printIn.includes(version) : true;
+  return item.printIn ? item.printIn.includes(version) : true
 }
 
 function byPriorityThenDate(
   version: ContentVersion
 ): (a: TimelineEntry, b: TimelineEntry) => number {
   return (a, b) => {
-    const diff = a.priority[version] - b.priority[version];
-    if (diff !== 0) return diff;
-    return b.startDate.localeCompare(a.startDate);
-  };
+    const diff = a.priority[version] - b.priority[version]
+    if (diff !== 0) return diff
+    return b.startDate.localeCompare(a.startDate)
+  }
 }
 
 /**
@@ -68,27 +68,27 @@ function byPriorityThenDate(
  * confuses date parsing). So the two media sort differently.
  */
 const byDate = (a: TimelineEntry, b: TimelineEntry) =>
-  b.startDate.localeCompare(a.startDate);
+  b.startDate.localeCompare(a.startDate)
 
 export function Timeline({ version }: { version: ContentVersion }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [enlargedImageId, setEnlargedImageId] = useState<string | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [enlargedImageId, setEnlargedImageId] = useState<string | null>(null)
 
-  const byId = new Map(timelineItems.map((item) => [item.id, item]));
+  const byId = new Map(timelineItems.map((item) => [item.id, item]))
 
-  const eligible = timelineItems.filter((item) => item.priority[version] !== 4);
-  const topLevel = eligible.filter((item) => !item.parentId);
-  const childrenByParent = new Map<string, TimelineEntry[]>();
+  const eligible = timelineItems.filter((item) => item.priority[version] !== 4)
+  const topLevel = eligible.filter((item) => !item.parentId)
+  const childrenByParent = new Map<string, TimelineEntry[]>()
   for (const item of eligible) {
-    if (!item.parentId) continue;
-    const list = childrenByParent.get(item.parentId) ?? [];
-    list.push(item);
-    childrenByParent.set(item.parentId, list);
+    if (!item.parentId) continue
+    const list = childrenByParent.get(item.parentId) ?? []
+    list.push(item)
+    childrenByParent.set(item.parentId, list)
   }
 
-  const compare = byPriorityThenDate(version);
-  topLevel.sort(compare);
-  for (const list of childrenByParent.values()) list.sort(compare);
+  const compare = byPriorityThenDate(version)
+  topLevel.sort(compare)
+  for (const list of childrenByParent.values()) list.sort(compare)
 
   const renderItem = (item: TimelineEntry) => (
     <TimelineItem
@@ -111,7 +111,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
         setEnlargedImageId((prev) => (prev === item.id ? null : item.id))
       }
     />
-  );
+  )
 
   // Groups consecutive nested items sharing the same parent into one run,
   // so they can share a single continuous "nested" bar instead of each
@@ -119,23 +119,22 @@ export function Timeline({ version }: { version: ContentVersion }) {
   // "Show more" cutoff still gets exactly one bar (spanning both its
   // always-visible and collapsed items) instead of two separate ones.
   const groupRuns = (items: TimelineEntry[]) => {
-    const runs: { parentId?: string; items: TimelineEntry[] }[] = [];
+    const runs: { parentId?: string; items: TimelineEntry[] }[] = []
     for (const item of items) {
-      const last = runs[runs.length - 1];
+      const last = runs[runs.length - 1]
       if (item.parentId && last?.parentId === item.parentId) {
-        last.items.push(item);
+        last.items.push(item)
       } else {
-        runs.push({ parentId: item.parentId, items: [item] });
+        runs.push({ parentId: item.parentId, items: [item] })
       }
     }
-    return runs;
-  };
+    return runs
+  }
 
-  const collapsibleClass = `overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out print:overflow-visible ${
-    isExpanded
+  const collapsibleClass = `overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out print:overflow-visible ${isExpanded
       ? "max-h-[5000px] opacity-100"
       : "max-h-0 opacity-0 print:max-h-[5000px] print:opacity-100"
-  }`;
+    }`
 
   const showMoreButton = (
     <button
@@ -146,23 +145,23 @@ export function Timeline({ version }: { version: ContentVersion }) {
     >
       Show more
     </button>
-  );
+  )
 
   const itemsList = (items: TimelineEntry[], extraClass = "") =>
     items.length > 0 && (
       <div className={`flex flex-col space-y-10 print:space-y-5 ${extraClass}`}>
         {items.map((item) => renderItem(item))}
       </div>
-    );
+    )
 
   // Flatten into natural render order — each top-level item immediately
   // followed by its own (already-sorted) children — to get each item's
   // natural position ahead of the "Show more" cutoff.
-  const naturalFlat: TimelineEntry[] = [];
+  const naturalFlat: TimelineEntry[] = []
   for (const employer of topLevel) {
-    naturalFlat.push(employer);
+    naturalFlat.push(employer)
     for (const child of childrenByParent.get(employer.id) ?? []) {
-      naturalFlat.push(child);
+      naturalFlat.push(child)
     }
   }
 
@@ -176,41 +175,41 @@ export function Timeline({ version }: { version: ContentVersion }) {
   // couple of children), the child is dropped entirely instead — it has no
   // "Show more" of its own to fall back into.
   const flat = naturalFlat.filter((item, index) => {
-    if (!item.parentId) return true;
-    const parent = byId.get(item.parentId);
-    if (!parent) return true;
-    const outranksParent = item.priority[version] > parent.priority[version];
-    return !(outranksParent && index < VISIBLE_ITEM_COUNT);
-  });
+    if (!item.parentId) return true
+    const parent = byId.get(item.parentId)
+    if (!parent) return true
+    const outranksParent = item.priority[version] > parent.priority[version]
+    return !(outranksParent && index < VISIBLE_ITEM_COUNT)
+  })
 
   // Group once on the full sequence (not on two pre-split slices), so a run
   // that straddles the cutoff renders as a single block with one bar
   // spanning both its always-visible and locally-collapsed items — instead
   // of the always-visible part and the collapsed part getting two separate
   // bars in two separate containers.
-  const runs = groupRuns(flat);
-  let consumed = 0;
-  let buttonPlaced = false;
-  const beforeBlocks: ReactNode[] = [];
-  const afterOnlyRuns: TimelineEntry[][] = [];
+  const runs = groupRuns(flat)
+  let consumed = 0
+  let buttonPlaced = false
+  const beforeBlocks: ReactNode[] = []
+  const afterOnlyRuns: TimelineEntry[][] = []
 
   runs.forEach((run, index) => {
-    const start = consumed;
-    consumed += run.items.length;
-    const localCut = Math.max(0, Math.min(run.items.length, VISIBLE_ITEM_COUNT - start));
-    const alwaysItems = run.items.slice(0, localCut);
-    const collapsedItems = run.items.slice(localCut);
+    const start = consumed
+    consumed += run.items.length
+    const localCut = Math.max(0, Math.min(run.items.length, VISIBLE_ITEM_COUNT - start))
+    const alwaysItems = run.items.slice(0, localCut)
+    const collapsedItems = run.items.slice(localCut)
 
     if (alwaysItems.length === 0) {
       // Entirely past the cutoff: no bar needed of its own here — it joins
       // the shared collapsed area below instead of getting a standalone
       // wrapper (which would add stray margin even while collapsed).
-      afterOnlyRuns.push(run.items);
-      return;
+      afterOnlyRuns.push(run.items)
+      return
     }
 
-    const showButtonHere = collapsedItems.length > 0 && !buttonPlaced;
-    if (collapsedItems.length > 0) buttonPlaced = true;
+    const showButtonHere = collapsedItems.length > 0 && !buttonPlaced
+    if (collapsedItems.length > 0) buttonPlaced = true
 
     const body = (
       <>
@@ -224,7 +223,7 @@ export function Timeline({ version }: { version: ContentVersion }) {
           </>
         )}
       </>
-    );
+    )
 
     beforeBlocks.push(
       run.parentId ? (
@@ -235,10 +234,10 @@ export function Timeline({ version }: { version: ContentVersion }) {
       ) : (
         <div key={index}>{body}</div>
       )
-    );
-  });
+    )
+  })
 
-  const afterOnlyItems = afterOnlyRuns.flat();
+  const afterOnlyItems = afterOnlyRuns.flat()
 
   // The print tree renders the same items through the same `renderItem`, so the
   // two can't drift on props — only the order differs. It needs none of the
@@ -247,14 +246,14 @@ export function Timeline({ version }: { version: ContentVersion }) {
   // instead, as the `parentTitle` prefix.
   const printable = timelineItems.filter((item) =>
     item.printIn ? item.printIn.includes(version) : item.priority[version] !== 4
-  );
-  const printTopLevel = printable.filter((i) => !i.parentId).sort(byDate);
+  )
+  const printTopLevel = printable.filter((i) => !i.parentId).sort(byDate)
   const printChildren = (parentId: string) =>
-    printable.filter((i) => i.parentId === parentId).sort(byDate);
+    printable.filter((i) => i.parentId === parentId).sort(byDate)
   // A child whose employer doesn't print would otherwise vanish from the PDF.
   const printOrphans = printable.filter(
     (i) => i.parentId && !printTopLevel.some((p) => p.id === i.parentId)
-  );
+  )
 
   return (
     <div className="flex flex-col max-xl:mt-14 xl:mt-4 print:mt-0 w-full text-black dark:text-white max-md:max-w-full">
@@ -319,5 +318,5 @@ export function Timeline({ version }: { version: ContentVersion }) {
       </div>
       <div className="xl:h-48"></div>
     </div>
-  );
+  )
 }
