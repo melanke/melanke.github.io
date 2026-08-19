@@ -525,7 +525,7 @@
 
   <section id="a1">
     <h2><span class="num">04</span>Âncora 1 — a história de profundidade</h2>
-    <p class="sub">Essa é a que aguenta cinco camadas. É onde você quer estar quando ele começar a cavar.</p>
+    <p class="sub">Essa é a que aguenta cinco camadas. É onde você quer estar quando ele começar a cavar — e desde que você recuperou a cadeia de diagnóstico, ela deixou de ser “redesenhei o write path” e virou uma investigação com ferramenta nomeada em cada passo.</p>
 
     <div class="card">
       <div class="anchor-head">
@@ -536,72 +536,87 @@
 
       <dl class="skel">
         <dt>Contexto</dt>
-        <dd>Plataforma B2B de entregas construída do zero, sob sua liderança técnica nos dois primeiros anos. Chegou a ~60 mil entregadores, 2 mil empresas, 50M+ notas. Adquirida pela MadeiraMadeira em 2021 — a Simpli atravessou a aquisição, operou o produto por mais três anos e entregou em 2024, com você como CTO voltando pra perto do time quando o trabalho pedia profundidade.</dd>
+        <dd>Plataforma B2B de entregas construída do zero, sob sua liderança técnica nos dois primeiros anos. Chegou a ~60 mil entregadores, 2 mil empresas, 50M+ notas. Adquirida pela MadeiraMadeira em 2021 — a Simpli atravessou a aquisição, operou por mais três anos e entregou em 2024, com você como CTO voltando pra perto do time quando o trabalho pedia profundidade.</dd>
 
         <dt>Gatilho</dt>
-        <dd>Uma dessas voltas, ~2019-2020: um pico de fim de mês fiscal expôs um gargalo de escrita no banco. <strong>O sistema não caiu</strong> — e isso é parte da história, não uma desculpa: latência e custo de AWS subindo é um sintoma mais difícil de diagnosticar que um outage.</dd>
+        <dd>Uma dessas voltas, ~2019-2020. Um <strong>billing alarm do CloudWatch</strong> disparou: o Postgres sempre custava um pouco mais no fechamento fiscal, mas dessa vez foi desproporcional — por causa do salto de empresas que tinham adotado o sistema havia pouco. <strong>O sistema não caiu.</strong> O primeiro sinal foi financeiro, não de latência.</dd>
 
-        <dt>Diagnóstico</dt>
-        <dd>Dois fluxos de escrita com perfis opostos estavam no mesmo banco: <em>pings de posição dos entregadores</em> (altíssima frequência, valor individual quase nulo, append-only) e <em>processamento de notas</em> (em rajada, transacional, cada linha importa). Otimizar o banco pra um piorava o outro.</dd>
+        <dt>Causa raiz</dt>
+        <dd>Clientes postando nota a nota no endpoint de integração em vez de usar o endpoint de batch — todos ao mesmo tempo no fechamento. <strong>Uma transação por nota, um flush de WAL por commit.</strong> O gargalo era commit-bound, não CPU-bound: latência de fsync não melhora com classe de instância.</dd>
 
         <dt>Decisão</dt>
         <dd>
-          <p>Separar por característica de escrita, não por volume.</p>
+          <p><strong>Duas correções em sequência, e a segunda só apareceu por causa da primeira.</strong></p>
           <ul>
-            <li>Pings → arquivos <strong>Parquet no S3</strong>, em lote.</li>
-            <li>Leitura quente (“onde está esse entregador agora”) → <strong>Redis</strong> com a última posição conhecida por entregador.</li>
-            <li>Notas → pipeline <strong>SNS/SQS</strong>, absorvendo a rajada de forma assíncrona.</li>
+            <li><strong>Ingestão de notas</strong> → fan-out SNS→SQS, worker commitando em lote.</li>
+            <li>Isso expôs uma segunda carga de escrita embaixo: <strong>posições dos entregadores</strong>, salvas a todo momento → posição atual no Redis, histórico em CSV comprimido no S3.</li>
           </ul>
         </dd>
 
         <dt>Descartado</dt>
         <dd>
-          <p><strong>Não decore a lista. Decore a regra que gera a lista:</strong> <em>o problema não era falta de máquina, era dois perfis de escrita opostos dividindo o mesmo banco.</em> Uma frase, e ela deriva as quatro rejeições na hora:</p>
+          <p><strong>Não decore a lista. Decore o mecanismo, que gera a lista:</strong> <em>o gargalo era número de commits, não falta de máquina — e fsync não escala com classe de instância.</em> Daí caem sozinhas:</p>
           <ul>
-            <li><strong>Escalar vertical</strong> — responde capacidade a um problema de mistura.</li>
+            <li><strong>Escalar vertical</strong> — não muda a latência de fsync. Esse é o argumento duro, não é julgamento.</li>
             <li><strong>Read replica</strong> — o gargalo era escrita.</li>
-            <li><strong>Sharding por empresa</strong> — os dois perfis continuam juntos, agora em N bancos, com hot shard no cliente grande.</li>
-            <li><strong>Fila na frente do mesmo banco</strong> — move o gargalo, não remove.</li>
+            <li><strong>Sharding por empresa</strong> — o padrão de commit continua idêntico, agora em N bancos, com hot shard no cliente grande.</li>
+            <li><strong>Fila na frente do mesmo banco</strong> — sem commit em lote do outro lado, move o gargalo em vez de remover.</li>
           </ul>
-          <p>Todas morrem pelo mesmo motivo, e explicar por que uma <em>classe</em> de solução não servia soa muito melhor que recitar quatro itens — recitar parece dever de casa.</p>
         </dd>
-
-        <dt>Trade-off aceito</dt>
-        <dd>Histórico de posição virou eventualmente consistente e perdeu SQL ad-hoc. Foi um preço consciente: ninguém consultava histórico recente em tempo real — o produto perguntava “onde está agora”, e isso ficou <em>mais</em> rápido.</dd>
 
         <dt>Como mediu</dt>
-        <dd>
-          <p><strong>São duas perguntas e as pessoas confundem.</strong> <em>(a) Como soube que era problema?</em> — aqui você está bem servido: sintoma de latência e custo subindo juntos, e a correlação com o calendário fiscal fechando o diagnóstico. Não era carga crescendo, era carga <em>concentrando</em>. <em>(b) Como soube que a correção funcionou?</em> — aqui você não tem número, e é melhor encarar isso agora.</p>
-          <p>A resposta honesta em três partes: o sinal comportamental (<em>“month-end stopped being something we watched”</em>), a direção sem número (custo parou de crescer mais rápido que o volume), e a autocrítica (<em>“I can't give you a clean before-and-after — we never set a baseline”</em>).</p>
-        </dd>
+        <dd><strong>Com as mesmas duas ferramentas da detecção, nos dois momentos:</strong> Performance Insights e Cost Explorer depois da correção 1, e de novo depois da correção 2. Mais acompanhamento diário anotando os números entre os fechamentos. Você não tem as magnitudes absolutas hoje — mas tem o método inteiro, e num TEI método bem contado vale mais que um número solto.</dd>
+
+        <dt>Trade-off aceito</dt>
+        <dd>Histórico de posição virou eventualmente consistente e perdeu SQL ad-hoc. Preço consciente: o produto perguntava “onde está agora”, e isso ficou <em>mais</em> rápido.</dd>
 
         <dt>Hoje seria</dt>
-        <dd>Instrumentação antes de re-arquitetar — e <strong>sem desculpa de época</strong>: em 2019 esse ferramental já era commodity, foi priorização errada, não falta de opção. Assumir isso sem apoiar em “na época não tinha” é o que faz a resposta pesar. Depois: ingestão gerenciada no lugar do batching na mão, e SLO de latência de escrita definido antes de mexer em arquitetura.</dd>
+        <dd>Instrumentação de performance <strong>permanente</strong>, não sob demanda — pelo motivo concreto explicado abaixo, não por boa prática. E foi exatamente a lição que vocês tiraram: alarmes no CloudWatch e no DLQ, conexões do RDS e memória do Redis sob acompanhamento proativo depois disso.</dd>
       </dl>
     </div>
 
-    <div class="note warn">
-      <span class="label">Duas frases que não podem sair da sua boca</span>
-      <p><strong>Qualquer percentual.</strong> “Reduzimos latência em 80%” convida “medido como, em que percentil, em que janela” — e a história inteira desaba. Num TEI, uma métrica que desaba contamina tudo que você disse antes dela. Se ele encostar em “me dá um número”, troque de projeto: <em>“the one where I have a clean number is Jamef — 8 seconds to a few milliseconds.”</em> Trocar de projeto pra entregar precisão é movimento forte, não fuga.</p>
-      <p><strong>“We evaluated X and rejected it.”</strong> As alternativas acima são reconstrução — o que um engenheiro sensato consideraria, não necessariamente o que você formalmente avaliou em 2019. Diga <em>“the obvious alternative is X, and it doesn't work because Y”</em>. Funciona igual e é verdade de qualquer jeito. Inventar processo é o que ele pega voltando no assunto por outro ângulo.</p>
+    <h3>A cadeia de diagnóstico — a espinha da história</h3>
+    <ol>
+      <li><strong>Billing alarm do CloudWatch</strong> dispara no fechamento fiscal.</li>
+      <li><strong>Cost Explorer</strong> mostra o padrão: o custo do RDS sempre sobe no fechamento, mas a magnitude é nova. Correlaciona com o salto de empresas recém-adotantes.</li>
+      <li><strong>Performance Insights habilitado no RDS</strong> — reativamente, depois do alarme.</li>
+      <li><strong>Espera até o fechamento seguinte.</strong> O segundo pico, no fim do mês seguinte, é o que o Performance Insights finalmente captura.</li>
+      <li>Acompanhamento diário, anotando os números.</li>
+      <li>Leitura de código → duas suspeitas.</li>
+      <li><strong>Correção 1</strong> (fan-out SNS→SQS + commit em lote) → mede de novo → melhora, <em>e revela a carga 2</em>.</li>
+      <li><strong>Correção 2</strong> (Redis + CSV comprimido no S3) → mede de novo → melhora significativa.</li>
+      <li>Alarmes no CloudWatch e no DLQ; observabilidade proativa daí em diante.</li>
+    </ol>
+
+    <div class="say">
+      <span class="label">O “faria diferente” — decore essa, é a melhor frase da âncora</span>
+      <p>“The bug only reproduced at fiscal month-end, and Performance Insights doesn't look backwards — so enabling it <em>after</em> the alarm meant waiting a full month for the next close just to see the peak. Not having standing performance instrumentation cost us a month of elapsed time on the diagnosis. That's why we came out of it monitoring RDS connections and Redis memory proactively, instead of reactively.”</p>
     </div>
 
-    <h3>A cascata — 12 perguntas que ele vai fazer</h3>
+    <p>Repare no que essa resposta faz: não é “eu deveria ter instrumentado” como boa prática abstrata. É <strong>o custo concreto de não ter instrumentado — um mês de calendário</strong> — com mecanismo, com o motivo (Performance Insights não olha pra trás) e com a correção que você de fato implementou depois. Tem autocrítica sem desculpa de época, e fecha em ação. É a resposta mais sênior do documento inteiro.</p>
+
+    <div class="note warn">
+      <span class="label">Duas frases que não podem sair da sua boca</span>
+      <p><strong>Qualquer percentual.</strong> “Reduzimos latência em 80%” convida “medido como, em que percentil, em que janela” — e a história desaba. Num TEI, uma métrica que desaba contamina tudo que você disse antes dela. Se ele encostar em “me dá um número”, troque de projeto: <em>“the one where I have a clean number is Jamef — 8 seconds to a few milliseconds.”</em> Trocar de projeto pra entregar precisão é movimento forte, não fuga.</p>
+      <p><strong>“We evaluated X and rejected it.”</strong> As alternativas acima são reconstrução a partir do mecanismo — não necessariamente o que você formalmente avaliou em 2019. Diga <em>“the obvious alternative is X, and it doesn't work because Y”</em>. Funciona igual e é verdade de qualquer jeito.</p>
+    </div>
+
+    <h3>A cascata — 14 perguntas que ele vai fazer</h3>
     <ul class="cascade">
-      <li><span class="q">Por que Parquet e não só jogar JSON no S3?</span><span class="a">Colunar comprime muito melhor num payload repetitivo como ping de GPS — corta custo de S3 e faz varredura analítica de histórico ficar viável. E escrever em lote amortiza o custo por evento. <b>Se ele empurrar:</b> a alternativa honesta seria um TSDB, e o que pesou contra foi superfície operacional nova num time pequeno.</span></li>
-      <li><span class="q">Redis é cache ou fonte da verdade?</span><span class="a">Cache — e essa é a razão de ser aceitável. A última posição é derivável do stream que continua chegando, então perder o Redis significa “posição desconhecida até o próximo ping”, não “dado perdido”. <b>O intervalo do ping limita o tamanho do buraco.</b></span></li>
-      <li><span class="q">E se o Redis cair no pico?</span><span class="a">Degradação, não falha: o mapa fica vazio e repopula em um ciclo de ping. Diga isso <em>e</em> diga o que faltava — aquecimento e política de eviction explícita.</span></li>
-      <li><span class="q">SQS entrega pelo menos uma vez. Como você evitou processar nota duas vezes?</span><span class="a">Chave de idempotência por nota. <b>Essa é a ponte pro Sharity</b> — lá você resolveu isso com dedupe table na mesma transação do incremento. Se a memória do iTrack falhar aqui, migre: “the pattern I'd defend in detail is the one I built on Sharity…”</span></li>
-      <li><span class="q">Ordem importava nas notas?</span><span class="a">Pense antes de responder — é pergunta de armadilha. Se importasse, SQS padrão não serviria e você precisaria de FIFO por empresa. Responda o que era verdade, não o que soa melhor.</span></li>
-      <li><span class="q">Como você soube que era escrita e não outra coisa?</span><span class="a">Essa é a pergunta de método, não de solução. Conte a sequência do diagnóstico: sintoma (latência + custo), correlação com o calendário fiscal, e daí pra métrica do banco. <b>Método bem contado vale mais que a solução.</b></span></li>
-      <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma, e o gargalo foi em 2019-2020. Resposta: <em>“those are the platform's lifetime figures — at the time of the bottleneck we were on the way there, and what mattered wasn't the absolute volume, it was the month-end concentration.”</em> Redireciona pro que era de fato o problema.</span></li>
-      <li><span class="q">Você construiu em 2016 e o gargalo foi em 2019 — o que você estava fazendo no meio?</span><span class="a">Pergunta de coerência de linha do tempo, e agora você tem a resposta limpa: CTO da Simpli, que seguiu cuidando do produto, com voltas hands-on quando o trabalho pedia. Essa foi uma delas. <b>Diga a forma do envolvimento, não finja intensidade constante.</b></span></li>
-      <li><span class="q">Quem discordou de você?</span><span class="a">Ele vai perguntar. Tenha uma resposta real — a defesa óbvia era “só aumenta a instância, é uma tarde de trabalho”. Conte como você comprou a discussão, não como você venceu.</span></li>
-      <li><span class="q">10x o volume — o que quebra primeiro?</span><span class="a">O batching feito à mão. Depois o Redis num nó só. Nomeie a ordem em que quebra e o que faria: ingestão gerenciada, particionamento do Parquet por tempo+entregador, Redis em cluster.</span></li>
-      <li><span class="q">Quanto tempo levou e quantas pessoas?</span><span class="a">Pergunta de calibração de escopo. <b>Não infle.</b> Se não lembra, dê a faixa e diga que é faixa.</span></li>
-      <li><span class="q">O que você entregaria antes se tivesse metade do tempo?</span><span class="a">O pipeline SNS/SQS das notas. É o que protege o fluxo que gera receita; posição de entregador degrada sem quebrar contrato.</span></li>
-      <li><span class="q">Como isso apareceu pro negócio?</span><span class="a">Custo de AWS estabilizado e fim de mês deixando de ser evento de risco. Se você tiver mesmo o número, use. Se não, descreva a mudança de <em>comportamento</em> — “month-end stopped being something we watched” é uma resposta forte sem número.</span></li>
-      <li><span class="q">O que você faria diferente?</span><span class="a">Observabilidade antes de arquitetura — e <b>sem encostar em “na época não tinha ferramenta”</b>, porque em 2019 tinha. Autocrítica sem desculpa de época é o que um TEI premia; com desculpa, vira defesa.</span></li>
+      <li><span class="q">Por que não fazer os clientes usarem o endpoint de batch?</span><span class="a"><b>A pergunta mais provável e mais perigosa</b> — a causa raiz era comportamento de cliente, então por que consertar na arquitetura? Resposta: você não faz 2.000 empresas mudarem a integração delas no seu cronograma, muito menos no fechamento fiscal. <b>A plataforma tem que absorver o comportamento que ela de fato recebe</b>, não o que a documentação pede. Isso é resposta de produto, não de infra, e é forte.</span></li>
+      <li><span class="q">Como você sabia que tinha terminado?</span><span class="a">Não sabia — e essa é a beleza da história. <b>A correção 1 é que revelou a carga 2.</b> Enquanto as notas dominavam o ruído, as posições dos entregadores eram invisíveis. Arco autêntico de depuração; ninguém inventa isso.</span></li>
+      <li><span class="q">Por que CSV comprimido e não Parquet?</span><span class="a">Era histórico frio, não workload analítico — gzip + CSV bastava e era mais simples. <b>Se hoje você escolheria Parquet, diga isso</b>: “I'd probably reach for Parquet today if the history were queried analytically.” Não defenda a escolha como ótima; defenda como adequada ao uso.</span></li>
+      <li><span class="q">Redis é cache ou fonte da verdade?</span><span class="a">Cache — e é por isso que é aceitável. A última posição é derivável do stream que continua chegando; perder o Redis é “posição desconhecida até o próximo ping”, não dado perdido. <b>O intervalo do ping limita o buraco.</b></span></li>
+      <li><span class="q">SQS entrega pelo menos uma vez. Como evitou processar nota duas vezes?</span><span class="a">Chave de idempotência por nota. <b>Ponte pro Sharity</b> se a memória falhar: lá foi dedupe table na mesma transação do incremento. “The pattern I'd defend in detail is the one I built on Sharity…”</span></li>
+      <li><span class="q">Por que o alarme foi de billing e não de performance?</span><span class="a">Ele vai puxar esse fio, e você quer que puxe. <b>Porque só o de billing existia.</b> É a entrada natural pro “faria diferente” — deixe ele te levar até lá em vez de você anunciar.</span></li>
+      <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma; o gargalo foi em 2019-2020. <em>“Those are lifetime figures — at the time we were on the way there, and what mattered wasn't absolute volume, it was the month-end concentration.”</em></span></li>
+      <li><span class="q">Você construiu em 2016 e o gargalo foi em 2019 — o que fazia no meio?</span><span class="a">CTO da Simpli, que seguia cuidando do produto, com voltas hands-on quando o trabalho pedia. Essa foi uma delas. <b>Diga a forma do envolvimento, não finja intensidade constante.</b></span></li>
+      <li><span class="q">Quem discordou de você?</span><span class="a">A defesa óbvia era “só aumenta a instância”. <b>E agora você tem o argumento que encerra a discussão sem ser arrogante:</b> fsync por commit não melhora com classe de instância. Conte como você comprou a discussão, não como venceu.</span></li>
+      <li><span class="q">Como soube que era escrita e não outra coisa?</span><span class="a">Pergunta de método. Conte a cadeia: alarme financeiro → Cost Explorer isolando o RDS → Performance Insights na janela → código. <b>Método bem contado vale mais que a solução.</b></span></li>
+      <li><span class="q">10x o volume — o que quebra primeiro?</span><span class="a">O Redis num nó só, e a política de retenção do histórico no S3. Nomeie a ordem em que quebra e o que faria: ingestão gerenciada, particionamento do histórico, Redis em cluster.</span></li>
+      <li><span class="q">Quanto tempo levou e quantas pessoas?</span><span class="a">Calibração de escopo. <b>Não infle.</b> E lembre que o calendário embutia um mês de espera pelo fechamento seguinte — isso é parte honesta da duração.</span></li>
+      <li><span class="q">O que entregaria antes se tivesse metade do tempo?</span><span class="a">A correção 1. É o fluxo que gera receita; posição de entregador degrada sem quebrar contrato.</span></li>
+      <li><span class="q">Como isso apareceu pro negócio?</span><span class="a">Custo de RDS desacoplado do crescimento de empresas, e fim de mês deixando de ser evento de risco. <em>“Month-end stopped being something we watched.”</em> Descrever a mudança de comportamento é resposta forte sem precisar de número.</span></li>
     </ul>
   </section>
 
