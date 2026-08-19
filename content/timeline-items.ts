@@ -1421,7 +1421,7 @@ export const timelineItems: TimelineEntry[] = [
     id: "itrack",
     parentId: "simpli",
     title: "iTrack",
-    dateRange: "Nov 2016 - Jun 2018",
+    dateRange: "Nov 2016 - 2024",
     startDate: "2016-11",
     technologies: [
       frontend.typescript,
@@ -1449,7 +1449,7 @@ export const timelineItems: TimelineEntry[] = [
       webdev: "Software Engineer | TechLead",
     },
     description:
-      "I was the lead engineer who built iTrack Brasil from the ground up, owning its system design and scaling it into a B2B delivery platform integrating multiple systems, with nearly 60,000 couriers and over 50 million invoices processed across 2,000 registered companies — growth that led to its acquisition by MadeiraMadeira in 2021. One example of that scaling work: as invoice volume and courier position updates grew, the database hit a write bottleneck, surfaced by a spike at the end of a fiscal month. The system stayed up, but latency and AWS costs climbed, so I redesigned the write path at its source — courier position pings now land as Parquet files on S3, backed by a Redis cache holding each courier's last known position for fast reads, while invoice processing moved behind an SNS/SQS pipeline that absorbs bursts asynchronously.",
+      "I was the lead engineer who built iTrack Brasil from the ground up, owning its system design through its first two years and scaling it into a B2B delivery platform integrating multiple systems, with nearly 60,000 couriers and over 50 million invoices processed across 2,000 registered companies — growth that led to its acquisition by MadeiraMadeira in 2021. Simpli carried the product through that acquisition and ran it for three more years before handing it over to MadeiraMadeira in 2024, with me on it as CTO, coming back alongside the team hands-on when the work needed the depth. One of those returns: as invoice volume and courier position updates grew, the database hit a write bottleneck, surfaced by a spike at the end of a fiscal month. The system stayed up, but latency and AWS costs climbed, so I redesigned the write path at its source — courier position pings now land as Parquet files on S3, backed by a Redis cache holding each courier's last known position for fast reads, while invoice processing moved behind an SNS/SQS pipeline that absorbs bursts asynchronously.",
     image: "/projects/itrack.webp",
     link: "https://itrackbrasil.com.br",
     priority: shownEverywhere,

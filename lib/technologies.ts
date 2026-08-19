@@ -43,7 +43,7 @@ export const backend = {
   postgresql: tech("PostgreSQL", "2013", "2025"),
   nosql: tech("NoSQL", "2018", "2026"),
   prisma: tech("Prisma", "2021", "2025"),
-  redis: tech("Redis", "2015", "2022"),
+  redis: tech("Redis", "2015", "2024"),
   graphql: tech("GraphQL", "2021", "2024"),
   rest: tech("REST", "2012", "2026"),
   websockets: tech("WebSockets", "2016", "2025"),
