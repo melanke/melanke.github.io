@@ -1,0 +1,862 @@
+<title>Cascata de Krylovsky</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #F5F7FA;
+    --surface: #FFFFFF;
+    --surface-2: #EDF1F6;
+    --ink: #131A23;
+    --ink-2: #38424F;
+    --muted: #616E7D;
+    --line: #DCE3EB;
+    --line-2: #C3CEDA;
+    --accent: #1F5FA8;
+    --accent-soft: #E7EFF8;
+    --warn: #A64B1B;
+    --warn-soft: #FBEFE6;
+    --ok: #2A6650;
+    --ok-soft: #E6F1EB;
+    --say-bg: #F0F4F9;
+
+    --f-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --f-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+    --pad: clamp(1.1rem, 3.5vw, 2.2rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D1218;
+      --surface: #151C25;
+      --surface-2: #1D2732;
+      --ink: #E5EAF1;
+      --ink-2: #C2CCD8;
+      --muted: #8A97A6;
+      --line: #26313E;
+      --line-2: #35424F;
+      --accent: #74AEEC;
+      --accent-soft: #17293C;
+      --warn: #E19A67;
+      --warn-soft: #2D2018;
+      --ok: #74C4A0;
+      --ok-soft: #16281F;
+      --say-bg: #1A222C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0D1218;
+    --surface: #151C25;
+    --surface-2: #1D2732;
+    --ink: #E5EAF1;
+    --ink-2: #C2CCD8;
+    --muted: #8A97A6;
+    --line: #26313E;
+    --line-2: #35424F;
+    --accent: #74AEEC;
+    --accent-soft: #17293C;
+    --warn: #E19A67;
+    --warn-soft: #2D2018;
+    --ok: #74C4A0;
+    --ok-soft: #16281F;
+    --say-bg: #1A222C;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: 0 var(--pad) 5rem;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    padding: clamp(2.4rem, 6vw, 4rem) 0 1.6rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .kicker {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
+  }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6vw, 3.3rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin: 0 0 0.7rem;
+  }
+
+  .dek {
+    font-family: var(--f-display);
+    font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: var(--measure);
+    margin: 0;
+  }
+
+  .vitals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.6rem;
+    margin-top: 1.5rem;
+    font-family: var(--f-mono);
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .vitals b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- nav ---------- */
+
+  nav.jump {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 0;
+    margin-bottom: 2.6rem;
+  }
+  .jump-inner {
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: 0.15rem;
+  }
+  .jump a {
+    flex: 0 0 auto;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: var(--muted);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    white-space: nowrap;
+    background: var(--surface);
+  }
+  .jump a:hover, .jump a:focus-visible { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- sections ---------- */
+
+  section { margin-bottom: 3.4rem; scroll-margin-top: 4.2rem; }
+
+  h2 {
+    font-family: var(--f-display);
+    font-size: clamp(1.45rem, 3.4vw, 1.95rem);
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.35rem;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--f-mono);
+    font-size: 0.68em;
+    font-weight: 500;
+    color: var(--accent);
+    margin-right: 0.55rem;
+    letter-spacing: 0;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem;
+    max-width: var(--measure);
+  }
+
+  h3 {
+    font-family: var(--f-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+
+  p { max-width: var(--measure); margin: 0 0 1rem; }
+  p:last-child { margin-bottom: 0; }
+
+  ul, ol { max-width: var(--measure); padding-left: 1.15rem; margin: 0 0 1rem; }
+  li { margin-bottom: 0.42rem; }
+  li:last-child { margin-bottom: 0; }
+  li::marker { color: var(--line-2); }
+
+  strong { font-weight: 600; }
+  em { color: var(--ink-2); }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: 0.86em;
+    background: var(--surface-2);
+    padding: 0.08em 0.34em;
+    border-radius: 3px;
+  }
+
+  /* ---------- card ---------- */
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: clamp(1.1rem, 3vw, 1.7rem);
+    margin-bottom: 1rem;
+  }
+
+  .anchor-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .anchor-tag {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--surface);
+    background: var(--accent);
+    padding: 0.22rem 0.5rem;
+    border-radius: 3px;
+  }
+  .anchor-name {
+    font-family: var(--f-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .anchor-meta {
+    font-family: var(--f-mono);
+    font-size: 0.73rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* skeleton rows */
+  .skel { display: grid; gap: 0.85rem; }
+  @media (min-width: 46rem) {
+    .skel { grid-template-columns: 8.5rem 1fr; gap: 0.9rem 1.4rem; align-items: start; }
+  }
+  .skel dt {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.28rem;
+  }
+  .skel dd { margin: 0; max-width: var(--measure); }
+  .skel dd p { margin-bottom: 0.5rem; }
+  .skel dd ul { margin-bottom: 0; }
+
+  /* ---------- "diga isso" ---------- */
+
+  .say {
+    background: var(--say-bg);
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem 1rem 0.85rem 1.05rem;
+    margin: 0.9rem 0;
+    border-radius: 0 3px 3px 0;
+    max-width: var(--measure);
+  }
+  .say .label {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .say p {
+    margin: 0 0 0.6rem;
+    font-size: 0.97rem;
+    line-height: 1.55;
+  }
+  .say p:last-child { margin-bottom: 0; }
+
+  /* ---------- cascade ---------- */
+
+  .cascade { list-style: none; padding: 0; margin: 0; max-width: var(--measure); }
+  .cascade > li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+    margin: 0;
+  }
+  .cascade > li:last-child { border-bottom: none; padding-bottom: 0; }
+  .cascade > li:first-child { padding-top: 0; }
+  .q {
+    display: block;
+    font-family: var(--f-display);
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 0.3rem;
+  }
+  .a { display: block; font-size: 0.93rem; color: var(--ink-2); }
+  .a b { color: var(--ink); }
+
+  /* ---------- callouts ---------- */
+
+  .note {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--muted);
+    background: var(--surface);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 3px 3px 0;
+    margin: 1.2rem 0;
+    max-width: var(--measure);
+    font-size: 0.93rem;
+  }
+  .note.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .note.ok { border-left-color: var(--ok); background: var(--ok-soft); }
+  .note .label {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    color: var(--muted);
+  }
+  .note.warn .label { color: var(--warn); }
+  .note.ok .label { color: var(--ok); }
+  .note p { margin-bottom: 0.55rem; font-size: 0.93rem; }
+  .note p:last-child { margin-bottom: 0; }
+
+  /* ---------- mine list ---------- */
+
+  .mine {
+    display: grid;
+    gap: 0.55rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mine:last-of-type { border-bottom: none; }
+  .mine-top { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+  .mine-name {
+    font-family: var(--f-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .sev {
+    font-family: var(--f-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.42rem;
+    border-radius: 3px;
+    border: 1px solid currentColor;
+  }
+  .sev.hi { color: var(--warn); background: var(--warn-soft); }
+  .sev.mid { color: var(--accent); background: var(--accent-soft); }
+  .mine p { margin: 0; font-size: 0.94rem; max-width: var(--measure); }
+
+  /* ---------- schedule ---------- */
+
+  .day { border-top: 1px solid var(--line-2); padding: 1.2rem 0; }
+  .day:last-child { border-bottom: 1px solid var(--line-2); }
+  .day-head { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+  .day-when {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .day-title { font-family: var(--f-display); font-size: 1.18rem; font-weight: 700; }
+  .day-budget { font-family: var(--f-mono); font-size: 0.72rem; color: var(--muted); margin-left: auto; }
+
+  /* ---------- number card ---------- */
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    font-family: var(--f-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    background: var(--surface-2);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.y { font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; font-size: 0.83rem; }
+
+  hr.rule { border: none; border-top: 1px solid var(--line); margin: 2.6rem 0; }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.4rem;
+    border-top: 2px solid var(--ink);
+    font-size: 0.86rem;
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">Technical Experience Interview · Preparo</p>
+    <h1>A cascata de Krylovsky</h1>
+    <p class="dek">Não é coding. É uma hora de <em>“por quê”</em> em cima de uma decisão sua. Ganha quem tem três histórias que aguentam cinco camadas de profundidade sem se contradizer — e uma resposta pronta pra pergunta que eles já fizeram duas vezes.</p>
+    <div class="vitals">
+      <span><b>Sex 21/ago</b> · 09:30–10:30 BRT</span>
+      <span>Alexander Krylovsky · Teams</span>
+      <span>Principal Software Engineer I · São Paulo</span>
+      <span><b>Você tem 2 dias</b></span>
+    </div>
+  </header>
+
+  <nav class="jump" aria-label="Seções">
+    <div class="jump-inner">
+      <a href="#formato">Formato</a>
+      <a href="#vaga">A vaga</a>
+      <a href="#abertura">Abertura</a>
+      <a href="#a1">A1 · iTrack</a>
+      <a href="#a2">A2 · Paved road</a>
+      <a href="#a3">A3 · AI-native</a>
+      <a href="#reservas">Reservas</a>
+      <a href="#minas">Campos minados</a>
+      <a href="#perguntas">Suas perguntas</a>
+      <a href="#plano">Plano de 2 dias</a>
+      <a href="#cartao">Cartão de números</a>
+    </div>
+  </nav>
+
+  <section id="formato">
+    <h2><span class="num">01</span>O que essa entrevista realmente testa</h2>
+    <p class="sub">A leitura que você trouxe está certa. Vale só apertar o parafuso em um ponto que muda o preparo.</p>
+
+    <p>O TEI é a PEI aplicada a uma decisão técnica: o entrevistador escolhe <strong>um</strong> projeto seu e fica ali. Quinze, vinte perguntas de acompanhamento no mesmo lugar. O que ele está medindo não é se você sabe a resposta — é se, na quinta camada, a história continua batendo com a primeira.</p>
+
+    <p>Isso tem uma consequência prática que muda tudo pra você: <strong>decorar script é a pior estratégia possível aqui</strong>. Script quebra na pergunta que sai do trilho, e aí o instinto é preencher o buraco inventando — que é exatamente o modo de falha que o formato foi desenhado pra pegar. Ele vai perguntar a mesma coisa de três ângulos diferentes de propósito.</p>
+
+    <p>O que sobrevive à cascata é <strong>esqueleto + números</strong>. O esqueleto é a lógica da decisão, que você reconstrói na hora em vez de recuperar da memória. Os números são a única parte que a memória não entrega sob pressão — e por isso ficam <a href="#cartao">num cartão na tela</a>, não na cabeça.</p>
+
+    <div class="note ok">
+      <span class="label">Sobre a memória</span>
+      <p>É uma call de Teams. Deixe esta página aberta na segunda tela, ao lado do vídeo. Todo mundo faz isso e ninguém acha ruim — o que soa mal é ler em voz alta, não consultar.</p>
+      <p>E o exercício que mais ajuda memória fraca não é reler: é <strong>recuperar em voz alta</strong>. Contar a história falando, com a página fechada, e só depois conferir o que faltou. Duas passadas assim valem mais que dez leituras.</p>
+    </div>
+  </section>
+
+  <section id="vaga">
+    <h2><span class="num">02</span>O que eles estão comprando</h2>
+    <p class="sub">O que consegui apurar da vaga — o site da McKinsey não abre pra fetch, então isso vem dos resumos de busca. Confira contra o texto original antes de apostar alto.</p>
+
+    <p>A vaga 109404 é <strong>Principal Software Engineer I, São Paulo</strong>, num time interno de engenharia — “Tech Ecosystem”. Constroem e escalam as ferramentas digitais internas usadas <em>pela firma inteira</em>, com o time espalhado por América do Norte, Europa e América Latina. As skills que aparecem nas vagas irmãs do mesmo time: full-stack com Python, GenAI, cloud.</p>
+
+    <p>Traduzindo pro seu caso, três leituras:</p>
+
+    <ul>
+      <li><strong>Eles não estão comprando Web3.</strong> A parte mais forte do seu CV é a menos relevante aqui. Isso não é problema — é instrução de enquadramento. 33Labs vai aparecer porque é seu emprego atual, e quando aparecer você descreve como <em>plataforma financeira de alto throughput numa empresa que nasceu security-first</em>, não como DeFi.</li>
+      <li><strong>Ferramenta interna usada por muitos times é literalmente a vaga.</strong> E você tem essa história: o paved road da Simpli. Aposto que você a subestima porque não tem número bonito. É a mais alinhada das três.</li>
+      <li><strong>“AI-native” apareceu duas vezes, de duas pessoas diferentes.</strong> Isso não é conversa fiada, é critério. E é onde você tem vantagem real sobre a média dos candidatos — você não só usa, você <em>escreve</em> sobre a disciplina.</li>
+    </ul>
+
+    <div class="note warn">
+      <span class="label">Cuidado com a leitura de senioridade</span>
+      <p>“Principal <em>I</em>” num time interno de tooling é uma faixa de entrada da trilha Principal. Vale calibrar a expectativa de escopo — e não entrar vendendo “eu era CTO”. Veja <a href="#minas">campos minados</a>.</p>
+    </div>
+  </section>
+
+  <section id="abertura">
+    <h2><span class="num">03</span>Os primeiros 90 segundos</h2>
+    <p class="sub">Ele quase certamente abre com “walk me through your background” ou “tell me about the most technically challenging thing you've built”. Essa resposta decide qual projeto ele vai escolher pra cavar. <strong>Você tem mais controle aqui do que parece.</strong></p>
+
+    <p>A regra: <strong>termine a abertura oferecendo duas portas</strong> — e ofereça as duas que você quer que ele escolha. Se você listar cinco projetos, ele escolhe o que soar mais exótico (spoiler: o de blockchain) e você passa 45 minutos defendendo a coisa errada.</p>
+
+    <div class="say">
+      <span class="label">Diga algo assim</span>
+      <p>“Nineteen years, most of it backend. I co-founded a software house in Brazil that grew to about 30 engineers and delivered 50-plus products over eleven years — so I've done both sides: the deep single-system work and the platform work that a lot of teams depend on.”</p>
+      <p>“The system I'd point to first is a B2B logistics platform I built from scratch and led — it ended up processing over 50 million invoices for about 60,000 couriers, and I had to redesign its write path when it hit a database bottleneck. The other thing I'd point to is less glamorous but probably closer to what your team does: standardising how 50-plus projects got their infrastructure, so nobody started from a blank page.”</p>
+      <p>“More recently I've been working on AI-assisted engineering workflows — putting agents inside development and review, and building the guardrails around them. Happy to go deep on any of those.”</p>
+    </div>
+
+    <p>Se ele escolher sozinho, ótimo. Se ele devolver “which one do you want to talk about?”, vá de <strong>iTrack</strong> — é a de maior profundidade defensável, e ela abre porta natural pras outras duas.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="a1">
+    <h2><span class="num">04</span>Âncora 1 — a história de profundidade</h2>
+    <p class="sub">Essa é a que aguenta cinco camadas. É onde você quer estar quando ele começar a cavar.</p>
+
+    <div class="card">
+      <div class="anchor-head">
+        <span class="anchor-tag">A1</span>
+        <span class="anchor-name">iTrack — o gargalo de escrita</span>
+        <span class="anchor-meta">Nov 2016 – 2024 · Lead Engineer, depois CTO</span>
+      </div>
+
+      <dl class="skel">
+        <dt>Contexto</dt>
+        <dd>Plataforma B2B de entregas construída do zero, sob sua liderança técnica nos dois primeiros anos. Chegou a ~60 mil entregadores, 2 mil empresas, 50M+ notas. Adquirida pela MadeiraMadeira em 2021 — a Simpli atravessou a aquisição, operou o produto por mais três anos e entregou em 2024, com você como CTO voltando pra perto do time quando o trabalho pedia profundidade.</dd>
+
+        <dt>Gatilho</dt>
+        <dd>Uma dessas voltas, ~2019-2020: um pico de fim de mês fiscal expôs um gargalo de escrita no banco. <strong>O sistema não caiu</strong> — e isso é parte da história, não uma desculpa: latência e custo de AWS subindo é um sintoma mais difícil de diagnosticar que um outage.</dd>
+
+        <dt>Diagnóstico</dt>
+        <dd>Dois fluxos de escrita com perfis opostos estavam no mesmo banco: <em>pings de posição dos entregadores</em> (altíssima frequência, valor individual quase nulo, append-only) e <em>processamento de notas</em> (em rajada, transacional, cada linha importa). Otimizar o banco pra um piorava o outro.</dd>
+
+        <dt>Decisão</dt>
+        <dd>
+          <p>Separar por característica de escrita, não por volume.</p>
+          <ul>
+            <li>Pings → arquivos <strong>Parquet no S3</strong>, em lote.</li>
+            <li>Leitura quente (“onde está esse entregador agora”) → <strong>Redis</strong> com a última posição conhecida por entregador.</li>
+            <li>Notas → pipeline <strong>SNS/SQS</strong>, absorvendo a rajada de forma assíncrona.</li>
+          </ul>
+        </dd>
+
+        <dt>Descartado</dt>
+        <dd>
+          <p><strong>Não decore a lista. Decore a regra que gera a lista:</strong> <em>o problema não era falta de máquina, era dois perfis de escrita opostos dividindo o mesmo banco.</em> Uma frase, e ela deriva as quatro rejeições na hora:</p>
+          <ul>
+            <li><strong>Escalar vertical</strong> — responde capacidade a um problema de mistura.</li>
+            <li><strong>Read replica</strong> — o gargalo era escrita.</li>
+            <li><strong>Sharding por empresa</strong> — os dois perfis continuam juntos, agora em N bancos, com hot shard no cliente grande.</li>
+            <li><strong>Fila na frente do mesmo banco</strong> — move o gargalo, não remove.</li>
+          </ul>
+          <p>Todas morrem pelo mesmo motivo, e explicar por que uma <em>classe</em> de solução não servia soa muito melhor que recitar quatro itens — recitar parece dever de casa.</p>
+        </dd>
+
+        <dt>Trade-off aceito</dt>
+        <dd>Histórico de posição virou eventualmente consistente e perdeu SQL ad-hoc. Foi um preço consciente: ninguém consultava histórico recente em tempo real — o produto perguntava “onde está agora”, e isso ficou <em>mais</em> rápido.</dd>
+
+        <dt>Como mediu</dt>
+        <dd>
+          <p><strong>São duas perguntas e as pessoas confundem.</strong> <em>(a) Como soube que era problema?</em> — aqui você está bem servido: sintoma de latência e custo subindo juntos, e a correlação com o calendário fiscal fechando o diagnóstico. Não era carga crescendo, era carga <em>concentrando</em>. <em>(b) Como soube que a correção funcionou?</em> — aqui você não tem número, e é melhor encarar isso agora.</p>
+          <p>A resposta honesta em três partes: o sinal comportamental (<em>“month-end stopped being something we watched”</em>), a direção sem número (custo parou de crescer mais rápido que o volume), e a autocrítica (<em>“I can't give you a clean before-and-after — we never set a baseline”</em>).</p>
+        </dd>
+
+        <dt>Hoje seria</dt>
+        <dd>Instrumentação antes de re-arquitetar — e <strong>sem desculpa de época</strong>: em 2019 esse ferramental já era commodity, foi priorização errada, não falta de opção. Assumir isso sem apoiar em “na época não tinha” é o que faz a resposta pesar. Depois: ingestão gerenciada no lugar do batching na mão, e SLO de latência de escrita definido antes de mexer em arquitetura.</dd>
+      </dl>
+    </div>
+
+    <div class="note warn">
+      <span class="label">Duas frases que não podem sair da sua boca</span>
+      <p><strong>Qualquer percentual.</strong> “Reduzimos latência em 80%” convida “medido como, em que percentil, em que janela” — e a história inteira desaba. Num TEI, uma métrica que desaba contamina tudo que você disse antes dela. Se ele encostar em “me dá um número”, troque de projeto: <em>“the one where I have a clean number is Jamef — 8 seconds to a few milliseconds.”</em> Trocar de projeto pra entregar precisão é movimento forte, não fuga.</p>
+      <p><strong>“We evaluated X and rejected it.”</strong> As alternativas acima são reconstrução — o que um engenheiro sensato consideraria, não necessariamente o que você formalmente avaliou em 2019. Diga <em>“the obvious alternative is X, and it doesn't work because Y”</em>. Funciona igual e é verdade de qualquer jeito. Inventar processo é o que ele pega voltando no assunto por outro ângulo.</p>
+    </div>
+
+    <h3>A cascata — 12 perguntas que ele vai fazer</h3>
+    <ul class="cascade">
+      <li><span class="q">Por que Parquet e não só jogar JSON no S3?</span><span class="a">Colunar comprime muito melhor num payload repetitivo como ping de GPS — corta custo de S3 e faz varredura analítica de histórico ficar viável. E escrever em lote amortiza o custo por evento. <b>Se ele empurrar:</b> a alternativa honesta seria um TSDB, e o que pesou contra foi superfície operacional nova num time pequeno.</span></li>
+      <li><span class="q">Redis é cache ou fonte da verdade?</span><span class="a">Cache — e essa é a razão de ser aceitável. A última posição é derivável do stream que continua chegando, então perder o Redis significa “posição desconhecida até o próximo ping”, não “dado perdido”. <b>O intervalo do ping limita o tamanho do buraco.</b></span></li>
+      <li><span class="q">E se o Redis cair no pico?</span><span class="a">Degradação, não falha: o mapa fica vazio e repopula em um ciclo de ping. Diga isso <em>e</em> diga o que faltava — aquecimento e política de eviction explícita.</span></li>
+      <li><span class="q">SQS entrega pelo menos uma vez. Como você evitou processar nota duas vezes?</span><span class="a">Chave de idempotência por nota. <b>Essa é a ponte pro Sharity</b> — lá você resolveu isso com dedupe table na mesma transação do incremento. Se a memória do iTrack falhar aqui, migre: “the pattern I'd defend in detail is the one I built on Sharity…”</span></li>
+      <li><span class="q">Ordem importava nas notas?</span><span class="a">Pense antes de responder — é pergunta de armadilha. Se importasse, SQS padrão não serviria e você precisaria de FIFO por empresa. Responda o que era verdade, não o que soa melhor.</span></li>
+      <li><span class="q">Como você soube que era escrita e não outra coisa?</span><span class="a">Essa é a pergunta de método, não de solução. Conte a sequência do diagnóstico: sintoma (latência + custo), correlação com o calendário fiscal, e daí pra métrica do banco. <b>Método bem contado vale mais que a solução.</b></span></li>
+      <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma, e o gargalo foi em 2019-2020. Resposta: <em>“those are the platform's lifetime figures — at the time of the bottleneck we were on the way there, and what mattered wasn't the absolute volume, it was the month-end concentration.”</em> Redireciona pro que era de fato o problema.</span></li>
+      <li><span class="q">Você construiu em 2016 e o gargalo foi em 2019 — o que você estava fazendo no meio?</span><span class="a">Pergunta de coerência de linha do tempo, e agora você tem a resposta limpa: CTO da Simpli, que seguiu cuidando do produto, com voltas hands-on quando o trabalho pedia. Essa foi uma delas. <b>Diga a forma do envolvimento, não finja intensidade constante.</b></span></li>
+      <li><span class="q">Quem discordou de você?</span><span class="a">Ele vai perguntar. Tenha uma resposta real — a defesa óbvia era “só aumenta a instância, é uma tarde de trabalho”. Conte como você comprou a discussão, não como você venceu.</span></li>
+      <li><span class="q">10x o volume — o que quebra primeiro?</span><span class="a">O batching feito à mão. Depois o Redis num nó só. Nomeie a ordem em que quebra e o que faria: ingestão gerenciada, particionamento do Parquet por tempo+entregador, Redis em cluster.</span></li>
+      <li><span class="q">Quanto tempo levou e quantas pessoas?</span><span class="a">Pergunta de calibração de escopo. <b>Não infle.</b> Se não lembra, dê a faixa e diga que é faixa.</span></li>
+      <li><span class="q">O que você entregaria antes se tivesse metade do tempo?</span><span class="a">O pipeline SNS/SQS das notas. É o que protege o fluxo que gera receita; posição de entregador degrada sem quebrar contrato.</span></li>
+      <li><span class="q">Como isso apareceu pro negócio?</span><span class="a">Custo de AWS estabilizado e fim de mês deixando de ser evento de risco. Se você tiver mesmo o número, use. Se não, descreva a mudança de <em>comportamento</em> — “month-end stopped being something we watched” é uma resposta forte sem número.</span></li>
+      <li><span class="q">O que você faria diferente?</span><span class="a">Observabilidade antes de arquitetura — e <b>sem encostar em “na época não tinha ferramenta”</b>, porque em 2019 tinha. Autocrítica sem desculpa de época é o que um TEI premia; com desculpa, vira defesa.</span></li>
+    </ul>
+  </section>
+
+  <section id="a2">
+    <h2><span class="num">05</span>Âncora 2 — a que espelha a vaga</h2>
+    <p class="sub">Se ele não escolher essa sozinho, <strong>puxe pra ela</strong>. É a única história sua que descreve o trabalho que o time dele faz todo dia.</p>
+
+    <div class="card">
+      <div class="anchor-head">
+        <span class="anchor-tag">A2</span>
+        <span class="anchor-name">Simpli — o paved road de infra</span>
+        <span class="anchor-meta">2013 – 2025 · Co-founder / CTO</span>
+      </div>
+
+      <dl class="skel">
+        <dt>Contexto</dt>
+        <dd>50+ projetos ao longo de 11 anos, org de 30 engenheiros com 5 team leads, cada cliente com sua própria conta AWS.</dd>
+
+        <dt>Problema</dt>
+        <dd>Toda infra nova começava do zero. IAM inconsistente entre projetos, custo imprevisível, e o primeiro deploy de cada projeto pagando o mesmo pedágio de novo.</dd>
+
+        <dt>Decisão</dt>
+        <dd>Um padrão em três peças: checklist de abertura de conta, conjunto-base de roles IAM, e um <strong>starter kit de Terraform reutilizável</strong>. Virou o caminho pavimentado — o mesmo template acelerava o primeiro deploy de todo projeto novo.</dd>
+
+        <dt>Segunda ordem</dt>
+        <dd>Otimização de custo começou <em>reativa</em> — um cliente reclamou da conta. Passado certo ponto, viraram gatilhos de alerta de anomalia em vez de esperar a próxima reclamação. <strong>Essa transição de reativo pra proativo é a melhor parte da história</strong> e é a que soa mais sênior.</dd>
+
+        <dt>Como mediu</dt>
+        <dd><strong>Você não mediu.</strong> Diga isso. Sério — “I never instrumented adoption or the delta in time-to-first-deploy, and that's the first thing I'd fix today” é uma resposta muito mais forte que um número inventado, e é a única resposta que sobrevive à cascata.</dd>
+      </dl>
+    </div>
+
+    <h3>A cascata — 8 perguntas</h3>
+    <ul class="cascade">
+      <li><span class="q">Como você fez 30 pessoas adotarem?</span><span class="a">A única resposta que convence: <b>porque era mais rápido do que não usar.</b> Você era CTO e podia mandar — mas mandar usar um template ruim só produz fork. Diga as duas coisas; a nuance é o que mostra senioridade.</span></li>
+      <li><span class="q">E quando um projeto precisava fugir do padrão?</span><span class="a">A pergunta real é: você tinha escape hatch ou o padrão virava prisão? Responda com um caso concreto se lembrar de um.</span></li>
+      <li><span class="q">Como versionava? Projeto antigo pegava o template novo?</span><span class="a">Pergunta clássica de platform engineering — drift entre o template e os 50 projetos que já rodavam. Se a resposta honesta é “não muito bem”, diga: <b>todo paved road tem esse problema e ele sabe disso.</b></span></li>
+      <li><span class="q">Como decidiu o que entra no baseline e o que fica por projeto?</span><span class="a">O critério: entra o que é igual em todo projeto <em>e</em> caro de errar — IAM se encaixa nos dois. Fica de fora o que varia por domínio.</span></li>
+      <li><span class="q">Quanto custava manter?</span><span class="a">Custo de manutenção de tooling interno é a pergunta favorita de quem faz tooling interno. Seja honesto sobre quem carregava esse custo.</span></li>
+      <li><span class="q">Você chamaria isso de platform team?</span><span class="a">Não. Era um padrão mantido por quem também entregava projeto — e essa é a diferença entre o que você fez e o que o time dele faz. <b>Reconhecer isso te credencia mais do que fingir equivalência.</b></span></li>
+      <li><span class="q">Como o alerta de anomalia funcionava?</span><span class="a">Threshold ou desvio? Quem recebia? Tinha ruído? Se virou alerta que todo mundo ignora, conte — é a coisa mais real que existe em alerting.</span></li>
+      <li><span class="q">O que você levaria disso pra cá?</span><span class="a">Ponte direta pra vaga. Uma frase: paved road só funciona se for o caminho mais rápido; padrão imposto que atrapalha vira fork em três semanas.</span></li>
+    </ul>
+  </section>
+
+  <section id="a3">
+    <h2><span class="num">06</span>Âncora 3 — o fechamento AI-native</h2>
+    <p class="sub">Mencionaram duas vezes, de duas bocas diferentes. Prepare como pergunta certa, não como possível. E aqui você tem munição que quase ninguém tem.</p>
+
+    <p>A frase que o cara do System Design usou — <em>“programar hoje é praticamente resolvido com IA”</em> — é meio provocação, meio tese da casa. A resposta ruim é concordar de cabeça. A resposta ruim número dois é discordar. <strong>A resposta boa concorda com a parte verdadeira e move a conversa pra onde o trabalho de verdade foi parar.</strong></p>
+
+    <div class="say">
+      <span class="label">A resposta central</span>
+      <p>“I mostly agree — on the typing. What I don't think moved is the responsibility. What changed for me is <em>where</em> the expensive mistakes happen: they moved upstream, into specification, and downstream, into review. So my job changed shape — I spend more time building the harness the agent works inside than writing the code itself.”</p>
+      <p>“There are two layers to that harness. The downstream one is the CI pipeline, and most teams only build that one — it catches bad code after it's written. The upstream one is structured discovery and spec, before the agent opens the editor. In high-stakes domains that's where the money is: a test suite will never tell you your incentive model has a drain in it.”</p>
+      <p>“And the third piece is boundaries. Instructions in a prompt aren't controls. The agent that writes the code shouldn't be the agent that reviews it, and some classes of change — anything that deletes production data or rewrites an IAM policy — get routed to a human no matter how clean the diff reads. That's not an AI problem, it's IAM.”</p>
+    </div>
+
+    <h3>As provas concretas — use uma, não as três</h3>
+    <ul>
+      <li><strong>33Labs.</strong> Você integrou agentes e ferramental especializado no fluxo de desenvolvimento <em>e de auditoria</em>. A convicção que saiu disso: auditoria começa no estágio de arquitetura, antes de existir código.</li>
+      <li><strong>defi-builder-skills.</strong> Marketplace público de skills de Claude Code implementando o harness upstream — discovery com go/no-go antes de qualquer código, depois spec, depois implementação função a função com passes de auditoria embutidos. Público, CC-BY-4.0, instalável. <em>É a prova mais forte porque é verificável.</em></li>
+      <li><strong>Você escreve sobre isso.</strong> “AI Agents Need Enforced Boundaries, Not Better Prompts” e “Discovery and Spec: The Missing Harness in AI-Assisted DeFi Development”. Num processo AI-native, ter posição pública sobre a disciplina te separa de quem só cita ferramenta.</li>
+      <li><strong>Seu próprio ambiente.</strong> Você construiu skills customizadas, pipeline de conteúdo agentic, geração de PDF de CV com orçamento de 3 páginas travado no build. É pequeno, mas é a demonstração mais direta de “eu construo o harness em que eu trabalho”.</li>
+    </ul>
+
+    <div class="note">
+      <span class="label">Atribuição</span>
+      <p>Se citar os números de PRs com IA (51% maiores, 54% mais bugs), atribua como pesquisa reportada — não como medição sua. Numa entrevista de cascata, um número mal atribuído é o único que ele vai lembrar.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="reservas">
+    <h2><span class="num">07</span>Reservas — se ele cavar noutro lugar</h2>
+    <p class="sub">Quatro histórias que você não vai puxar, mas precisa ter o esqueleto pronto caso ele escolha.</p>
+
+    <div class="card">
+      <h3>Sharity — idempotência sem ordenação global</h3>
+      <p>Sistema de conquistas orientado a eventos: badges, barras de progresso em tempo real, desafios encadeados. Eventos de negócio via SQS; idempotência garantida inserindo o ID do evento numa dedupe table <strong>na mesma transação MySQL</strong> do incremento do contador — entrega duplicada aborta em vez de contar duas vezes. Desafio encadeado se desbloqueia publicando um evento de volta na fila, sem precisar de ordenação global. Aguentou 100k+ usuários e foi reusado dentro da Abacashi depois da aquisição.</p>
+      <p><em>Por que é forte:</em> é a melhor história de correção em sistema distribuído que você tem, e o detalhe da mesma transação é o tipo de coisa que só quem fez sabe.</p>
+    </div>
+
+    <div class="card">
+      <h3>LDC She Digital — configuração no lugar de branch por país</h3>
+      <p>Louis Dreyfus, plataforma global de Saúde, Segurança e Meio Ambiente, cada unidade com regulação, formulário e relatório próprios. Em vez de um branch por país, você modelou formulários, campos e workflows como <strong>dado configurável</strong> — time de compliance de uma unidade nova sobe seu próprio processo configurando, sem pedir código nem deploy. Integração com Azure AD.</p>
+      <p><em>Por que é forte aqui:</em> é a mais “McKinsey” das suas histórias — plataforma única, muitas geografias, variação regulatória. Se ele for de consultoria de carreira, essa é a que ele reconhece.</p>
+    </div>
+
+    <div class="card">
+      <h3>Jamef — 8 segundos pra poucos milissegundos</h3>
+      <p>Escopo começou frontend-only; rastrear a lentidão até a origem puxou você pra camada de dados. Camada de cache + paginação server-side no result set. <em>Por que é forte:</em> número limpo e a lição de escopo — “o escopo que me deram não continha o problema”.</p>
+    </div>
+
+    <div class="card">
+      <h3>Handover — o ativo que você não está usando</h3>
+      <p>Consultoria é um negócio de <em>handover</em>: toda engagement termina com alguém que não é você tocando o sistema. É literalmente o modelo de entrega da McKinsey — e é a capacidade mais subestimada do seu currículo, porque está espalhada como fatos soltos em vez de dita como habilidade.</p>
+      <p>O que você tem: <strong>50+ projetos de cliente entregues</strong> ao longo de 11 anos, com engajamento médio de 20,6 meses. <strong>Duas travessias de aquisição</strong> — o iTrack, que a Simpli atravessou e operou por mais três anos sob o novo dono antes de entregar à MadeiraMadeira em 2024; e o Sharity, vendido à Abacashi, onde você foi convidado a liderar a engenharia da fusão <em>em reconhecimento à qualidade do sistema</em>, e refatorou o legado C#/Angular pra Node/React com a plataforma no ar o tempo todo, via Strangler Fig em vez de rewrite big-bang.</p>
+      <p><em>Como usar:</em> não como história própria — como <strong>uma frase de fechamento</strong> quando ele perguntar o que você traria pro time. “Most of my career ended in handovers — 50-plus client projects, and twice a system I built got acquired and I stayed to hand it over properly. I build things assuming I won't be the one running them.” Numa consultoria, isso é reconhecimento imediato.</p>
+    </div>
+
+    <div class="card">
+      <h3>Enclave — reorg de chain como replay idempotente</h3>
+      <p>Se ele quiser ir pra blockchain, essa é a que você deixa ir — porque na verdade é uma história de sistema distribuído. Cada bloco guardado pela própria hash e pela do pai; detectar reorg é caminhar pelas hashes-pai até achar uma conhecida (o ponto de fork), invalidar os blocos órfãos e os saldos derivados deles, e reprocessar a cadeia canônica por handlers idempotentes. <strong>Conte com esse vocabulário</strong> — fork detection, invalidação, replay idempotente — e não com vocabulário de cripto.</p>
+    </div>
+  </section>
+
+  <section id="minas">
+    <h2><span class="num">08</span>Campos minados</h2>
+    <p class="sub">Seis coisas que podem virar contra você. Cinco têm resposta pronta; uma precisa que você confira um fato antes.</p>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">Python</span><span class="sev hi">Checar antes</span></div>
+      <p>A recrutadora mencionou Python e seu CV lista <code>Python (2018-2024)</code>. Mas quando fui olhar de onde vem: SimpliData (data science com Python/R, 2018-19, marcado como invisível no CV) e Neo3-boa — onde a própria descrição diz que <em>compiladores não são sua especialidade</em> e seu papel foi definir objetivos e prioridades. <strong>Isso não sustenta “serviço em produção em Python”.</strong></p>
+      <p>Confira na sua memória se tem mais coisa. Se não tiver: não ofereça profundidade, e tenha a linha honesta pronta — <em>“Python isn't my primary language; my production depth is Java, Kotlin, Node and TypeScript. What I'd bring is that I've picked up production languages repeatedly and I know how I do it.”</em> Numa vaga AI-native, trocar de linguagem é a coisa mais barata que existe — mas quem tem que dizer isso é ele, não você. Não use como escudo.</p>
+    </div>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">33Labs é Web3 e eles não estão comprando Web3</span><span class="sev mid">Enquadramento</span></div>
+      <p>Já existe pronta a versão certa no seu próprio CV enterprise: plataforma financeira de alto throughput, empresa que nasceu como firma de auditoria de segurança, revisão começando no estágio de arquitetura, security engineers envolvidos o tempo todo. <strong>Decore essa moldura</strong>, não o vocabulário de DeFi.</p>
+    </div>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">Co-founder/CTO indo pra IC</span><span class="sev hi">Vão perguntar</span></div>
+      <p>A dúvida silenciosa: esse cara aceita direção? Vai querer mandar? Não espere a pergunta — é melhor você abrir do que ele. A resposta que funciona é específica sobre o que você <em>quer</em>, não defensiva sobre o que você foi: você passou 11 anos alternando entre construir e gerir, e o que te interessa agora é a parte hands-on de sistema — o que a Simpli te ensinou sobre organização vira contexto, não pretensão de cargo.</p>
+    </div>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">“50+ projetos” lê como largura, não profundidade</span><span class="sev mid">Contra-ataque pronto</span></div>
+      <p>Numa consultoria isso soa familiar demais — e a suspeita é que ninguém que fez 50 projetos foi fundo em nenhum. Some a isso os date ranges que se sobrepõem no CV (iTrack 2016-2024, Sharity 2021-2024, Neon 2021-2024, Jamef 2019-2022) e a pergunta fica inevitável: <em>como uma pessoa estava em cinco coisas ao mesmo tempo?</em></p>
+      <p><strong>Primeiro contra-ataque, sem argumentar:</strong> escolha um caminho de escrita e vá cinco camadas. A cascata do iTrack existe pra isso. Deixe a profundidade responder.</p>
+      <p><strong>Segundo, se ele perguntar da sobreposição:</strong> existe um padrão de operação real por trás, e ele é o modelo de entrega de consultoria — pesado na frente (discovery, requisitos, arquitetura, roadmap apertado), depois transição pra um lead, depois disponível em escalação e review de sprint. Dito assim, a sobreposição vira sistema em vez de inflação.</p>
+      <div class="say">
+        <span class="label">A versão que você pode falar</span>
+        <p>“Early on I front-loaded myself onto every project — discovery, requirements, architecture — and honestly, part of that was me not trusting anyone else with it yet. That doesn't scale past two or three projects, and it made me the bottleneck. What fixed it was building leads I could actually hand to — five of them by the end — and turning the handoff into a designed transition instead of me just moving on. By then I was running about three projects concurrently, and peaked at seven. That number only works if the handoff genuinely works.”</p>
+      </div>
+      <p><strong>O que não pode sair da sua boca:</strong> “eu confiava mais em mim do que nos outros” como estado atual. É verdade sobre o começo, mas dito solto lê como não-delega, gargalo, não formou gente — e numa firma que roda em leverage isso é negativo forte. <strong>Conte o arco, não o ponto de partida</strong> — e os 5 team leads são a prova de que você corrigiu.</p>
+      <p><strong>E emende com o que você quer agora</strong>, senão ele faz a conta sozinho e erra: esta vaga é plataforma interna, sistema de vida longa. “Eu começo e passo adiante” pode soar como quem não quer a parte longa. Feche com <em>“that was the right model for a project business; what I want now is the other side of it — staying with one system long enough to live with my own decisions.”</em></p>
+    </div>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">Observabilidade</span><span class="sev mid">Vire a favor</span></div>
+      <p>É um buraco real e você sabe. Cobrado em qualquer vaga sênior de backend. A jogada é não deixar ele achar — <strong>você entrega primeiro</strong>, como “o que eu faria diferente” no iTrack. Buraco que você mesmo nomeia com a correção junto vira sinal de calibração; buraco que ele descobre vira gap.</p>
+    </div>
+
+    <div class="mine">
+      <div class="mine-top"><span class="mine-name">Contradição por lapso de memória</span><span class="sev hi">Tenha a frase de recuperação</span></div>
+      <p>O modo de falha do TEI não é não saber — é preencher o buraco. Tenha uma saída ensaiada e use sem culpa: <em>“Let me get the shape of it right first, and I'll be careful with the numbers — I don't want to give you one I'm not sure of.”</em> Isso <strong>ganha</strong> ponto num TEI. Inventar perde tudo, porque ele vai voltar no mesmo assunto por outro ângulo dez minutos depois.</p>
+    </div>
+  </section>
+
+  <section id="perguntas">
+    <h2><span class="num">09</span>Suas perguntas pra ele</h2>
+    <p class="sub">Tenha quatro. Ele vai dar uns 5-8 minutos no fim, e num time interno de tooling as perguntas boas são todas sobre adoção — não sobre stack.</p>
+    <ul>
+      <li>“Who are the internal users of what your team builds, and how do you find out when they've routed around you?” <em>— a pergunta que só quem já manteve ferramenta interna faz.</em></li>
+      <li>“The team spans North America, Europe and LatAm. What does a decision that needs three timezones actually look like — is there a written-first culture?”</li>
+      <li>“You mentioned AI-native twice in this process. Where has that already changed how the team works, versus where is it still aspiration?” <em>— mostra que você prestou atenção e não é ingênuo.</em></li>
+      <li>“What does the first 90 days look like for a Principal here — is it landing changes, or mapping the ecosystem first?” <em>— também calibra a expectativa de escopo do “Principal I”.</em></li>
+    </ul>
+  </section>
+
+  <section id="plano">
+    <h2><span class="num">10</span>O plano de dois dias</h2>
+    <p class="sub">Ordenado por retorno. Se você só fizer metade, faça a primeira metade de cada dia.</p>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-when">Hoje · qua 19</span>
+        <span class="day-title">Reconstruir, não decorar</span>
+        <span class="day-budget">~2h30</span>
+      </div>
+      <ul>
+        <li><strong>Releia as fontes no seu próprio repo</strong> (40 min): as entradas do iTrack, da Simpli e do Sharity em <code>content/timeline-items.ts</code>. Não é pra memorizar — é pra recuperar detalhe que a memória perdeu.</li>
+        <li><strong>Escreva os três esqueletos com as suas palavras</strong> (60 min). Isso importa: o esqueleto que sobrevive à cascata é o que <em>você</em> escreveu, não o que leu. Sete linhas por âncora — contexto, gatilho, descartado, decisão, trade-off, medida, hoje seria.</li>
+        <li><strong>Uma passada em voz alta do iTrack</strong> (20 min), com esta página fechada. Depois abra e veja o que caiu.</li>
+        <li><strong>Confira o Python</strong> (10 min). Se achar uso real em produção, é a diferença entre uma resposta defensiva e uma tranquila.</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-when">Amanhã · qui 20</span>
+        <span class="day-title">A cascata de verdade</span>
+        <span class="day-budget">~4h, em dois blocos</span>
+      </div>
+      <ul>
+        <li><strong>Manhã — treino de sondagem</strong> (90 min). Use o Claude como entrevistador hostil: cole seu esqueleto do iTrack e peça 20 perguntas de “por quê” em cascata, uma de cada vez, sem parar. <em>É o exercício de maior retorno dos dois dias</em> — treina resistência, que é o que o formato testa, não conteúdo.</li>
+        <li><strong>Manhã — repita com a A2</strong> (40 min).</li>
+        <li><strong>Tarde — fixe a resposta AI-native</strong> (45 min). Fale em voz alta até sair sem tropeço. Escolha <em>uma</em> prova concreta e fique com ela.</li>
+        <li><strong>Tarde — campos minados</strong> (30 min). Diga cada uma das seis respostas em voz alta uma vez. Especialmente a de co-founder→IC e a frase de recuperação.</li>
+        <li><strong>Noite — ensaio gravado</strong> (45 min). Grave. Ouça em 1.5x. Você está caçando duas coisas: contradição entre o que disse no minuto 5 e no minuto 30, e onde você acelerou (acelerar = insegurança, e ele ouve).</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-when">Sexta · antes das 9:30</span>
+        <span class="day-title">Não aprenda nada novo</span>
+        <span class="day-budget">~50 min</span>
+      </div>
+      <ul>
+        <li>Leia esta página inteira uma vez, sem parar (15 min).</li>
+        <li>Uma passada em voz alta só da <a href="#abertura">abertura de 90 segundos</a> (10 min).</li>
+        <li>Teams: áudio, câmera, e a segunda tela posicionada — esta página aberta na seção <a href="#cartao">Cartão de números</a> (15 min).</li>
+        <li><strong>Não abra tutorial de Python.</strong> Estudar na véspera não entra na cascata e come a energia que entra.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cartao">
+    <h2><span class="num">11</span>Cartão de números</h2>
+    <p class="sub">Deixe <strong>esta seção</strong> visível durante a call. É a única parte que a memória não precisa carregar.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Projeto</th><th>Período</th><th>Papel</th><th>Número</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>iTrack</td><td class="y">nov 2016 – 2024</td><td>Lead Eng. → CTO</td><td class="n">50M+ notas · 60k entregadores · 2k empresas</td></tr>
+          <tr><td>Simpli</td><td class="y">out 2013 – mai 2025</td><td>Co-founder / CTO</td><td class="n">50+ projetos · 30 devs · 5 team leads</td></tr>
+          <tr><td>Sharity</td><td class="y">mar 2021 – ago 2024</td><td>Eng. / TechLead</td><td class="n">100k usuários · R$2M em doações</td></tr>
+          <tr><td>Neon Wallet</td><td class="y">jul 2021 – jul 2024</td><td>Eng. / TechLead</td><td class="n">US$1B+ em volume</td></tr>
+          <tr><td>Apptite</td><td class="y">set 2015 – jul 2017</td><td>Eng. / TechLead</td><td class="n">US$1.6M GMV · 100k pedidos · 50k usuários</td></tr>
+          <tr><td>Multilaser Runin</td><td class="y">ago – out 2014</td><td>Software Engineer</td><td class="n">20M+ aparelhos testados</td></tr>
+          <tr><td>Jamef</td><td class="y">jun 2019 – mai 2022</td><td>Software Engineer</td><td class="n">8s → poucos ms</td></tr>
+          <tr><td>LDC She Digital</td><td class="y">out 2019 – nov 2020</td><td>Eng. / TechLead</td><td class="n">unidades globais, uma plataforma</td></tr>
+          <tr><td>Enclave Wallet</td><td class="y">jun 2024 – fev 2025</td><td>Eng. / Product Owner</td><td class="n">—</td></tr>
+          <tr><td>33Labs</td><td class="y">set 2025 – atual</td><td>Eng. / Main Contract Dev</td><td class="n">—</td></tr>
+          <tr><td>SIMET · NIC.br</td><td class="y">2010 – 2013</td><td>Software Engineer</td><td class="n">ferramenta oficial de medição do Brasil</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="label">Datas que precisam bater</span>
+      <p>iTrack: construído nov/2016, envolvimento profundo até ~2018, redesenho do write path <strong>~2019-2020</strong>, aquisição pela MadeiraMadeira em <strong>2021</strong>, Simpli operando até entregar em <strong>2024</strong>. Sharity vendida à Abacashi, você liderando a engenharia da fusão. Simpli inteira: out/2013 – mai/2025.</p>
+    </div>
+
+    <div class="note">
+      <span class="label">Métricas de entrega (se a conversa virar pra gestão)</span>
+      <p>Simultaneidade: média de 3,1 projetos ao mesmo tempo, pico de 7. Duração média de engajamento: 20,6 meses (mediana 16). Precisão de estimativa: meta de nenhuma tarefa passar 2h do estimado — muito estourada no início, rara no fim, conforme o dado voltava pros devs como feedback (ClickClock).</p>
+    </div>
+
+    <div class="note warn">
+      <span class="label">Se você travar</span>
+      <p><em>“Let me get the shape of it right first, and I'll be careful with the numbers — I don't want to give you one I'm not sure of.”</em></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Montado a partir do seu próprio portfólio — <code>content/timeline-items.ts</code>, <code>components/Bio.tsx</code>, <code>content/career-gaps.md</code> e os posts do blog. Os números vêm do CV; a leitura da vaga vem de resultados de busca, porque o site da McKinsey não abriu pra leitura direta. O único item que precisa da sua verificação está marcado em <a href="#minas">Campos minados</a>.</p>
+    <p>Mora em <code>content/interview-prep/mckinsey-tei-2026-08.html</code> — documento interno, não é servido pelo site. As âncoras, os campos minados e a estrutura de cascata servem pra qualquer entrevista de experiência técnica; o que é específico da McKinsey é a seção <a href="#vaga">A vaga</a>.</p>
+  </footer>
+
+</div>

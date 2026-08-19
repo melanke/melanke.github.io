@@ -19,6 +19,7 @@ content/         # Content pipeline (not served)
   lessons/       # Structured knowledge from real commits
   drafts/        # Work-in-progress articles
   ideas/         # Raw idea capture
+  interview-prep/ # Interview prep sheets (internal, never served)
   INDEX.md       # Cache of topics + lessons (auto-updated by skill)
 public/
   blog-images/   # OG images — one PNG per post, named {slug}.png
