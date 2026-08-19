@@ -35,13 +35,6 @@ export interface TimelineEntry {
    */
   printIn?: ContentVersion[];
   /**
-   * Which versions print this item's description in the PDF. Omitted = all of
-   * them. Narrowing it keeps an entry on the page for the dates alone, which
-   * is what date coverage needs, without spending lines on detail that does
-   * not serve that audience.
-   */
-  printDescriptionIn?: ContentVersion[];
-  /**
    * Which versions print this item's `Tech:` line. Omitted = all of them.
    */
   printTechIn?: ContentVersion[];
@@ -1788,9 +1781,5 @@ export const timelineItems: TimelineEntry[] = [
     // history starts at 2010, so a reader adding up the dates gets 16 years
     // while the bio claims 19+. A couple of lines buy back three years.
     printIn: ["general", "web3", "leader", "enterprise", "product", "webdev"],
-    // Junior PHP/Java detail earns its line on the engineering CVs and nowhere
-    // else — on the PM and PO versions only the dates are doing any work, and
-    // those two have the tightest page budget.
-    printDescriptionIn: ["general", "web3", "enterprise", "webdev"],
   },
 ];

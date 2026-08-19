@@ -102,9 +102,6 @@ export function Timeline({ version }: { version: ContentVersion }) {
       technologies={resolveTechnologies(item.technologies, version)}
       role={resolveText(item.role, version)}
       description={resolveText(item.description, version)}
-      printDescription={
-        item.printDescriptionIn ? item.printDescriptionIn.includes(version) : true
-      }
       printTech={item.printTechIn ? item.printTechIn.includes(version) : true}
       image={item.image}
       link={item.link}
@@ -279,9 +276,9 @@ export function Timeline({ version }: { version: ContentVersion }) {
       {/* PRINT: chronological. print:mt-2.5 is the shared "heading -> its
           content" gap (10px), the same distance Skills and Notable
           Achievements use; headings carry print:mt-5 (20px) above. */}
-      <div className="hidden print:flex print:flex-col print:space-y-5 print:mt-2.5">
+      <div className="hidden print:flex print:flex-col print:space-y-4 print:mt-2.5">
         {printTopLevel.map((employer) => (
-          <div key={employer.id} className="print:space-y-5 print:flex print:flex-col">
+          <div key={employer.id} className="print:space-y-4 print:flex print:flex-col">
             {renderItem(employer)}
             {printChildren(employer.id).map(renderItem)}
           </div>
@@ -289,12 +286,15 @@ export function Timeline({ version }: { version: ContentVersion }) {
         {printOrphans.map(renderItem)}
       </div>
 
-      {/* Print only: the PDF carries a selection of the 50+ projects — a
-          3-page budget cannot hold them all, and Notable Achievements cites a
-          couple that did not make this version's cut. Saying so turns a gap a
-          reader would notice into a pointer, and gives the parser the URL. */}
-      <p className="hidden print:block print:mt-2.5 text-xs text-black">
-        Selected projects — the full history is at{" "}
+      {/* Print only: three pages cannot hold 50+ projects, and Notable
+          Achievements cites a couple that did not make this version's cut.
+          Saying so turns a gap the reader would notice into a pointer, and
+          hands the parser the URL. The rule above it matters as much as the
+          words: without it the line sits flush under the last entry and reads
+          as a comment about that project. */}
+      <p className="hidden print:block print:mt-2.5 print:pt-1.5 border-t border-black/25 text-xs italic text-black/70">
+        This CV lists a selection of projects. The complete history — including
+        the ones named under Notable Achievements — is at{" "}
         <a href="https://gil.solutions">gil.solutions</a>.
       </p>
 

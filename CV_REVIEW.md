@@ -432,9 +432,9 @@ naquela data. Excluí-lo demoveria as três injustamente.
     explícita**
 14. ✅ **Os 3 anos, fechados nas 6 versões.** A entrada `early-career` (FingerPrint,
     Escala, NetStartup, 2007-2010) só imprimia na enterprise; agora imprime em todas, e
-    a experiência começa em 2007 em vez de 2010 — a conta bate com os "19+ years". Para
-    caber, ganhou `printDescriptionIn`: o detalhe de PHP/Java júnior imprime nos CVs de
-    engenharia e some no de PM e PO, onde só as datas trabalham.
+    a experiência começa em 2007 em vez de 2010 — a conta bate com os "19+ years", com a
+    descrição em todas as versões (sem ela a entrada fica estranha, só título e datas).
+    O que pagou o espaço foi apertar o `print:space-y` entre entradas de 20px para 16px.
     🟡 **Sharity/Desabafa em enterprise e web3** seguem sem entrada própria, mas a nota
     nova (item 19) responde a pergunta que o leitor faria
 15. ❌ **Achievements em coluna única — desnecessário, premissa não se confirma.** Testado
