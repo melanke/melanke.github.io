@@ -548,7 +548,7 @@
         <dd>
           <p><strong>Duas correções em sequência, e a segunda só apareceu por causa da primeira.</strong></p>
           <ul>
-            <li><strong>Ingestão de notas</strong> → fan-out SNS→SQS, worker commitando em lote.</li>
+            <li><strong>Ingestão de notas</strong> → uma fila SQS, workers concorrentes consumindo em lote, com autoscaling pela quantidade de mensagens por worker.</li>
             <li>Isso expôs uma segunda carga de escrita embaixo: <strong>posições dos entregadores</strong>, salvas a todo momento → posição atual no Redis, histórico em CSV comprimido no S3.</li>
           </ul>
         </dd>
@@ -583,7 +583,7 @@
       <li><strong>Espera até o fechamento seguinte.</strong> O segundo pico, no fim do mês seguinte, é o que o Performance Insights finalmente captura.</li>
       <li>Acompanhamento diário, anotando os números.</li>
       <li>Leitura de código → duas suspeitas.</li>
-      <li><strong>Correção 1</strong> (fan-out SNS→SQS + commit em lote) → mede de novo → melhora, <em>e revela a carga 2</em>.</li>
+      <li><strong>Correção 1</strong> (fila SQS + workers concorrentes em lote, escalando por backlog) → mede de novo → melhora, <em>e revela a carga 2</em>.</li>
       <li><strong>Correção 2</strong> (Redis + CSV comprimido no S3) → mede de novo → melhora significativa.</li>
       <li>Alarmes no CloudWatch e no DLQ; observabilidade proativa daí em diante.</li>
     </ol>
@@ -608,6 +608,8 @@
       <li><span class="q">Por que CSV comprimido e não Parquet?</span><span class="a">Era histórico frio, não workload analítico — gzip + CSV bastava e era mais simples. <b>Se hoje você escolheria Parquet, diga isso</b>: “I'd probably reach for Parquet today if the history were queried analytically.” Não defenda a escolha como ótima; defenda como adequada ao uso.</span></li>
       <li><span class="q">Redis é cache ou fonte da verdade?</span><span class="a">Cache — e é por isso que é aceitável. A última posição é derivável do stream que continua chegando; perder o Redis é “posição desconhecida até o próximo ping”, não dado perdido. <b>O intervalo do ping limita o buraco.</b></span></li>
       <li><span class="q">SQS entrega pelo menos uma vez. Como evitou processar nota duas vezes?</span><span class="a">Chave de idempotência por nota. <b>Ponte pro Sharity</b> se a memória falhar: lá foi dedupe table na mesma transação do incremento. “The pattern I'd defend in detail is the one I built on Sharity…”</span></li>
+      <li><span class="q">Como você escalava os workers?</span><span class="a">Autoscaling pela <b>quantidade de mensagens por worker</b> — backlog, não CPU. <b>Diga isso explicitamente</b>: a maioria escala consumidor de fila por CPU, que é a métrica errada pra carga I/O-bound, porque o worker fica ocioso esperando o banco enquanto a fila cresce. Escalar por profundidade de fila é o jeito certo e sinaliza experiência real. É também a sua resposta pra “e se dobrar o volume amanhã?” — dobra sozinho.</span></li>
+      <li><span class="q">Ordem importava nas notas?</span><span class="a">Fila única com workers concorrentes <b>não preserva ordem</b> — então a resposta tem que ser que não importava, e é bom você saber por quê antes de ele perguntar. Se importasse, precisaria de FIFO com message group por empresa, ao custo de throughput. <b>Pense antes de responder; é pergunta de armadilha.</b></span></li>
       <li><span class="q">Por que o alarme foi de billing e não de performance?</span><span class="a">Ele vai puxar esse fio, e você quer que puxe. <b>Porque só o de billing existia.</b> É a entrada natural pro “faria diferente” — deixe ele te levar até lá em vez de você anunciar.</span></li>
       <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma; o gargalo foi em 2019-2020. <em>“Those are lifetime figures — at the time we were on the way there, and what mattered wasn't absolute volume, it was the month-end concentration.”</em></span></li>
       <li><span class="q">Você construiu em 2016 e o gargalo foi em 2019 — o que fazia no meio?</span><span class="a">CTO da Simpli, que seguia cuidando do produto, com voltas hands-on quando o trabalho pedia. Essa foi uma delas. <b>Diga a forma do envolvimento, não finja intensidade constante.</b></span></li>
