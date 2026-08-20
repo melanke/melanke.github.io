@@ -549,7 +549,7 @@
           <p><strong>Duas correções em sequência, e a segunda só apareceu por causa da primeira.</strong></p>
           <ul>
             <li><strong>Ingestão de notas</strong> → uma fila SQS, workers concorrentes consumindo em lote, com autoscaling pela quantidade de mensagens por worker.</li>
-            <li>Isso expôs uma segunda carga de escrita embaixo: <strong>posições dos entregadores</strong>, salvas a todo momento → posição atual no Redis, histórico em CSV comprimido no S3.</li>
+            <li>Isso expôs uma segunda carga de escrita embaixo: <strong>posições dos entregadores</strong>, salvas a todo momento → posição atual no Redis, histórico em Parquet no S3, lido com Athena.</li>
           </ul>
         </dd>
 
@@ -584,7 +584,7 @@
       <li>Acompanhamento diário, anotando os números.</li>
       <li>Leitura de código → duas suspeitas.</li>
       <li><strong>Correção 1</strong> (fila SQS + workers concorrentes em lote, escalando por backlog) → mede de novo → melhora, <em>e revela a carga 2</em>.</li>
-      <li><strong>Correção 2</strong> (Redis + CSV comprimido no S3) → mede de novo → melhora significativa.</li>
+      <li><strong>Correção 2</strong> (Redis + histórico Parquet no S3) → mede de novo → melhora significativa.</li>
       <li>Alarmes no CloudWatch e no DLQ; observabilidade proativa daí em diante.</li>
     </ol>
 
@@ -601,12 +601,23 @@
       <p><strong>“We evaluated X and rejected it.”</strong> As alternativas acima são reconstrução a partir do mecanismo — não necessariamente o que você formalmente avaliou em 2019. Diga <em>“the obvious alternative is X, and it doesn't work because Y”</em>. Funciona igual e é verdade de qualquer jeito.</p>
     </div>
 
+    <div class="note">
+      <span class="label">Parquet em 15 minutos — a superfície inteira que você precisa</span>
+      <p><strong>Row group.</strong> O arquivo é dividido em blocos de linhas independentes. Cada um é lido em separado — <em>é daí que vem a splittability</em>, e é o que gzip sobre CSV não tem: um <code>.gz</code> grande descomprime serialmente, num worker só.</p>
+      <p><strong>Encoding por coluna.</strong> Dentro do row group, cada coluna é guardada junta e codificada pelo que ela é: <em>dictionary</em> + <em>run-length</em> para valores repetidos (seu <code>courier_id</code>), <em>delta</em> para sequências (seu <code>timestamp</code>), <em>bit-packing</em> para inteiros pequenos. Por isso comprime muito mais que uma linha de CSV, que mistura tipos e força o gzip a olhar bytes heterogêneos.</p>
+      <p><strong>Estatística por row group.</strong> Guarda min/max de cada coluna. Um <code>WHERE</code> em timestamp deixa o motor pular row groups inteiros sem abrir — <em>predicate pushdown</em>. CSV não tem metadado nenhum: sempre varredura total.</p>
+      <p><strong>Tipado.</strong> Binário com tipo, sem parsing de string a cada campo na leitura.</p>
+      <p><strong>O custo:</strong> o writer é mais pesado. Precisa acumular um row group em memória antes de escrever, então não dá pra anexar linha a linha como em CSV. Escrita em lote resolve — <em>que é exatamente o que o seu worker já fazia</em>.</p>
+      <p><strong>Onde parar:</strong> tamanho de row group, seleção de encoding e bloom filters são afinação. Você não afinou. Diga isso e siga.</p>
+    </div>
+
     <h3>A cascata — 14 perguntas que ele vai fazer</h3>
     <ul class="cascade">
       <li><span class="q">Por que não fazer os clientes usarem o endpoint de batch?</span><span class="a"><b>A pergunta mais provável e mais perigosa</b> — a causa raiz era comportamento de cliente, então por que consertar na arquitetura? Resposta: você não faz 2.000 empresas mudarem a integração delas no seu cronograma, muito menos no fechamento fiscal. <b>A plataforma tem que absorver o comportamento que ela de fato recebe</b>, não o que a documentação pede. Isso é resposta de produto, não de infra, e é forte.</span></li>
       <li><span class="q">Como você sabia que tinha terminado?</span><span class="a">Não sabia — e essa é a beleza da história. <b>A correção 1 é que revelou a carga 2.</b> Enquanto as notas dominavam o ruído, as posições dos entregadores eram invisíveis. Arco autêntico de depuração; ninguém inventa isso.</span></li>
-      <li><span class="q">Por que CSV comprimido e não Parquet?</span><span class="a"><b>Pergunta afiada, porque vocês liam esses arquivos com Athena</b> — e Athena cobra por byte escaneado, colunar escaneia uma fração, e gzip não é splittable, então um CSV grande não paraleliza. Existem duas respostas honestas e você escolhe pela frequência real de consulta. <b>(a) A resposta forte — conceda o ponto técnico e mantenha a decisão:</b> “Parquet would have been better on storage and scan cost, even reading every column — the encoding compresses far harder and gzip doesn't split. But the crisis was on the write path, and Parquet complicates the writer: you can't append to it row by row. We took the simpler writer under pressure, and the history was cheap enough that it never became worth revisiting.” <b>Ele não consegue te pegar em algo que você já entregou</b>, e conceder com precisão mostra mais domínio que defender. <b>Nunca diga “eu lia todas as colunas, então Parquet não ajudaria”</b> — é equívoco comum: o ganho vem de encoding por coluna (dictionary/RLE/delta, e seus pings de GPS são o caso de laboratório), de splittability e de estatística de row group, nenhum dos três ligado a quantas colunas você lê. Parquet é de 2013 e o Athena lê desde 2016, então <b>não existe defesa de “não estava disponível”</b>. <b>(b) Se era consultado com frequência:</b> assuma — “Parquet would have been the better call, and for a specific reason: bytes scanned and splittability. I'd choose it today.” <b>Não misture as duas.</b></span></li>
-      <li><span class="q">Vocês particionavam o histórico no S3?</span><span class="a">Se sim (por ano/mês/dia no prefixo), Athena faz partition pruning e boa parte do custo de CSV evapora — <b>e aí a defesa da resposta (a) fica bem mais forte</b>. Se não, cada consulta varria tudo, e essa é a ineficiência real, mais que o formato. <b>Responda o que era verdade</b>; se não lembrar, diga que não lembra.</span></li>
+      <li><span class="q">Por que Parquet?</span><span class="a"><b>Pergunta fácil, e você responde inteira em duas frases:</b> “The history was courier position pings — hugely repetitive telemetry. Parquet's per-column encoding compresses that far harder than a row format, and unlike gzipped CSV it's splittable, so Athena parallelises the read.” <b>Pare aí.</b> Não ofereça profundidade que você não vai querer sustentar.</span></li>
+      <li><span class="q">E se ele for fundo em Parquet?</span><span class="a">Row group sizing, escolha de encoding, bloom filters — <b>a resposta certa é entregar o limite</b>: <em>“I used it, I didn't tune it at that level.”</em> Ninguém espera que um líder de backend tenha calibrado internals de Parquet, e fingir que calibrou é o único jeito de perder pontos aqui. <b>Entregar o limite com naturalidade lê como senioridade</b>, não como lacuna.</span></li>
+      <li><span class="q">Vocês particionavam o histórico no S3?</span><span class="a">Se sim (por ano/mês/dia no prefixo), Athena faz partition pruning e pula partições inteiras antes de abrir arquivo. <b>Responda o que era verdade</b>; se não lembrar, diga que não lembra. Com Parquet você já tem min/max por row group de qualquer jeito, então a ausência de partição dói menos do que doeria em CSV.</span></li>
       <li><span class="q">Redis é cache ou fonte da verdade?</span><span class="a">Cache — e é por isso que é aceitável. A última posição é derivável do stream que continua chegando; perder o Redis é “posição desconhecida até o próximo ping”, não dado perdido. <b>O intervalo do ping limita o buraco.</b></span></li>
       <li><span class="q">SQS entrega pelo menos uma vez. Como evitou processar nota duas vezes?</span><span class="a">Chave de idempotência por nota. <b>Ponte pro Sharity</b> se a memória falhar: lá foi dedupe table na mesma transação do incremento. “The pattern I'd defend in detail is the one I built on Sharity…”</span></li>
       <li><span class="q">Como você escalava os workers?</span><span class="a">Autoscaling pela <b>quantidade de mensagens por worker</b> — backlog, não CPU. <b>Diga isso explicitamente</b>: a maioria escala consumidor de fila por CPU, que é a métrica errada pra carga I/O-bound, porque o worker fica ocioso esperando o banco enquanto a fila cresce. Escalar por profundidade de fila é o jeito certo e sinaliza experiência real. É também a sua resposta pra “e se dobrar o volume amanhã?” — dobra sozinho.</span></li>
