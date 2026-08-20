@@ -539,7 +539,7 @@
         <dd>Plataforma B2B de entregas construída do zero, sob sua liderança técnica nos dois primeiros anos. Chegou a ~60 mil entregadores, 2 mil empresas, 50M+ notas. Adquirida pela MadeiraMadeira em 2021 — a Simpli atravessou a aquisição, operou por mais três anos e entregou em 2024, com você como CTO voltando pra perto do time quando o trabalho pedia profundidade.</dd>
 
         <dt>Gatilho</dt>
-        <dd>Uma dessas voltas, ~2019-2020. Um <strong>billing alarm do CloudWatch</strong> disparou: o Postgres sempre custava um pouco mais no fechamento fiscal, mas dessa vez foi desproporcional — por causa do salto de empresas que tinham adotado o sistema havia pouco. <strong>O sistema não caiu.</strong> O primeiro sinal foi financeiro, não de latência.</dd>
+        <dd>Uma dessas voltas, no fim de 2019 entrando em 2020 — o episódio atravessou dois fechamentos fiscais, que é por que você lembra dos dois anos. Um <strong>billing alarm do CloudWatch</strong> disparou: o Postgres sempre custava um pouco mais no fechamento fiscal, mas dessa vez foi desproporcional — por causa do salto de empresas que tinham adotado o sistema havia pouco. <strong>O sistema não caiu.</strong> O primeiro sinal foi financeiro, não de latência.</dd>
 
         <dt>Causa raiz</dt>
         <dd>Clientes postando nota a nota no endpoint de integração em vez de usar o endpoint de batch — todos ao mesmo tempo no fechamento. <strong>Uma transação por nota, um flush de WAL por commit.</strong> O gargalo era commit-bound, não CPU-bound: latência de fsync não melhora com classe de instância.</dd>
@@ -612,7 +612,7 @@
       <li><span class="q">Como você escalava os workers?</span><span class="a">Autoscaling pela <b>quantidade de mensagens por worker</b> — backlog, não CPU. <b>Diga isso explicitamente</b>: a maioria escala consumidor de fila por CPU, que é a métrica errada pra carga I/O-bound, porque o worker fica ocioso esperando o banco enquanto a fila cresce. Escalar por profundidade de fila é o jeito certo e sinaliza experiência real. É também a sua resposta pra “e se dobrar o volume amanhã?” — dobra sozinho.</span></li>
       <li><span class="q">Ordem importava nas notas?</span><span class="a">Fila única com workers concorrentes <b>não preserva ordem</b> — então a resposta tem que ser que não importava, e é bom você saber por quê antes de ele perguntar. Se importasse, precisaria de FIFO com message group por empresa, ao custo de throughput. <b>Pense antes de responder; é pergunta de armadilha.</b></span></li>
       <li><span class="q">Por que o alarme foi de billing e não de performance?</span><span class="a">Ele vai puxar esse fio, e você quer que puxe. <b>Porque só o de billing existia.</b> É a entrada natural pro “faria diferente” — deixe ele te levar até lá em vez de você anunciar.</span></li>
-      <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma; o gargalo foi em 2019-2020. <em>“Those are lifetime figures — at the time we were on the way there, and what mattered wasn't absolute volume, it was the month-end concentration.”</em></span></li>
+      <li><span class="q">Qual era o volume quando bateu o gargalo?</span><span class="a"><b>Não é 50 milhões.</b> Esses são os números de vida da plataforma; o gargalo foi na virada de 2019 pra 2020. <em>“Those are lifetime figures — at the time we were on the way there, and what mattered wasn't absolute volume, it was the month-end concentration.”</em></span></li>
       <li><span class="q">Você construiu em 2016 e o gargalo foi em 2019 — o que fazia no meio?</span><span class="a">CTO da Simpli, que seguia cuidando do produto, com voltas hands-on quando o trabalho pedia. Essa foi uma delas. <b>Diga a forma do envolvimento, não finja intensidade constante.</b></span></li>
       <li><span class="q">Quem discordou de você?</span><span class="a">A defesa óbvia era “só aumenta a instância”. <b>E agora você tem o argumento que encerra a discussão sem ser arrogante:</b> fsync por commit não melhora com classe de instância. Conte como você comprou a discussão, não como venceu.</span></li>
       <li><span class="q">Como soube que era escrita e não outra coisa?</span><span class="a">Pergunta de método. Conte a cadeia: alarme financeiro → Cost Explorer isolando o RDS → Performance Insights na janela → código. <b>Método bem contado vale mais que a solução.</b></span></li>
@@ -858,7 +858,7 @@
 
     <div class="note">
       <span class="label">Datas que precisam bater</span>
-      <p>iTrack: construído nov/2016, envolvimento profundo até ~2018, redesenho do write path <strong>~2019-2020</strong>, aquisição pela MadeiraMadeira em <strong>2021</strong>, Simpli operando até entregar em <strong>2024</strong>. Sharity vendida à Abacashi, você liderando a engenharia da fusão. Simpli inteira: out/2013 – mai/2025.</p>
+      <p>iTrack: construído nov/2016, envolvimento profundo até ~2018, redesenho do write path <strong>fim de 2019 → 2020</strong> (Athena só chegou em sa-east-1 em dez/2019), aquisição pela MadeiraMadeira em <strong>2021</strong>, Simpli operando até entregar em <strong>2024</strong>. Sharity vendida à Abacashi, você liderando a engenharia da fusão. Simpli inteira: out/2013 – mai/2025.</p>
     </div>
 
     <div class="note">
