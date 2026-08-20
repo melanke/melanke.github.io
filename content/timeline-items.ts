@@ -1430,7 +1430,6 @@ export const timelineItems: TimelineEntry[] = [
       backend.java,
       backend.aws,
       backend.s3,
-      backend.sns,
       backend.sqs,
       backend.redis,
       backend.postgresql,
