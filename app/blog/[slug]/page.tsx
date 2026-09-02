@@ -52,7 +52,7 @@ function formatDate(iso?: string): string {
 
 const headerProps = {
   name: 'Gil',
-  title: 'Principal Software Engineer',
+  title: 'Software Engineer',
   contacts: {
     fullName: 'Gil Lopes Bueno',
     email: 'gilbueno.mail@gmail.com',

@@ -3,7 +3,7 @@ import { CompactHeader } from '@/components/CompactHeader'
 
 const headerProps = {
   name: 'Gil',
-  title: 'Principal Software Engineer',
+  title: 'Software Engineer',
   contacts: {
     fullName: 'Gil Lopes Bueno',
     email: 'gilbueno.mail@gmail.com',

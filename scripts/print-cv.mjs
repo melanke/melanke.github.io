@@ -12,18 +12,18 @@
 //
 // Fails the build if any version exceeds MAX_PAGES: the whole point of the
 // print layout is that a recruiter gets a 3-page CV.
-import { createServer } from "http";
-import { PDFDocument } from "pdf-lib";
-import { readFile, writeFile } from "fs/promises";
-import { existsSync, mkdirSync } from "fs";
-import { join, extname } from "path";
+import { createServer } from "http"
+import { PDFDocument } from "pdf-lib"
+import { readFile, writeFile } from "fs/promises"
+import { existsSync, mkdirSync } from "fs"
+import { join, extname } from "path"
 
-const MAX_PAGES = +(process.env.CV_MAX_PAGES || 3);
-const ROOT = join(process.cwd(), "out");
-const PUBLIC_DOCS = join(process.cwd(), "public", "documents");
-const OUT_DOCS = join(ROOT, "documents");
+const MAX_PAGES = +(process.env.CV_MAX_PAGES || 3)
+const ROOT = join(process.cwd(), "out")
+const PUBLIC_DOCS = join(process.cwd(), "public", "documents")
+const OUT_DOCS = join(ROOT, "documents")
 
-const AUTHOR = "Gil Lopes Bueno";
+const AUTHOR = "Gil Lopes Bueno"
 
 // `title` and `keywords` are stamped into the PDF's document information
 // dictionary after Chrome renders it. Chrome ignores `<meta name="author">`,
@@ -35,10 +35,10 @@ const AUTHOR = "Gil Lopes Bueno";
 const VERSIONS = [
   {
     route: "/",
-    file: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf",
-    title: `${AUTHOR} — Principal Software Engineer`,
+    file: "Gil-Lopes-Bueno-Software-Engineer.pdf",
+    title: `${AUTHOR} — Software Engineer`,
     keywords: [
-      "Principal Software Engineer", "Backend Engineer", "AI Engineering",
+      "Software Engineer", "Backend Engineer", "AI Engineering",
       "Node.js", "TypeScript", "Java", "Kotlin", "PostgreSQL", "AWS",
       "Microservices", "Distributed Systems", "Solution Architecture",
       "Agent Development", "MCP", "RAG", "Blockchain", "Solidity",
@@ -80,10 +80,10 @@ const VERSIONS = [
   },
   {
     route: "/enterprise",
-    file: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf",
-    title: `${AUTHOR} — Principal Backend Engineer`,
+    file: "Gil-Lopes-Bueno-Backend-Engineer.pdf",
+    title: `${AUTHOR} — Backend Engineer`,
     keywords: [
-      "Principal Backend Engineer", "Java", "Kotlin", "Node.js", "TypeScript",
+      "Backend Engineer", "Java", "Kotlin", "Node.js", "TypeScript",
       "Microservices", "Distributed Systems", "Solution Architecture",
       "PostgreSQL", "MySQL", "Redis", "ElasticSearch", "AWS", "Docker",
       "Terraform", "CI/CD", "REST", "GraphQL",
@@ -101,7 +101,7 @@ const VERSIONS = [
       "Scrum", "Kanban", "Jira", "ClickUp", "Figma",
     ],
   },
-];
+]
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -110,25 +110,25 @@ const CHROME_CANDIDATES = [
   "/usr/bin/chromium",
   "/usr/bin/chromium-browser",
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-].filter(Boolean);
+].filter(Boolean)
 
 const skip = (why) => {
-  console.log(`\n  CV PDFs skipped: ${why}`);
-  process.exit(0);
-};
+  console.log(`\n  CV PDFs skipped: ${why}`)
+  process.exit(0)
+}
 
-if (process.env.SKIP_CV_PDF) skip("SKIP_CV_PDF is set");
-if (process.env.CI) skip("running in CI");
-if (!existsSync(ROOT)) skip("no out/ directory — run `next build` first");
+if (process.env.SKIP_CV_PDF) skip("SKIP_CV_PDF is set")
+if (process.env.CI) skip("running in CI")
+if (!existsSync(ROOT)) skip("no out/ directory — run `next build` first")
 
-const chrome = CHROME_CANDIDATES.find((p) => existsSync(p));
-if (!chrome) skip("no Chrome found (set CHROME_PATH to override)");
+const chrome = CHROME_CANDIDATES.find((p) => existsSync(p))
+if (!chrome) skip("no Chrome found (set CHROME_PATH to override)")
 
-let chromium;
+let chromium
 try {
-  ({ chromium } = await import("playwright-core"));
+  ({ chromium } = await import("playwright-core"))
 } catch {
-  skip("playwright-core is not installed");
+  skip("playwright-core is not installed")
 }
 
 // Static file server over out/, mirroring how GitHub Pages serves the export.
@@ -150,49 +150,49 @@ const MIME = {
   ".xml": "application/xml",
   ".txt": "text/plain",
   ".pdf": "application/pdf",
-};
+}
 
 const server = createServer(async (req, res) => {
-  const path = decodeURIComponent(req.url.split("?")[0]);
-  let file = join(ROOT, path);
+  const path = decodeURIComponent(req.url.split("?")[0])
+  let file = join(ROOT, path)
   if (!extname(file)) {
     file = existsSync(join(file, "index.html"))
       ? join(file, "index.html")
-      : `${file}.html`;
+      : `${file}.html`
   }
   try {
-    const body = await readFile(file);
+    const body = await readFile(file)
     res.writeHead(200, {
       "content-type": MIME[extname(file)] || "application/octet-stream",
-    });
-    res.end(body);
+    })
+    res.end(body)
   } catch {
-    res.writeHead(404).end("not found");
+    res.writeHead(404).end("not found")
   }
-});
+})
 
-await new Promise((resolve) => server.listen(0, resolve));
-const port = server.address().port;
+await new Promise((resolve) => server.listen(0, resolve))
+const port = server.address().port
 
 // A single output dir can be passed for experiments; otherwise write the two
 // places that matter: the repo copy and the just-built export.
-const targets = process.argv[2] ? [process.argv[2]] : [PUBLIC_DOCS, OUT_DOCS];
-targets.forEach((dir) => mkdirSync(dir, { recursive: true }));
+const targets = process.argv[2] ? [process.argv[2]] : [PUBLIC_DOCS, OUT_DOCS]
+targets.forEach((dir) => mkdirSync(dir, { recursive: true }))
 
-const browser = await chromium.launch({ executablePath: chrome });
-const page = await browser.newPage();
-const oversized = [];
+const browser = await chromium.launch({ executablePath: chrome })
+const page = await browser.newPage()
+const oversized = []
 
 for (const { route, file, title, keywords } of VERSIONS) {
-  await page.goto(`http://localhost:${port}${route}`, { waitUntil: "networkidle" });
-  await page.emulateMedia({ media: "print" });
+  await page.goto(`http://localhost:${port}${route}`, { waitUntil: "networkidle" })
+  await page.emulateMedia({ media: "print" })
   // `networkidle` only guarantees requests were kicked off, not that every
   // @font-face weight finished parsing. Without this wait, Chrome's PDF
   // snapshot can catch some weights (e.g. font-semibold headings) before
   // they've swapped in, embedding just the Regular weight and faking the
   // rest with synthetic bold — which renders visibly heavier than a real
   // browser print of the same page.
-  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(() => document.fonts.ready)
   const pdf = await page.pdf({
     format: "Letter",
     printBackground: false,
@@ -201,38 +201,38 @@ for (const { route, file, title, keywords } of VERSIONS) {
     // real outline instead of a flat bag of text runs.
     tagged: true,
     margin: { top: "0.31in", bottom: "0", left: "0.31in", right: "0.31in" },
-  });
+  })
 
   // Chrome leaves Author, Title and Keywords empty — it has no way to know
   // them — so they get stamped on here. Re-saving through pdf-lib preserves
   // the structure tree emitted by `tagged: true` above.
-  const doc = await PDFDocument.load(pdf);
-  doc.setTitle(title, { showInWindowTitleBar: true });
-  doc.setAuthor(AUTHOR);
-  doc.setSubject(title);
+  const doc = await PDFDocument.load(pdf)
+  doc.setTitle(title, { showInWindowTitleBar: true })
+  doc.setAuthor(AUTHOR)
+  doc.setSubject(title)
   // pdf-lib joins the array with spaces, which makes multi-word keywords
   // run together ("Project Manager Delivery Manager"). Pre-joining with
   // commas gives a parser separable terms.
-  doc.setKeywords([keywords.join(", ")]);
-  doc.setCreator("gil.solutions");
-  const stamped = await doc.save();
+  doc.setKeywords([keywords.join(", ")])
+  doc.setCreator("gil.solutions")
+  const stamped = await doc.save()
 
-  const pages = doc.getPageCount();
+  const pages = doc.getPageCount()
 
-  for (const dir of targets) await writeFile(join(dir, file), stamped);
-  console.log(`  ${pages} pages  ${file}`);
-  if (pages > MAX_PAGES) oversized.push({ file, pages });
+  for (const dir of targets) await writeFile(join(dir, file), stamped)
+  console.log(`  ${pages} pages  ${file}`)
+  if (pages > MAX_PAGES) oversized.push({ file, pages })
 }
 
-await browser.close();
-server.close();
+await browser.close()
+server.close()
 
 if (oversized.length) {
   console.error(
     `\n  CV over budget (max ${MAX_PAGES} pages):\n` +
-      oversized.map((o) => `    ${o.pages} pages  ${o.file}`).join("\n") +
-      `\n\n  Trim content, or tighten the print styles in components/TimelineItem.tsx\n` +
-      `  and app/globals.css (see the @media print block).\n`
-  );
-  process.exit(1);
+    oversized.map((o) => `    ${o.pages} pages  ${o.file}`).join("\n") +
+    `\n\n  Trim content, or tighten the print styles in components/TimelineItem.tsx\n` +
+    `  and app/globals.css (see the @media print block).\n`
+  )
+  process.exit(1)
 }

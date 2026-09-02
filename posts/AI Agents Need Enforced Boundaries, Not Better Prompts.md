@@ -138,4 +138,4 @@ If you're rolling out agent-driven development on your own team, I'd like to hea
 
 ---
 
-_Written by Gil, a Principal Software Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._
+_Written by Gil, a Software Engineer with 19+ years of experience, focused on shipping AI-driven backends that hold up in production._

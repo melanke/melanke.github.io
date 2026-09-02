@@ -1,22 +1,22 @@
-import { ContentVersion } from "@/app/contentVersion";
-import { Tech, backend, frontend, other, blockchain, ai } from "@/lib/technologies";
+import { ContentVersion } from "@/app/contentVersion"
+import { Tech, backend, frontend, other, blockchain, ai } from "@/lib/technologies"
 
 export interface TimelineEntry {
-  id: string;
+  id: string
   /** Groups nested children under their employer's id (e.g. "simpli"). */
-  parentId?: string;
-  title: string;
+  parentId?: string
+  title: string
   /** Display string, e.g. "Nov 2016 - Jun 2018". */
-  dateRange: string;
+  dateRange: string
   /** Sortable "YYYY-MM", derived from dateRange's start. */
-  startDate: string;
-  technologies: Tech[] | Partial<Record<ContentVersion, Tech[]>>;
-  role: string | Partial<Record<ContentVersion, string>>;
+  startDate: string
+  technologies: Tech[] | Partial<Record<ContentVersion, Tech[]>>
+  role: string | Partial<Record<ContentVersion, string>>
   /** Markdown. */
-  description: string | Partial<Record<ContentVersion, string>>;
-  image?: string;
-  link?: string;
-  links?: (string | { label: string; url: string })[];
+  description: string | Partial<Record<ContentVersion, string>>
+  image?: string
+  link?: string
+  links?: (string | { label: string; url: string })[]
   /**
    * Declared explicitly per version — not derived. 1 = relevant to that
    * version (shows near the top), 2 = relevant elsewhere but still shown
@@ -25,7 +25,7 @@ export interface TimelineEntry {
    * page entirely. Nothing is auto-assigned to 4; it's a deliberate,
    * per-item, per-version call.
    */
-  priority: Record<ContentVersion, 1 | 2 | 3 | 4>;
+  priority: Record<ContentVersion, 1 | 2 | 3 | 4>
   /**
    * Independent of priority: which versions print this in the PDF. Omitted
    * = prints wherever priority !== 4. A narrower list preserves today's
@@ -33,11 +33,11 @@ export interface TimelineEntry {
    * item may now be visible (priority 2 or 3) on more pages than it prints
    * on.
    */
-  printIn?: ContentVersion[];
+  printIn?: ContentVersion[]
   /**
    * Which versions print this item's `Tech:` line. Omitted = all of them.
    */
-  printTechIn?: ContentVersion[];
+  printTechIn?: ContentVersion[]
 }
 
 export const ALL_VERSIONS: ContentVersion[] = [
@@ -47,7 +47,7 @@ export const ALL_VERSIONS: ContentVersion[] = [
   "enterprise",
   "product",
   "webdev",
-];
+]
 
 const shownEverywhere: Record<ContentVersion, 1 | 2 | 3 | 4> = {
   general: 1,
@@ -56,7 +56,7 @@ const shownEverywhere: Record<ContentVersion, 1 | 2 | 3 | 4> = {
   enterprise: 1,
   product: 1,
   webdev: 1,
-};
+}
 
 // Truly invisible — excluded from render entirely. Nothing is assigned this
 // automatically; move an item here only when explicitly asked.
@@ -67,7 +67,7 @@ const invisible: Record<ContentVersion, 1 | 2 | 3 | 4> = {
   enterprise: 4,
   product: 4,
   webdev: 4,
-};
+}
 
 export const timelineItems: TimelineEntry[] = [
   {
@@ -321,13 +321,13 @@ export const timelineItems: TimelineEntry[] = [
     image: "/projects/american-spend.webp",
     link: "https://spend.market/",
     priority: {
-  general: 2,
-  web3: 1,
-  leader: 2,
-  enterprise: 2,
-  product: 2,
-  webdev: 4,
-},
+      general: 2,
+      web3: 1,
+      leader: 2,
+      enterprise: 2,
+      product: 2,
+      webdev: 4,
+    },
     printIn: ["web3"],
   },
   {
@@ -425,13 +425,13 @@ export const timelineItems: TimelineEntry[] = [
     image: "/projects/mosaic.webp",
     link: "https://mosaic.build/",
     priority: {
-  general: 2,
-  web3: 1,
-  leader: 2,
-  enterprise: 2,
-  product: 2,
-  webdev: 4,
-},
+      general: 2,
+      web3: 1,
+      leader: 2,
+      enterprise: 2,
+      product: 2,
+      webdev: 4,
+    },
     printIn: ["web3"],
   },
   {
@@ -456,13 +456,13 @@ export const timelineItems: TimelineEntry[] = [
     image: "/projects/buidlguidl.webp",
     link: "https://buidlguidl.com/batches",
     priority: {
-  general: 2,
-  web3: 1,
-  leader: 1,
-  enterprise: 2,
-  product: 2,
-  webdev: 4,
-},
+      general: 2,
+      web3: 1,
+      leader: 1,
+      enterprise: 2,
+      product: 2,
+      webdev: 4,
+    },
     printIn: ["web3"],
   },
   {
@@ -502,13 +502,13 @@ export const timelineItems: TimelineEntry[] = [
       },
     ],
     priority: {
-  general: 2,
-  web3: 1,
-  leader: 2,
-  enterprise: 2,
-  product: 2,
-  webdev: 4,
-},
+      general: 2,
+      web3: 1,
+      leader: 2,
+      enterprise: 2,
+      product: 2,
+      webdev: 4,
+    },
     printIn: ["web3"],
   },
   {
@@ -695,13 +695,13 @@ export const timelineItems: TimelineEntry[] = [
     image: "/projects/enclave.webp",
     link: "https://enclavewallet.com",
     priority: {
-    general: 1,
-    web3: 1,
-    leader: 1,
-    enterprise: 2,
-    product: 1,
-    webdev: 1,
-  },
+      general: 1,
+      web3: 1,
+      leader: 1,
+      enterprise: 2,
+      product: 1,
+      webdev: 1,
+    },
   },
   {
     id: "linkd-academy",
@@ -941,13 +941,13 @@ export const timelineItems: TimelineEntry[] = [
     },
     image: "/projects/letter.png",
     priority: {
-  general: 2,
-  web3: 1,
-  leader: 2,
-  enterprise: 2,
-  product: 2,
-  webdev: 4,
-},
+      general: 2,
+      web3: 1,
+      leader: 2,
+      enterprise: 2,
+      product: 2,
+      webdev: 4,
+    },
     printIn: ["web3"],
   },
   {
@@ -1730,29 +1730,29 @@ export const timelineItems: TimelineEntry[] = [
     startDate: "2010-01",
     technologies: {
       general: [
-      frontend.jquery,
-      frontend.backbone,
-      backend.java,
-      other.android,
-      backend.rest,
-      frontend.javascript,
-    ],
+        frontend.jquery,
+        frontend.backbone,
+        backend.java,
+        other.android,
+        backend.rest,
+        frontend.javascript,
+      ],
       enterprise: [
-      frontend.jquery,
-      frontend.backbone,
-      backend.java,
-      other.android,
-      backend.rest,
-      frontend.javascript,
-    ],
+        frontend.jquery,
+        frontend.backbone,
+        backend.java,
+        other.android,
+        backend.rest,
+        frontend.javascript,
+      ],
       webdev: [
-      frontend.jquery,
-      frontend.backbone,
-      backend.java,
-      other.android,
-      backend.rest,
-      frontend.javascript,
-    ],
+        frontend.jquery,
+        frontend.backbone,
+        backend.java,
+        other.android,
+        backend.rest,
+        frontend.javascript,
+      ],
       web3: [],
       leader: [],
       product: [],
@@ -1788,4 +1788,4 @@ export const timelineItems: TimelineEntry[] = [
     // while the bio claims 19+. A couple of lines buy back three years.
     printIn: ["general", "web3", "leader", "enterprise", "product", "webdev"],
   },
-];
+]

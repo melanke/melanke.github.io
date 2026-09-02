@@ -32,12 +32,12 @@ The site is the source of truth for Gil's CV. Each audience is a `ContentVersion
 
 | Version | Route | Positioning |
 |---------|-------|-------------|
-| `general` | `/` | Principal Software Engineer — backend + AI first |
+| `general` | `/` | Software Engineer — backend + AI first |
 | `web3` | `/web3` | Senior Blockchain Engineer — protocol/DeFi first |
 | `leader` | `/project-manager` | Technical Project Manager — delivery first: scope, estimates, schedule, budget, risk. The id stays `leader` internally; the public title is never "Tech Lead" or "Engineering Manager" |
-| `enterprise` | `/enterprise` | Principal Software Engineer — Java/Kotlin, distributed systems; Web3 last, framed as integration work |
+| `enterprise` | `/enterprise` | Software Engineer — Java/Kotlin, distributed systems; Web3 last, framed as integration work |
 | `product` | `/product` | Technical Product Owner — discovery/requirements/roadmap first, engineering as the credibility behind it |
-| `webdev` | `/webdev` | Senior Full-Stack Engineer — React/Next/TypeScript first, no "Principal", DeFi kept off the PDF |
+| `webdev` | `/webdev` | Senior Full-Stack Engineer — React/Next/TypeScript first, DeFi kept off the PDF |
 
 A version changes wording and ordering, never the facts. The pieces that vary:
 `Bio.tsx` (summary), `ResumePage.tsx` (skill sections + order), and

@@ -1,4 +1,4 @@
-import { ContentVersion } from "@/app/contentVersion";
+import { ContentVersion } from "@/app/contentVersion"
 
 export function Bio({ version }: { version: ContentVersion }) {
   return version === "web3" ? (
@@ -28,7 +28,7 @@ export function Bio({ version }: { version: ContentVersion }) {
   ) : version === "enterprise" ? (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-4 print:mt-2">
-        I am a Principal Software Engineer with 19+ years delivering scalable
+        I am a Software Engineer with 19+ years delivering scalable
         backend systems, distributed applications and enterprise software,
         with 50+ projects across logistics, fintech, media, enterprise SaaS
         and Web3. I architected a logistics platform processing 50M+ invoices
@@ -130,7 +130,7 @@ export function Bio({ version }: { version: ContentVersion }) {
   ) : (
     <>
       <div className="text-sm leading-4 text-black dark:text-white max-md:max-w-full animate-fade-up opacity-0 mt-4 print:mt-2">
-        I am a Principal Software Engineer, focused on shipping AI-driven backends that hold up in production, with 19+ years of experience and
+        I am a Software Engineer, focused on shipping AI-driven backends that hold up in production, with 19+ years of experience and
         over 50 delivered projects. Most of my career has gone into backend
         systems that hold up under real scale. I architected a logistics
         platform that processed 50M+ invoices for 60,000 couriers, and a wallet
@@ -150,5 +150,5 @@ export function Bio({ version }: { version: ContentVersion }) {
         comfortable talking to the people who depend on what I ship.
       </div>
     </>
-  );
+  )
 }

@@ -1,22 +1,22 @@
-import { StickyHeader } from "@/components/StickyHeader";
-import { Bio } from "@/components/Bio";
-import { Achievements } from "@/components/Achievements";
-import { History } from "@/components/History";
-import { SkillSection } from "@/components/SkillSection";
-import { Timeline } from "@/components/Timeline";
-import { OtherSection } from "@/components/OtherSection";
-import { LatestPosts } from "@/components/LatestPosts";
-import { PiGlobe, PiRobot } from "react-icons/pi";
+import { StickyHeader } from "@/components/StickyHeader"
+import { Bio } from "@/components/Bio"
+import { Achievements } from "@/components/Achievements"
+import { History } from "@/components/History"
+import { SkillSection } from "@/components/SkillSection"
+import { Timeline } from "@/components/Timeline"
+import { OtherSection } from "@/components/OtherSection"
+import { LatestPosts } from "@/components/LatestPosts"
+import { PiGlobe, PiRobot } from "react-icons/pi"
 import {
   HiOutlineClipboardDocumentList,
   HiOutlineLanguage,
   HiOutlineUserGroup,
-} from "react-icons/hi2";
-import { BlockchainIcon } from "@/components/BlockchainIcon";
-import { BiServer } from "react-icons/bi";
-import { FaFileDownload } from "react-icons/fa";
-import { ContentVersion } from "@/app/contentVersion";
-import { getAllPosts } from "@/lib/posts";
+} from "react-icons/hi2"
+import { BlockchainIcon } from "@/components/BlockchainIcon"
+import { BiServer } from "react-icons/bi"
+import { FaFileDownload } from "react-icons/fa"
+import { ContentVersion } from "@/app/contentVersion"
+import { getAllPosts } from "@/lib/posts"
 import {
   backend,
   frontend,
@@ -25,13 +25,13 @@ import {
   other,
   practice,
   deliveryTools,
-} from "@/lib/technologies";
-import { cloneElement } from "react";
-import { existsSync } from "fs";
-import { join } from "path";
+} from "@/lib/technologies"
+import { cloneElement } from "react"
+import { existsSync } from "fs"
+import { join } from "path"
 
 export function ResumePage({ version }: { version: ContentVersion }) {
-  const latestPosts = getAllPosts().slice(0, 5);
+  const latestPosts = getAllPosts().slice(0, 5)
 
   const backendSection = (
     <SkillSection
@@ -72,7 +72,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         backend.elasticsearch,
       ]}
     />
-  );
+  )
 
   // Enterprise variant of the backend section: same real skills, ordered so a
   // recruiter reads Java/Kotlin and distributed systems before anything else.
@@ -113,7 +113,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         backend.elasticsearch,
       ]}
     />
-  );
+  )
 
   const aiSection = (
     <SkillSection
@@ -138,7 +138,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         ai.rag,
       ]}
     />
-  );
+  )
 
   const frontendSection = (
     <SkillSection
@@ -164,7 +164,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         frontend.reactHookForm,
       ]}
     />
-  );
+  )
 
   const blockchainSection = (
     <SkillSection
@@ -196,7 +196,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         blockchain.slither,
       ]}
     />
-  );
+  )
 
   // Enterprise variant of the blockchain section: framed as Web3 integration
   // work (multi-chain, wallets, SDKs) rather than DeFi/protocol engineering.
@@ -228,7 +228,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         blockchain.auditPrep,
       ]}
     />
-  );
+  )
 
   // Product resume only: the competencies behind the PO/BA hats — what he did,
   // as opposed to what he was called. Declared in `lib/technologies.ts` under
@@ -265,7 +265,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         deliveryTools.clickup,
       ]}
     />
-  );
+  )
 
   // Technical Project Manager resume only: the delivery disciplines and tools
   // behind the PM responsibilities he held at Simpli from 2013 onward. The
@@ -300,7 +300,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         deliveryTools.linear,
       ]}
     />
-  );
+  )
 
   // Languages rides in the skills list rather than as a section of its own:
   // on paper the categories are inline labels, so this costs one line instead
@@ -316,7 +316,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         { name: "Portuguese", since: "Native" },
       ]}
     />
-  );
+  )
 
   // Skill order is version-driven: the primary resume (general) leads with
   // Backend + AI, the web3 resume leads with Blockchain + AI, the enterprise
@@ -326,7 +326,7 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     ...(version === "web3"
       ? [blockchainSection, aiSection, backendSection, frontendSection]
       : version === "webdev"
-      ? [
+        ? [
           frontendSection,
           backendSection,
           aiSection,
@@ -335,40 +335,40 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           // this audience is actually screening for.
           cloneElement(blockchainSection, { className: "print:hidden" }),
         ]
-      : version === "enterprise"
-      ? [
-          backendEnterpriseSection,
-          frontendSection,
-          aiSection,
-          web3IntegrationSection,
-        ]
-      : version === "product"
-      ? [
-          productSection,
-          backendSection,
-          frontendSection,
-          aiSection,
-          // Blockchain stays on the site as range evidence, but the PDF's
-          // 3-page budget is better spent on the product content.
-          cloneElement(blockchainSection, { className: "print:hidden" }),
-        ]
-      : version === "leader"
-      ? [
-          projectManagementSection,
-          backendSection,
-          // AI and frontend remain visible on screen as technical range, but
-          // backend is the relevant technical proof on the 3-page PM PDF.
-          cloneElement(aiSection, { className: "print:hidden" }),
-          cloneElement(frontendSection, { className: "print:hidden" }),
-          // Blockchain stays on the site as range evidence, but Project
-          // Management needs the print budget more for this audience.
-          cloneElement(blockchainSection, { className: "print:hidden" }),
-        ]
-      : [backendSection, aiSection, frontendSection, blockchainSection]),
+        : version === "enterprise"
+          ? [
+            backendEnterpriseSection,
+            frontendSection,
+            aiSection,
+            web3IntegrationSection,
+          ]
+          : version === "product"
+            ? [
+              productSection,
+              backendSection,
+              frontendSection,
+              aiSection,
+              // Blockchain stays on the site as range evidence, but the PDF's
+              // 3-page budget is better spent on the product content.
+              cloneElement(blockchainSection, { className: "print:hidden" }),
+            ]
+            : version === "leader"
+              ? [
+                projectManagementSection,
+                backendSection,
+                // AI and frontend remain visible on screen as technical range, but
+                // backend is the relevant technical proof on the 3-page PM PDF.
+                cloneElement(aiSection, { className: "print:hidden" }),
+                cloneElement(frontendSection, { className: "print:hidden" }),
+                // Blockchain stays on the site as range evidence, but Project
+                // Management needs the print budget more for this audience.
+                cloneElement(blockchainSection, { className: "print:hidden" }),
+              ]
+              : [backendSection, aiSection, frontendSection, blockchainSection]),
     // Last on every version: it is the one row that is not about the stack, and
     // the version-specific lead has to keep the top of the list.
     languagesSection,
-  ];
+  ]
 
   // The PDFs are print-to-PDF exports done by hand, so a version may not have
   // one yet — only render the download button when the file actually exists.
@@ -376,11 +376,11 @@ export function ResumePage({ version }: { version: ContentVersion }) {
     web3: "Gil-Lopes-Bueno-Senior-Blockchain-Engineer.pdf",
     webdev: "Gil-Lopes-Bueno-Senior-Full-Stack-Engineer.pdf",
     leader: "Gil-Lopes-Bueno-Technical-Project-Manager.pdf",
-    enterprise: "Gil-Lopes-Bueno-Principal-Backend-Engineer.pdf",
+    enterprise: "Gil-Lopes-Bueno-Backend-Engineer.pdf",
     product: "Gil-Lopes-Bueno-Technical-Product-Owner.pdf",
-    general: "Gil-Lopes-Bueno-Principal-Software-Engineer.pdf",
-  }[version];
-  const hasPdf = existsSync(join(process.cwd(), "public", "documents", pdfFileName));
+    general: "Gil-Lopes-Bueno-Software-Engineer.pdf",
+  }[version]
+  const hasPdf = existsSync(join(process.cwd(), "public", "documents", pdfFileName))
 
   return (
     <div className="print:p-0 print:max-w-[740px]">
@@ -390,14 +390,14 @@ export function ResumePage({ version }: { version: ContentVersion }) {
           version === "web3"
             ? "Senior Blockchain Engineer"
             : version === "webdev"
-            ? "Senior Full-Stack Engineer"
-            : version === "leader"
-            ? "Technical Project Manager"
-            : version === "product"
-            ? "Technical Product Owner"
-            : version === "enterprise"
-            ? "Principal Backend Engineer"
-            : "Principal Software Engineer"
+              ? "Senior Full-Stack Engineer"
+              : version === "leader"
+                ? "Technical Project Manager"
+                : version === "product"
+                  ? "Technical Product Owner"
+                  : version === "enterprise"
+                    ? "Backend Engineer"
+                    : "Software Engineer"
         }
         contacts={{
           fullName: "Gil Lopes Bueno",
@@ -461,5 +461,5 @@ export function ResumePage({ version }: { version: ContentVersion }) {
         />
       </div>
     </div>
-  );
+  )
 }

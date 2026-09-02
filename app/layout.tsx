@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { Footer } from "@/components/Footer";
+import type { Metadata } from "next"
+import localFont from "next/font/local"
+import "./globals.css"
+import { Footer } from "@/components/Footer"
 
 // Both families are self-hosted (next/font/local) instead of fetched from
 // Google Fonts at build time via next/font/google. In this build environment
@@ -20,7 +20,7 @@ const display = localFont({
   ],
   variable: "--font-display",
   display: "swap",
-});
+})
 
 const body = localFont({
   src: [
@@ -32,14 +32,14 @@ const body = localFont({
   ],
   variable: "--font-body",
   display: "swap",
-});
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gil.solutions"),
-  title: "Gil Lopes Bueno - Principal Software Engineer",
+  title: "Gil Lopes Bueno - Software Engineer",
   description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
   keywords: [
-    "Principal Developer",
+    "Developer",
     "Full Stack",
     "Blockchain",
     "Web Development",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Gil Lopes Bueno" }],
   creator: "Gil Lopes Bueno",
   openGraph: {
-    title: "Gil Lopes Bueno - Principal Software Engineer",
+    title: "Gil Lopes Bueno - Software Engineer",
     description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
     type: "website",
     locale: "en_US",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Gil Lopes Bueno - Principal Software Engineer",
+    title: "Gil Lopes Bueno - Software Engineer",
     description: "Fullstack Dev since 2007, Blockchain Dev since 2018",
     images: ["/profile.webp"],
   },
@@ -93,12 +93,12 @@ export const metadata: Metadata = {
   appleWebApp: {
     title: "Gil LB",
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} transition-colors`}>
@@ -110,5 +110,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }

@@ -2,7 +2,7 @@ export const SITE_URL = 'https://gil.solutions'
 
 export const AUTHOR = {
   name: 'Gil Lopes Bueno',
-  jobTitle: 'Principal Software Engineer',
+  jobTitle: 'Software Engineer',
   url: SITE_URL,
   image: `${SITE_URL}/profile.webp`,
   sameAs: [

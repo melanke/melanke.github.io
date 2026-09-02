@@ -123,4 +123,4 @@ Today I don't report anymore. I only block, afraid of loosing my account again. 
 
 ---
 
-_Written by Gil, a Principal Software Engineer with 19+ years of experience, 8 of them in Web3, currently building DeFi protocols at 33Labs — which is exactly the profile these messages are written for._
+_Written by Gil, a Software Engineer with 19+ years of experience, 8 of them in Web3, currently building DeFi protocols at 33Labs — which is exactly the profile these messages are written for._
