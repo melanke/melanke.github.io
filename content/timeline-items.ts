@@ -1048,13 +1048,17 @@ export const timelineItems: TimelineEntry[] = [
       frontend.nextjs,
       backend.graphql,
       backend.mysql,
+      backend.nosql,
+      backend.redis,
       backend.aws,
       backend.sqs,
+      backend.sns,
       backend.csharp,
       frontend.angular,
       backend.prisma,
       backend.elasticsearch,
       backend.rest,
+      backend.websockets,
       backend.s3,
       backend.ecs,
       backend.docker,
@@ -1081,7 +1085,7 @@ export const timelineItems: TimelineEntry[] = [
       webdev: "Software Engineer | TechLead",
     },
     description:
-      "Sharity was a crowdfunding platform for charitable causes that I built from creation through scaling, growing it past 100 thousand users. It was eventually sold to Abacashi, a bigger competitor, and I was invited to lead the engineering side of that merger in recognition of the quality of Sharity's system — refactoring Abacashi's legacy C#/Angular codebase over to Node.js and React with the platform staying live the whole time, using a Strangler Fig strategy to migrate it piece by piece instead of a big-bang rewrite. One example of the work on Sharity itself: an event-driven achievements system, with badges and real-time progress bars for challenges that could chain off one another. Business events flowed through SQS, and idempotency was enforced by inserting each event's ID into a dedupe table in the same MySQL transaction as the counter increment, so a duplicate delivery just aborted instead of double-counting; chained challenges unlocked themselves by publishing a follow-up event back onto the queue, with no need for global ordering. It held up at 100k+ users, and was later reused as-is inside Abacashi after the merger.",
+      "Sharity was a crowdfunding platform for charitable causes that I built from creation through scaling, growing it past 100 thousand users. It was eventually sold to Abacashi, a bigger competitor, and I was invited to lead the engineering side of that merger in recognition of the quality of Sharity's system — refactoring Abacashi's legacy C#/Angular codebase over to Node.js and React with the platform staying live the whole time, using a Strangler Fig strategy to migrate it piece by piece instead of a big-bang rewrite. One example of the work on Sharity itself: a standalone event-driven achievements service, given its own stores from day one because its write path ran far heavier than the donation path and outgrew Sharity's transactional MySQL. Events flowed through SNS and SQS; counters lived in DynamoDB, with idempotency from a conditional transaction on each event's ID, so duplicates just aborted. Progress bars ran over WebSockets, leaderboards on Redis sorted sets, and chained challenges unlocked once on completion, needing no global ordering. It was reused as-is inside Abacashi after the merger.",
     image: "/projects/sharity.webp",
     links: [
       "https://sharity.com.br",
@@ -1520,7 +1524,7 @@ export const timelineItems: TimelineEntry[] = [
     id: "apptite",
     parentId: "simpli",
     title: "Apptite",
-    dateRange: "Sep 2015 - July 2017",
+    dateRange: "Sep 2015 - 2022",
     startDate: "2015-09",
     technologies: [
       other.android,
@@ -1535,6 +1539,8 @@ export const timelineItems: TimelineEntry[] = [
       backend.rest,
       backend.aws,
       backend.docker,
+      backend.microservices,
+      backend.distributedSystems,
       backend.solutionArchitecture,
       frontend.javascript,
     ],
@@ -1547,7 +1553,7 @@ export const timelineItems: TimelineEntry[] = [
       webdev: "Software Engineer | TechLead",
     },
     description:
-      "Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups' and media coverage that established it as an important platform in the artisanal food market. I was the main engineer responsible for the platform from its initial planning and structuring through scaling it as it grew. One example of that scaling work: the dish recommendation engine. The map was discretized into cells, each holding the list of stores that served it, updated in batch whenever delivery areas changed — so the geographic lookup itself was just a cached read. Personalization ran on top of that already-filtered set, combining complementary signals in parallel (repurchase history, regional popularity, among others), with the heavier estimates — including a store-by-cell matrix — precomputed offline.",
+      "Apptite was a food delivery app for iOS, Android and the web. It gained recognition with acceleration by '500 Startups' and media coverage that established it as an important platform in the artisanal food market. I was the main engineer responsible for the platform from its initial planning and structuring through scaling it as it grew. One example of that scaling work: the dish recommendation engine. The map was discretized into cells holding the stores that served each area, updated in batch, so the geographic lookup was a cached read; personalization then combined signals in parallel over that filtered set, with the heavier estimates precomputed offline.",
     image: "/projects/apptite.webp",
     priority: {
       general: 1,
