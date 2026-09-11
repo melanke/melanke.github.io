@@ -37,7 +37,7 @@ export const backend = {
   java: tech("Java", "2008", "2024"),
   kotlin: tech("Kotlin", "2016", "2024"),
   csharp: tech("C#", "2018", "2024"),
-  python: tech("Python", "2018", "2024"),
+  python: tech("Python", "2018", "2026"),
   r: tech("R", "2018", "2019"),
   mysql: tech("MySQL", "2013", "2024"),
   postgresql: tech("PostgreSQL", "2013", "2025"),
